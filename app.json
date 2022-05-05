@@ -23,7 +23,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.malfito12.sedegesapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
