@@ -10,6 +10,8 @@ import { AuthContext } from '../../Atoms/Context/AuthContext'
 import TeacherHomeScreem from '../../Screems/PrivateScreem/TeacherScreems/TeacherHomeScreem'
 import InicioTest from '../../Screems/PrivateScreem/TeacherScreems/SerieTests/InicioTest'
 import AsyncStorageLib from '@react-native-async-storage/async-storage'
+import InicioTestEst from '../../Screems/PrivateScreem/StudentScreems/SerieTest/InicioTestEst'
+import Preguntas from '../../Screems/PrivateScreem/TeacherScreems/SerieTests/Preguntas'
 
 const Stack = createNativeStackNavigator()
 
@@ -39,9 +41,18 @@ const Navigation = () => {
                                     options={{
                                         headerStyle: { backgroundColor: '#000010' },
                                         headerTintColor: 'white',
-                                        title: 'tests'
+                                        title: 'Lista de Tests'
                                     }}
                                 // initialParams={{ lala:AsyncStorageLib.getItem('test') }}
+                                />
+                                <Stack.Screen
+                                    name='Preguntas'
+                                    component={Preguntas}
+                                    options={{
+                                        headerStyle: { backgroundColor: '#000010' },
+                                        headerTintColor: 'white',
+                                        title: 'Preguntas'
+                                    }}
                                 />
                             </>
                         ) : (
@@ -54,6 +65,16 @@ const Navigation = () => {
                                         headerStyle: { backgroundColor: '#000010' },
                                         headerTintColor: 'white',
                                         title: 'Perfil'
+                                    }}
+                                // initialParams={{ post: () => logget() }}
+                                />
+                                <Stack.Screen
+                                    name='InicioTestEst'
+                                    component={InicioTestEst}
+                                    options={{
+                                        headerStyle: { backgroundColor: '#000010' },
+                                        headerTintColor: 'white',
+                                        title: 'Lista de Tests'
                                     }}
                                 // initialParams={{ post: () => logget() }}
                                 />

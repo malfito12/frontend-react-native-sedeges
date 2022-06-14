@@ -56,17 +56,6 @@ const RealizeTestScreem = ({navigation}) => {
           refreshing={refresing}
         />}
       />
-      {/* {tests.length > 0 ? (
-        tests.map((e, index) => (
-          <View key={index}>
-            <Text style={{ color: 'white' }}>{e.test_name}</Text>
-          </View>
-        ))
-      ) : (
-        <View>
-          <Text style={{ color: 'white' }}>No existe Informacion</Text>
-        </View>
-      )} */}
 
     </Layaut>
   )

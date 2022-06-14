@@ -75,12 +75,15 @@ const CreateTestScreem = () => {
     const closeModalEditTest = () => {
         setModalEditTest(false)
     }
-    const openCloseStatus = (e) => {
+    const openStatus = () => {
+        setEstado(true)
+    }
+    const closeStatus=(e)=>{
         setChangeData({
             ...changeData,
             test_status: e
         })
-        setEstado(!estado)
+        setEstado(false)
     }
     const editTests=async(e)=>{
         e.preventDefault()
@@ -188,11 +191,11 @@ const CreateTestScreem = () => {
                             value={changeData.test_description}
                         />
                         {changeData.test_status === true ? (
-                            <TouchableOpacity onPress={openCloseStatus} style={{ ...styles.buttonStatus,backgroundColor:'green', width: '90%', alignItems: 'center' }}>
+                            <TouchableOpacity onPress={openStatus} style={{ ...styles.buttonStatus,backgroundColor:'green', width: '90%', alignItems: 'center' }}>
                                 <Text>Vigente</Text>
                             </TouchableOpacity>
                         ) : (
-                            <TouchableOpacity onPress={openCloseStatus} style={{ ...styles.buttonStatus,backgroundColor:'red', width: '90%', alignItems: 'center' }}>
+                            <TouchableOpacity onPress={openStatus} style={{ ...styles.buttonStatus,backgroundColor:'red', width: '90%', alignItems: 'center' }}>
                                 <Text>Cerrado</Text>
                             </TouchableOpacity>
                         )}
@@ -213,10 +216,10 @@ const CreateTestScreem = () => {
             >
                 <View style={styles.centeredView}>
                     <View style={styles.modalView2}>
-                        <TouchableOpacity style={{ backgroundColor: 'green', padding: 5, margin: 5 }} onPress={() => openCloseStatus(true)}>
+                        <TouchableOpacity style={{ backgroundColor: 'green', padding: 5, margin: 5 }} onPress={() => closeStatus(true)}>
                             <Text>Vigente</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={{ backgroundColor: 'red', padding: 5, margin: 5 }} onPress={() => openCloseStatus(false)}>
+                        <TouchableOpacity style={{ backgroundColor: 'red', padding: 5, margin: 5 }} onPress={() => closeStatus(false)}>
                             <Text>Cerrado</Text>
                         </TouchableOpacity>
                     </View>

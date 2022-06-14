@@ -6,6 +6,8 @@ import { Foundation, Ionicons, Feather, SimpleLineIcons } from '@expo/vector-ico
 import TestHomeScreem from './Test/TestHomeScreem'
 import ResultsHomeScreem from './Results/ResultsHomeScreem'
 import OtrosHomeScreem from './Otros/OtrosHomeScreem'
+import InicioTestEst from './SerieTest/InicioTestEst'
+import TestsList from './Test/TestsList'
 
 
 const Tab = createBottomTabNavigator()
@@ -21,12 +23,13 @@ const Home = ({ navigation }) => {
 
     return (
         <Tab.Navigator
-            initialRouteName='StudentScreem'
+            initialRouteName='TestsList'
             screenOptions={({ route }) => ({
                 tabBarIcon: () => {
-                    if (route.name === 'StudentScreem') {
-                        return (<Ionicons name='school-outline' size={24} color='white' />)
-                    } else if (route.name === 'TestHomeScreem') {
+                    // if (route.name === 'StudentScreem') {
+                    //     return (<Ionicons name='school-outline' size={24} color='white' />)
+                    // } else 
+                    if (route.name === 'TestsList') {
                         return (<Ionicons name='library-outline' size={24} color='white' />)
                     } else if (route.name === 'ResultsHomeScreem') {
                         return (<Foundation name='results' size={24} color='white' />)
@@ -56,14 +59,21 @@ const Home = ({ navigation }) => {
                 // indicatorStyle:{backgroundColor:'red'}
 
             })}>
-            <Tab.Screen name="StudentScreem" component={StudentScreem} options={{
+            {/* <Tab.Screen name="StudentScreem" component={StudentScreem} options={{
                 headerLeft: () => (perfil),
                 headerTitle: '',
                 title: 'Estudiantes',
                 headerStyle: { backgroundColor: '#000010' },
                 headerTintColor: 'white',
-            }} />
-            <Tab.Screen name="TestHomeScreem" component={TestHomeScreem} options={{
+            }} /> */}
+            {/* <Tab.Screen name="TestHomeScreem" component={TestHomeScreem} options={{
+                headerLeft: () => (perfil),
+                headerTitle: '',
+                title: 'Test',
+                headerStyle: { backgroundColor: '#000010' },
+                headerTintColor: 'white',
+            }} /> */}
+            <Tab.Screen name="TestsList" component={TestsList} options={{
                 headerLeft: () => (perfil),
                 headerTitle: '',
                 title: 'Test',
