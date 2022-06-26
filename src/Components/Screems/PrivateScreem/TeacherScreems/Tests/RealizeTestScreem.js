@@ -30,7 +30,7 @@ const RealizeTestScreem = ({navigation}) => {
 
   const prueba=async(e)=>{
     await AsyncStorageLib.setItem('test',JSON.stringify(e))
-    await navigation.navigate('InicioTest')
+    await navigation.navigate('CategoryTest')
   }
   return (
     <Layaut>

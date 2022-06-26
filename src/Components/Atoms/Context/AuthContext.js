@@ -18,8 +18,8 @@ export const AuthProvider = ({ children }) => {
         await axios.post(`${PORT_URL}login`, { user_name, user_password })
             .then((async (resp) => {
                 let data = resp.data
-                setToken({ token: data.token })
-                setUser({ user: data.user, rol: data.rol })
+                // setUser({ user: data.user, rol: data.rol })
+                // setToken({ token: data.token })
                 AsyncStorageLib.setItem('token', JSON.stringify(data.token))
                 AsyncStorageLib.setItem('user', JSON.stringify(data.user))
                 AsyncStorageLib.setItem('rol', JSON.stringify(data.rol))
@@ -30,8 +30,9 @@ export const AuthProvider = ({ children }) => {
                 setIsLoading(false)
                 console.log(err)
             })
+
     }
-    // console.log(token)
+    // console.log(user.rol)
     const logout = async () => {
         setIsLoading(true)
         await axios.post(`${PORT_URL}logout`, {})

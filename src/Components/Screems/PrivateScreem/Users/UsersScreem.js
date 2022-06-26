@@ -19,14 +19,21 @@ const UsersScreem = ({ navigation }) => {
     user_email: '',
     user_name: '',
   })
-
   useEffect(() => {
-    getAllUsers()
+    getToken()
   }, [])
+  const getToken=async()=>{
+    AsyncStorageLib.getItem('user')
+    .then(resp=>{
+      getAllUsers(JSON.parse(resp))
+    })
+
+  }
   //------GET USERS-------------
-  const getAllUsers = async () => {
-    const id = user.user
-    await axios.get(`${PORT_URL}user/${id}`)
+  const getAllUsers = async (e) => {
+    // const id = user.user
+    // await axios.get(`${PORT_URL}user/${id}`)
+    await axios.get(`${PORT_URL}user/${e}`)
       .then(resp => {
         setUsers(resp.data)
       })

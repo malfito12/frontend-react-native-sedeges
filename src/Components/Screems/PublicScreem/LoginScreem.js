@@ -7,7 +7,7 @@ import * as Progress from 'react-native-progress'
 import sedeges from '../../../images/sedeges-logo.png'
 import { AuthContext } from '../../Atoms/Context/AuthContext'
 
-const LoginScreem = ({ navigation,route }) => {
+const LoginScreem = ({ navigation }) => {
     const {isLoading,login}=useContext(AuthContext)
     const [hidePass, setHidePass] = useState({
         iconPassword: 'eye',
