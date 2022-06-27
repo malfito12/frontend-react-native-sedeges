@@ -5,6 +5,8 @@ import { AuthContext } from '../../../../Atoms/Context/AuthContext'
 import axios from 'axios';
 import { PORT_URL } from '../../../../../PortUrl/PortUrl'
 import * as Progress from 'react-native-progress'
+import { AntDesign } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient'
 
 const CreateTestScreem = () => {
     var fecha = new Date
@@ -20,8 +22,8 @@ const CreateTestScreem = () => {
     const [estado, setEstado] = useState(false)
     const [tests, setTests] = useState([])
     const [refresing, setRefresing] = useState(false)
-    const [progress,setProgress]=useState('none')
-    const [exist,setExist]=useState('none')
+    const [progress, setProgress] = useState('none')
+    const [exist, setExist] = useState('none')
     const [changeData, setChangeData] = useState({
         test_name: '',
         test_description: '',
@@ -38,7 +40,7 @@ const CreateTestScreem = () => {
         setProgress('flex')
         await axios.get(`${PORT_URL}tests`)
             .then(resp => {
-                if(resp.data.length===0){
+                if (resp.data.length === 0) {
                     setExist('flex')
                 }
                 setProgress('none')
@@ -124,9 +126,12 @@ const CreateTestScreem = () => {
     return (
         <>
             <Layaut>
-                <TouchableOpacity onPress={openCloseModalAddTest} style={styles.buttonRegister}>
-                    <Text>Nuevo Test</Text>
-                </TouchableOpacity>
+                <LinearGradient style={styles.buttonRegister} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#00c853', '#64dd17', '#aeea00']}>
+                    <TouchableOpacity style={styles.buttonSuccess} onPress={openCloseModalAddTest} >
+                        <Text style={{ color: 'white' }}>Nuevo Test</Text>
+                        <AntDesign name="addfile" size={20} color="white" style={{ marginLeft: 10 }} />
+                    </TouchableOpacity>
+                </LinearGradient>
                 <ScrollView
                     style={{ marginBottom: 50 }}
                     refreshControl={<RefreshControl
@@ -138,17 +143,17 @@ const CreateTestScreem = () => {
                         tests.map((e, index) => (
                             <View key={index} style={styles.testView}>
                                 <View>
-                                    <Text>{e.test_name}</Text>
-                                    <Text>{e.test_description}</Text>
-                                    <Text>{e.test_register_date}</Text>
+                                    <Text style={{color:'white'}}>{e.test_name}</Text>
+                                    <Text style={{color:'white'}}>{e.test_description}</Text>
+                                    <Text style={{color:'white'}}>{e.test_register_date}</Text>
                                     {/* <Text>{e.test_status.toString()}</Text> */}
                                 </View>
                                 {e.test_status === true ? (
-                                    <TouchableOpacity onPress={() => openModalEditTest(e)} style={{ backgroundColor: 'green', padding: 10 }}>
+                                    <TouchableOpacity onPress={() => openModalEditTest(e)} style={{ backgroundColor: 'green', padding: 10, borderRadius:5 }}>
                                         <Text style={{ color: 'white' }}>Vigente</Text>
                                     </TouchableOpacity>
                                 ) : (
-                                    <TouchableOpacity onPress={() => openModalEditTest(e)} style={{ backgroundColor: 'red', padding: 10 }}>
+                                    <TouchableOpacity onPress={() => openModalEditTest(e)} style={{ backgroundColor: 'red', padding: 10,borderRadius:5 }}>
                                         <Text style={{ color: 'white' }}>Cerrado</Text>
                                     </TouchableOpacity>
                                 )}
@@ -156,9 +161,9 @@ const CreateTestScreem = () => {
                         ))
                     ) : (
                         <>
-                            <Text style={{ color: 'white', alignSelf: 'center', padding: 20,display: exist }}>No Existen Registros</Text>
+                            <Text style={{ color: 'white', alignSelf: 'center', padding: 20, display: exist }}>No Existen Registros</Text>
                             <View style={{ display: progress }}>
-                                <Progress.Circle style={{ alignSelf: 'center' }} borderWidth={3} size={40} indeterminate={true} />
+                                <Progress.Circle style={{ alignSelf: 'center' }} borderWidth={2} size={20} indeterminate={true} />
                             </View>
                         </>
 
@@ -258,11 +263,16 @@ const CreateTestScreem = () => {
 }
 const styles = StyleSheet.create({
     buttonRegister: {
-        backgroundColor: 'red',
-        padding: 10,
+        padding: 7,
         marginBottom: 5,
-        borderRadius: 3,
-        marginHorizontal: 6
+        borderRadius: 5,
+        marginHorizontal: 6,
+    },
+    buttonSuccess:{
+        width: '100%', 
+        alignItems: 'center',
+        flexDirection: 'row',
+        justifyContent: 'center'
     },
     buttonStatus: {
         // backgroundColor: 'red',
@@ -310,13 +320,13 @@ const styles = StyleSheet.create({
     },
     testView: {
         flexDirection: 'row',
-        backgroundColor: 'white',
+        backgroundColor: '#3C425A',
         padding: 10,
         margin: 7,
-        borderRadius: 3,
+        borderRadius: 5,
         justifyContent: 'space-between',
         alignItems: 'center'
-    }
+    },
 })
 
 export default CreateTestScreem

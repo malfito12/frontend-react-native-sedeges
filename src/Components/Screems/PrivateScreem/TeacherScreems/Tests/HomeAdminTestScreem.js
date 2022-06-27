@@ -8,13 +8,13 @@ const Nob = createMaterialTopTabNavigator()
 const HomeAdminTestScreem = () => {
     return (
         <Nob.Navigator screenOptions={{
-            tabBarStyle: { backgroundColor: '#000015' },
+            tabBarStyle: { backgroundColor: '#12151C' },
             tabBarActiveTintColor: 'green',
             tabBarInactiveTintColor: 'white',
             tabBarLabelStyle: { fontSize: 12 },
             tabBarIndicatorStyle: { backgroundColor: 'green' },
         }}>
-            <Nob.Screen name='CreateTestScreem' component={CreateTestScreem} options={{ tabBarLabel: 'Nuevo' }} />
+            <Nob.Screen name='CreateTestScreem' component={CreateTestScreem} options={{ tabBarLabel: 'Nuevo'}} />
             <Nob.Screen name='RealizeTestScreem' component={RealizeTestScreem} options={{ tabBarLabel: 'Test' }} />
         </Nob.Navigator>
     )

@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity,StyleSheet } from 'react-native'
 import React, { useContext } from 'react'
 import { AuthContext } from '../../../Atoms/Context/AuthContext'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
@@ -6,6 +6,7 @@ import { FontAwesome5, Foundation, Ionicons, Feather, SimpleLineIcons } from '@e
 import StudentsAdminScreem from './Students/StudentsAdminScreem'
 import ResultsAdminScreem from './Results/ResultsAdminScreem'
 import HomeAdminTestScreem from './Tests/HomeAdminTestScreem'
+import { LinearGradient } from 'expo-linear-gradient'
 
 const Tab = createBottomTabNavigator()
 
@@ -36,10 +37,15 @@ const TeacherHomeScreem = ({ navigation }) => {
           tabBarStyle: {
             backgroundColor: '#12151C',
             borderBottomColor: '#10ac84',
-            borderTopColor: '#10ac84',
+            // borderTopColor: '#10ac84',
+            borderTopColor: '#000010',
             padding: 10,
             marginBottom: 20,
+            marginHorizontal:5,
+            borderRadius:3,
             position: 'absolute',
+            elevation:0,
+            ...styles.prueba
           },
           tabBarActiveTintColor: 'green',
         })}
@@ -48,9 +54,11 @@ const TeacherHomeScreem = ({ navigation }) => {
           headerLeft: () => (perfil),
           headerTitle: '',
           title: 'Estudiantes',
-          headerStyle: { backgroundColor: '#000010' },
+          headerStyle: { backgroundColor: '#000010', },
           headerTintColor: 'white',
+          
         }} />
+
         <Tab.Screen name="HomeAdminTestScreem" component={HomeAdminTestScreem} options={{
           headerLeft: () => (perfil),
           headerTitle: '',
@@ -69,5 +77,16 @@ const TeacherHomeScreem = ({ navigation }) => {
     </>
   )
 }
-
+const styles = StyleSheet.create({
+  prueba: {
+    shadowColor:'#311b92',
+    shadowOffset:{
+      width:0,
+      height:10
+    },
+    shadowOpacity:0.25,
+    shadowRadius:3.5,
+    elevation:5
+  }
+})
 export default TeacherHomeScreem

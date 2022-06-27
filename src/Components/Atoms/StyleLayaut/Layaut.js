@@ -4,12 +4,14 @@ import { LinearGradient } from 'expo-linear-gradient'
 
 const Layaut = ({ children }) => {
   return (
-    <View style={styles.container} >
+    <LinearGradient style={{height:'100%'}}  start={{ x: 1, y: 1 }} end={{ x: 0, y: 1 }} colors={['#000010', '#010822', '#000010']}>
+      <View style={styles.container}>
 
-      {/* icons de celular arriba */}
-      <StatusBar backgroundColor='#000010' />
-      {children}
-    </View>
+        {/* icons de celular arriba */}
+        <StatusBar backgroundColor='#000010' />
+        {children}
+      </View>
+    </LinearGradient>
   )
 }
 
@@ -27,11 +29,7 @@ const styles = StyleSheet.create({
   container: {
     padding: 20,
     flex: 1,
-    height:'100%',
-    // alignItems: 'center',
-    backgroundColor: '#000010'
-    // backgroundColor: '#212121'
-    // backgroundColor: 'rgba(0,0,0,0)'
+    height: '100%',
   },
 })
 
