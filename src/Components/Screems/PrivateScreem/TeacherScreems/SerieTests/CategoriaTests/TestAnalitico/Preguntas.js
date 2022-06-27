@@ -15,7 +15,7 @@ const Preguntas = ({ route, navigation }) => {
       <Text>{route.params.data[route.params.cont].pregunta.preguntas.b}</Text>
       <Text style={{alignSelf:'center'}}>{route.params.cont}</Text>
       {route.params.cont == 4 ? (
-        <TouchableOpacity onPress={() => navigation.push('CategoryTest')} style={{ backgroundColor: 'red' }}>
+        <TouchableOpacity onPress={() => navigation.navigate('CategoryTest')} style={{ backgroundColor: 'red' }}>
           <Text>volver --</Text>
         </TouchableOpacity>
       ) : (

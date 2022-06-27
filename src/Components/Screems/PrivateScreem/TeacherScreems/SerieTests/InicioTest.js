@@ -266,7 +266,8 @@ const InicioTest = ({ navigation, route }) => {
         },
     ]
     
-    const lala2=lala1
+    // const lala2=lala1
+    const lala2=lala
     
     // console.log(lala2)
 

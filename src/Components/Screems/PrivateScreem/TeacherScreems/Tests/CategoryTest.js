@@ -6,7 +6,7 @@ const CategoryTest = ({navigation}) => {
     
     const categoryDat=[
         {id:1,title:'TEST GRAFICO', direction:()=>navigation.navigate('InicioTest',{categoria:'TEST GRAFICO',id_cartegory:'test-grafico'})},
-        {id:2,title:'TEST ANALITICO',direction:()=>navigation.push('InicioTest',{categoria:'TEST ANALITICO',id_cartegory:'test-analitico'})},
+        {id:2,title:'TEST ANALITICO',direction:()=>navigation.navigate('InicioTest',{categoria:'TEST ANALITICO',id_cartegory:'test-analitico'})},
         {id:3,title:'TEST MATEMATICO',direction:()=>navigation.navigate('InicioTest',{categoria:'TEST MATEMATICO',id_cartegory:'test-matematico'})},
     ]
   return (

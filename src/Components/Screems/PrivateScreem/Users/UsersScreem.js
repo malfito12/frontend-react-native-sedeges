@@ -22,11 +22,11 @@ const UsersScreem = ({ navigation }) => {
   useEffect(() => {
     getToken()
   }, [])
-  const getToken=async()=>{
+  const getToken = async () => {
     AsyncStorageLib.getItem('user')
-    .then(resp=>{
-      getAllUsers(JSON.parse(resp))
-    })
+      .then(resp => {
+        getAllUsers(JSON.parse(resp))
+      })
 
   }
   //------GET USERS-------------
@@ -67,13 +67,13 @@ const UsersScreem = ({ navigation }) => {
   }
   const deleteUser = async () => {
     const id = changeData.user_id
-    await axios.delete(`${PORT_URL}users/${id}`)
-      .then(resp => {
-        console.log(resp.data)
-        getAllUsers()
+    // await axios.delete(`${PORT_URL}users/${id}`)
+    //   .then(resp => {
+    //     console.log(resp.data)
+    //     getAllUsers()
         closeModalDeleteUser()
-      })
-      .catch(err => console.log(err))
+    //   })
+    //   .catch(err => console.log(err))
   }
   //---------REFRESH------
   const onRefresh = useCallback(async () => {

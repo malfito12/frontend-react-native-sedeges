@@ -1,10 +1,10 @@
-import { View, Text, Modal, TouchableOpacity, TextInput, ScrollView, StyleSheet } from 'react-native'
-import React, { useState, useContext, useEffect } from 'react'
+import { View, Text, Modal, TouchableOpacity, TextInput, RefreshControl, ScrollView, StyleSheet, ProgressBarAndroid } from 'react-native'
+import React, { useState, useContext, useEffect, useCallback } from 'react'
 import Layaut from '../../../../Atoms/StyleLayaut/Layaut'
-import AsyncStorageLib from '@react-native-async-storage/async-storage'
 import { AuthContext } from '../../../../Atoms/Context/AuthContext'
 import axios from 'axios';
 import { PORT_URL } from '../../../../../PortUrl/PortUrl'
+import * as Progress from 'react-native-progress'
 
 const CreateTestScreem = () => {
     var fecha = new Date
@@ -19,6 +19,9 @@ const CreateTestScreem = () => {
     const [modalEditTest, setModalEditTest] = useState(false)
     const [estado, setEstado] = useState(false)
     const [tests, setTests] = useState([])
+    const [refresing, setRefresing] = useState(false)
+    const [progress,setProgress]=useState('none')
+    const [exist,setExist]=useState('none')
     const [changeData, setChangeData] = useState({
         test_name: '',
         test_description: '',
@@ -32,8 +35,14 @@ const CreateTestScreem = () => {
     }, [])
 
     const getTests = async () => {
+        setProgress('flex')
         await axios.get(`${PORT_URL}tests`)
             .then(resp => {
+                if(resp.data.length===0){
+                    setExist('flex')
+                }
+                setProgress('none')
+                // document.getElementById('nose').display='none'
                 setTests(resp.data)
             })
             .catch(err => {
@@ -78,24 +87,24 @@ const CreateTestScreem = () => {
     const openStatus = () => {
         setEstado(true)
     }
-    const closeStatus=(e)=>{
+    const closeStatus = (e) => {
         setChangeData({
             ...changeData,
             test_status: e
         })
         setEstado(false)
     }
-    const editTests=async(e)=>{
+    const editTests = async (e) => {
         e.preventDefault()
-        const id=changeData.test_id
-        await axios.put(`${PORT_URL}test/${id}`,changeData)
-        .then(resp=>{
-            getTests()
-            closeModalEditTest()
-        })
-        .catch(err=>{
-            console.log(err)
-        })
+        const id = changeData.test_id
+        await axios.put(`${PORT_URL}test/${id}`, changeData)
+            .then(resp => {
+                getTests()
+                closeModalEditTest()
+            })
+            .catch(err => {
+                console.log(err)
+            })
         // console.log(changeData)
 
     }
@@ -106,13 +115,25 @@ const CreateTestScreem = () => {
             [name]: value
         })
     }
+    //---------REFRESH------
+    const onRefresh = useCallback(async () => {
+        setRefresing(true)
+        await getTests()
+        setRefresing(false)
+    })
     return (
         <>
             <Layaut>
                 <TouchableOpacity onPress={openCloseModalAddTest} style={styles.buttonRegister}>
                     <Text>Nuevo Test</Text>
                 </TouchableOpacity>
-                <ScrollView style={{ marginBottom: 50 }}>
+                <ScrollView
+                    style={{ marginBottom: 50 }}
+                    refreshControl={<RefreshControl
+                        colors={['#78e08f']}
+                        onRefresh={onRefresh}
+                        refreshing={refresing}
+                    />}>
                     {tests.length > 0 ? (
                         tests.map((e, index) => (
                             <View key={index} style={styles.testView}>
@@ -134,11 +155,18 @@ const CreateTestScreem = () => {
                             </View>
                         ))
                     ) : (
-                        <Text style={{ color: 'white', alignSelf: 'center', padding: 20 }}>No Existen registros</Text>
+                        <>
+                            <Text style={{ color: 'white', alignSelf: 'center', padding: 20,display: exist }}>No Existen Registros</Text>
+                            <View style={{ display: progress }}>
+                                <Progress.Circle style={{ alignSelf: 'center' }} borderWidth={3} size={40} indeterminate={true} />
+                            </View>
+                        </>
+
                     )
                     }
                 </ScrollView>
             </Layaut>
+
             {/* ------------------REGISTER TEST----------------------------------------- */}
             <Modal
                 visible={modalAddTest}
@@ -177,7 +205,7 @@ const CreateTestScreem = () => {
             >
                 <View style={styles.centeredView}>
                     <View style={styles.modalView}>
-                        <Text style={{color:'white'}}>EDITAR EVENTO</Text>
+                        <Text style={{ color: 'white' }}>EDITAR EVENTO</Text>
                         <TextInput
                             style={styles.textInput}
                             placeholder='Nombre Test'
@@ -191,11 +219,11 @@ const CreateTestScreem = () => {
                             value={changeData.test_description}
                         />
                         {changeData.test_status === true ? (
-                            <TouchableOpacity onPress={openStatus} style={{ ...styles.buttonStatus,backgroundColor:'green', width: '90%', alignItems: 'center' }}>
+                            <TouchableOpacity onPress={openStatus} style={{ ...styles.buttonStatus, backgroundColor: 'green', width: '90%', alignItems: 'center' }}>
                                 <Text>Vigente</Text>
                             </TouchableOpacity>
                         ) : (
-                            <TouchableOpacity onPress={openStatus} style={{ ...styles.buttonStatus,backgroundColor:'red', width: '90%', alignItems: 'center' }}>
+                            <TouchableOpacity onPress={openStatus} style={{ ...styles.buttonStatus, backgroundColor: 'red', width: '90%', alignItems: 'center' }}>
                                 <Text>Cerrado</Text>
                             </TouchableOpacity>
                         )}
