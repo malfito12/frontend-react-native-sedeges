@@ -18,7 +18,7 @@ const CategoryTest = ({navigation}) => {
       renderItem={c=>(
           <View>
               <TouchableOpacity onPress={c.item.direction}  style={styles.testView}>
-                  <Text style={{alignSelf:'center'}}>{c.item.title}</Text>
+                  <Text style={{alignSelf:'center',fontFamily:'Roboto_500Medium'}}>{c.item.title}</Text>
               </TouchableOpacity>
           </View>
       )}

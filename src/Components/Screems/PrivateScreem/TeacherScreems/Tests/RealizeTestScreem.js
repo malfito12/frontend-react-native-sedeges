@@ -67,11 +67,11 @@ const RealizeTestScreem = ({ navigation }) => {
           tests.map((e, index) => (
             <View key={index} style={styles.testView}>
               <View>
-                <Text>{e.test_name}</Text>
-                <Text>{e.test_description}</Text>
+                <Text style={{fontFamily:'Roboto_500Medium'}}>{e.test_name}</Text>
+                <Text style={{fontFamily:'Roboto_500Medium'}}>{e.test_description}</Text>
               </View>
               <TouchableOpacity onPress={() => prueba(e)} style={{ backgroundColor: 'green', padding: 10, borderRadius: 25 }}>
-                <Text style={{ color: 'white' }}>go</Text>
+                <Text style={{ color: 'white',fontFamily:'Roboto_500Medium' }}>go</Text>
               </TouchableOpacity>
             </View>
           ))

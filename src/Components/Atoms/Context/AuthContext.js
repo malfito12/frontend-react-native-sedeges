@@ -2,6 +2,22 @@ import AsyncStorageLib from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import React, { createContext, useState } from 'react'
 import { PORT_URL } from '../../../PortUrl/PortUrl';
+import AppLoading from 'expo-app-loading';
+import {
+    useFonts,
+    Roboto_100Thin,
+    Roboto_100Thin_Italic,
+    Roboto_300Light,
+    Roboto_300Light_Italic,
+    Roboto_400Regular,
+    Roboto_400Regular_Italic,
+    Roboto_500Medium,
+    Roboto_500Medium_Italic,
+    Roboto_700Bold,
+    Roboto_700Bold_Italic,
+    Roboto_900Black,
+    Roboto_900Black_Italic,
+} from '@expo-google-fonts/roboto';
 
 export const AuthContext = createContext();
 
@@ -11,6 +27,23 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState({ user: undefined, rol: undefined })
     // const [rol, setRol] = useState({ rol: undefined })
 
+    let [fontsLoaded] = useFonts({
+        Roboto_100Thin,
+        Roboto_100Thin_Italic,
+        Roboto_300Light,
+        Roboto_300Light_Italic,
+        Roboto_400Regular,
+        Roboto_400Regular_Italic,
+        Roboto_500Medium,
+        Roboto_500Medium_Italic,
+        Roboto_700Bold,
+        Roboto_700Bold_Italic,
+        Roboto_900Black,
+        Roboto_900Black_Italic,
+    });
+    if (!fontsLoaded) {
+        return <AppLoading />
+    }
     const login = async (e) => {
         var user_name = e.user_name.trim().replace(/\s\s+/g, ' ')
         var user_password = e.user_password.trim().replace(/\s\s+/g, ' ')

@@ -1,5 +1,6 @@
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
+import Layaut from '../../../../../../Atoms/StyleLayaut/Layaut'
 
 const Preguntas = ({ route, navigation }) => {
   // console.log(route.params)
@@ -9,23 +10,30 @@ const Preguntas = ({ route, navigation }) => {
   //   alert('no mas')
   // }
   return (
-    <View>
-      <Text>Preguntas</Text>
-      <Text>{route.params.data[route.params.cont].pregunta.preguntas.a}</Text>
-      <Text>{route.params.data[route.params.cont].pregunta.preguntas.b}</Text>
-      <Text style={{alignSelf:'center'}}>{route.params.cont}</Text>
+    <Layaut>
+      <Text style={styles.textFont}>Preguntas</Text>
+      <Text style={styles.textFont}>{route.params.data[route.params.cont].pregunta.preguntas.a}</Text>
+      <Text style={styles.textFont}>{route.params.data[route.params.cont].pregunta.preguntas.b}</Text>
+      {/* <Text style={{ alignSelf: 'center',...styles.textFont }}>{route.params.cont}</Text> */}
       {route.params.cont == 4 ? (
         <TouchableOpacity onPress={() => navigation.navigate('CategoryTest')} style={{ backgroundColor: 'red' }}>
-          <Text>volver --</Text>
+          <Text style={styles.textFont}>volver --</Text>
         </TouchableOpacity>
       ) : (
         <TouchableOpacity onPress={() => navigation.navigate('Preguntas', { data: route.params.data, cont: route.params.cont + 1 })} style={{ backgroundColor: 'green' }}>
-          <Text>siguiente --</Text>
+          <Text style={styles.textFont}>siguiente --</Text>
         </TouchableOpacity>
       )}
 
-    </View>
+    </Layaut>
   )
 }
+
+const styles = StyleSheet.create({
+  textFont: {
+    fontFamily: 'Roboto_500Medium',
+    color: 'white'
+  }
+})
 
 export default Preguntas

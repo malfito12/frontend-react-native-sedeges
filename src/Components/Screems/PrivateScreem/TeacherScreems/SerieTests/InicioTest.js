@@ -309,7 +309,7 @@ const InicioTest = ({ navigation, route }) => {
                 renderItem={p => (
                     <View style={styles.testView}>
                         <View>
-                            <Text>{p.item.title}</Text>
+                            <Text style={{fontFamily:'Roboto_500Medium'}}>{p.item.title}</Text>
                             {/* <Text>{p.item.test_description}</Text> */}
                         </View>
                         {/* <TouchableOpacity onPress={() => navigation.navigate('Instructions', { title: p.item.title, id: p.item.id, contenido: p.item.contenido })} style={{ backgroundColor: '#78e08f', padding: 10, borderRadius: 25 }}> */}

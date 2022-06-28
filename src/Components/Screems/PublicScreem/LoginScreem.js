@@ -1,5 +1,5 @@
-import { View, Text, StyleSheet, TextInput,Image, Modal, TouchableOpacity, ScrollView } from 'react-native'
-import React, { useState,useContext } from 'react'
+import { View, Text, StyleSheet, TextInput, Image, Modal, TouchableOpacity, ScrollView } from 'react-native'
+import React, { useState, useContext } from 'react'
 import Layaut from '../../Atoms/StyleLayaut/Layaut'
 import { LinearGradient } from 'expo-linear-gradient'
 import { Entypo } from '@expo/vector-icons';
@@ -8,7 +8,7 @@ import sedeges from '../../../images/sedeges-logo.png'
 import { AuthContext } from '../../Atoms/Context/AuthContext'
 
 const LoginScreem = ({ navigation }) => {
-    const {isLoading,login}=useContext(AuthContext)
+    const { isLoading, login } = useContext(AuthContext)
     const [hidePass, setHidePass] = useState({
         iconPassword: 'eye',
         viewPassword: true,
@@ -36,11 +36,11 @@ const LoginScreem = ({ navigation }) => {
         <>
             <Layaut>
                 <ScrollView >
-                    <Image style={{width:120,height:120, marginBottom:10, alignSelf:'center'}} source={sedeges} />
+                    <Image style={{ width: 120, height: 120, marginBottom: 10, alignSelf: 'center' }} source={sedeges} />
                     <View style={styles.containerBottom}>
-                        <Text style={{ color: 'white' }}>Iniciar Sesión</Text>
+                        <Text style={{ color: 'white',fontFamily:'Roboto_700Bold' }}>Iniciar Sesión</Text>
                         <TouchableOpacity style={styles.buttonRegister} onPress={() => navigation.navigate('RegisterUserScreem')} >
-                            <Text style={{ color: 'white' }}>Registrarse</Text>
+                            <Text style={{ color: 'white',fontFamily:'Roboto_700Bold' }}>Registrarse</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.container}>
@@ -65,8 +65,8 @@ const LoginScreem = ({ navigation }) => {
                             </TouchableOpacity>
                         </View>
                         <LinearGradient style={styles.buttonSubmit} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#00c853', '#64dd17', '#aeea00']}>
-                            <TouchableOpacity style={{ width: '100%', alignItems: 'center' }} onPress={()=>{login(changeData)}} >
-                                <Text style={{ color: 'white' }}>Aceptar</Text>
+                            <TouchableOpacity style={{ width: '100%', alignItems: 'center' }} onPress={() => { login(changeData) }} >
+                                <Text style={{ color: 'white',fontFamily:'Roboto_900Black_Italic' }}>Iniciar Sesion</Text>
                             </TouchableOpacity>
                         </LinearGradient>
                     </View>
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
         borderRadius: 3,
         width: '90%',
         alignItems: 'center',
-        marginBottom:40
+        marginBottom: 40
 
     },
     buttonRegister: {
