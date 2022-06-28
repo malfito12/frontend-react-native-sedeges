@@ -28,11 +28,11 @@ export const data = [
                             b: 'EL SEÑOR "X" ES UN JEFE DE SCOUTS',
                             c: 'Luego:',
                         },
-                        resp: {
-                            a: 'Los aviadores son buenos jefes de scouts',
-                            b: 'Un aviador puede ser jefe de scouts',
-                            c: 'Los jefes de scouts son buenos aviadores'
-                        }
+                        resp: [
+                            {respuesta:'Los aviadores son buenos jefes de scouts',puntaje:5},
+                            {respuesta:'Un aviador puede ser jefe de scouts',puntaje:10},
+                            {respuesta:'Los jefes de scouts son buenos aviadores',puntaje:15},
+                        ]
                     }
                 },
                 {
@@ -43,11 +43,11 @@ export const data = [
                             b: null,
                             c: '¿Cual de los muchados se encuentra en el segundo lugar?',
                         },
-                        resp: {
-                            a: 'Luis',
-                            b: 'Enrique',
-                            c: 'Fancisco',
-                        }
+                        resp: [
+                            {respuesta:'Luis',puntaje:5},
+                            {respuesta:'Enrique',puntaje:10},
+                            {respuesta:'Fancisco',puntaje:15},
+                        ]
                     }
                 },
                 {
@@ -58,11 +58,11 @@ export const data = [
                             b: 'LOS CHOFERES SON SERES HUMANOS',
                             c: 'Luego:',
                         },
-                        resp: {
-                            a: 'La vida de nungun ser humano esta asegurada',
-                            b: 'Los choferes de vehiculos no estas libres de cometer accdentes',
-                            c: 'Pocos choferes coducen con seguridad sus vehiculos',
-                        }
+                        resp: [
+                            {respuesta:'La vida de ningun ser humano esta asegurada',puntaje:5},
+                            {respuesta:'Los chóferes de vehiculos no estan libres de cometer accidentes',puntaje:10},
+                            {respuesta:'Pocos chóferes conducen con seguridad sus vehiculos',puntaje:15},
+                        ]
                     }
                 },
                 {
@@ -73,11 +73,11 @@ export const data = [
                             b: null,
                             c: 'Luego:',
                         },
-                        resp: {
-                            a: 'El debe permanecer con usus amigos',
-                            b: 'El debe hacerse el fuerte para dejar a sus amigos',
-                            c: 'El sufrirá un perjuicio',
-                        }
+                        resp: [
+                            {respuesta:'El debe permanecer con sus amigos',puntaje:5},
+                            {respuesta:'El debe hacerse el fuerte para dejar a sus amigos',puntaje:10},
+                            {respuesta:'El sufrirá un perjuicio',puntaje:15},
+                        ]
                     }
                 },
                 {
@@ -88,11 +88,11 @@ export const data = [
                             b: 'ESTA FIGURA NO TIENE CUATRO LADOS IGUALES',
                             c: 'Luego:',
                         },
-                        resp: {
-                            a: 'Es un circulo',
-                            b: 'No es un cuadrado',
-                            c: 'Es un triangulo',
-                        }
+                        resp: [
+                            {respuesta:'Es un circulo',puntaje:5},
+                            {respuesta:'No es un cuadrado',puntaje:10},
+                            {respuesta:'Es un triangulo',puntaje:15},
+                        ]
                     }
                 },
                 {
@@ -103,11 +103,11 @@ export const data = [
                             b: 'ESTA PERSONAL NO ES EXTRANJERA',
                             c: 'Luego:',
                         },
-                        resp: {
-                            a: 'Es nacionalizada',
-                            b: 'Es natural de pais',
-                            c: 'Es un turista',
-                        }
+                        resp: [
+                            {respuesta:'Es nacionalizada',puntaje:5},
+                            {respuesta:'Es natural de pais',puntaje:10},
+                            {respuesta:'Es un turista',puntaje:15},
+                        ]
                     }
                 },
                 {
@@ -118,11 +118,11 @@ export const data = [
                             b: 'LA CALLE "D" ES PARALELA A LA CALLE "C"',
                             c: 'Luego:',
                         },
-                        resp: {
-                            a: 'La calle "S" esta al este de "D"',
-                            b: 'La calle "C" cruza a "S"',
-                            c: 'La calle "S" es paralera "C"'
-                        }
+                        resp: [
+                            {respuesta:'La calle "S" esta al este de "D"',puntaje:5},
+                            {respuesta:'La calle "C" cruza a "S"',puntaje:10},
+                            {respuesta:'La calle "S" es paralera "C"',puntaje:15},
+                        ]
                     }
                 },
                 {
@@ -133,11 +133,11 @@ export const data = [
                             b: null,
                             c: 'Luego:',
                         },
-                        resp: {
-                            a: 'Su hermnao es menos inteligente que Ud.',
-                            b: 'Su hermano es tan inteligente como Ud.',
-                            c: 'Su hermando es mas inteligente que Ud.',
-                        }
+                        resp: [
+                            {respuesta:'Su hermnao es menos inteligente que Ud.',puntaje:5},
+                            {respuesta:'Su hermano es tan inteligente como Ud.',puntaje:10},
+                            {respuesta:'Su hermando es mas inteligente que Ud.',puntaje:15},
+                        ]
                     }
                 },
                 {
@@ -148,11 +148,11 @@ export const data = [
                             b: null,
                             c: '¿Quien es el mejor jugador de futbol?',
                         },
-                        resp: {
-                            a: 'Eduardo',
-                            b: 'Guillermo',
-                            c: 'Jaime'
-                        }
+                        resp: [
+                            {respuesta:'Eduardo',puntaje:5},
+                            {respuesta:'Guillermo',puntaje:10},
+                            {respuesta:'Jaime',puntaje:15},
+                        ]
                     }
                 },
                 {
@@ -163,11 +163,11 @@ export const data = [
                             b: '"B" PESA MENOS QUE "C"',
                             c: 'Luego:',
                         },
-                        resp: {
-                            a: '"B" pesa menos que "C"',
-                            b: '"A" pesa igual que "B"',
-                            c: '"A" pesa menos que "C"'
-                        }
+                        resp: [
+                            {respuesta:'"B" pesa menos que "C"',puntaje:5},
+                            {respuesta:'"A" pesa igual que "B"',puntaje:10},
+                            {respuesta:'"A" pesa menos que "C"',puntaje:15},
+                        ]
                     }
                 },
                 {
@@ -178,11 +178,11 @@ export const data = [
                             b: 'ESTA CAJA NO CONTIENE PLATA',
                             c: 'Luego esta caja',
                         },
-                        resp: {
-                            a: 'Contiene diamantes',
-                            b: 'Contiene oro o diamantes',
-                            c: 'No se sabe que contiene'
-                        }
+                        resp: [
+                            {respuesta:'Contiene diamantes',puntaje:5},
+                            {respuesta:'Contiene oro o diamantes',puntaje:10},
+                            {respuesta:'No se sabe que contiene',puntaje:15},
+                        ]
                     }
                 },
                 {
@@ -193,11 +193,12 @@ export const data = [
                             b: null,
                             c: 'Por consiguiente:',
                         },
-                        resp: {
-                            a: 'El no debe formar parte de equipo',
-                            b: 'El puede perder el apoyo de sus compañeros',
-                            c: 'El puede presentar razonablmente una queja'
-                        }
+                        resp:[
+                            {respuesta:'El no debe formar parte de equipo',puntaje:5},
+                            {respuesta:'El puede perder el apoyo de sus compañeros',puntaje:10},
+                            {respuesta:'El puede presentar razonablmente una queja',puntaje:15},
+                        ]
+                        
                     }
                 },
                 {
@@ -208,11 +209,11 @@ export const data = [
                             b: null,
                             c: 'Entonces:',
                         },
-                        resp: {
-                            a: 'El rechazo de la queja es justificable',
-                            b: 'El rechazo se discute sin reserva',
-                            c: 'El reacho de la queja es desatinado, o es imperdonable'
-                        }
+                        resp: [
+                            {respuesta:'El rechazo de la queja es justificable',puntaje:5},
+                            {respuesta:'El rechazo se discute sin reserva',puntaje:10},
+                            {respuesta:'El reacho de la queja es desatinado, o es imperdonable',puntaje:15},
+                        ]
                     }
                 },
                 {
@@ -223,11 +224,11 @@ export const data = [
                             b: 'LA CASA "B" ESTA SITUADA AL NOR-ESTE DE LA CASA "C"',
                             c: 'Luego:',
                         },
-                        resp: {
-                            a: 'La casa "A" queda cerca de la casa de "C"',
-                            b: 'La casa "C" está más cercana a la casa "A" que a la casa "B"',
-                            c: 'La casa "A" queda al nor-este de la casa "C"'
-                        }
+                        resp: [
+                            {respuesta:'La casa "A" queda cerca de la casa de "C"',puntaje:5},
+                            {respuesta:'La casa "C" está más cercana a la casa "A" que a la casa "B"',puntaje:10},
+                            {respuesta:'La casa "A" queda al nor-este de la casa "C"',puntaje:15},
+                        ]
                     }
                 },
                 {
@@ -238,11 +239,11 @@ export const data = [
                             b: '"X" ESTÁ ENTRE "Y" y "Z"',
                             c: 'Luego:',
                         },
-                        resp: {
-                            a: '"W" no está entre "Y" y "Z"',
-                            b: '"W" está entre "X" y "Z"',
-                            c: '"W" está más cerca de "X" que "Z"'
-                        }
+                        resp: [
+                            {respuesta:'"W" no está entre "Y" y "Z"',puntaje:5},
+                            {respuesta:'"W" está entre "X" y "Z"',puntaje:10},
+                            {respuesta:'"W" está más cerca de "X" que "Z"',puntaje:15},
+                        ]
                     }
                 },
             ]
@@ -274,13 +275,13 @@ export const data = [
                             b: null,
                         },
                         resp: {
-                            a: '14',
-                            b: '12',
-                            c: '10',
-                            d: '8',
-                            e: '7',
-                            f: '6',
-                            g: '4',
+                            a: {respuesta:'14',puntaje:2},
+                            b: {respuesta:'12',puntaje:4},
+                            c: {respuesta:'10',puntaje:6},
+                            d: {respuesta:'8',puntaje:8},
+                            e: {respuesta:'7',puntaje:10},
+                            f: {respuesta:'6',puntaje:12},
+                            g: {respuesta:'4',puntaje:14},
                         }
                     }
                 },
@@ -291,15 +292,16 @@ export const data = [
                             a: 'Escoja el numnero incorrecto',
                             b: null,
                         },
-                        resp: {
-                            a: '19',
-                            b: '16',
-                            c: '13',
-                            d: '11',
-                            e: '10',
-                            f: '7',
-                            g: '4',
-                        }
+                        resp: [
+                            {a: {respuesta:'19',puntaje:2}},
+                            {b: {respuesta:'16',puntaje:4}},
+                            {c: {respuesta:'13',puntaje:6}},
+                            {d: {respuesta:'11',puntaje:8}},
+                            {e: {respuesta:'10',puntaje:10}},
+                            {f: {respuesta:'7',puntaje:12}},
+                            {g: {respuesta:'4',puntaje:14}},
+
+                        ]
                     }
                 },
                 {

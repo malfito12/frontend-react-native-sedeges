@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity,StyleSheet } from 'react-native'
 import React from 'react'
 import Layaut from '../../../../../../Atoms/StyleLayaut/Layaut'
 
@@ -19,11 +19,11 @@ const Instructions = ({ navigation, route }) => {
   ]
   return (
     <Layaut>
-      <Text style={{fontFamily:'Roboto_500Medium',color:'white'}}>Instructions</Text>
-      <Text style={{fontFamily:'Roboto_500Medium',color:'white'}}>{route.params.title}</Text>
-      <Text style={{fontFamily:'Roboto_500Medium',color:'white'}}>{route.params.contenido.instructions}</Text>
-      <TouchableOpacity onPress={() => navigation.navigate('Preguntas', { data: preguntas,cont:0 })} style={{ backgroundColor: 'green', alignSelf: 'center', padding: 5 }}>
-        <Text>comenzar</Text>
+      <Text style={styles.textFont}>Instructions</Text>
+      <Text style={styles.textFont}>{route.params.title}</Text>
+      <Text style={styles.textFont}>{route.params.contenido.instructions}</Text>
+      <TouchableOpacity style={styles.buttonStart} onPress={() => navigation.navigate('Preguntas', { data: preguntas,cont:0 })}>
+        <Text style={styles.textFont}>Comenzar</Text>
       </TouchableOpacity>
       {/* <TouchableOpacity onPress={() => navigation.push('PruebaTest', { data: info })} style={{ backgroundColor: 'red', alignSelf: 'center', padding: 5 }}>
         <Text>prueba</Text>
@@ -31,5 +31,21 @@ const Instructions = ({ navigation, route }) => {
     </Layaut>
   )
 }
+const styles=StyleSheet.create({
+  buttonStart:{
+    padding:10,
+    margin:10,
+    backgroundColor:'green',
+    borderRadius:5,
+    alignSelf:'center',
+    justifyContent:'center',
+    alignItems:'center'
+  },
+  textFont: {
+    fontFamily: 'Roboto_500Medium',
+    color: 'white',
+    fontSize:14
+  }
+})
 
 export default Instructions
