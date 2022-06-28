@@ -2,11 +2,12 @@ import { View, Text, TouchableOpacity,StyleSheet } from 'react-native'
 import React, { useContext } from 'react'
 import { AuthContext } from '../../../Atoms/Context/AuthContext'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { FontAwesome5, Foundation, Ionicons, Feather, SimpleLineIcons } from '@expo/vector-icons'
+import { FontAwesome5, Foundation, Ionicons, Feather, SimpleLineIcons,Entypo  } from '@expo/vector-icons'
 import StudentsAdminScreem from './Students/StudentsAdminScreem'
 import ResultsAdminScreem from './Results/ResultsAdminScreem'
 import HomeAdminTestScreem from './Tests/HomeAdminTestScreem'
 import { LinearGradient } from 'expo-linear-gradient'
+import HomeAdminTestVocational from './TestsVocational/HomeAdminTestVocational'
 
 const Tab = createBottomTabNavigator()
 
@@ -30,6 +31,8 @@ const TeacherHomeScreem = ({ navigation }) => {
               return (<Ionicons name='school-outline' size={24} color='white' />)
             } else if (route.name === 'HomeAdminTestScreem') {
               return (<Ionicons name='library-outline' size={24} color='white' />)
+            } else if (route.name === 'HomeAdminTestVocational') {
+              return (<Entypo name="qq" size={24} color="white" />)
             } else if (route.name === 'ResultsAdminScreem') {
               return (<Foundation name='results' size={24} color='white' />)
             }
@@ -63,6 +66,13 @@ const TeacherHomeScreem = ({ navigation }) => {
           headerLeft: () => (perfil),
           headerTitle: '',
           title: 'Test',
+          headerStyle: { backgroundColor: '#000010' },
+          headerTintColor: 'white',
+        }} />
+        <Tab.Screen name="HomeAdminTestVocational" component={HomeAdminTestVocational} options={{
+          headerLeft: () => (perfil),
+          headerTitle: '',
+          title: 'Test Vocacional',
           headerStyle: { backgroundColor: '#000010' },
           headerTintColor: 'white',
         }} />

@@ -1,4 +1,4 @@
-import { View, Text, Modal, TouchableOpacity, TextInput, RefreshControl, ScrollView, StyleSheet, ProgressBarAndroid } from 'react-native'
+import { View, Text, Modal, TouchableOpacity, TextInput, RefreshControl, ScrollView, StyleSheet } from 'react-native'
 import React, { useState, useContext, useEffect, useCallback } from 'react'
 import Layaut from '../../../../Atoms/StyleLayaut/Layaut'
 import { AuthContext } from '../../../../Atoms/Context/AuthContext'
@@ -7,6 +7,7 @@ import { PORT_URL } from '../../../../../PortUrl/PortUrl'
 import * as Progress from 'react-native-progress'
 import { AntDesign } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient'
+import { CancelButton, DeleteButton, SuccessButton, UdpateButton } from '../../../../Molecules/Buttons/Buttons';
 
 const CreateTestScreem = () => {
     var fecha = new Date
@@ -52,8 +53,18 @@ const CreateTestScreem = () => {
             })
     }
     //-------------POEST TEST-------------------
-    const openCloseModalAddTest = () => {
-        setModalAddTest(!modalAddTest)
+    const openModalAddTest = () => {
+        setModalAddTest(true)
+    }
+    const closeModalAddTest = () => {
+        setModalAddTest(false)
+        setChangeData({
+            test_name: '',
+            test_description: '',
+            test_register_date: todo,
+            test_status: false,
+            user_id: user.user,
+        })
     }
     const postTest = async (e) => {
         e.preventDefault()
@@ -64,7 +75,7 @@ const CreateTestScreem = () => {
             .then(resp => {
                 console.log(resp.data)
                 getTests()
-                openCloseModalAddTest()
+                closeModalAddTest()
                 setChangeData({
                     test_name: '',
                     test_description: '',
@@ -85,6 +96,13 @@ const CreateTestScreem = () => {
     }
     const closeModalEditTest = () => {
         setModalEditTest(false)
+        setChangeData({
+            test_name: '',
+            test_description: '',
+            test_register_date: todo,
+            test_status: false,
+            user_id: user.user,
+        })
     }
     const openStatus = () => {
         setEstado(true)
@@ -110,6 +128,15 @@ const CreateTestScreem = () => {
         // console.log(changeData)
 
     }
+    //--------------DETELE TEST---------------------------
+    const deleteTest = async (e) => {
+        // e.preventDefault()
+        await axios.delete(`${PORT_URL}test/${e}`)
+            .then(resp => {
+                getTests()
+            })
+            .catch(err => console.log(err))
+    }
     //--------------HANDLE CHANGE---------------------------
     const handleChange = (name, value) => {
         setChangeData({
@@ -127,7 +154,7 @@ const CreateTestScreem = () => {
         <>
             <Layaut>
                 <LinearGradient style={styles.buttonRegister} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#00c853', '#64dd17', '#aeea00']}>
-                    <TouchableOpacity style={styles.buttonSuccess} onPress={openCloseModalAddTest} >
+                    <TouchableOpacity style={styles.buttonSuccess} onPress={openModalAddTest} >
                         <Text style={{ color: 'white' }}>Nuevo Test</Text>
                         <AntDesign name="addfile" size={20} color="white" style={{ marginLeft: 10 }} />
                     </TouchableOpacity>
@@ -142,21 +169,23 @@ const CreateTestScreem = () => {
                     {tests.length > 0 ? (
                         tests.map((e, index) => (
                             <View key={index} style={styles.testView}>
-                                <View>
-                                    <Text style={{color:'white'}}>{e.test_name}</Text>
-                                    <Text style={{color:'white'}}>{e.test_description}</Text>
-                                    <Text style={{color:'white'}}>{e.test_register_date}</Text>
-                                    {/* <Text>{e.test_status.toString()}</Text> */}
+                                <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', marginBottom: 5 }}>
+                                    <View>
+                                        <Text style={{ color: 'white' }}>{e.test_name}</Text>
+                                        <Text style={{ color: 'white' }}>{e.test_description}</Text>
+                                        <Text style={{ color: 'white' }}>{e.test_register_date}</Text>
+                                        {/* <Text>{e.test_status.toString()}</Text> */}
+                                    </View>
+                                    {e.test_status === true ? (<AntDesign name="checkcircle" size={40} color="#76ff03" />) : (<AntDesign name="closecircle" size={40} color="#ff1744" />)}
                                 </View>
-                                {e.test_status === true ? (
-                                    <TouchableOpacity onPress={() => openModalEditTest(e)} style={{ backgroundColor: 'green', padding: 10, borderRadius:5 }}>
-                                        <Text style={{ color: 'white' }}>Vigente</Text>
+                                <View>
+                                    <TouchableOpacity onPress={() => openModalEditTest(e)}>
+                                        <UdpateButton name={'Actualizar'} />
                                     </TouchableOpacity>
-                                ) : (
-                                    <TouchableOpacity onPress={() => openModalEditTest(e)} style={{ backgroundColor: 'red', padding: 10,borderRadius:5 }}>
-                                        <Text style={{ color: 'white' }}>Cerrado</Text>
+                                    <TouchableOpacity onPress={() => deleteTest(e.test_id)}>
+                                        <DeleteButton name={'Eliminar'} />
                                     </TouchableOpacity>
-                                )}
+                                </View>
                             </View>
                         ))
                     ) : (
@@ -179,27 +208,31 @@ const CreateTestScreem = () => {
                 transparent
             >
                 <View style={styles.centeredView}>
-                    <View style={styles.modalView}>
-                        <Text>CREAR NUEVO EVENTO</Text>
-                        <TextInput
-                            style={styles.textInput}
-                            placeholder='Nombre Test'
-                            onChangeText={text => handleChange('test_name', text)}
-                            value={changeData.test_name}
-                        />
-                        <TextInput
-                            style={styles.textInput}
-                            placeholder='Descripción'
-                            onChangeText={text => handleChange('test_description', text)}
-                            value={changeData.test_description}
-                        />
-                        <TouchableOpacity onPress={postTest} style={styles.buttonRegister}>
-                            <Text>aceptar</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={openCloseModalAddTest} style={styles.buttonRegister}>
-                            <Text>Cerrar</Text>
-                        </TouchableOpacity>
-                    </View>
+                    <LinearGradient style={{ marginHorizontal: 15, borderRadius: 5, padding: 5 }} start={{ x: 1, y: 1 }} end={{ x: 0, y: 1 }} colors={['#335469', '#587c92', '#335469']}>
+                        <View style={{ alignItems: 'center' }}>
+                            <Text style={{ margin: 10, color: 'white' }}>CREAR NUEVO EVENTO</Text>
+                            <TextInput
+                                style={styles.textInput}
+                                placeholder='Nombre Test'
+                                onChangeText={text => handleChange('test_name', text)}
+                                value={changeData.test_name}
+                            />
+                            <TextInput
+                                style={styles.textInput}
+                                placeholder='Descripción'
+                                onChangeText={text => handleChange('test_description', text)}
+                                value={changeData.test_description}
+                            />
+                            <View style={{ flexDirection: 'row', width: '100%', justifyContent: 'space-evenly' }}>
+                                <TouchableOpacity onPress={postTest}>
+                                    <SuccessButton name={'Aceptar'} />
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress={closeModalAddTest}>
+                                    <CancelButton name={'Cancel'} />
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    </LinearGradient>
                 </View>
             </Modal>
             {/* ------------------------EDIT EVENTO------------------------------ */}
@@ -209,36 +242,40 @@ const CreateTestScreem = () => {
                 transparent
             >
                 <View style={styles.centeredView}>
-                    <View style={styles.modalView}>
-                        <Text style={{ color: 'white' }}>EDITAR EVENTO</Text>
-                        <TextInput
-                            style={styles.textInput}
-                            placeholder='Nombre Test'
-                            onChangeText={text => handleChange('test_name', text)}
-                            value={changeData.test_name}
-                        />
-                        <TextInput
-                            style={styles.textInput}
-                            placeholder='Descripción'
-                            onChangeText={text => handleChange('test_description', text)}
-                            value={changeData.test_description}
-                        />
-                        {changeData.test_status === true ? (
-                            <TouchableOpacity onPress={openStatus} style={{ ...styles.buttonStatus, backgroundColor: 'green', width: '90%', alignItems: 'center' }}>
-                                <Text>Vigente</Text>
-                            </TouchableOpacity>
-                        ) : (
-                            <TouchableOpacity onPress={openStatus} style={{ ...styles.buttonStatus, backgroundColor: 'red', width: '90%', alignItems: 'center' }}>
-                                <Text>Cerrado</Text>
-                            </TouchableOpacity>
-                        )}
-                        <TouchableOpacity onPress={editTests} style={styles.buttonRegister}>
-                            <Text>aceptar</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={closeModalEditTest} style={styles.buttonRegister}>
-                            <Text>Cerrar</Text>
-                        </TouchableOpacity>
-                    </View>
+                    <LinearGradient style={{ marginHorizontal: 15, borderRadius: 5, padding: 5 }} start={{ x: 1, y: 1 }} end={{ x: 0, y: 1 }} colors={['#335469', '#587c92', '#335469']}>
+                        <View style={{ alignItems: 'center' }}>
+                            <Text style={{ color: 'white', padding: 10 }}>ACTUALIZAR TEST</Text>
+                            <TextInput
+                                style={styles.textInput}
+                                placeholder='Nombre Test'
+                                onChangeText={text => handleChange('test_name', text)}
+                                value={changeData.test_name}
+                            />
+                            <TextInput
+                                style={styles.textInput}
+                                placeholder='Descripción'
+                                onChangeText={text => handleChange('test_description', text)}
+                                value={changeData.test_description}
+                            />
+                            {changeData.test_status === true ? (
+                                <TouchableOpacity onPress={openStatus} style={{ ...styles.buttonStatus, backgroundColor: 'green', width: '90%', alignItems: 'center' }}>
+                                    <Text>Vigente</Text>
+                                </TouchableOpacity>
+                            ) : (
+                                <TouchableOpacity onPress={openStatus} style={{ ...styles.buttonStatus, backgroundColor: 'red', width: '90%', alignItems: 'center' }}>
+                                    <Text>Cerrado</Text>
+                                </TouchableOpacity>
+                            )}
+                            <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', width: '100%' }}>
+                                <TouchableOpacity onPress={editTests}>
+                                    <SuccessButton name={'Actualizar'} />
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress={closeModalEditTest}>
+                                    <CancelButton name={'Cancel'} />
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    </LinearGradient>
                 </View>
             </Modal>
             {/* ------------------------ESTADO------------------------- */}
@@ -268,8 +305,8 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         marginHorizontal: 6,
     },
-    buttonSuccess:{
-        width: '100%', 
+    buttonSuccess: {
+        width: '100%',
         alignItems: 'center',
         flexDirection: 'row',
         justifyContent: 'center'
@@ -311,7 +348,7 @@ const styles = StyleSheet.create({
         width: '90%',
         fontSize: 14,
         marginBottom: 10,
-        borderWidth: 1,
+        // borderWidth: 1,
         backgroundColor: 'white',
         borderRadius: 3,
         height: 35,
@@ -319,13 +356,13 @@ const styles = StyleSheet.create({
 
     },
     testView: {
-        flexDirection: 'row',
+        // flexDirection: 'row',
         backgroundColor: '#3C425A',
         padding: 10,
         margin: 7,
         borderRadius: 5,
-        justifyContent: 'space-between',
-        alignItems: 'center'
+        // justifyContent: 'space-between',
+        // alignItems: 'center'
     },
 })
 
