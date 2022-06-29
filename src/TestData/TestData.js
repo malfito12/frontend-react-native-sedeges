@@ -25,8 +25,8 @@ export const data = [
                             c: null,
                         },
                         resp: [
-                            { respuesta: require('../images/pantalla.png'),puntaje:10 },
-                            { respuesta: require('../images/sedeges-logo.png'),puntaje:5 },
+                            { respuesta: require('../images/pantalla.png'), puntaje: 10 },
+                            { respuesta: require('../images/sedeges-logo.png'), puntaje: 5 },
                         ]
                     }
                 },
@@ -39,8 +39,8 @@ export const data = [
                             c: null,
                         },
                         resp: [
-                            { respuesta: require('../images/pantalla.png'),puntaje:10 },
-                            { respuesta: require('../images/sedeges-logo.png'),puntaje:5 },
+                            { respuesta: require('../images/pantalla.png'), puntaje: 10 },
+                            { respuesta: require('../images/sedeges-logo.png'), puntaje: 5 },
                         ]
                     }
                 },
@@ -53,8 +53,8 @@ export const data = [
                             c: null,
                         },
                         resp: [
-                            { respuesta: require('../images/sedeges-logo.png'),puntaje:5 },
-                            { respuesta: require('../images/pantalla.png'),puntaje:10 },
+                            { respuesta: require('../images/sedeges-logo.png'), puntaje: 5 },
+                            { respuesta: require('../images/pantalla.png'), puntaje: 10 },
                         ]
                     }
                 },
@@ -67,8 +67,8 @@ export const data = [
                             c: null,
                         },
                         resp: [
-                            { respuesta: require('../images/pantalla.png'),puntaje:10 },
-                            { respuesta: require('../images/sedeges-logo.png'),puntaje:5 },
+                            { respuesta: require('../images/pantalla.png'), puntaje: 10 },
+                            { respuesta: require('../images/sedeges-logo.png'), puntaje: 5 },
                         ]
                     }
                 },
@@ -81,8 +81,8 @@ export const data = [
                             c: null,
                         },
                         resp: [
-                            { respuesta: require('../images/pantalla.png'),puntaje:10 },
-                            { respuesta: require('../images/sedeges-logo.png'),puntaje:5 },
+                            { respuesta: require('../images/pantalla.png'), puntaje: 10 },
+                            { respuesta: require('../images/sedeges-logo.png'), puntaje: 5 },
                         ]
                     }
                 },
@@ -95,8 +95,8 @@ export const data = [
                             c: null,
                         },
                         resp: [
-                            { respuesta: require('../images/sedeges-logo.png'),puntaje:5 },
-                            { respuesta: require('../images/pantalla.png'),puntaje:10 },
+                            { respuesta: require('../images/sedeges-logo.png'), puntaje: 5 },
+                            { respuesta: require('../images/pantalla.png'), puntaje: 10 },
                         ]
                     }
                 },
@@ -109,16 +109,250 @@ export const data = [
                             c: null,
                         },
                         resp: [
-                            { respuesta: require('../images/sedeges-logo.png'),puntaje:5 },
-                            { respuesta: require('../images/pantalla.png'),puntaje:10 },
+                            { respuesta: require('../images/sedeges-logo.png'), puntaje: 5 },
+                            { respuesta: require('../images/pantalla.png'), puntaje: 10 },
                         ]
                     }
                 },
             ]
         }
     },
-    { title: 'test 2', id: 2, categoria: 'test-grafico' },
-    { title: 'test 3', id: 3, categoria: 'test-grafico' },
+    {
+        title: 'test 2',
+        id: 2,
+        categoria: 'test-grafico',
+        contenido: {
+            instructions: 'En cada una de series de figura que siguen, usted deberá encontrar la que sea igual a la primera aunque esté en otra posicion.',
+            ejm: {
+                preguntas: {
+                    a: null,
+                    b: null
+                },
+                resp: [
+                    { respuesta: require('../images/sedeges-logo.png') },
+                    { respuesta: require('../images/pantalla.png') },
+                ]
+            },
+            preguntas: [
+                {
+                    pregunta: {
+                        pre_id: 0,
+                        preguntas: {
+                            a: null,
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: require('../images/pantalla.png'), puntaje: 10 },
+                            { respuesta: require('../images/sedeges-logo.png'), puntaje: 5 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 1,
+                        preguntas: {
+                            a: null,
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: require('../images/pantalla.png'), puntaje: 10 },
+                            { respuesta: require('../images/sedeges-logo.png'), puntaje: 5 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 2,
+                        preguntas: {
+                            a: null,
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: require('../images/sedeges-logo.png'), puntaje: 5 },
+                            { respuesta: require('../images/pantalla.png'), puntaje: 10 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 3,
+                        preguntas: {
+                            a: null,
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: require('../images/pantalla.png'), puntaje: 10 },
+                            { respuesta: require('../images/sedeges-logo.png'), puntaje: 5 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 4,
+                        preguntas: {
+                            a: null,
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: require('../images/pantalla.png'), puntaje: 10 },
+                            { respuesta: require('../images/sedeges-logo.png'), puntaje: 5 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 5,
+                        preguntas: {
+                            a: null,
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: require('../images/sedeges-logo.png'), puntaje: 5 },
+                            { respuesta: require('../images/pantalla.png'), puntaje: 10 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 6,
+                        preguntas: {
+                            a: null,
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: require('../images/sedeges-logo.png'), puntaje: 5 },
+                            { respuesta: require('../images/pantalla.png'), puntaje: 10 },
+                        ]
+                    }
+                },
+            ]
+        }
+    },
+    {
+        title: 'test 3',
+        id: 3,
+        categoria: 'test-grafico',
+        contenido: {
+            instructions: 'A continuacion hay varias figuras; unas corresponden a la derecha y otros a la izquierda: Lo que usted tiene que hacer es decidir en cada caso si es derecha(D) o izquierda(I).',
+            ejm: {
+                preguntas: {
+                    a: null,
+                    b: null
+                },
+                resp: [
+                    { respuesta: require('../images/sedeges-logo.png') },
+                    { respuesta: require('../images/pantalla.png') },
+                ]
+            },
+            preguntas: [
+                {
+                    pregunta: {
+                        pre_id: 0,
+                        preguntas: {
+                            a: null,
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: require('../images/pantalla.png'), puntaje: 10 },
+                            { respuesta: require('../images/sedeges-logo.png'), puntaje: 5 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 1,
+                        preguntas: {
+                            a: null,
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: require('../images/pantalla.png'), puntaje: 10 },
+                            { respuesta: require('../images/sedeges-logo.png'), puntaje: 5 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 2,
+                        preguntas: {
+                            a: null,
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: require('../images/sedeges-logo.png'), puntaje: 5 },
+                            { respuesta: require('../images/pantalla.png'), puntaje: 10 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 3,
+                        preguntas: {
+                            a: null,
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: require('../images/pantalla.png'), puntaje: 10 },
+                            { respuesta: require('../images/sedeges-logo.png'), puntaje: 5 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 4,
+                        preguntas: {
+                            a: null,
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: require('../images/pantalla.png'), puntaje: 10 },
+                            { respuesta: require('../images/sedeges-logo.png'), puntaje: 5 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 5,
+                        preguntas: {
+                            a: null,
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: require('../images/sedeges-logo.png'), puntaje: 5 },
+                            { respuesta: require('../images/pantalla.png'), puntaje: 10 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 6,
+                        preguntas: {
+                            a: null,
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: require('../images/sedeges-logo.png'), puntaje: 5 },
+                            { respuesta: require('../images/pantalla.png'), puntaje: 10 },
+                        ]
+                    }
+                },
+            ]
+        }
+    },
     {
         title: 'test 4',
         id: 4,
@@ -391,15 +625,15 @@ export const data = [
                             a: 'Escoja el numnero incorrecto',
                             b: null,
                         },
-                        resp: {
-                            a: { respuesta: '14', puntaje: 2 },
-                            b: { respuesta: '12', puntaje: 4 },
-                            c: { respuesta: '10', puntaje: 6 },
-                            d: { respuesta: '8', puntaje: 8 },
-                            e: { respuesta: '7', puntaje: 10 },
-                            f: { respuesta: '6', puntaje: 12 },
-                            g: { respuesta: '4', puntaje: 14 },
-                        }
+                        resp: [
+                            { respuesta: '14', puntaje: 2 },
+                            { respuesta: '12', puntaje: 4 },
+                            { respuesta: '10', puntaje: 6 },
+                            { respuesta: '8', puntaje: 8 },
+                            { respuesta: '7', puntaje: 10 },
+                            { respuesta: '6', puntaje: 12 },
+                            { respuesta: '4', puntaje: 14 },
+                        ]
                     }
                 },
                 {
@@ -410,13 +644,13 @@ export const data = [
                             b: null,
                         },
                         resp: [
-                            { a: { respuesta: '19', puntaje: 2 } },
-                            { b: { respuesta: '16', puntaje: 4 } },
-                            { c: { respuesta: '13', puntaje: 6 } },
-                            { d: { respuesta: '11', puntaje: 8 } },
-                            { e: { respuesta: '10', puntaje: 10 } },
-                            { f: { respuesta: '7', puntaje: 12 } },
-                            { g: { respuesta: '4', puntaje: 14 } },
+                            { respuesta: '19', puntaje: 2 },
+                            { respuesta: '16', puntaje: 4 },
+                            { respuesta: '13', puntaje: 6 },
+                            { respuesta: '11', puntaje: 8 },
+                            { respuesta: '10', puntaje: 10 },
+                            { respuesta: '7', puntaje: 12 },
+                            { respuesta: '4', puntaje: 14 },
 
                         ]
                     }
@@ -428,14 +662,14 @@ export const data = [
                             a: 'Escoja el numnero incorrecto',
                             b: null,
                         },
-                        resp: {
-                            a: '1',
-                            b: '5',
-                            c: '9',
-                            d: '13',
-                            e: '15',
-                            f: '17',
-                        }
+                        resp: [
+                            { respuesta: '1', puntaje: 2 },
+                            { respuesta: '5', puntaje: 4 },
+                            { respuesta: '9', puntaje: 6 },
+                            { respuesta: '13', puntaje: 8 },
+                            { respuesta: '15', puntaje: 10 },
+                            { respuesta: '17', puntaje: 12 },
+                        ]
                     }
                 },
                 {
@@ -445,16 +679,16 @@ export const data = [
                             a: 'Escoja el numnero incorrecto',
                             b: null,
                         },
-                        resp: {
-                            a: '4',
-                            b: '5',
-                            c: '7',
-                            d: '8',
-                            e: '10',
-                            f: '11',
-                            g: '12',
-                            h: '13',
-                        }
+                        resp: [
+                            { respuesta: '4', puntaje: 2 },
+                            { respuesta: '5', puntaje: 4 },
+                            { respuesta: '7', puntaje: 6 },
+                            { respuesta: '8', puntaje: 8 },
+                            { respuesta: '10', puntaje: 10 },
+                            { respuesta: '11', puntaje: 12 },
+                            { respuesta: '12', puntaje: 14 },
+                            { respuesta: '13', puntaje: 16 },
+                        ]
                     }
                 },
                 {
@@ -464,18 +698,18 @@ export const data = [
                             a: 'Escoja el numnero incorrecto',
                             b: null,
                         },
-                        resp: {
-                            a: '2',
-                            b: '4',
-                            c: '5',
-                            d: '7',
-                            e: '8',
-                            f: '9',
-                            g: '10',
-                            h: '11',
-                            i: '13',
-                            j: '14',
-                        }
+                        resp: [
+                            { respuesta: '2', puntaje: 2 },
+                            { respuesta: '4', puntaje: 4 },
+                            { respuesta: '5', puntaje: 6 },
+                            { respuesta: '7', puntaje: 8 },
+                            { respuesta: '8', puntaje: 10 },
+                            { respuesta: '9', puntaje: 12 },
+                            { respuesta: '10', puntaje: 14 },
+                            { respuesta: '11', puntaje: 16 },
+                            { respuesta: '13', puntaje: 18 },
+                            { respuesta: '14', puntaje: 20 },
+                        ]
                     }
                 },
                 {
@@ -485,17 +719,17 @@ export const data = [
                             a: 'Escoja el numnero incorrecto',
                             b: null,
                         },
-                        resp: {
-                            a: '0',
-                            b: '7',
-                            c: '14',
-                            d: '19',
-                            e: '24',
-                            f: '27',
-                            g: '29',
-                            h: '30',
-                            i: '31',
-                        }
+                        resp: [
+                            { respuesta: '0', puntaje: 2 },
+                            { respuesta: '7', puntaje: 4 },
+                            { respuesta: '14', puntaje: 6 },
+                            { respuesta: '19', puntaje: 8 },
+                            { respuesta: '24', puntaje: 10 },
+                            { respuesta: '27', puntaje: 12 },
+                            { respuesta: '29', puntaje: 14 },
+                            { respuesta: '30', puntaje: 16 },
+                            { respuesta: '31', puntaje: 18 },
+                        ]
                     }
                 },
                 {
@@ -505,19 +739,19 @@ export const data = [
                             a: 'Escoja el numnero incorrecto',
                             b: null,
                         },
-                        resp: {
-                            a: '20',
-                            b: '17',
-                            c: '15',
-                            d: '14',
-                            e: '11',
-                            f: '9',
-                            g: '8',
-                            h: '7',
-                            i: '5',
-                            j: '3',
-                            k: '2',
-                        }
+                        resp: [
+                            { respuesta: '20', puntaje: 2 },
+                            { respuesta: '17', puntaje: 4 },
+                            { respuesta: '15', puntaje: 6 },
+                            { respuesta: '14', puntaje: 8 },
+                            { respuesta: '11', puntaje: 10 },
+                            { respuesta: '9', puntaje: 12 },
+                            { respuesta: '8', puntaje: 14 },
+                            { respuesta: '7', puntaje: 16 },
+                            { respuesta: '5', puntaje: 18 },
+                            { respuesta: '3', puntaje: 20 },
+                            { respuesta: '2', puntaje: 22 },
+                        ]
                     }
                 },
                 {
@@ -527,19 +761,19 @@ export const data = [
                             a: 'Escoja el numnero incorrecto',
                             b: null,
                         },
-                        resp: {
-                            a: '21',
-                            b: '20',
-                            c: '18',
-                            d: '15',
-                            e: '14',
-                            f: '12',
-                            g: '10',
-                            h: '9',
-                            i: '8',
-                            j: '6',
-                            k: '3',
-                        }
+                        resp: [
+                            { respuesta: '21', puntaje: 2 },
+                            { respuesta: '10', puntaje: 4 },
+                            { respuesta: '18', puntaje: 6 },
+                            { respuesta: '15', puntaje: 8 },
+                            { respuesta: '14', puntaje: 10 },
+                            { respuesta: '12', puntaje: 12 },
+                            { respuesta: '10', puntaje: 14 },
+                            { respuesta: '9', puntaje: 16 },
+                            { respuesta: '8', puntaje: 18 },
+                            { respuesta: '6', puntaje: 20 },
+                            { respuesta: '3', puntaje: 22 },
+                        ]
                     }
                 },
                 {
@@ -549,17 +783,17 @@ export const data = [
                             a: 'Escoja el numnero incorrecto',
                             b: null,
                         },
-                        resp: {
-                            a: '2',
-                            b: '3',
-                            c: '5',
-                            d: '8',
-                            e: '12',
-                            f: '17',
-                            g: '22',
-                            h: '23',
-                            i: '30',
-                        }
+                        resp: [
+                            { respuesta: '2', puntaje: 2 },
+                            { respuesta: '3', puntaje: 4 },
+                            { respuesta: '5', puntaje: 6 },
+                            { respuesta: '8', puntaje: 8 },
+                            { respuesta: '12', puntaje: 10 },
+                            { respuesta: '17', puntaje: 12 },
+                            { respuesta: '22', puntaje: 14 },
+                            { respuesta: '23', puntaje: 16 },
+                            { respuesta: '30', puntaje: 18 },
+                        ]
                     }
                 },
                 {
@@ -569,18 +803,18 @@ export const data = [
                             a: 'Escoja el numnero incorrecto',
                             b: null,
                         },
-                        resp: {
-                            a: '20',
-                            b: '18',
-                            c: '19',
-                            d: '17',
-                            e: '18',
-                            f: '16',
-                            g: '17',
-                            h: '14',
-                            i: '15',
-                            j: '16',
-                        }
+                        resp: [
+                            { respuesta: '20', puntaje: 2 },
+                            { respuesta: '18', puntaje: 4 },
+                            { respuesta: '19', puntaje: 6 },
+                            { respuesta: '17', puntaje: 8 },
+                            { respuesta: '18', puntaje: 10 },
+                            { respuesta: '16', puntaje: 12 },
+                            { respuesta: '17', puntaje: 14 },
+                            { respuesta: '14', puntaje: 16 },
+                            { respuesta: '15', puntaje: 18 },
+                            { respuesta: '16', puntaje: 20 },
+                        ]
                     }
                 },
             ]
@@ -597,13 +831,13 @@ export const data = [
                     a: '12  _   14  15  _   _   18',
                     b: 'Escoja el grupo correcto',
                 },
-                resp: {
-                    a: '13,15,16',
-                    b: '13,15,17',
-                    c: '13,16,17',
-                    d: '14,16,17',
-                    e: '15,16,18',
-                }
+                resp: [
+                    { respuesta: '13,15,16' },
+                    { respuesta: '13,15,17' },
+                    { respuesta: '13,16,17' },
+                    { respuesta: '14,16,17' },
+                    { respuesta: '15,16,18' },
+                ]
             },
             preguntas: [
                 {
@@ -613,13 +847,13 @@ export const data = [
                             a: '1   4   _   10  _   _   19',
                             b: 'Escoja el grupo correcto',
                         },
-                        resp: {
-                            a: '5,11,18',
-                            b: '7,13,16',
-                            c: '5,13,16',
-                            d: '7,11,18',
-                            e: '5,16,18',
-                        }
+                        resp: [
+                            { respuesta: '5,11,18', puntaje: 2 },
+                            { respuesta: '7,13,16', puntaje: 4 },
+                            { respuesta: '5,13,16', puntaje: 6 },
+                            { respuesta: '7,11,18', puntaje: 8 },
+                            { respuesta: '5,16,18', puntaje: 10 },
+                        ]
                     }
                 },
                 {
@@ -629,13 +863,13 @@ export const data = [
                             a: '2   _   8   _   32  _',
                             b: 'Escoja el grupo correcto',
                         },
-                        resp: {
-                            a: '7,13,33',
-                            b: '4,16,37',
-                            c: '3,15,48',
-                            d: '4,16,64',
-                            e: '6,24,64',
-                        }
+                        resp: [
+                            { respuesta: '7,13,33', puntaje: 2 },
+                            { respuesta: '4,16,37', puntaje: 4 },
+                            { respuesta: '3,15,48', puntaje: 6 },
+                            { respuesta: '4,16,64', puntaje: 8 },
+                            { respuesta: '6,24,64', puntaje: 10 },
+                        ]
                     }
                 },
                 {
@@ -645,13 +879,13 @@ export const data = [
                             a: '44  37  _   _   16  _   2',
                             b: 'Escoja el grupo correcto',
                         },
-                        resp: {
-                            a: '30,22,8',
-                            b: '31,22,9',
-                            c: '30,23,9',
-                            d: '30,21,9',
-                            e: '31,23,8',
-                        }
+                        resp: [
+                            { respuesta: '30,22,8', puntaje: 2 },
+                            { respuesta: '31,22,9', puntaje: 4 },
+                            { respuesta: '30,23,9', puntaje: 6 },
+                            { respuesta: '30,21,9', puntaje: 8 },
+                            { respuesta: '31,23,8', puntaje: 10 },
+                        ]
                     }
                 },
                 {
@@ -661,13 +895,13 @@ export const data = [
                             a: '6   _   28  _   50  _   72',
                             b: 'Escoja el grupo correcto',
                         },
-                        resp: {
-                            a: '16,38,60',
-                            b: '16,39,61',
-                            c: '17,38,60',
-                            d: '11,39,61',
-                            e: '17,39,61',
-                        }
+                        resp: [
+                            { respuesta: '16,38,60', puntaje: 2 },
+                            { respuesta: '16,39,61', puntaje: 4 },
+                            { respuesta: '17,38,60', puntaje: 6 },
+                            { respuesta: '11,39,61', puntaje: 8 },
+                            { respuesta: '17,39,61', puntaje: 10 },
+                        ]
                     }
                 },
                 {
@@ -677,13 +911,13 @@ export const data = [
                             a: '83  70  _   44  _   _   5',
                             b: 'Escoja el grupo correcto',
                         },
-                        resp: {
-                            a: '57,31,18',
-                            b: '53,33,23',
-                            c: '57,33,19',
-                            d: '53,31,18',
-                            e: '57,33,19',
-                        }
+                        resp: [
+                            { respuesta: '57,31,18', puntaje: 2 },
+                            { respuesta: '53,33,23', puntaje: 4 },
+                            { respuesta: '57,33,19', puntaje: 6 },
+                            { respuesta: '53,31,18', puntaje: 8 },
+                            { respuesta: '57,33,19', puntaje: 10 },
+                        ]
                     }
                 },
             ]
@@ -700,105 +934,709 @@ export const data = [
                     a: 'Si tu tienes 5 Bs. y gastas 3 Bs. ¿ cuantos Bs. te quedan ?',
                     b: null,
                 },
-                resp: {
-                    a: '1,00 Bs.',
-                    b: '2,00 Bs.',
-                    c: '3,00 Bs.',
-                    c: '5,00 Bs.'
-                }
+                resp: [
+                    { respuesta: '1,00 Bs.'},
+                    { respuesta: '2,00 Bs.'},
+                    { respuesta: '3,00 Bs.'},
+                    { respuesta: '5,00 Bs.'},
+                ]
             },
             preguntas: [
                 {
                     pregunta: {
-                        pre_id: 1,
+                        pre_id: 0,
                         preguntas: {
-                            a: 'EL SEÑOR "X" ES UN AVIADOR',
-                            b: 'EL SEÑOR "X" ES UN JEFE DE SCOUTS',
-                            c: 'Luego:',
+                            a: 'Un tren de carga viaja a una velocidad de 20 kilometros por hora.',
+                            b: '¿Cunatos kilometros recorrerá en 4 horas?',
+                            c: null,
                         },
-                        resp: {
-                            a: 'Los aviadores son buenos jefes de scouts',
-                            b: 'Un aviador puede ser jefe de scouts',
-                            c: 'Los jefes de scouts son buenos aviadores'
-                        }
+                        resp: [
+                            { respuesta: '5', puntaje: 2 },
+                            { respuesta: '24', puntaje: 4 },
+                            { respuesta: '80', puntaje: 6 },
+                            { respuesta: '60', puntaje: 8 },
+                        ]
                     }
                 },
                 {
                     pregunta: {
                         pre_id: 1,
                         preguntas: {
-                            a: 'EL SEÑOR "X" ES UN AVIADOR',
-                            b: 'EL SEÑOR "X" ES UN JEFE DE SCOUTS',
-                            c: 'Luego:',
+                            a: '¿Cuantos metros de tela se podrá comprar con 150 Bs. a razón de 4 metros por 50 Bs.?',
+                            b: null,
+                            c: null,
                         },
-                        resp: {
-                            a: 'Los aviadores son buenos jefes de scouts',
-                            b: 'Un aviador puede ser jefe de scouts',
-                            c: 'Los jefes de scouts son buenos aviadores'
-                        }
+                        resp: [
+                            { respuesta: '9', puntaje: 2 },
+                            { respuesta: '12', puntaje: 4 },
+                            { respuesta: '15', puntaje: 6 },
+                            { respuesta: '60', puntaje: 8 },
+                        ]
                     }
                 },
                 {
                     pregunta: {
-                        pre_id: 1,
+                        pre_id: 2,
                         preguntas: {
-                            a: 'EL SEÑOR "X" ES UN AVIADOR',
-                            b: 'EL SEÑOR "X" ES UN JEFE DE SCOUTS',
-                            c: 'Luego:',
+                            a: 'En un mapa cada media pulgada representa 20 millas.',
+                            b: '¿Cuantas millas estaran representadas en 5 pulgadas?',
+                            c: null,
                         },
-                        resp: {
-                            a: 'Los aviadores son buenos jefes de scouts',
-                            b: 'Un aviador puede ser jefe de scouts',
-                            c: 'Los jefes de scouts son buenos aviadores'
-                        }
+                        resp: [
+                            { respuesta: '10', puntaje: 2 },
+                            { respuesta: '20', puntaje: 4 },
+                            { respuesta: '100', puntaje: 6 },
+                            { respuesta: '200', puntaje: 8 },
+                        ]
                     }
                 },
                 {
                     pregunta: {
-                        pre_id: 1,
+                        pre_id: 3,
                         preguntas: {
-                            a: 'EL SEÑOR "X" ES UN AVIADOR',
-                            b: 'EL SEÑOR "X" ES UN JEFE DE SCOUTS',
-                            c: 'Luego:',
+                            a: 'Una Galleta cuesta 3 centavos, pero puede obtenerse una docena por 30 centavos.',
+                            b: 'Cuantos economizaré si compro una docena',
+                            c: null,
                         },
-                        resp: {
-                            a: 'Los aviadores son buenos jefes de scouts',
-                            b: 'Un aviador puede ser jefe de scouts',
-                            c: 'Los jefes de scouts son buenos aviadores'
-                        }
+                        resp: [
+                            { respuesta: '10 ctvs.', puntaje: 2 },
+                            { respuesta: '6 ctvs.', puntaje: 4 },
+                            { respuesta: '2 1/2 ctvs.', puntaje: 6 },
+                            { respuesta: '9 ctvs.', puntaje: 8 },
+                        ]
                     }
                 },
                 {
                     pregunta: {
-                        pre_id: 1,
+                        pre_id: 4,
                         preguntas: {
-                            a: 'EL SEÑOR "X" ES UN AVIADOR',
-                            b: 'EL SEÑOR "X" ES UN JEFE DE SCOUTS',
-                            c: 'Luego:',
+                            a: '¿Cuantos centimetros cubicos tendra una caja que mide 5 centimetros de largo, 4 centimetros de ancho y 3 centimetros de alto?',
+                            b: null,
+                            c: null,
                         },
-                        resp: {
-                            a: 'Los aviadores son buenos jefes de scouts',
-                            b: 'Un aviador puede ser jefe de scouts',
-                            c: 'Los jefes de scouts son buenos aviadores'
-                        }
+                        resp: [
+                            { respuesta: '12', puntaje: 2 },
+                            { respuesta: '32', puntaje: 4 },
+                            { respuesta: '60', puntaje: 6 },
+                            { respuesta: '100', puntaje: 8 },
+                        ]
                     }
                 },
                 {
                     pregunta: {
-                        pre_id: 1,
+                        pre_id: 5,
                         preguntas: {
-                            a: 'EL SEÑOR "X" ES UN AVIADOR',
-                            b: 'EL SEÑOR "X" ES UN JEFE DE SCOUTS',
-                            c: 'Luego:',
+                            a: 'A un escolar le dicen 20 palabras de ortografia dudosa, pero solo ha escrito correctamente el 90% de ellas.',
+                            b: '¿Cuantas palabras ha escrito correctamente?',
+                            c: null,
                         },
-                        resp: {
-                            a: 'Los aviadores son buenos jefes de scouts',
-                            b: 'Un aviador puede ser jefe de scouts',
-                            c: 'Los jefes de scouts son buenos aviadores'
-                        }
+                        resp: [
+                            { respuesta: '1', puntaje: 2 },
+                            { respuesta: '11', puntaje: 4 },
+                            { respuesta: '18', puntaje: 6 },
+                            { respuesta: '19', puntaje: 8 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 6,
+                        preguntas: {
+                            a: '¿Cuantas estampillas de 1.50 Bs. podrán cambiarse por 30 estampillas de 0.5 Bs ?',
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: '10', puntaje: 2 },
+                            { respuesta: '15', puntaje: 4 },
+                            { respuesta: '18', puntaje: 6 },
+                            { respuesta: '19', puntaje: 8 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 7,
+                        preguntas: {
+                            a: 'Un equipo de futbol ha jugago 25 partidos y ganó 7 partidos más que los perdidos.',
+                            b: '¿Cuantos partidos ha ganado?',
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: '7', puntaje: 2 },
+                            { respuesta: '9', puntaje: 4 },
+                            { respuesta: '16', puntaje: 6 },
+                            { respuesta: '18', puntaje: 8 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 8,
+                        preguntas: {
+                            a: '¿ Cuantas hojas de papel de 7x10 cm. se podrá obtener en un pliego grande de papel que mide 21x30 cm. ?',
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: '3', puntaje: 2 },
+                            { respuesta: '6', puntaje: 4 },
+                            { respuesta: '9', puntaje: 6 },
+                            { respuesta: '34', puntaje: 8 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 9,
+                        preguntas: {
+                            a: 'Si un metro de papel cuesta 10 ctvs.',
+                            b: '¿Cuantos se tendra que gastar para cubrir el techo de un cuarto de 15 metros?',
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: '3.10', puntaje: 2 },
+                            { respuesta: '6.20', puntaje: 4 },
+                            { respuesta: '31.00', puntaje: 6 },
+                            { respuesta: '24.00', puntaje: 8 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 10,
+                        preguntas: {
+                            a: '¿Cual es el número que 2.5 veces es igual a 40?',
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: '16', puntaje: 2 },
+                            { respuesta: '8', puntaje: 4 },
+                            { respuesta: '15', puntaje: 6 },
+                            { respuesta: '17', puntaje: 8 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 11,
+                        preguntas: {
+                            a: 'Si un cubo de hielo de 5 pulgadas pesa 4.25 de onzas.',
+                            b: '¿Cunatas onzas pesará un cubo de 10 pulgadas?',
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: '212.5', puntaje: 2 },
+                            { respuesta: '8.5', puntaje: 4 },
+                            { respuesta: '34', puntaje: 6 },
+                            { respuesta: '50', puntaje: 8 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 12,
+                        preguntas: {
+                            a: '¿Cual es el número que multiplicado por 2, es 4 unidades nemos que 3 veces 6?',
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: '6', puntaje: 2 },
+                            { respuesta: '7', puntaje: 4 },
+                            { respuesta: '14', puntaje: 6 },
+                            { respuesta: '8', puntaje: 8 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 13,
+                        preguntas: {
+                            a: 'Juan tiene una edad que equivale a 1/4 de la edad de su tio. Las edades de ambos reunidas dan un total de 40 años.',
+                            b: '¿Cuantos años de diferencia hay entre la edad de Juan y la edad de su tio?',
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: '10', puntaje: 2 },
+                            { respuesta: '20', puntaje: 4 },
+                            { respuesta: '24', puntaje: 6 },
+                            { respuesta: '30', puntaje: 8 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 14,
+                        preguntas: {
+                            a: 'Un tanque de agua es alimento por 3 cañerias, una de las cuales puede llevarlo en 2 horas, y la otra en 3 horas. Una tercera cañeria puede desocuparlo en 1 hora.',
+                            b: 'Si el tanque esta lleno, y las tres cañerias abiertas, ¿en cuantas horas estará vacio el tanque?',
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: '2', puntaje: 2 },
+                            { respuesta: '4', puntaje: 4 },
+                            { respuesta: '5', puntaje: 6 },
+                            { respuesta: '6', puntaje: 8 },
+                        ]
                     }
                 },
             ]
         }
     },
+    {
+        title: 'test 8',
+        id: 8,
+        categoria: 'test-matematico',
+        contenido: {
+            instructions: 'Lo que usted tiene que hacer es decidir, cual de las cuatro palabras escritas con la letras minusculas posee un significado igual o semejante a la palabra escrita con mayúscula.',
+            ejm: {
+                preguntas: {
+                    a: 'CAMINAR',
+                    b: null,
+                },
+                resp: [
+                    { respuesta: 'Jugar'},
+                    { respuesta: 'Luchar'},
+                    { respuesta: 'Andar'},
+                    { respuesta: 'Viajar'},
+                ]
+            },
+            preguntas: [
+                {
+                    pregunta: {
+                        pre_id: 0,
+                        preguntas: {
+                            a: 'EXTRAJERO',
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: 'Nativo', puntaje: 2 },
+                            { respuesta: 'Forastero', puntaje: 4 },
+                            { respuesta: 'Raro', puntaje: 6 },
+                            { respuesta: 'Desconocido', puntaje: 8 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 1,
+                        preguntas: {
+                            a: 'CONTESTACIÓN',
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: 'Respuesta', puntaje: 2 },
+                            { respuesta: 'Conversación', puntaje: 4 },
+                            { respuesta: 'Dictamen', puntaje: 6 },
+                            { respuesta: 'Negación', puntaje: 8 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 2,
+                        preguntas: {
+                            a: 'ASISTIR',
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: 'Consentir', puntaje: 2 },
+                            { respuesta: 'Agregar', puntaje: 4 },
+                            { respuesta: 'Concurrir', puntaje: 6 },
+                            { respuesta: 'Vigilar', puntaje: 8 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 3,
+                        preguntas: {
+                            a: 'ADMIRADO',
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: 'Admitido', puntaje: 2 },
+                            { respuesta: 'Protegido', puntaje: 4 },
+                            { respuesta: 'Asustado', puntaje: 6 },
+                            { respuesta: 'Asombrado', puntaje: 8 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 4,
+                        preguntas: {
+                            a: 'FINALIZAR',
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: 'Limitar', puntaje: 2 },
+                            { respuesta: 'Concluir', puntaje: 4 },
+                            { respuesta: 'Fijar', puntaje: 6 },
+                            { respuesta: 'Llegar', puntaje: 8 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 5,
+                        preguntas: {
+                            a: 'ESTIMAR',
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: 'Apreciar', puntaje: 2 },
+                            { respuesta: 'Respetar', puntaje: 4 },
+                            { respuesta: 'Estimular', puntaje: 6 },
+                            { respuesta: 'Despreciar', puntaje: 8 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 6,
+                        preguntas: {
+                            a: 'ADQUIRIR',
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: 'Conducir', puntaje: 2 },
+                            { respuesta: 'Consentir', puntaje: 4 },
+                            { respuesta: 'Obtener', puntaje: 6 },
+                            { respuesta: 'Aceptar', puntaje: 8 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 7,
+                        preguntas: {
+                            a: 'AMPLIO',
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: 'Concurrido', puntaje: 2 },
+                            { respuesta: 'Espacioso', puntaje: 4 },
+                            { respuesta: 'Generoso', puntaje: 6 },
+                            { respuesta: 'Vacio', puntaje: 8 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 8,
+                        preguntas: {
+                            a: 'ASOMBRO',
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: 'Sorpresa', puntaje: 2 },
+                            { respuesta: 'Verguenza', puntaje: 4 },
+                            { respuesta: 'Contrariedad', puntaje: 6 },
+                            { respuesta: 'Peligro', puntaje: 8 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 9,
+                        preguntas: {
+                            a: 'OPRIMIDO',
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: 'Necesitado', puntaje: 2 },
+                            { respuesta: 'Molesto', puntaje: 4 },
+                            { respuesta: 'Arbitrario', puntaje: 6 },
+                            { respuesta: 'Sometido', puntaje: 8 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 10,
+                        preguntas: {
+                            a: 'SAQUEAR',
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: 'Recoger', puntaje: 2 },
+                            { respuesta: 'Despojar', puntaje: 4 },
+                            { respuesta: 'Pelear', puntaje: 6 },
+                            { respuesta: 'Vestir', puntaje: 8 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 11,
+                        preguntas: {
+                            a: 'OBSTINACION',
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: 'Obediencia', puntaje: 2 },
+                            { respuesta: 'Terquedad', puntaje: 4 },
+                            { respuesta: 'Rebeldia', puntaje: 6 },
+                            { respuesta: 'Tino', puntaje: 8 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 12,
+                        preguntas: {
+                            a: 'ETERNO',
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: 'Breve', puntaje: 2 },
+                            { respuesta: 'Sagrado', puntaje: 4 },
+                            { respuesta: 'Perpetuo', puntaje: 6 },
+                            { respuesta: 'Durable', puntaje: 8 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 13,
+                        preguntas: {
+                            a: 'FUGAR',
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: 'Engañar', puntaje: 2 },
+                            { respuesta: 'Liberar', puntaje: 4 },
+                            { respuesta: 'Raptar', puntaje: 6 },
+                            { respuesta: 'Escapar', puntaje: 8 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 14,
+                        preguntas: {
+                            a: 'NOTABLE',
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: 'Severo', puntaje: 2 },
+                            { respuesta: 'Terrible', puntaje: 4 },
+                            { respuesta: 'Anotado', puntaje: 6 },
+                            { respuesta: 'Famoso', puntaje: 8 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 15,
+                        preguntas: {
+                            a: 'IMPLORAR',
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: 'Pensar', puntaje: 2 },
+                            { respuesta: 'Suplicar', puntaje: 4 },
+                            { respuesta: 'Reparar', puntaje: 6 },
+                            { respuesta: 'Protestar', puntaje: 8 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 16,
+                        preguntas: {
+                            a: 'MENGUAR',
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: 'Disimular', puntaje: 2 },
+                            { respuesta: 'Repetir', puntaje: 4 },
+                            { respuesta: 'Reducir', puntaje: 6 },
+                            { respuesta: 'Aumentar', puntaje: 8 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 17,
+                        preguntas: {
+                            a: 'PROFECIA',
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: 'Segestion', puntaje: 2 },
+                            { respuesta: 'Predicción', puntaje: 4 },
+                            { respuesta: 'Herejía', puntaje: 6 },
+                            { respuesta: 'Profesión', puntaje: 8 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 18,
+                        preguntas: {
+                            a: 'CORROER',
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: 'Carcomer', puntaje: 2 },
+                            { respuesta: 'Perseguir', puntaje: 4 },
+                            { respuesta: 'Comerciar', puntaje: 6 },
+                            { respuesta: 'Corregir', puntaje: 8 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 19,
+                        preguntas: {
+                            a: 'PERSISTENTE',
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: 'Probable', puntaje: 2 },
+                            { respuesta: 'Raro', puntaje: 4 },
+                            { respuesta: 'Variable', puntaje: 6 },
+                            { respuesta: 'Constante', puntaje: 8 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 20,
+                        preguntas: {
+                            a: 'INDAGAR',
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: 'Hallar', puntaje: 2 },
+                            { respuesta: 'Remover', puntaje: 4 },
+                            { respuesta: 'Averiguar', puntaje: 6 },
+                            { respuesta: 'Detener', puntaje: 8 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 21,
+                        preguntas: {
+                            a: 'IDONEIDAD',
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: 'Suficiencia', puntaje: 2 },
+                            { respuesta: 'Prudencia', puntaje: 4 },
+                            { respuesta: 'Sabiduria', puntaje: 6 },
+                            { respuesta: 'Donación', puntaje: 8 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 22,
+                        preguntas: {
+                            a: 'DIAFANO',
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: 'Luminoso', puntaje: 2 },
+                            { respuesta: 'Limpido', puntaje: 4 },
+                            { respuesta: 'Frágil', puntaje: 6 },
+                            { respuesta: 'Delicado', puntaje: 8 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 23,
+                        preguntas: {
+                            a: 'AMBIGUO',
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: 'Ambicioso', puntaje: 2 },
+                            { respuesta: 'Hipócrita', puntaje: 4 },
+                            { respuesta: 'Cuidadoso', puntaje: 6 },
+                            { respuesta: 'Dudoso', puntaje: 8 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 24,
+                        preguntas: {
+                            a: 'DILAPIDAR',
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: 'Malgastar', puntaje: 2 },
+                            { respuesta: 'Usar', puntaje: 4 },
+                            { respuesta: 'Distraer', puntaje: 6 },
+                            { respuesta: 'Idéntico', puntaje: 8 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 25,
+                        preguntas: {
+                            a: 'AFLIGIDO',
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: 'Destruido', puntaje: 2 },
+                            { respuesta: 'Apenado', puntaje: 4 },
+                            { respuesta: 'Pesado', puntaje: 6 },
+                            { respuesta: 'Derrotado', puntaje: 8 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 26,
+                        preguntas: {
+                            a: 'DESTREZA',
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: 'Ventaja', puntaje: 2 },
+                            { respuesta: 'Destrozo', puntaje: 4 },
+                            { respuesta: 'Trenzado', puntaje: 6 },
+                            { respuesta: 'Habilidad', puntaje: 8 },
+                        ]
+                    }
+                },
+            ]
+        }
+    }
 ]

@@ -5,7 +5,7 @@ import Layaut from '../../../../Atoms/StyleLayaut/Layaut'
 const RealizeTestVocational = () => {
   return (
     <Layaut>
-      <Text>RealizeTestVocational</Text>
+      <Text style={{alignSelf:'center',color:'white'}}>No existe informacion</Text>
     </Layaut>
   )
 }
