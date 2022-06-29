@@ -11,10 +11,11 @@ import TeacherHomeScreem from '../../Screems/PrivateScreem/TeacherScreems/Teache
 import InicioTestEst from '../../Screems/PrivateScreem/StudentScreems/SerieTest/InicioTestEst'
 import InicioTest from '../../Screems/PrivateScreem/TeacherScreems/SerieTests/InicioTest'
 import AsyncStorageLib from '@react-native-async-storage/async-storage'
-import Instructions from '../../Screems/PrivateScreem/TeacherScreems/SerieTests/CategoriaTests/TestAnalitico/Instructions'
 import Preguntas from '../../Screems/PrivateScreem/TeacherScreems/SerieTests/CategoriaTests/TestAnalitico/Preguntas'
 import CategoryTest from '../../Screems/PrivateScreem/TeacherScreems/Tests/CategoryTest'
 import PruebaTest from '../../Screems/PrivateScreem/TeacherScreems/SerieTests/CategoriaTests/TestAnalitico/PruebaTest'
+import Instructions from '../../Screems/PrivateScreem/TeacherScreems/SerieTests/Instructions'
+import PreguntaTestGrafico from '../../Screems/PrivateScreem/TeacherScreems/SerieTests/CategoriaTests/TestGrafico/PreguntaTestGrafico'
 
 const Stack = createNativeStackNavigator()
 
@@ -74,6 +75,15 @@ const Navigation = () => {
                                 headerStyle: { backgroundColor: '#000010' },
                                 headerTintColor: 'white',
                                 title: 'Preguntas'
+                            }}
+                        />
+                        <Stack.Screen
+                            name='PreguntaTestGrafico'
+                            component={PreguntaTestGrafico}
+                            options={{
+                                headerStyle: { backgroundColor: '#000010' },
+                                headerTintColor: 'white',
+                                title: 'Test Grafico'
                             }}
                         />
                         <Stack.Screen

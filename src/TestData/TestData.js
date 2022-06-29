@@ -1,11 +1,128 @@
 export const data = [
-    { title: 'test 1', id: 1, categoria:'test-grafico' },
-    { title: 'test 2', id: 2 ,categoria:'test-grafico'},
-    { title: 'test 3', id: 3 ,categoria:'test-grafico'},
+    {
+        title: 'test 1',
+        id: 1,
+        categoria: 'test-grafico',
+        contenido: {
+            instructions: 'A continuacion hay varias figuras; unas corresponden a la derecha y otros a la izquierda: Lo que usted tiene que hacer es decidir en cada caso si es derecha(D) o izquierda(I).',
+            ejm: {
+                preguntas: {
+                    a: null,
+                    b: null
+                },
+                resp: [
+                    { respuesta: require('../images/sedeges-logo.png') },
+                    { respuesta: require('../images/pantalla.png') },
+                ]
+            },
+            preguntas: [
+                {
+                    pregunta: {
+                        pre_id: 0,
+                        preguntas: {
+                            a: null,
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: require('../images/pantalla.png'),puntaje:10 },
+                            { respuesta: require('../images/sedeges-logo.png'),puntaje:5 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 1,
+                        preguntas: {
+                            a: null,
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: require('../images/pantalla.png'),puntaje:10 },
+                            { respuesta: require('../images/sedeges-logo.png'),puntaje:5 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 2,
+                        preguntas: {
+                            a: null,
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: require('../images/sedeges-logo.png'),puntaje:5 },
+                            { respuesta: require('../images/pantalla.png'),puntaje:10 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 3,
+                        preguntas: {
+                            a: null,
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: require('../images/pantalla.png'),puntaje:10 },
+                            { respuesta: require('../images/sedeges-logo.png'),puntaje:5 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 4,
+                        preguntas: {
+                            a: null,
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: require('../images/pantalla.png'),puntaje:10 },
+                            { respuesta: require('../images/sedeges-logo.png'),puntaje:5 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 5,
+                        preguntas: {
+                            a: null,
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: require('../images/sedeges-logo.png'),puntaje:5 },
+                            { respuesta: require('../images/pantalla.png'),puntaje:10 },
+                        ]
+                    }
+                },
+                {
+                    pregunta: {
+                        pre_id: 6,
+                        preguntas: {
+                            a: null,
+                            b: null,
+                            c: null,
+                        },
+                        resp: [
+                            { respuesta: require('../images/sedeges-logo.png'),puntaje:5 },
+                            { respuesta: require('../images/pantalla.png'),puntaje:10 },
+                        ]
+                    }
+                },
+            ]
+        }
+    },
+    { title: 'test 2', id: 2, categoria: 'test-grafico' },
+    { title: 'test 3', id: 3, categoria: 'test-grafico' },
     {
         title: 'test 4',
         id: 4,
-        categoria:'test-analitico',
+        categoria: 'test-analitico',
         contenido: {
             instructions: 'Lee antentamente cada grupo de oraciones escritas con letras mayusculas, asi como las tres posibles respuestas; luego escoja la mas adecuada.',
             ejm: {
@@ -13,11 +130,11 @@ export const data = [
                     a: 'TODOS LOS SERES QUE TIENE CUATRO PATARS SON ANIMALES',
                     b: 'TODOS LOS CABALLEROS TIENE CUATRO PATAS',
                 },
-                resp: {
-                    a: 'Otros seres como los caballeros pueden caminar',
-                    b: 'Todos los caballeros peden caminar',
-                    c: 'Todos los caballeros son animales'
-                }
+                resp: [
+                    { respuesta: 'Otros seres como los caballeros pueden caminar' },
+                    { respuesta: 'Todos los caballeros peden caminar' },
+                    { respuesta: 'Todos los caballeros son animales' }
+                ]
             },
             preguntas: [
                 {
@@ -29,9 +146,9 @@ export const data = [
                             c: 'Luego:',
                         },
                         resp: [
-                            {respuesta:'Los aviadores son buenos jefes de scouts',puntaje:5},
-                            {respuesta:'Un aviador puede ser jefe de scouts',puntaje:10},
-                            {respuesta:'Los jefes de scouts son buenos aviadores',puntaje:15},
+                            { respuesta: 'Los aviadores son buenos jefes de scouts', puntaje: 5 },
+                            { respuesta: 'Un aviador puede ser jefe de scouts', puntaje: 10 },
+                            { respuesta: 'Los jefes de scouts son buenos aviadores', puntaje: 15 },
                         ]
                     }
                 },
@@ -44,9 +161,9 @@ export const data = [
                             c: '¿Cual de los muchados se encuentra en el segundo lugar?',
                         },
                         resp: [
-                            {respuesta:'Luis',puntaje:5},
-                            {respuesta:'Enrique',puntaje:10},
-                            {respuesta:'Fancisco',puntaje:15},
+                            { respuesta: 'Luis', puntaje: 5 },
+                            { respuesta: 'Enrique', puntaje: 10 },
+                            { respuesta: 'Fancisco', puntaje: 15 },
                         ]
                     }
                 },
@@ -59,9 +176,9 @@ export const data = [
                             c: 'Luego:',
                         },
                         resp: [
-                            {respuesta:'La vida de ningun ser humano esta asegurada',puntaje:5},
-                            {respuesta:'Los chóferes de vehiculos no estan libres de cometer accidentes',puntaje:10},
-                            {respuesta:'Pocos chóferes conducen con seguridad sus vehiculos',puntaje:15},
+                            { respuesta: 'La vida de ningun ser humano esta asegurada', puntaje: 5 },
+                            { respuesta: 'Los chóferes de vehiculos no estan libres de cometer accidentes', puntaje: 10 },
+                            { respuesta: 'Pocos chóferes conducen con seguridad sus vehiculos', puntaje: 15 },
                         ]
                     }
                 },
@@ -74,9 +191,9 @@ export const data = [
                             c: 'Luego:',
                         },
                         resp: [
-                            {respuesta:'El debe permanecer con sus amigos',puntaje:5},
-                            {respuesta:'El debe hacerse el fuerte para dejar a sus amigos',puntaje:10},
-                            {respuesta:'El sufrirá un perjuicio',puntaje:15},
+                            { respuesta: 'El debe permanecer con sus amigos', puntaje: 5 },
+                            { respuesta: 'El debe hacerse el fuerte para dejar a sus amigos', puntaje: 10 },
+                            { respuesta: 'El sufrirá un perjuicio', puntaje: 15 },
                         ]
                     }
                 },
@@ -89,9 +206,9 @@ export const data = [
                             c: 'Luego:',
                         },
                         resp: [
-                            {respuesta:'Es un circulo',puntaje:5},
-                            {respuesta:'No es un cuadrado',puntaje:10},
-                            {respuesta:'Es un triangulo',puntaje:15},
+                            { respuesta: 'Es un circulo', puntaje: 5 },
+                            { respuesta: 'No es un cuadrado', puntaje: 10 },
+                            { respuesta: 'Es un triangulo', puntaje: 15 },
                         ]
                     }
                 },
@@ -104,9 +221,9 @@ export const data = [
                             c: 'Luego:',
                         },
                         resp: [
-                            {respuesta:'Es nacionalizada',puntaje:5},
-                            {respuesta:'Es natural de pais',puntaje:10},
-                            {respuesta:'Es un turista',puntaje:15},
+                            { respuesta: 'Es nacionalizada', puntaje: 5 },
+                            { respuesta: 'Es natural de pais', puntaje: 10 },
+                            { respuesta: 'Es un turista', puntaje: 15 },
                         ]
                     }
                 },
@@ -119,9 +236,9 @@ export const data = [
                             c: 'Luego:',
                         },
                         resp: [
-                            {respuesta:'La calle "S" esta al este de "D"',puntaje:5},
-                            {respuesta:'La calle "C" cruza a "S"',puntaje:10},
-                            {respuesta:'La calle "S" es paralera "C"',puntaje:15},
+                            { respuesta: 'La calle "S" esta al este de "D"', puntaje: 5 },
+                            { respuesta: 'La calle "C" cruza a "S"', puntaje: 10 },
+                            { respuesta: 'La calle "S" es paralera "C"', puntaje: 15 },
                         ]
                     }
                 },
@@ -134,9 +251,9 @@ export const data = [
                             c: 'Luego:',
                         },
                         resp: [
-                            {respuesta:'Su hermnao es menos inteligente que Ud.',puntaje:5},
-                            {respuesta:'Su hermano es tan inteligente como Ud.',puntaje:10},
-                            {respuesta:'Su hermando es mas inteligente que Ud.',puntaje:15},
+                            { respuesta: 'Su hermnao es menos inteligente que Ud.', puntaje: 5 },
+                            { respuesta: 'Su hermano es tan inteligente como Ud.', puntaje: 10 },
+                            { respuesta: 'Su hermando es mas inteligente que Ud.', puntaje: 15 },
                         ]
                     }
                 },
@@ -149,9 +266,9 @@ export const data = [
                             c: '¿Quien es el mejor jugador de futbol?',
                         },
                         resp: [
-                            {respuesta:'Eduardo',puntaje:5},
-                            {respuesta:'Guillermo',puntaje:10},
-                            {respuesta:'Jaime',puntaje:15},
+                            { respuesta: 'Eduardo', puntaje: 5 },
+                            { respuesta: 'Guillermo', puntaje: 10 },
+                            { respuesta: 'Jaime', puntaje: 15 },
                         ]
                     }
                 },
@@ -164,9 +281,9 @@ export const data = [
                             c: 'Luego:',
                         },
                         resp: [
-                            {respuesta:'"B" pesa menos que "C"',puntaje:5},
-                            {respuesta:'"A" pesa igual que "B"',puntaje:10},
-                            {respuesta:'"A" pesa menos que "C"',puntaje:15},
+                            { respuesta: '"B" pesa menos que "C"', puntaje: 5 },
+                            { respuesta: '"A" pesa igual que "B"', puntaje: 10 },
+                            { respuesta: '"A" pesa menos que "C"', puntaje: 15 },
                         ]
                     }
                 },
@@ -179,9 +296,9 @@ export const data = [
                             c: 'Luego esta caja',
                         },
                         resp: [
-                            {respuesta:'Contiene diamantes',puntaje:5},
-                            {respuesta:'Contiene oro o diamantes',puntaje:10},
-                            {respuesta:'No se sabe que contiene',puntaje:15},
+                            { respuesta: 'Contiene diamantes', puntaje: 5 },
+                            { respuesta: 'Contiene oro o diamantes', puntaje: 10 },
+                            { respuesta: 'No se sabe que contiene', puntaje: 15 },
                         ]
                     }
                 },
@@ -193,12 +310,12 @@ export const data = [
                             b: null,
                             c: 'Por consiguiente:',
                         },
-                        resp:[
-                            {respuesta:'El no debe formar parte de equipo',puntaje:5},
-                            {respuesta:'El puede perder el apoyo de sus compañeros',puntaje:10},
-                            {respuesta:'El puede presentar razonablmente una queja',puntaje:15},
+                        resp: [
+                            { respuesta: 'El no debe formar parte de equipo', puntaje: 5 },
+                            { respuesta: 'El puede perder el apoyo de sus compañeros', puntaje: 10 },
+                            { respuesta: 'El puede presentar razonablmente una queja', puntaje: 15 },
                         ]
-                        
+
                     }
                 },
                 {
@@ -210,9 +327,9 @@ export const data = [
                             c: 'Entonces:',
                         },
                         resp: [
-                            {respuesta:'El rechazo de la queja es justificable',puntaje:5},
-                            {respuesta:'El rechazo se discute sin reserva',puntaje:10},
-                            {respuesta:'El reacho de la queja es desatinado, o es imperdonable',puntaje:15},
+                            { respuesta: 'El rechazo de la queja es justificable', puntaje: 5 },
+                            { respuesta: 'El rechazo se discute sin reserva', puntaje: 10 },
+                            { respuesta: 'El reacho de la queja es desatinado, o es imperdonable', puntaje: 15 },
                         ]
                     }
                 },
@@ -225,9 +342,9 @@ export const data = [
                             c: 'Luego:',
                         },
                         resp: [
-                            {respuesta:'La casa "A" queda cerca de la casa de "C"',puntaje:5},
-                            {respuesta:'La casa "C" está más cercana a la casa "A" que a la casa "B"',puntaje:10},
-                            {respuesta:'La casa "A" queda al nor-este de la casa "C"',puntaje:15},
+                            { respuesta: 'La casa "A" queda cerca de la casa de "C"', puntaje: 5 },
+                            { respuesta: 'La casa "C" está más cercana a la casa "A" que a la casa "B"', puntaje: 10 },
+                            { respuesta: 'La casa "A" queda al nor-este de la casa "C"', puntaje: 15 },
                         ]
                     }
                 },
@@ -240,9 +357,9 @@ export const data = [
                             c: 'Luego:',
                         },
                         resp: [
-                            {respuesta:'"W" no está entre "Y" y "Z"',puntaje:5},
-                            {respuesta:'"W" está entre "X" y "Z"',puntaje:10},
-                            {respuesta:'"W" está más cerca de "X" que "Z"',puntaje:15},
+                            { respuesta: '"W" no está entre "Y" y "Z"', puntaje: 5 },
+                            { respuesta: '"W" está entre "X" y "Z"', puntaje: 10 },
+                            { respuesta: '"W" está más cerca de "X" que "Z"', puntaje: 15 },
                         ]
                     }
                 },
@@ -252,7 +369,7 @@ export const data = [
     {
         title: 'test 5',
         id: 5,
-        categoria:'test-matematico',
+        categoria: 'test-matematico',
         contenido: {
             instructions: 'En cada serie de nuemros, hay uno que es incorrecto. Busque ese número',
             ejm: {
@@ -275,13 +392,13 @@ export const data = [
                             b: null,
                         },
                         resp: {
-                            a: {respuesta:'14',puntaje:2},
-                            b: {respuesta:'12',puntaje:4},
-                            c: {respuesta:'10',puntaje:6},
-                            d: {respuesta:'8',puntaje:8},
-                            e: {respuesta:'7',puntaje:10},
-                            f: {respuesta:'6',puntaje:12},
-                            g: {respuesta:'4',puntaje:14},
+                            a: { respuesta: '14', puntaje: 2 },
+                            b: { respuesta: '12', puntaje: 4 },
+                            c: { respuesta: '10', puntaje: 6 },
+                            d: { respuesta: '8', puntaje: 8 },
+                            e: { respuesta: '7', puntaje: 10 },
+                            f: { respuesta: '6', puntaje: 12 },
+                            g: { respuesta: '4', puntaje: 14 },
                         }
                     }
                 },
@@ -293,13 +410,13 @@ export const data = [
                             b: null,
                         },
                         resp: [
-                            {a: {respuesta:'19',puntaje:2}},
-                            {b: {respuesta:'16',puntaje:4}},
-                            {c: {respuesta:'13',puntaje:6}},
-                            {d: {respuesta:'11',puntaje:8}},
-                            {e: {respuesta:'10',puntaje:10}},
-                            {f: {respuesta:'7',puntaje:12}},
-                            {g: {respuesta:'4',puntaje:14}},
+                            { a: { respuesta: '19', puntaje: 2 } },
+                            { b: { respuesta: '16', puntaje: 4 } },
+                            { c: { respuesta: '13', puntaje: 6 } },
+                            { d: { respuesta: '11', puntaje: 8 } },
+                            { e: { respuesta: '10', puntaje: 10 } },
+                            { f: { respuesta: '7', puntaje: 12 } },
+                            { g: { respuesta: '4', puntaje: 14 } },
 
                         ]
                     }
@@ -472,7 +589,7 @@ export const data = [
     {
         title: 'test 6',
         id: 6,
-        categoria:'test-matematico',
+        categoria: 'test-matematico',
         contenido: {
             instructions: 'Aqui hay varias series de numeros que aumentan o disminuyen. A las series les falta algunos nuemros para estar completas. Escoja entre las respuestas, el gtupo que contiene todos los nueros que falta.',
             ejm: {
@@ -575,7 +692,7 @@ export const data = [
     {
         title: 'test 7',
         id: 7,
-        categoria:'test-matematico',
+        categoria: 'test-matematico',
         contenido: {
             instructions: 'A continuacion hay varios problemas y frente a cada uno, de ellos cuatro respuestas posibles precedidas por letras. Busque cual es la respuesta correcta.',
             ejm: {

@@ -284,7 +284,7 @@ const InicioTest = ({ navigation, route }) => {
         // console.log(newArray)
         for(var i =0;i<newArray.length;i++){
             if(e===newArray[i].id){
-                navigation.navigate('Instructions', { title: newArray[i].title, id: newArray[i].id, contenido: newArray[i].contenido })
+                navigation.navigate('Instructions', { title: newArray[i].title, id: newArray[i].id, contenido: newArray[i].contenido, categoria:newArray[i].categoria })
                 break
             }
         }
