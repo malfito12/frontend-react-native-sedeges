@@ -100,7 +100,7 @@ const UsersScreem = ({ navigation }) => {
           renderItem={(p) => (
             <View style={styles.itemContainer}>
               <View>
-                <Text style={styles.itemTitle}>{p.index + 1}</Text>
+                {/* <Text style={styles.itemTitle}>{p.index + 1}</Text> */}
                 <Text style={styles.itemTitle}>{p.item.user_name}</Text>
                 <Text style={styles.itemTitle}>{p.item.user_email}</Text>
                 {/* <Text style={styles.itemTitle}>{p.item.repeat_password}</Text> */}
@@ -242,7 +242,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   itemTitle: {
-    color: '#ffffff'
+    color: '#ffffff',
+    fontFamily:'Roboto_700Bold'
   },
   titleEdit: {
     fontSize: 15,

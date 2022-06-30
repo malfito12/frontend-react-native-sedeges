@@ -107,7 +107,6 @@ const Navigation = () => {
                                 headerTintColor: 'white',
                                 title: 'Perfil'
                             }}
-                        // initialParams={{ post: () => logget() }}
                         />
                         <Stack.Screen
                             name='InicioTestEst'
@@ -117,7 +116,50 @@ const Navigation = () => {
                                 headerTintColor: 'white',
                                 title: 'Lista de Tests'
                             }}
-                        // initialParams={{ post: () => logget() }}
+                        />
+                        <Stack.Screen
+                            name='CategoryTest'
+                            component={CategoryTest}
+                            options={{
+                                headerStyle: { backgroundColor: '#000010' },
+                                headerTintColor: 'white',
+                                title: 'Categorias'
+                            }} />
+                        <Stack.Screen
+                            name='InicioTest'
+                            component={InicioTest}
+                            options={{
+                                headerStyle: { backgroundColor: '#000010' },
+                                headerTintColor: 'white',
+                                title: 'Lista de Tests'
+                            }}
+                        />
+                        <Stack.Screen
+                            name='Instructions'
+                            component={Instructions}
+                            options={{
+                                headerStyle: { backgroundColor: '#000010' },
+                                headerTintColor: 'white',
+                                title: 'Instrucciones'
+                            }}
+                        />
+                        <Stack.Screen
+                            name='Preguntas'
+                            component={Preguntas}
+                            options={{
+                                headerStyle: { backgroundColor: '#000010' },
+                                headerTintColor: 'white',
+                                title: 'Preguntas'
+                            }}
+                        />
+                        <Stack.Screen
+                            name='PreguntaTestGrafico'
+                            component={PreguntaTestGrafico}
+                            options={{
+                                headerStyle: { backgroundColor: '#000010' },
+                                headerTintColor: 'white',
+                                title: 'Test Grafico'
+                            }}
                         />
                     </>
                 ) : (

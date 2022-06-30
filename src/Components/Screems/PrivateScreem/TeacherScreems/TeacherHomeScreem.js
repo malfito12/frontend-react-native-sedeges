@@ -41,6 +41,7 @@ const TeacherHomeScreem = ({ navigation }) => {
             ...styles.prueba
           },
           tabBarActiveTintColor: '#76ff03',
+          tabBarInactiveTintColor:'white'
 
         })}
       >

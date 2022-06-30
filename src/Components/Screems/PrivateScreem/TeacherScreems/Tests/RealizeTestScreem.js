@@ -1,9 +1,12 @@
-import { View, TouchableOpacity, Text, FlatList, RefreshControl, StyleSheet, ScrollView } from 'react-native'
+import { View, TouchableOpacity, Text, FlatList, RefreshControl, StyleSheet, ScrollView, ImageBackground } from 'react-native'
 import React, { useState, useEffect, useCallback } from 'react'
 import Layaut from '../../../../Atoms/StyleLayaut/Layaut'
 import axios from 'axios'
 import { PORT_URL } from '../../../../../PortUrl/PortUrl'
 import AsyncStorageLib from '@react-native-async-storage/async-storage'
+import fondoImage from '../../../../../images/ImagesFondo/test-analitico.jpg'
+import { LinearGradient } from 'expo-linear-gradient'
+const image = { uri: "https://reactjs.org/logo-og.png" };
 
 const RealizeTestScreem = ({ navigation }) => {
   const [tests, setTests] = useState([])
@@ -65,14 +68,19 @@ const RealizeTestScreem = ({ navigation }) => {
       >
         {tests.length > 0 ? (
           tests.map((e, index) => (
-            <View key={index} style={styles.testView}>
-              <View>
-                <Text style={{fontFamily:'Roboto_500Medium'}}>{e.test_name}</Text>
-                <Text style={{fontFamily:'Roboto_500Medium'}}>{e.test_description}</Text>
+            <View key={index} style={{ marginBottom: 10 }}>
+              <ImageBackground source={fondoImage} resizeMode="cover" style={styles.ImageView} imageStyle={{ borderRadius: 5, }} />
+              <View style={styles.testView}>
+                <View style={{ paddingBottom: 10 }}>
+                  <Text style={styles.textStyles}>{e.test_name}</Text>
+                  <Text style={styles.textStyles}>{e.test_description}</Text>
+                </View>
+                <LinearGradient style={{width: '30%',borderRadius: 5,}} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#e65100', '#fb8c00', '#ffa726']}>
+                  <TouchableOpacity onPress={() => prueba(e)} style={styles.buttonGoTest}>
+                    <Text style={styles.textStyles}>Go Test</Text>
+                  </TouchableOpacity>
+                </LinearGradient>
               </View>
-              <TouchableOpacity onPress={() => prueba(e)} style={{ backgroundColor: 'green', padding: 10, borderRadius: 25 }}>
-                <Text style={{ color: 'white',fontFamily:'Roboto_500Medium' }}>go</Text>
-              </TouchableOpacity>
             </View>
           ))
         ) : (
@@ -80,6 +88,7 @@ const RealizeTestScreem = ({ navigation }) => {
             <Text style={{ alignSelf: 'center', color: 'white' }}>No Existe Informacion</Text>
           </View>
         )}
+
       </ScrollView>
     </Layaut>
   )
@@ -87,13 +96,26 @@ const RealizeTestScreem = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   testView: {
-    flexDirection: 'row',
-    backgroundColor: 'white',
+    flex: 1,
     padding: 10,
     margin: 7,
-    borderRadius: 3,
-    justifyContent: 'space-between',
-    alignItems: 'center'
+    // marginHorizontal: 15,
+    // backgroundColor:'red',
+  },
+  ImageView: {
+    opacity: 0.5,
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+  },
+  buttonGoTest: {
+    width:'100%',
+    padding: 10,
+    alignItems: 'center',
+  },
+  textStyles: {
+    fontFamily: 'Roboto_500Medium',
+    color: 'white'
   }
 })
 
