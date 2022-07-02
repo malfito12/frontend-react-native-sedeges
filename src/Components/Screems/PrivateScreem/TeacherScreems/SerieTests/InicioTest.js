@@ -274,8 +274,19 @@ const InicioTest = ({ navigation, route }) => {
 
     const newArray=[]
     for (var i = 0; i < lala2.length; i++) {
+        var num=i+1
+        var nuevo
+        if(num==1){
+            nuevo=route.params.avance1
+        }else if(num==2){
+            nuevo=route.params.avance2
+        }else if(num==3){
+            nuevo=route.params.avance3
+        }
         if (route.params.id_cartegory === lala2[i].categoria) {
-            newArray.push(lala2[i])
+            if(nuevo===0){
+                newArray.push(lala2[i])
+            }
         }
         // console.log('llena')
     }
@@ -284,7 +295,7 @@ const InicioTest = ({ navigation, route }) => {
         // console.log(newArray)
         for(var i =0;i<newArray.length;i++){
             if(e===newArray[i].id){
-                navigation.navigate('Instructions', { title: newArray[i].title, id: newArray[i].id, contenido: newArray[i].contenido, categoria:newArray[i].categoria })
+                navigation.navigate('Instructions', { title: newArray[i].title, id: newArray[i].id, contenido: newArray[i].contenido, categoria:newArray[i].categoria, })
                 break
             }
         }

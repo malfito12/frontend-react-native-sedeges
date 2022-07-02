@@ -1,4 +1,4 @@
-import { View, Text, Modal, TouchableOpacity, TextInput, RefreshControl, ScrollView, StyleSheet } from 'react-native'
+import { View, Text, Modal, TouchableOpacity, TextInput, RefreshControl, ScrollView, StyleSheet, ImageBackground } from 'react-native'
 import React, { useState, useContext, useEffect, useCallback } from 'react'
 import Layaut from '../../../../Atoms/StyleLayaut/Layaut'
 import { AuthContext } from '../../../../Atoms/Context/AuthContext'
@@ -9,7 +9,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient'
 import { CancelButton, DeleteButton, SuccessButton, UdpateButton } from '../../../../Molecules/Buttons/Buttons';
 
-const CreateTestScreem = () => {
+const CreateTestScreem = ({navigation}) => {
     var fecha = new Date
     var anio = fecha.getFullYear()
     var mes = fecha.getMonth() + 1
@@ -168,8 +168,10 @@ const CreateTestScreem = () => {
                     />}>
                     {tests.length > 0 ? (
                         tests.map((e, index) => (
-                            <View key={index} style={styles.testView}>
-                                <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', marginBottom: 5 }}>
+                            // <View key={index} style={styles.testView}>
+                            <View key={index} style={{ marginBottom: 10,marginHorizontal:15 }}>
+                                <ImageBackground source={require('../../../../../images/ImagesFondo/test-image3.jpg')} resizeMode='cover' style={styles.ImageView} imageStyle={{ borderRadius: 5, }} />
+                                <View style={styles.marginText}>
                                     <View>
                                         <Text style={{ color: 'white' }}>{e.test_name}</Text>
                                         <Text style={{ color: 'white' }}>{e.test_description}</Text>
@@ -178,12 +180,15 @@ const CreateTestScreem = () => {
                                     </View>
                                     {e.test_status === true ? (<AntDesign name="checkcircle" size={40} color="#76ff03" />) : (<AntDesign name="closecircle" size={40} color="#ff1744" />)}
                                 </View>
-                                <View>
+                                <View style={{flexDirection:'row',paddingLeft:20,paddingBottom:10}}>
                                     <TouchableOpacity onPress={() => openModalEditTest(e)}>
-                                        <UdpateButton name={'Actualizar'} />
+                                        <SuccessButton name={'Actualizar'} />
                                     </TouchableOpacity>
                                     <TouchableOpacity onPress={() => deleteTest(e.test_id)}>
-                                        <DeleteButton name={'Eliminar'} />
+                                        <CancelButton name={'Eliminar'} />
+                                    </TouchableOpacity>
+                                    <TouchableOpacity onPress={() =>navigation.navigate('RealizeTestScreem') }>
+                                        <CancelButton name={'ir'} />
                                     </TouchableOpacity>
                                 </View>
                             </View>
@@ -303,7 +308,7 @@ const styles = StyleSheet.create({
         padding: 7,
         marginBottom: 5,
         borderRadius: 5,
-        marginHorizontal: 6,
+        marginHorizontal: 15,
     },
     buttonSuccess: {
         width: '100%',
@@ -355,15 +360,22 @@ const styles = StyleSheet.create({
         padding: 5,
 
     },
-    testView: {
-        // flexDirection: 'row',
-        backgroundColor: '#3C425A',
-        padding: 10,
-        margin: 7,
-        borderRadius: 5,
-        // justifyContent: 'space-between',
-        // alignItems: 'center'
-    },
+    ImageView: {
+        opacity: 0.5,
+        width: '100%',
+        height: '100%',
+        position: 'absolute',
+        // marginHorizontal:15
+      },
+    marginText:{
+        flexDirection: 'row', 
+        justifyContent: 'space-between', 
+        alignItems: 'center', 
+        marginBottom: 5,
+        paddingTop:5, 
+        paddingLeft:20,
+        paddingRight:20
+    }
 })
 
 export default CreateTestScreem

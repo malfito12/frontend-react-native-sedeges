@@ -16,7 +16,7 @@ export const SuccessButton = (props) => {
 export const CancelButton = (props) => {
     const name = props.name
     return (
-        <LinearGradient style={styles.buttonCancel} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#c62828', '#f44336', '#e57373']}>
+        <LinearGradient style={styles.buttonCancel} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#bf360c', '#e64a19', '#ff6d00']}>
             {/* <Text style={{ color: 'white' }}>{name}</Text> */}
             <TextNormal name={name} />
         </LinearGradient>

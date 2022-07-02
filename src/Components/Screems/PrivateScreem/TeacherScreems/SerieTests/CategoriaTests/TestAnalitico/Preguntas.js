@@ -22,7 +22,8 @@ const Preguntas = ({ route, navigation }) => {
         ))
       }
       {route.params.cont == 4 ? (
-        <TouchableOpacity onPress={() => navigation.navigate('CategoryTest')} style={styles.buttonBack}>
+        // <TouchableOpacity onPress={() => navigation.navigate('CategoryTest')} style={styles.buttonBack}>
+        <TouchableOpacity onPress={() => navigation.navigate('InicioTest',{ categoria: 'TEST ANALITICO', id_cartegory: 'test-analitico' })} style={styles.buttonBack}>
           <Text style={styles.textFont}>Volver</Text>
         </TouchableOpacity>
       ) : (

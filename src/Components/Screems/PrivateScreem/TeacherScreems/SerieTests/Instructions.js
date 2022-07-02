@@ -34,7 +34,7 @@ const Instructions = ({ navigation, route }) => {
               </View>
             ))}
           </View>
-          <TouchableOpacity style={styles.buttonStart} onPress={() => navigation.navigate('PreguntaTestGrafico', { data: preguntas, cont: 0 })}>
+          <TouchableOpacity style={styles.buttonStart} onPress={() => navigation.navigate('PreguntaTestGrafico', { data: preguntas, cont: 0, })}>
             <Text style={styles.textFont}>Comenzar</Text>
           </TouchableOpacity>
         </>

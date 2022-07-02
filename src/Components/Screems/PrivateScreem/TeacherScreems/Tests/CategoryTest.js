@@ -1,17 +1,78 @@
-import { View, TouchableOpacity,Text,FlatList,StyleSheet } from 'react-native'
-import React from 'react'
+import { View, TouchableOpacity, Text, FlatList, StyleSheet, ImageBackground, ScrollView } from 'react-native'
+import React, { useState,useEffect } from 'react'
 import Layaut from '../../../../Atoms/StyleLayaut/Layaut'
+import TestMatematico from '../../../../../images/ImagesFondo/test-matematico.jpg'
+import TestGrafico from '../../../../../images/ImagesFondo/test-grafico.jpg'
+import TestAnalitico from '../../../../../images/ImagesFondo/test-analitico.jpg'
+import AsyncStorageLib from '@react-native-async-storage/async-storage'
 
-const CategoryTest = ({navigation}) => {
-    
-    const categoryDat=[
-        {id:1,title:'TEST GRAFICO', direction:()=>navigation.navigate('InicioTest',{categoria:'TEST GRAFICO',id_cartegory:'test-grafico'})},
-        {id:2,title:'TEST ANALITICO',direction:()=>navigation.navigate('InicioTest',{categoria:'TEST ANALITICO',id_cartegory:'test-analitico'})},
-        {id:3,title:'TEST MATEMATICO',direction:()=>navigation.navigate('InicioTest',{categoria:'TEST MATEMATICO',id_cartegory:'test-matematico'})},
-    ]
+const CategoryTest = ({ navigation,route }) => {
+  const [avance, setAvance] = useState({
+    test1: 0,
+    test2: 0,
+    test3: 0,
+    test4: 0,
+    // test5:'',
+    // test6:'',
+    // test7:'',
+  })
+  useEffect(()=>{
+    getData()
+  },[])
+  const getData=async()=>{
+    await AsyncStorageLib.getItem('prueba')
+    .then(resp=>{
+      if(resp){
+        setAvance({
+          ...avance,
+          test1:JSON.parse(resp)
+        })
+      }
+    })
+    // AsyncStorageLib.getItem('rol').then(resp => setRol(JSON.parse(resp)))
+    // if(aa){
+    //   setAvance({test1:aa})
+    // }
+  }
+  console.log(avance.test1)
+
+  const categoryDat = [
+    {
+      id: 1,
+      title: 'TEST GRAFICO',
+      image: TestGrafico,
+      direction: () => navigation.navigate('InicioTest',
+        {
+          categoria: 'TEST GRAFICO',
+          id_cartegory: 'test-grafico',
+          avance1:avance.test1,
+          avance2:avance.test2,
+          avance3:avance.test3,
+        })
+    },
+    {
+      id: 2,
+      title: 'TEST ANALITICO',
+      image: TestAnalitico,
+      direction: () => navigation.navigate('InicioTest',
+        {
+          categoria: 'TEST ANALITICO',
+          id_cartegory: 'test-analitico'
+        })
+    },
+    {
+      id: 3, title: 'TEST MATEMATICO',
+      image: TestMatematico,
+      direction: () => navigation.navigate('InicioTest',
+        {
+          categoria: 'TEST MATEMATICO',
+          id_cartegory: 'test-matematico'
+        })
+    },
+  ]
   return (
     <Layaut>
-      <FlatList 
+      {/* <FlatList 
       data={categoryDat}
       style={{width:'100%'}}
       keyExtractor={item=>item.id}
@@ -22,18 +83,33 @@ const CategoryTest = ({navigation}) => {
               </TouchableOpacity>
           </View>
       )}
-      />
+      /> */}
+      <ScrollView>
+        {categoryDat.map((e, index) => (
+          <View key={index} style={{ marginBottom: 10 }}>
+            <TouchableOpacity onPress={e.direction} style={styles.testView}>
+              <ImageBackground source={e.image} resizeMode='cover' style={styles.ImageView} imageStyle={{ borderRadius: 5, }} />
+              <View style={{ padding: 30 }}>
+                <Text style={{ alignSelf: 'center', color: 'white', fontFamily: 'Roboto_500Medium' }}>{e.title}</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+        ))}
+      </ScrollView>
     </Layaut>
   )
 }
 
 const styles = StyleSheet.create({
-    testView: {
-      backgroundColor: 'white',
-      padding: 20,
-      margin: 10,
-      borderRadius: 3,
-    }
-  })
+  testView: {
+    borderRadius: 5,
+  },
+  ImageView: {
+    opacity: 0.5,
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+  },
+})
 
 export default CategoryTest

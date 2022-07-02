@@ -75,6 +75,7 @@ export const AuthProvider = ({ children }) => {
                 AsyncStorageLib.removeItem('user')
                 AsyncStorageLib.removeItem('rol')
                 AsyncStorageLib.removeItem('test')
+                AsyncStorageLib.removeItem('prueba')
                 setIsLoading(false)
                 setToken({ token: undefined })
                 setUser({ user: undefined, rol: undefined })

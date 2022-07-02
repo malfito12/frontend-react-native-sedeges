@@ -1,8 +1,15 @@
 import { View, Text, StyleSheet, TouchableOpacity,Image } from 'react-native'
 import React from 'react'
 import Layaut from '../../../../../../Atoms/StyleLayaut/Layaut'
+import AsyncStorageLib from '@react-native-async-storage/async-storage'
 
 const PreguntaTestGrafico = ({ route, navigation }) => {
+    var sum=7
+    const enviar=async()=>{
+        await AsyncStorageLib.setItem('prueba',JSON.stringify(sum))
+        // navigation.navigate('CategoryTest')
+        navigation.push('CategoryTest')
+    }
     return (
         <Layaut>
             <Text style={styles.textFont}>Preguntas</Text>
@@ -17,7 +24,9 @@ const PreguntaTestGrafico = ({ route, navigation }) => {
                 ))}
             </View>
             {route.params.cont == 4 ? (
-                <TouchableOpacity onPress={() => navigation.navigate('CategoryTest')} style={styles.buttonBack}>
+                // <TouchableOpacity onPress={() => navigation.navigate('CategoryTest')} style={styles.buttonBack}>
+                <TouchableOpacity onPress={() => enviar()} style={styles.buttonBack}>
+                {/* <TouchableOpacity onPress={() => navigation.navigate('InicioTest',{ categoria: 'TEST GRAFICO', id_cartegory: 'test-grafico' })} style={styles.buttonBack}> */}
                     <Text style={styles.textFont}>Volver</Text>
                 </TouchableOpacity>
             ) : (
