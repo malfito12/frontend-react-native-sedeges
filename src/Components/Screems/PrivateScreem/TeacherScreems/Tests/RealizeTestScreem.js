@@ -72,12 +72,12 @@ const RealizeTestScreem = ({ navigation }) => {
               <ImageBackground source={fondoImage} resizeMode="cover" style={styles.ImageView} imageStyle={{ borderRadius: 5, }} />
               <View style={styles.testView}>
                 <View style={{ paddingBottom: 10 }}>
-                  <Text style={styles.textStyles}>{e.test_name}</Text>
-                  <Text style={styles.textStyles}>{e.test_description}</Text>
+                  <Text style={{...styles.textStyles,fontSize:16}}>{e.test_name}</Text>
+                  {/* <Text style={styles.textStyles}>{e.test_description}</Text> */}
                 </View>
-                <LinearGradient style={{width: '30%',borderRadius: 5,}} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#e65100', '#fb8c00', '#ffa726']}>
+                <LinearGradient style={{width: '50%',borderRadius: 5,}} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#e65100', '#fb8c00', '#ffa726']}>
                   <TouchableOpacity onPress={() => prueba(e)} style={styles.buttonGoTest}>
-                    <Text style={styles.textStyles}>Go Test</Text>
+                    <Text style={styles.textStyles}>Iniciar Test</Text>
                   </TouchableOpacity>
                 </LinearGradient>
               </View>
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
   },
   textStyles: {
     fontFamily: 'Roboto_500Medium',
-    color: 'white'
+    color: 'white',
   }
 })
 

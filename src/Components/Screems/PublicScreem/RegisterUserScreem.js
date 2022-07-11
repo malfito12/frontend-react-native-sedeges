@@ -1,4 +1,4 @@
-import { View, Text,Modal, TextInput, StyleSheet,Image, TouchableOpacity, ScrollView } from 'react-native'
+import { View, Text, Modal, TextInput, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native'
 import React, { useState } from 'react'
 import Layaut from '../../Atoms/StyleLayaut/Layaut'
 import { PORT_URL } from '../../../PortUrl/PortUrl'
@@ -10,7 +10,7 @@ import { Entypo } from '@expo/vector-icons';
 import sedeges from '../../../images/sedeges-logo.png'
 
 const RegisterUserScreem = ({ navigation }) => {
-    const [progress,setProgress]=useState(false)
+    const [progress, setProgress] = useState(false)
     const [hidePass, setHidePass] = useState({
         iconPassword: 'eye',
         viewPassword: true,
@@ -24,7 +24,7 @@ const RegisterUserScreem = ({ navigation }) => {
         user_email: '',
         user_password: '',
         user_repeat_password: '',
-        user_rol:'Estudiante'
+        user_rol: 'Estudiante'
     })
     //---------------POST USER--------------------------
     const postUser = async () => {
@@ -39,13 +39,13 @@ const RegisterUserScreem = ({ navigation }) => {
 
         // console.log(espacio.test(ss))
         setProgress(true)
-        if(changeData.user_name===''||changeData.user_email===''||changeData.user_password===''||changeData.user_repeat_password===''){
+        if (changeData.user_name === '' || changeData.user_email === '' || changeData.user_password === '' || changeData.user_repeat_password === '') {
             setProgress(false)
             return alert('Por favor, llene todos los datos')
-        }else if (!(validator.isEmail(changeData.user_email))) {
+        } else if (!(validator.isEmail(changeData.user_email))) {
             setProgress(false)
             return alert('Email incorrecto')
-        }else if (changeData.user_password !== changeData.user_repeat_password) {
+        } else if (changeData.user_password !== changeData.user_repeat_password) {
             setProgress(false)
             return alert('verifique que las contraseñas sean iguales')
         }
@@ -54,10 +54,11 @@ const RegisterUserScreem = ({ navigation }) => {
             .then(resp => {
                 setProgress(false)
                 alert(resp.data.message)
-                navigation.navigate('LoginScreem')
+                // navigation.navigate('LoginScreem')
+                navigation.navigate('TeacherHomeScreem')
                 // console.log(resp.data)
             })
-            .catch(err=>{
+            .catch(err => {
                 setProgress(false)
                 console.log(err)
             })
@@ -96,87 +97,91 @@ const RegisterUserScreem = ({ navigation }) => {
     }
     return (
         <>
-        <Layaut>
-            <ScrollView>
-            <Image style={{width:120,height:120, marginBottom:10, alignSelf:'center'}} source={sedeges} />
-                <View style={styles.containerBottom}>
-                    <Text style={{ color: 'white' }}>Registro</Text>
-                    <TouchableOpacity style={styles.buttonRegister} onPress={() => navigation.navigate('LoginScreem')} >
+            <Layaut>
+                <Text style={{ color: 'white', alignSelf: 'center', fontFamily: 'Roboto_900Black_Italic', fontSize: 16, marginBottom: 15 }}>Registrar Usuario</Text>
+                <ScrollView>
+                    {/* <Image style={{ width: 120, height: 120, marginBottom: 10, alignSelf: 'center' }} source={sedeges} /> */}
+                    {/* <View style={styles.containerBottom}>
+                        <TouchableOpacity style={styles.buttonRegister} onPress={() => navigation.navigate('LoginScreem')} >
                         <Text style={{ color: 'white' }}>Iniciar Sesión</Text>
                     </TouchableOpacity>
-                </View>
-                <View style={styles.container}>
-                    <TextInput
-                        style={styles.input}
-                        placeholder='Nombre de Usuario'
-                        placeholderTextColor='#b0bec5'
-                        onChangeText={text => handleChange('user_name', text)}
-                        value={changeData.user_name}
-                    />
-                    <TextInput
-                        style={styles.input}
-                        placeholder='Correo Electronico'
-                        placeholderTextColor='#b0bec5'
-                        onChangeText={text => handleChange('user_email', text)}
-                        value={changeData.user_email}
-                    />
-                    <View style={styles.passwordInput}>
+                    </View> */}
+                    <View style={styles.container}>
                         <TextInput
-                            style={{ flex: 1, color: 'white' }}
+                            style={styles.input}
+                            placeholder='Nombre de Usuario'
                             placeholderTextColor='#b0bec5'
-                            placeholder='Contraseña'
-                            secureTextEntry={hidePass.viewPassword}
-                            onChangeText={text => handleChange('user_password', text)}
-                            value={changeData.user_password}
+                            onChangeText={text => handleChange('user_name', text)}
+                            value={changeData.user_name}
                         />
-                        <TouchableOpacity onPress={verPass}>
-                            <Entypo name={hidePass.iconPassword} size={20} color='white' />
-                        </TouchableOpacity>
-                    </View>
-                    <View style={styles.passwordInput}>
                         <TextInput
-                            style={{ flex: 1, color: 'white' }}
+                            style={styles.input}
+                            placeholder='Correo Electronico'
                             placeholderTextColor='#b0bec5'
-                            placeholder='Repita Contraseña'
-                            secureTextEntry={hidePass2.viewRepeatPassword}
-                            onChangeText={text => handleChange('user_repeat_password', text)}
-                            value={changeData.user_repeat_password}
+                            onChangeText={text => handleChange('user_email', text)}
+                            value={changeData.user_email}
                         />
-                        <TouchableOpacity onPress={verPass2}>
-                            <Entypo name={hidePass2.iconRepeatPassword} size={20} color='white' />
-                        </TouchableOpacity>
-                    </View>
-                    {/* <TextInput
+                        <View style={styles.passwordInput}>
+                            <TextInput
+                                style={{ flex: 1, color: 'white' }}
+                                placeholderTextColor='#b0bec5'
+                                placeholder='Contraseña'
+                                secureTextEntry={hidePass.viewPassword}
+                                onChangeText={text => handleChange('user_password', text)}
+                                value={changeData.user_password}
+                            />
+                            <TouchableOpacity onPress={verPass}>
+                                <Entypo name={hidePass.iconPassword} size={20} color='white' />
+                            </TouchableOpacity>
+                        </View>
+                        <View style={styles.passwordInput}>
+                            <TextInput
+                                style={{ flex: 1, color: 'white' }}
+                                placeholderTextColor='#b0bec5'
+                                placeholder='Repita Contraseña'
+                                secureTextEntry={hidePass2.viewRepeatPassword}
+                                onChangeText={text => handleChange('user_repeat_password', text)}
+                                value={changeData.user_repeat_password}
+                            />
+                            <TouchableOpacity onPress={verPass2}>
+                                <Entypo name={hidePass2.iconRepeatPassword} size={20} color='white' />
+                            </TouchableOpacity>
+                        </View>
+                        {/* <TextInput
                 keyboardType='numeric'
                 style={styles.input}
                 placeholder='Edad'
                 placeholderTextColor='#545674'
                 onChangeText={text => handleChange('edad', text)}
             /> */}
-                    <LinearGradient style={styles.buttonSave} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#00c853', '#64dd17', '#aeea00']}>
-                        <TouchableOpacity style={{ width: '100%', alignItems: 'center' }} onPress={postUser} >
-                            <Text style={{ color: 'white' }}>Registrar</Text>
+                        <LinearGradient style={styles.buttonSave} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#00c853', '#64dd17', '#aeea00']}>
+                            <TouchableOpacity style={{ width: '100%', alignItems: 'center' }} onPress={postUser} >
+                                <Text style={{ color: 'white' }}>Registrar</Text>
+                            </TouchableOpacity>
+                        </LinearGradient>
+                        <TouchableOpacity style={{ width: '90%', alignItems: 'center',backgroundColor:'red', borderRadius:3, padding:10 }} onPress={()=>navigation.navigate('TeacherHomeScreem')}>
+                            <Text style={{ color: 'white' }}>Atras</Text>
                         </TouchableOpacity>
-                    </LinearGradient>
+                    </View>
+                </ScrollView>
+            </Layaut>
+            <Modal
+                visible={progress}
+                transparent
+                animationType='fade'
+            >
+                <View style={styles.progressView}>
+                    <Progress.Circle borderWidth={3} size={40} indeterminate={true} />
                 </View>
-            </ScrollView>
-        </Layaut>
-        <Modal
-            visible={progress}
-            transparent
-            animationType='fade'
-        >
-            <View style={styles.progressView}>
-                <Progress.Circle borderWidth={3} size={40} indeterminate={true} />
-            </View>
-        </Modal>
+            </Modal>
         </>
     )
 }
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center'
+        alignItems: 'center',
+        marginBottom: 10
     },
     input: {
         width: '90%',
@@ -208,7 +213,7 @@ const styles = StyleSheet.create({
         // paddingTop: 10,
         backgroundColor: '#10ac84',
         padding: 10,
-        marginBottom:40,
+        marginBottom: 10,
         borderRadius: 3,
         width: '90%',
         alignItems: 'center'
@@ -217,7 +222,7 @@ const styles = StyleSheet.create({
     containerBottom: {
         width: '90%',
         height: '15%',
-        marginBottom:10,
+        marginBottom: 10,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',

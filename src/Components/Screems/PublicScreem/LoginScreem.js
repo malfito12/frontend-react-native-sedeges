@@ -39,9 +39,9 @@ const LoginScreem = ({ navigation }) => {
                     <Image style={{ width: 120, height: 120, marginBottom: 10, alignSelf: 'center' }} source={sedeges} />
                     <View style={styles.containerBottom}>
                         <Text style={{ color: 'white',fontFamily:'Roboto_700Bold' }}>Iniciar Sesión</Text>
-                        <TouchableOpacity style={styles.buttonRegister} onPress={() => navigation.navigate('RegisterUserScreem')} >
+                        {/* <TouchableOpacity style={styles.buttonRegister} onPress={() => navigation.navigate('RegisterUserScreem')} >
                             <Text style={{ color: 'white',fontFamily:'Roboto_700Bold' }}>Registrarse</Text>
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
                     </View>
                     <View style={styles.container}>
                         <TextInput

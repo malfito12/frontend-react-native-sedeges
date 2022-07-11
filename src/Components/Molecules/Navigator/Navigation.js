@@ -16,6 +16,7 @@ import CategoryTest from '../../Screems/PrivateScreem/TeacherScreems/Tests/Categ
 import PruebaTest from '../../Screems/PrivateScreem/TeacherScreems/SerieTests/CategoriaTests/TestAnalitico/PruebaTest'
 import Instructions from '../../Screems/PrivateScreem/TeacherScreems/SerieTests/Instructions'
 import PreguntaTestGrafico from '../../Screems/PrivateScreem/TeacherScreems/SerieTests/CategoriaTests/TestGrafico/PreguntaTestGrafico'
+import PerfilUserScreem from '../../Screems/PrivateScreem/Users/PerfilUserScreem'
 
 const Stack = createNativeStackNavigator()
 
@@ -30,14 +31,36 @@ const Navigation = () => {
             <Stack.Navigator>
                 {login && rol === 'admin' ? (
                     <>
-                        <Stack.Screen name='Admin' component={TeacherHomeScreem} options={{ headerShown: false }} />
+                        <Stack.Screen name='TeacherHomeScreem' component={TeacherHomeScreem} options={{ headerShown: false }} />
+                        <Stack.Screen
+                            name='RegisterUserScreem'
+                            component={RegisterUserScreem}
+                            options={{
+                                title: '',
+                                headerTitleAlign: 'center',
+                                headerTitleStyle: { fontSize: 16 },
+                                headerStyle: { backgroundColor: '#000010' },
+                                headerTintColor: 'white',
+                                headerLeft: () => <></>
+                            }}
+                        />
+                        <Stack.Screen
+                            name='PerfilUserScreem'
+                            component={PerfilUserScreem}
+                            options={{
+                                headerStyle: { backgroundColor: '#000010' },
+                                headerTintColor: 'white',
+                                title: 'Perfil'
+                            }}
+                        // initialParams={{ post: () => logget() }}
+                        />
                         <Stack.Screen
                             name='UsersScreem'
                             component={UsersScreem}
                             options={{
                                 headerStyle: { backgroundColor: '#000010' },
                                 headerTintColor: 'white',
-                                title: 'Perfil'
+                                title: 'Lista de Usuarios'
                             }}
                         // initialParams={{ post: () => logget() }}
                         />
@@ -100,8 +123,8 @@ const Navigation = () => {
                     <>
                         <Stack.Screen name='Home' component={Home} options={{ headerShown: false }} />
                         <Stack.Screen
-                            name='UsersScreem'
-                            component={UsersScreem}
+                            name='PerfilUserScreem'
+                            component={PerfilUserScreem}
                             options={{
                                 headerStyle: { backgroundColor: '#000010' },
                                 headerTintColor: 'white',
@@ -176,7 +199,7 @@ const Navigation = () => {
                             }}
                         // initialParams={{ post: () => logget() }}
                         />
-                        <Stack.Screen
+                        {/* <Stack.Screen
                             name='RegisterUserScreem'
                             component={RegisterUserScreem}
                             options={{
@@ -187,7 +210,7 @@ const Navigation = () => {
                                 headerTintColor: 'white',
                                 headerLeft: () => <></>
                             }}
-                        />
+                        /> */}
                     </>
                 )}
             </Stack.Navigator>

@@ -20,7 +20,8 @@ const UsersScreem = ({ navigation }) => {
     user_name: '',
   })
   useEffect(() => {
-    getToken()
+    // getToken()
+    getAllUsers()
   }, [])
   const getToken = async () => {
     AsyncStorageLib.getItem('user')
@@ -32,8 +33,7 @@ const UsersScreem = ({ navigation }) => {
   //------GET USERS-------------
   const getAllUsers = async (e) => {
     // const id = user.user
-    // await axios.get(`${PORT_URL}user/${id}`)
-    await axios.get(`${PORT_URL}user/${e}`)
+    await axios.get(`${PORT_URL}users`)
       .then(resp => {
         setUsers(resp.data)
       })
@@ -67,13 +67,13 @@ const UsersScreem = ({ navigation }) => {
   }
   const deleteUser = async () => {
     const id = changeData.user_id
-    // await axios.delete(`${PORT_URL}users/${id}`)
-    //   .then(resp => {
-    //     console.log(resp.data)
-    //     getAllUsers()
+    await axios.delete(`${PORT_URL}users/${id}`)
+      .then(resp => {
+        console.log(resp.data)
+        getAllUsers()
         closeModalDeleteUser()
-    //   })
-    //   .catch(err => console.log(err))
+      })
+      .catch(err => console.log(err))
   }
   //---------REFRESH------
   const onRefresh = useCallback(async () => {
@@ -93,9 +93,10 @@ const UsersScreem = ({ navigation }) => {
   return (
     <>
       <Layaut>
+        <Text style={{ color: 'white', alignSelf: 'center', marginBottom: 10, fontFamily: 'Roboto_500Medium', fontSize: 15 }}>Lista de Usuarios</Text>
         <FlatList
           data={users}
-          style={{ width: '100%' }}
+          style={{ width: '100%',marginBottom:45 }}
           keyExtractor={item => item.user_id}
           renderItem={(p) => (
             <View style={styles.itemContainer}>
@@ -110,13 +111,18 @@ const UsersScreem = ({ navigation }) => {
                   onPress={() => openModalEditUser(p.item)}
                   // onPress={() => console.log(p.item.id_usuario)}
                   style={styles.itemButtonUpdate}>
-                  <Text>Edit</Text>
+                  <Text style={styles.itemTitle}>Actualizar</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                   onPress={() => openModalDeleteUser(p.item)}
                   style={styles.itemButtonDelete}>
-                  <Text style={{ color: 'white' }}>Delete</Text>
+                  <Text style={styles.itemTitle}>Eliminar</Text>
                 </TouchableOpacity>
+                {/* <TouchableOpacity
+                  onPress={() => openModalDeleteUser(p.item)}
+                  style={styles.itemButtonDelete}>
+                  <Text style={styles.itemTitle}>option</Text>
+                </TouchableOpacity> */}
               </View>
             </View>
           )}
@@ -126,12 +132,6 @@ const UsersScreem = ({ navigation }) => {
             refreshing={refresing}
           />}
         />
-        <TouchableOpacity
-          // onPress={cerrarSesion}
-          onPress={logout}
-          style={styles.itemButtonDelete}>
-          <Text style={{ color: 'white' }}>Cerrar Sesion</Text>
-        </TouchableOpacity>
       </Layaut>
       {/* ----------------------MODAL PROGRESS-------------------------------- */}
       <Modal
@@ -165,10 +165,10 @@ const UsersScreem = ({ navigation }) => {
             />
             <View style={styles.ViewButtonsModal}>
               <TouchableOpacity onPress={editUser} style={{ backgroundColor: '#0277bd', ...styles.buttonAceptCancel }}>
-                <Text style={{ color: 'white' }}>Aceptar</Text>
+                <Text style={styles.itemTitle}>Aceptar</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={closeModalEditUser} style={{ backgroundColor: '#dd2c00', ...styles.buttonAceptCancel }}>
-                <Text style={{ color: 'white' }}>Cancelar</Text>
+                <Text style={styles.itemTitle}>Cancelar</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -235,15 +235,16 @@ const styles = StyleSheet.create({
   },
   itemContainer: {
     backgroundColor: '#333333',
-    padding: 20,
-    marginVertical: 8,
+    padding: 10,
+    marginHorizontal: 15,
+    marginBottom: 10,
     borderRadius: 5,
     flexDirection: 'row',
     justifyContent: 'space-between'
   },
   itemTitle: {
-    color: '#ffffff',
-    fontFamily:'Roboto_700Bold'
+    color: '#e3f2fd',
+    fontFamily: 'Roboto_700Bold'
   },
   titleEdit: {
     fontSize: 15,
@@ -255,14 +256,14 @@ const styles = StyleSheet.create({
     padding: 5,
     backgroundColor: 'lawngreen',
     alignItems: 'center',
-    borderRadius: 5,
+    borderRadius: 2,
   },
   itemButtonDelete: {
     margin: 5,
     padding: 5,
     backgroundColor: 'crimson',
     alignItems: 'center',
-    borderRadius: 5,
+    borderRadius: 2,
   },
   ViewButtonsModal: {
     flexDirection: 'row',

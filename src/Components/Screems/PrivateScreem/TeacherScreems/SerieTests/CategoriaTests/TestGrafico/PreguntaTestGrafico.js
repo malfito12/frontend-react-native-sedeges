@@ -24,8 +24,8 @@ const PreguntaTestGrafico = ({ route, navigation }) => {
                 ))}
             </View>
             {route.params.cont == 4 ? (
-                // <TouchableOpacity onPress={() => navigation.navigate('CategoryTest')} style={styles.buttonBack}>
-                <TouchableOpacity onPress={() => enviar()} style={styles.buttonBack}>
+                <TouchableOpacity onPress={() => navigation.navigate('CategoryTest')} style={styles.buttonBack}>
+                {/* <TouchableOpacity onPress={() => enviar()} style={styles.buttonBack}> */}
                 {/* <TouchableOpacity onPress={() => navigation.navigate('InicioTest',{ categoria: 'TEST GRAFICO', id_cartegory: 'test-grafico' })} style={styles.buttonBack}> */}
                     <Text style={styles.textFont}>Volver</Text>
                 </TouchableOpacity>

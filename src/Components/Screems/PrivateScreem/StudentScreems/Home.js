@@ -16,7 +16,7 @@ const Tab = createBottomTabNavigator()
 const Home = ({ navigation }) => {
     const perfil = (
         <View style={{ marginHorizontal: 20 }}>
-            <TouchableOpacity onPress={() => navigation.navigate('UsersScreem')}>
+            <TouchableOpacity onPress={() => navigation.navigate('PerfilUserScreem')}>
                 <Feather name='user' size={30} color='white' />
             </TouchableOpacity>
         </View>

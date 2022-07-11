@@ -7,6 +7,7 @@ import StudentsAdminScreem from './Students/StudentsAdminScreem'
 import ResultsAdminScreem from './Results/ResultsAdminScreem'
 import HomeAdminTestScreem from './Tests/HomeAdminTestScreem'
 import HomeAdminTestVocational from './TestsVocational/HomeAdminTestVocational'
+import UsersScreem from '../Users/UsersScreem'
 
 
 const Tab = createBottomTabNavigator()
@@ -15,7 +16,7 @@ const TeacherHomeScreem = ({ navigation }) => {
   const { logout } = useContext(AuthContext)
   const perfil = (
     <View style={{ marginHorizontal: 20 }}>
-      <TouchableOpacity onPress={() => navigation.navigate('UsersScreem')}>
+      <TouchableOpacity onPress={() => navigation.navigate('PerfilUserScreem')}>
         <FontAwesome5 name='chalkboard-teacher' size={25} color='white' />
       </TouchableOpacity>
     </View>
@@ -24,7 +25,7 @@ const TeacherHomeScreem = ({ navigation }) => {
   return (
     <>
       <Tab.Navigator
-        initialRouteName='StudentsAdminScreem'
+        initialRouteName='UsersScreem'
         screenOptions={({ route }) => ({
           tabBarStyle: {
             backgroundColor: '#12151C',
@@ -41,11 +42,11 @@ const TeacherHomeScreem = ({ navigation }) => {
             ...styles.prueba
           },
           tabBarActiveTintColor: '#76ff03',
-          tabBarInactiveTintColor:'white'
+          tabBarInactiveTintColor: 'white',
 
         })}
       >
-        <Tab.Screen name="StudentsAdminScreem" component={StudentsAdminScreem} options={{
+        {/* <Tab.Screen name="StudentsAdminScreem" component={StudentsAdminScreem} options={{
           headerLeft: () => (perfil),
           headerTitle: '',
           tabBarLabel: 'Estudiantes',
@@ -53,6 +54,22 @@ const TeacherHomeScreem = ({ navigation }) => {
           headerTintColor: 'white',
           tabBarLabelStyle: { fontFamily: 'Roboto_700Bold' },
           tabBarIcon: ({ size, color }) => (<Ionicons name='school-outline' size={size} color={color} />),
+        }} /> */}
+        <Tab.Screen name="UsersScreem" component={UsersScreem} options={{
+          headerLeft: () => (perfil),
+          headerTitle: '',
+          tabBarLabel: 'Usuarios',
+          headerStyle: { backgroundColor: '#000010' },
+          headerTintColor: 'white',
+          tabBarLabelStyle: { fontFamily: 'Roboto_700Bold' },
+          tabBarIcon: ({ size, color }) => (<Feather name="users" size={size} color={color} />),
+          headerRight: () => (
+            <View style={{ marginRight: 30 }}>
+              <TouchableOpacity onPress={() => navigation.push('RegisterUserScreem')}>
+              <Ionicons name="person-add-outline" size={26} color="white" />
+              </TouchableOpacity>
+            </View>
+          )
         }} />
 
         <Tab.Screen name="HomeAdminTestScreem" component={HomeAdminTestScreem} options={{
@@ -60,7 +77,7 @@ const TeacherHomeScreem = ({ navigation }) => {
           headerTitle: '',
           tabBarLabel: 'Test',
           headerStyle: { backgroundColor: '#000010' },
-          tabBarLabelStyle:{fontFamily:'Roboto_700Bold'},
+          tabBarLabelStyle: { fontFamily: 'Roboto_700Bold' },
           tabBarIcon: ({ size, color }) => (<Ionicons name='library-outline' size={size} color={color} />),
         }} />
         <Tab.Screen name="HomeAdminTestVocational" component={HomeAdminTestVocational} options={{
@@ -68,7 +85,7 @@ const TeacherHomeScreem = ({ navigation }) => {
           headerTitle: '',
           tabBarLabel: 'Test Vocacional',
           headerStyle: { backgroundColor: '#000010' },
-          tabBarLabelStyle:{fontFamily:'Roboto_700Bold'},
+          tabBarLabelStyle: { fontFamily: 'Roboto_700Bold' },
           tabBarIcon: ({ size, color }) => (<Entypo name="qq" size={size} color={color} />)
         }} />
         <Tab.Screen name="ResultsAdminScreem" component={ResultsAdminScreem} options={{
@@ -76,7 +93,7 @@ const TeacherHomeScreem = ({ navigation }) => {
           headerTitle: '',
           tabBarLabel: 'Resultados',
           headerStyle: { backgroundColor: '#000010' },
-          tabBarLabelStyle:{fontFamily:'Roboto_700Bold'},
+          tabBarLabelStyle: { fontFamily: 'Roboto_700Bold' },
           tabBarIcon: ({ size, color }) => (<Foundation name='results' size={size} color={color} />)
         }} />
       </Tab.Navigator>

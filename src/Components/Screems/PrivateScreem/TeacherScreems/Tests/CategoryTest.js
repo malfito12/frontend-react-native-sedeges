@@ -1,60 +1,57 @@
-import { View, TouchableOpacity, Text, FlatList, StyleSheet, ImageBackground, ScrollView } from 'react-native'
-import React, { useState,useEffect } from 'react'
+import { View, TouchableOpacity, Text, FlatList, StyleSheet, ImageBackground, ScrollView, TextInput } from 'react-native'
+import React, { useState, useEffect } from 'react'
 import Layaut from '../../../../Atoms/StyleLayaut/Layaut'
 import TestMatematico from '../../../../../images/ImagesFondo/test-matematico.jpg'
 import TestGrafico from '../../../../../images/ImagesFondo/test-grafico.jpg'
 import TestAnalitico from '../../../../../images/ImagesFondo/test-analitico.jpg'
 import AsyncStorageLib from '@react-native-async-storage/async-storage'
 
-const CategoryTest = ({ navigation,route }) => {
-  const [avance, setAvance] = useState({
-    test1: 0,
-    test2: 0,
-    test3: 0,
-    test4: 0,
-    // test5:'',
-    // test6:'',
-    // test7:'',
-  })
-  useEffect(()=>{
-    getData()
-  },[])
-  const getData=async()=>{
-    await AsyncStorageLib.getItem('prueba')
-    .then(resp=>{
-      if(resp){
-        setAvance({
-          ...avance,
-          test1:JSON.parse(resp)
-        })
-      }
-    })
-    // AsyncStorageLib.getItem('rol').then(resp => setRol(JSON.parse(resp)))
-    // if(aa){
-    //   setAvance({test1:aa})
-    // }
-  }
-  console.log(avance.test1)
+const CategoryTest = ({ navigation, route }) => {
+  // const [avance, setAvance] = useState({
+  //   test1: 0,
+  //   test2: 0,
+  //   test3: 0,
+  //   test4: 0,
+  // })
+  // useEffect(()=>{
+  //   getData()
+  // },[])
+  // const getData=async()=>{
+  //   await AsyncStorageLib.getItem('prueba')
+  //   .then(resp=>{
+  //     if(resp){
+  //       setAvance({
+  //         ...avance,
+  //         test1:JSON.parse(resp)
+  //       })
+  //     }
+  //   })
+  //   // AsyncStorageLib.getItem('rol').then(resp => setRol(JSON.parse(resp)))
+  //   // if(aa){
+  //   //   setAvance({test1:aa})
+  //   // }
+  // }
+  // console.log(avance.test1)
 
   const categoryDat = [
     {
       id: 1,
       title: 'TEST GRAFICO',
       image: TestGrafico,
-      direction: () => navigation.navigate('InicioTest',
+      direction: () => navigation.push('InicioTest',
         {
           categoria: 'TEST GRAFICO',
           id_cartegory: 'test-grafico',
-          avance1:avance.test1,
-          avance2:avance.test2,
-          avance3:avance.test3,
+          // avance1:avance.test1,
+          // avance2:avance.test2,
+          // avance3:avance.test3,
         })
     },
     {
       id: 2,
       title: 'TEST ANALITICO',
       image: TestAnalitico,
-      direction: () => navigation.navigate('InicioTest',
+      direction: () => navigation.push('InicioTest',
         {
           categoria: 'TEST ANALITICO',
           id_cartegory: 'test-analitico'
@@ -63,7 +60,7 @@ const CategoryTest = ({ navigation,route }) => {
     {
       id: 3, title: 'TEST MATEMATICO',
       image: TestMatematico,
-      direction: () => navigation.navigate('InicioTest',
+      direction: () => navigation.push('InicioTest',
         {
           categoria: 'TEST MATEMATICO',
           id_cartegory: 'test-matematico'
@@ -85,6 +82,28 @@ const CategoryTest = ({ navigation,route }) => {
       )}
       /> */}
       <ScrollView>
+      <View style={{backgroundColor:'white',marginBottom:10, padding:5}}>
+        <Text>Formulario</Text>
+        <TextInput
+          placeholder='Nombre Completo'
+          placeholderTextColor='#b0bec5'
+        />
+        <TextInput
+          placeholder='Edad'
+          placeholderTextColor='#b0bec5'
+        />
+        <TextInput
+          placeholder='Sexo'
+          placeholderTextColor='#b0bec5'
+        />
+        <TextInput
+          placeholder='Centro'
+          placeholderTextColor='#b0bec5'
+        />
+        <TouchableOpacity style={{backgroundColor:'green'}}>
+          <Text>Registrar</Text>
+        </TouchableOpacity>
+      </View>
         {categoryDat.map((e, index) => (
           <View key={index} style={{ marginBottom: 10 }}>
             <TouchableOpacity onPress={e.direction} style={styles.testView}>
@@ -96,6 +115,7 @@ const CategoryTest = ({ navigation,route }) => {
           </View>
         ))}
       </ScrollView>
+      
     </Layaut>
   )
 }
