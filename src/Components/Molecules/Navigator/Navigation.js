@@ -17,6 +17,7 @@ import PruebaTest from '../../Screems/PrivateScreem/TeacherScreems/SerieTests/Ca
 import Instructions from '../../Screems/PrivateScreem/TeacherScreems/SerieTests/Instructions'
 import PreguntaTestGrafico from '../../Screems/PrivateScreem/TeacherScreems/SerieTests/CategoriaTests/TestGrafico/PreguntaTestGrafico'
 import PerfilUserScreem from '../../Screems/PrivateScreem/Users/PerfilUserScreem'
+import DataPersonScreem from '../../Screems/PrivateScreem/TeacherScreems/Tests/DataPersonScreem'
 
 const Stack = createNativeStackNavigator()
 
@@ -65,12 +66,21 @@ const Navigation = () => {
                         // initialParams={{ post: () => logget() }}
                         />
                         <Stack.Screen
+                            name='DataPersonScreem'
+                            component={DataPersonScreem}
+                            options={{
+                                headerStyle: { backgroundColor: '#000010' },
+                                headerTintColor: 'white',
+                                title: 'Información'
+                            }} />
+                        <Stack.Screen
                             name='CategoryTest'
                             component={CategoryTest}
                             options={{
                                 headerStyle: { backgroundColor: '#000010' },
                                 headerTintColor: 'white',
-                                title: 'Categorias'
+                                title: 'Categorias',
+                                headerLeft:()=><></>,
                             }} />
                         <Stack.Screen
                             name='InicioTest'
@@ -140,6 +150,14 @@ const Navigation = () => {
                                 title: 'Lista de Tests'
                             }}
                         />
+                        <Stack.Screen
+                            name='DataPersonScreem'
+                            component={DataPersonScreem}
+                            options={{
+                                headerStyle: { backgroundColor: '#000010' },
+                                headerTintColor: 'white',
+                                title: 'Información'
+                            }} />
                         <Stack.Screen
                             name='CategoryTest'
                             component={CategoryTest}

@@ -5,6 +5,7 @@ import TestMatematico from '../../../../../images/ImagesFondo/test-matematico.jp
 import TestGrafico from '../../../../../images/ImagesFondo/test-grafico.jpg'
 import TestAnalitico from '../../../../../images/ImagesFondo/test-analitico.jpg'
 import AsyncStorageLib from '@react-native-async-storage/async-storage'
+import { LinearGradient } from 'expo-linear-gradient'
 
 const CategoryTest = ({ navigation, route }) => {
   // const [avance, setAvance] = useState({
@@ -82,28 +83,7 @@ const CategoryTest = ({ navigation, route }) => {
       )}
       /> */}
       <ScrollView>
-      <View style={{backgroundColor:'white',marginBottom:10, padding:5}}>
-        <Text>Formulario</Text>
-        <TextInput
-          placeholder='Nombre Completo'
-          placeholderTextColor='#b0bec5'
-        />
-        <TextInput
-          placeholder='Edad'
-          placeholderTextColor='#b0bec5'
-        />
-        <TextInput
-          placeholder='Sexo'
-          placeholderTextColor='#b0bec5'
-        />
-        <TextInput
-          placeholder='Centro'
-          placeholderTextColor='#b0bec5'
-        />
-        <TouchableOpacity style={{backgroundColor:'green'}}>
-          <Text>Registrar</Text>
-        </TouchableOpacity>
-      </View>
+
         {categoryDat.map((e, index) => (
           <View key={index} style={{ marginBottom: 10 }}>
             <TouchableOpacity onPress={e.direction} style={styles.testView}>
@@ -114,8 +94,13 @@ const CategoryTest = ({ navigation, route }) => {
             </TouchableOpacity>
           </View>
         ))}
+        <LinearGradient style={{ borderRadius: 2, marginTop:30 }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#e65100', '#fb8c00', '#ffa726']}>
+          <TouchableOpacity style={{padding:10}} onPress={()=>navigation.navigate('RealizeTestScreem')}>
+            <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', alignSelf:'center' }} >Terminar y Guardar</Text>
+          </TouchableOpacity>
+        </LinearGradient>
       </ScrollView>
-      
+
     </Layaut>
   )
 }

@@ -16,7 +16,7 @@ export const SuccessButton = (props) => {
 export const CancelButton = (props) => {
     const name = props.name
     return (
-        <LinearGradient style={styles.buttonCancel} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#bf360c', '#e64a19', '#ff6d00']}>
+        <LinearGradient style={styles.buttonCancel} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['red', 'red', 'red']}>
             {/* <Text style={{ color: 'white' }}>{name}</Text> */}
             <TextNormal name={name} />
         </LinearGradient>
@@ -48,13 +48,13 @@ export const DeleteButton = (props) => {
 const styles = StyleSheet.create({
     buttonSuccess: {
         padding: 5,
-        margin: 5,
+        margin:5,
         borderRadius: 3,
-        alignItems: 'center'
+        alignItems: 'center',
     },
     buttonCancel: {
         padding: 5,
-        margin: 5,
+        margin:5,
         borderRadius: 3,
         alignItems: 'center'
     },

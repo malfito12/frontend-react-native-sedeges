@@ -1690,7 +1690,7 @@ const Instructions = ({ navigation, route }) => {
             ))}
           </View>
           <TouchableOpacity style={styles.buttonStart} onPress={() => navigation.navigate('PreguntaTestGrafico', { data: preguntas, cont: 0, })}>
-            <Text style={styles.textFont}>Comenzar</Text>
+            <Text style={styles.textFont}>Vamos!!</Text>
           </TouchableOpacity>
         </>
       ) : categoria === 'test-analitico' ? (
@@ -1699,7 +1699,7 @@ const Instructions = ({ navigation, route }) => {
           <Text style={styles.textFont}>{route.params.title}</Text>
           <Text style={styles.textFont}>{route.params.contenido.instructions}</Text>
           <TouchableOpacity style={styles.buttonStart} onPress={() => navigation.navigate('Preguntas', { data: preguntas, cont: 0 })}>
-            <Text style={styles.textFont}>Comenzar</Text>
+            <Text style={styles.textFont}>Vamos!!</Text>
           </TouchableOpacity>
         </>
       ) : (

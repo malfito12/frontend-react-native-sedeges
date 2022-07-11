@@ -7,6 +7,7 @@ import AsyncStorageLib from '@react-native-async-storage/async-storage'
 import Layaut from '../../../Atoms/StyleLayaut/Layaut'
 import * as Progress from 'react-native-progress'
 import { AuthContext } from '../../../Atoms/Context/AuthContext'
+import { CancelButton, SuccessButton } from '../../../Molecules/Buttons/Buttons'
 
 const PerfilUserScreem = () => {
     const { logout, isLoading, user } = useContext(AuthContext)
@@ -88,25 +89,23 @@ const PerfilUserScreem = () => {
             [name]: value
         })
     }
+    console.log(users)
     return (
         <>
             <Layaut>
-                <FlatList
+                {/* <FlatList
                     data={users}
                     style={{ width: '100%' }}
                     keyExtractor={item => item.user_id}
                     renderItem={(p) => (
                         <View style={styles.itemContainer}>
                             <View>
-                                {/* <Text style={styles.itemTitle}>{p.index + 1}</Text> */}
                                 <Text style={styles.itemTitle}>{p.item.user_name}</Text>
                                 <Text style={styles.itemTitle}>{p.item.user_email}</Text>
-                                {/* <Text style={styles.itemTitle}>{p.item.repeat_password}</Text> */}
                             </View>
                             <View>
                                 <TouchableOpacity
                                     onPress={() => openModalEditUser(p.item)}
-                                    // onPress={() => console.log(p.item.id_usuario)}
                                     style={styles.itemButtonUpdate}>
                                     <Text>Edit</Text>
                                 </TouchableOpacity>
@@ -123,7 +122,26 @@ const PerfilUserScreem = () => {
                         onRefresh={onRefresh}
                         refreshing={refresing}
                     />}
-                />
+                /> */}
+                {users.length > 0 ?
+                    <View style={{ height: '90%' }}>
+                        <Text style={styles.itemTitle}>Nombre de Usuario: {users[0].user_name}</Text>
+                        <Text style={styles.itemTitle}>Correo Electronico: {users[0].user_email}</Text>
+                        <Text style={styles.itemTitle}>Rol de Usuario: {users[0].user_rol}</Text>
+                        <View style={{marginHorizontal:20, marginTop:20}}>
+                            <TouchableOpacity  onPress={() => openModalEditUser(users[0])}>
+                                <SuccessButton name={'Actualizar'} />
+                            </TouchableOpacity>
+                            <TouchableOpacity  >
+                                <SuccessButton name={'Cambiar Contraseña'} />
+                            </TouchableOpacity>
+                            {/* <TouchableOpacity style={{width:'50%'}}  onPress={() => openModalDeleteUser(users[0])}>
+                                <CancelButton name={'Eliminar'} />
+                            </TouchableOpacity> */}
+                        </View>
+                    </View>
+                    : null
+                }
                 <TouchableOpacity
                     // onPress={cerrarSesion}
                     onPress={logout}
@@ -150,7 +168,7 @@ const PerfilUserScreem = () => {
             >
                 <View style={styles.centeredView}>
                     <View style={styles.modalView}>
-                        <Text style={styles.titleEdit}>USUARIO</Text>
+                        <Text style={styles.titleEdit}>Actualizar Usuario</Text>
                         <TextInput
                             defaultValue={changeData.user_name}
                             style={styles.textInput}
@@ -241,26 +259,29 @@ const styles = StyleSheet.create({
     },
     itemTitle: {
         color: '#ffffff',
-        fontFamily: 'Roboto_700Bold'
+        fontFamily: 'Roboto_700Bold_Italic',
+        fontSize:15,
+        marginHorizontal:22,
+        paddingBottom:5
     },
     titleEdit: {
         fontSize: 15,
-        fontWeight: 'bold',
-        padding: 8
+        fontFamily: 'Roboto_700Bold_Italic',
+        padding: 8,
     },
     itemButtonUpdate: {
         margin: 5,
         padding: 5,
         backgroundColor: 'lawngreen',
         alignItems: 'center',
-        borderRadius: 5,
+        borderRadius: 2,
     },
     itemButtonDelete: {
         margin: 5,
         padding: 5,
         backgroundColor: 'crimson',
         alignItems: 'center',
-        borderRadius: 5,
+        borderRadius: 2,
     },
     ViewButtonsModal: {
         flexDirection: 'row',

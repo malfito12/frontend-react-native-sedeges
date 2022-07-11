@@ -187,9 +187,9 @@ const CreateTestScreem = ({navigation}) => {
                                     <TouchableOpacity onPress={() => deleteTest(e.test_id)}>
                                         <CancelButton name={'Eliminar'} />
                                     </TouchableOpacity>
-                                    <TouchableOpacity onPress={() =>navigation.navigate('RealizeTestScreem') }>
+                                    {/* <TouchableOpacity onPress={() =>navigation.navigate('RealizeTestScreem') }>
                                         <CancelButton name={'ir'} />
-                                    </TouchableOpacity>
+                                    </TouchableOpacity> */}
                                 </View>
                             </View>
                         ))

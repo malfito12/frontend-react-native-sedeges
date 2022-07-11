@@ -7,13 +7,14 @@ import AsyncStorageLib from '@react-native-async-storage/async-storage'
 import Layaut from '../../../Atoms/StyleLayaut/Layaut'
 import * as Progress from 'react-native-progress'
 import { AuthContext } from '../../../Atoms/Context/AuthContext'
+import { FontAwesome, MaterialIcons  } from '@expo/vector-icons'
+import { LinearGradient } from 'expo-linear-gradient'
 
 const UsersScreem = ({ navigation }) => {
-  const { logout, isLoading, user } = useContext(AuthContext)
+  const { isLoading } = useContext(AuthContext)
   const [users, setUsers] = useState([])
   const [refresing, setRefresing] = useState(false)
   const [openModalEdit, setOpenModalEdit] = useState(false)
-  const [openModalDelete, setOpenModalDelete] = useState(false)
   const [changeData, setChangeData] = useState({
     user_id: '',
     user_email: '',
@@ -57,24 +58,6 @@ const UsersScreem = ({ navigation }) => {
       })
       .catch(err => console.log(err))
   }
-  //---------DELETE USER------------------
-  const openModalDeleteUser = (e) => {
-    setChangeData(e)
-    setOpenModalDelete(true)
-  }
-  const closeModalDeleteUser = () => {
-    setOpenModalDelete(false)
-  }
-  const deleteUser = async () => {
-    const id = changeData.user_id
-    await axios.delete(`${PORT_URL}users/${id}`)
-      .then(resp => {
-        console.log(resp.data)
-        getAllUsers()
-        closeModalDeleteUser()
-      })
-      .catch(err => console.log(err))
-  }
   //---------REFRESH------
   const onRefresh = useCallback(async () => {
     setRefresing(true)
@@ -88,15 +71,46 @@ const UsersScreem = ({ navigation }) => {
       [name]: value
     })
   }
+  //---------DELETE NEW USER-------------
+  const [changeDataDelete, setChangeDataDelete] = useState({
+    inputDelete: '',
+  })
+  const deleteNewUser = async (e) => {
+    e.preventDefault()
+    if(changeData.user_rol==='admin'){
+      closeModalEditUser()
+      alert('no se puede eliminar a un administrador')
+      return
+    }
+    if (changeDataDelete.inputDelete === 'Eliminar') {
+      const id = changeData.user_id
+      await axios.delete(`${PORT_URL}users/${id}`)
+        .then(resp => {
+          alert(JSON.stringify(resp.data.message))
+          getAllUsers()
+          closeModalEditUser()
+        })
+        .catch(err => console.log(err))
+    } else {
+      alert('Error, La palabra no coincide')
+    }
+  }
+  const handleChangeDelete = (name, value) => {
+    setChangeDataDelete({
+      ...changeDataDelete,
+      [name]: value
+    })
+  }
+  //-.--------------------------------------------------------------------
   // console.log(users)
-  // console.log(changeData)
+  console.log(changeData)
   return (
     <>
       <Layaut>
         <Text style={{ color: 'white', alignSelf: 'center', marginBottom: 10, fontFamily: 'Roboto_500Medium', fontSize: 15 }}>Lista de Usuarios</Text>
         <FlatList
           data={users}
-          style={{ width: '100%',marginBottom:45 }}
+          style={{ width: '100%', marginBottom: 45 }}
           keyExtractor={item => item.user_id}
           renderItem={(p) => (
             <View style={styles.itemContainer}>
@@ -106,24 +120,12 @@ const UsersScreem = ({ navigation }) => {
                 <Text style={styles.itemTitle}>{p.item.user_email}</Text>
                 {/* <Text style={styles.itemTitle}>{p.item.repeat_password}</Text> */}
               </View>
-              <View>
-                <TouchableOpacity
-                  onPress={() => openModalEditUser(p.item)}
-                  // onPress={() => console.log(p.item.id_usuario)}
-                  style={styles.itemButtonUpdate}>
-                  <Text style={styles.itemTitle}>Actualizar</Text>
+              <LinearGradient style={{borderRadius:3,padding:5}} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#00c853', '#64dd17', '#aeea00']}>
+                <TouchableOpacity style={{flexDirection:'row',alignContent:'center',alignItems:'center'}}   onPress={() => openModalEditUser(p.item)}>
+                  <Text style={{ color: 'white',fontFamily:'Roboto_500Medium',paddingRight:3 }}>Opciones</Text>
+                  <MaterialIcons name="settings" size={24} color="white" />
                 </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => openModalDeleteUser(p.item)}
-                  style={styles.itemButtonDelete}>
-                  <Text style={styles.itemTitle}>Eliminar</Text>
-                </TouchableOpacity>
-                {/* <TouchableOpacity
-                  onPress={() => openModalDeleteUser(p.item)}
-                  style={styles.itemButtonDelete}>
-                  <Text style={styles.itemTitle}>option</Text>
-                </TouchableOpacity> */}
-              </View>
+              </LinearGradient>
             </View>
           )}
           refreshControl={<RefreshControl
@@ -152,7 +154,12 @@ const UsersScreem = ({ navigation }) => {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.titleEdit}>USUARIO</Text>
+            <View style={styles.directionButton}>
+              <TouchableOpacity onPress={closeModalEditUser}>
+                <FontAwesome name="window-close" size={30} color="#424242" />
+              </TouchableOpacity>
+            </View>
+            <Text style={styles.titleEdit}>Actualizar Usuario</Text>
             <TextInput
               defaultValue={changeData.user_name}
               style={styles.textInput}
@@ -163,32 +170,27 @@ const UsersScreem = ({ navigation }) => {
               defaultValue={changeData.user_email}
               onChangeText={text => handleChange('user_email', text)}
             />
-            <View style={styles.ViewButtonsModal}>
-              <TouchableOpacity onPress={editUser} style={{ backgroundColor: '#0277bd', ...styles.buttonAceptCancel }}>
-                <Text style={styles.itemTitle}>Aceptar</Text>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={closeModalEditUser} style={{ backgroundColor: '#dd2c00', ...styles.buttonAceptCancel }}>
-                <Text style={styles.itemTitle}>Cancelar</Text>
-              </TouchableOpacity>
+            <View style={{ ...styles.directionButton, marginBottom: 15 }} >
+              <LinearGradient style={{ borderRadius: 3 }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#00c853', '#64dd17', '#aeea00']}>
+                <TouchableOpacity onPress={editUser} >
+                  <Text style={{ color: 'white', fontFamily: 'Roboto_400Regular_Italic', padding: 5 }}>Actualizar Usuario</Text>
+                </TouchableOpacity>
+              </LinearGradient>
             </View>
-          </View>
-        </View>
-      </Modal>
-      {/* ----------------MODAL DELETE------------------------------------ */}
-      <Modal
-        visible={openModalDelete}
-        animationType='fade'
-        transparent
-      >
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text style={{ padding: 10, fontWeight: 'bold' }}>Estas de Seguro de eliminar a {changeData.user_name}</Text>
-            <View style={styles.ViewButtonsModal}>
-              <TouchableOpacity onPress={deleteUser} style={{ backgroundColor: '#0277bd', ...styles.buttonAceptCancel }}>
-                <Text style={{ color: 'white' }}>Aceptar</Text>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={closeModalDeleteUser} style={{ backgroundColor: '#dd2c00', ...styles.buttonAceptCancel }}>
-                <Text style={{ color: 'white' }}>Cancelar</Text>
+            {/* <TouchableOpacity onPress={closeModalEditUser} style={{ backgroundColor: '#dd2c00', ...styles.buttonAceptCancel }}>
+                <Text style={styles.itemTitle}>Cancelar</Text>
+              </TouchableOpacity> */}
+
+            <Text style={styles.titleEdit}>Eliminar Usuario</Text>
+            <Text style={{ fontFamily: 'Roboto_400Regular_Italic' }}>Si desea eliminar al usuario, escriba la palabra "Eliminar"</Text>
+            <TextInput
+              placeholder='Ejm: Eliminar'
+              style={styles.textInput}
+              onChangeText={text => handleChangeDelete('inputDelete', text)}
+            />
+            <View style={{ ...styles.directionButton, marginBottom: 15 }}>
+              <TouchableOpacity style={{ backgroundColor: 'red', borderRadius: 3 }} onPress={deleteNewUser}>
+                <Text style={{ color: 'white', padding: 5, fontFamily: 'Roboto_400Regular_Italic' }}>Eliminar Usuario</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -208,6 +210,7 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     height: 40,
     padding: 10,
+    fontFamily: 'Roboto_400Regular_Italic'
     // borderColor: '#10ac84'
     // borderColor: '#000'
   },
@@ -248,22 +251,12 @@ const styles = StyleSheet.create({
   },
   titleEdit: {
     fontSize: 15,
+    padding: 8,
     fontWeight: 'bold',
-    padding: 8
-  },
-  itemButtonUpdate: {
-    margin: 5,
-    padding: 5,
-    backgroundColor: 'lawngreen',
-    alignItems: 'center',
-    borderRadius: 2,
-  },
-  itemButtonDelete: {
-    margin: 5,
-    padding: 5,
-    backgroundColor: 'crimson',
-    alignItems: 'center',
-    borderRadius: 2,
+    fontFamily: 'Roboto_400Regular_Italic',
+    alignSelf:'flex-start',
+    marginHorizontal:10
+
   },
   ViewButtonsModal: {
     flexDirection: 'row',
@@ -271,16 +264,17 @@ const styles = StyleSheet.create({
     width: '100%',
     padding: 10
   },
-  buttonAceptCancel: {
-    padding: 5,
-    borderRadius: 5,
-    alignItems: 'center',
-  },
   centeredViewProgress: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 22,
+  },
+  directionButton: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    width: '90%',
+    // marginBottom:15
   },
 })
 

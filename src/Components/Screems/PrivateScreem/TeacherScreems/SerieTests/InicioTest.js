@@ -84,7 +84,7 @@ const InicioTest = ({ navigation, route }) => {
                         {/* <TouchableOpacity onPress={() => navigation.navigate('Instructions', { title: p.item.title, id: p.item.id, contenido: p.item.contenido, categoria:p.item.categoria })} style={{ backgroundColor: '#78e08f', padding: 10, borderRadius: 3 }}> */}
                         <TouchableOpacity onPress={() => navigation.navigate('Instructions', { title: p.item.title, id: p.item.id, contenido: p.item.contenido, categoria:p.item.categoria })} style={{ backgroundColor: '#78e08f', padding: 10, borderRadius: 3 }}>
                         {/* <TouchableOpacity onPress={() => go(p.item.id)} style={{ backgroundColor: '#78e08f', padding: 10, borderRadius: 25 }}> */}
-                            <Text style={{ color: 'white' }}>Iniciar Test</Text>
+                            <Text style={{ color: 'white',fontFamily:'Roboto_400Regular_Italic' }}>Comenzar</Text>
                         </TouchableOpacity>
                     </View>
                 )}

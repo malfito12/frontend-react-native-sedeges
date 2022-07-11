@@ -8,6 +8,7 @@ import * as Progress from 'react-native-progress'
 import { LinearGradient } from 'expo-linear-gradient'
 import { Entypo } from '@expo/vector-icons';
 import sedeges from '../../../images/sedeges-logo.png'
+import { CancelButton, SuccessButton } from '../../Molecules/Buttons/Buttons'
 
 const RegisterUserScreem = ({ navigation }) => {
     const [progress, setProgress] = useState(false)
@@ -55,7 +56,7 @@ const RegisterUserScreem = ({ navigation }) => {
                 setProgress(false)
                 alert(resp.data.message)
                 // navigation.navigate('LoginScreem')
-                navigation.navigate('TeacherHomeScreem')
+                navigation.push('TeacherHomeScreem')
                 // console.log(resp.data)
             })
             .catch(err => {
@@ -148,19 +149,17 @@ const RegisterUserScreem = ({ navigation }) => {
                             </TouchableOpacity>
                         </View>
                         {/* <TextInput
-                keyboardType='numeric'
-                style={styles.input}
-                placeholder='Edad'
-                placeholderTextColor='#545674'
-                onChangeText={text => handleChange('edad', text)}
-            /> */}
-                        <LinearGradient style={styles.buttonSave} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#00c853', '#64dd17', '#aeea00']}>
-                            <TouchableOpacity style={{ width: '100%', alignItems: 'center' }} onPress={postUser} >
-                                <Text style={{ color: 'white' }}>Registrar</Text>
-                            </TouchableOpacity>
-                        </LinearGradient>
-                        <TouchableOpacity style={{ width: '90%', alignItems: 'center',backgroundColor:'red', borderRadius:3, padding:10 }} onPress={()=>navigation.navigate('TeacherHomeScreem')}>
-                            <Text style={{ color: 'white' }}>Atras</Text>
+                            keyboardType='numeric'
+                            style={styles.input}
+                            placeholder='Edad'
+                            placeholderTextColor='#545674'
+                            onChangeText={text => handleChange('edad', text)}
+                        /> */}
+                        <TouchableOpacity style={{width:'100%'}} onPress={postUser} >
+                            <SuccessButton name={'Registrar'} />
+                        </TouchableOpacity>
+                        <TouchableOpacity style={{width:'100%'}} onPress={() => navigation.navigate('TeacherHomeScreem')} >
+                            <CancelButton name={'Cancelar'} />
                         </TouchableOpacity>
                     </View>
                 </ScrollView>
@@ -181,10 +180,11 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        marginBottom: 10
+        marginBottom: 10,
+        marginHorizontal:20
     },
     input: {
-        width: '90%',
+        width: '100%',
         // fontSize: 14,
         marginBottom: 10,
         borderWidth: 1,
@@ -196,7 +196,7 @@ const styles = StyleSheet.create({
         borderColor: '#10ac84'
     },
     passwordInput: {
-        width: '90%',
+        width: '100%',
         // fontSize: 14,
         marginBottom: 10,
         borderWidth: 1,
