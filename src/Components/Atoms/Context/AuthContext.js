@@ -25,6 +25,7 @@ export const AuthProvider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false)
     const [token, setToken] = useState({ token: undefined })
     const [user, setUser] = useState({ user: undefined, rol: undefined })
+    // const [user, setUser] = useState([])
     // const [rol, setRol] = useState({ rol: undefined })
 
     let [fontsLoaded] = useFonts({
@@ -51,7 +52,7 @@ export const AuthProvider = ({ children }) => {
         await axios.post(`${PORT_URL}login`, { user_name, user_password })
             .then((async (resp) => {
                 let data = resp.data
-                // setUser({ user: data.user, rol: data.rol })
+                // setUser(JSON.stringify(data.user))
                 // setToken({ token: data.token })
                 AsyncStorageLib.setItem('token', JSON.stringify(data.token))
                 AsyncStorageLib.setItem('user', JSON.stringify(data.user))

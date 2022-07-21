@@ -18,6 +18,10 @@ import Instructions from '../../Screems/PrivateScreem/TeacherScreems/SerieTests/
 import PreguntaTestGrafico from '../../Screems/PrivateScreem/TeacherScreems/SerieTests/CategoriaTests/TestGrafico/PreguntaTestGrafico'
 import PerfilUserScreem from '../../Screems/PrivateScreem/Users/PerfilUserScreem'
 import DataPersonScreem from '../../Screems/PrivateScreem/TeacherScreems/Tests/DataPersonScreem'
+import TestOrientationType from '../../Screems/PrivateScreem/TeacherScreems/TestsVocational/TestOrientationType'
+import InstructionTestAptitudes from '../../Screems/PrivateScreem/TeacherScreems/TestsVocational/TestAptitudes/InstructionTestAptitudes'
+import InstructionTestIntereses from '../../Screems/PrivateScreem/TeacherScreems/TestsVocational/TestIntereses/InstructionTestIntereses'
+import PreguntasTestAptitudes from '../../Screems/PrivateScreem/TeacherScreems/TestsVocational/TestAptitudes/PreguntasTestAptitudes'
 
 const Stack = createNativeStackNavigator()
 
@@ -126,6 +130,42 @@ const Navigation = () => {
                                 headerStyle: { backgroundColor: '#000010' },
                                 headerTintColor: 'white',
                                 title: 'Preguntas'
+                            }}
+                        />
+                        <Stack.Screen
+                            name='TestOrientationType'
+                            component={TestOrientationType}
+                            options={{
+                                headerStyle: { backgroundColor: '#000010' },
+                                headerTintColor: 'white',
+                                title: 'Tests de Orientacion Vocacional'
+                            }}
+                        />
+                        <Stack.Screen
+                            name='InstructionTestAptitudes'
+                            component={InstructionTestAptitudes}
+                            options={{
+                                headerStyle: { backgroundColor: '#000010' },
+                                headerTintColor: 'white',
+                                title: 'Instrucciones'
+                            }}
+                        />
+                        <Stack.Screen
+                            name='PreguntasTestAptitudes'
+                            component={PreguntasTestAptitudes}
+                            options={{
+                                headerStyle: { backgroundColor: '#000010' },
+                                headerTintColor: 'white',
+                                title: 'Preguntas'
+                            }}
+                        />
+                        <Stack.Screen
+                            name='InstructionTestIntereses'
+                            component={InstructionTestIntereses}
+                            options={{
+                                headerStyle: { backgroundColor: '#000010' },
+                                headerTintColor: 'white',
+                                title: 'Instrucciones'
                             }}
                         />
                     </>

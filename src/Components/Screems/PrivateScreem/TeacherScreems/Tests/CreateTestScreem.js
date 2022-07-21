@@ -8,8 +8,9 @@ import * as Progress from 'react-native-progress'
 import { AntDesign } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient'
 import { CancelButton, DeleteButton, SuccessButton, UdpateButton } from '../../../../Molecules/Buttons/Buttons';
+import AsyncStorageLib from '@react-native-async-storage/async-storage';
 
-const CreateTestScreem = ({navigation}) => {
+const CreateTestScreem = ({ navigation }) => {
     var fecha = new Date
     var anio = fecha.getFullYear()
     var mes = fecha.getMonth() + 1
@@ -17,7 +18,9 @@ const CreateTestScreem = ({navigation}) => {
     var todo;
     if (mes < 10) { todo = anio + '-' + '0' + mes + '-' + dia } else todo = anio + '-' + mes + '-' + dia
 
-    const { user } = useContext(AuthContext)
+    // const { user } = useContext(AuthContext)
+    const [idUser, setIdUser] = useState([])
+    AsyncStorageLib.getItem('user').then(resp =>setIdUser(JSON.parse(resp)))
     const [modalAddTest, setModalAddTest] = useState(false)
     const [modalEditTest, setModalEditTest] = useState(false)
     const [estado, setEstado] = useState(false)
@@ -30,7 +33,7 @@ const CreateTestScreem = ({navigation}) => {
         test_description: '',
         test_register_date: todo,
         test_status: false,
-        user_id: user.user,
+        user_id: '',
     })
 
     useEffect(() => {
@@ -63,7 +66,7 @@ const CreateTestScreem = ({navigation}) => {
             test_description: '',
             test_register_date: todo,
             test_status: false,
-            user_id: user.user,
+            user_id: '',
         })
     }
     const postTest = async (e) => {
@@ -81,12 +84,13 @@ const CreateTestScreem = ({navigation}) => {
                     test_description: '',
                     test_register_date: todo,
                     test_status: false,
-                    user_id: user.user,
+                    user_id: '',
                 })
             })
             .catch(err => {
                 console.log(err)
             })
+        // await axios.post(`${PORT_URL}test-aptitudes`,changeData)
 
     }
     //--------------EDIT TEST---------------------------
@@ -101,7 +105,7 @@ const CreateTestScreem = ({navigation}) => {
             test_description: '',
             test_register_date: todo,
             test_status: false,
-            user_id: user.user,
+            user_id: '',
         })
     }
     const openStatus = () => {
@@ -110,7 +114,7 @@ const CreateTestScreem = ({navigation}) => {
     const closeStatus = (e) => {
         setChangeData({
             ...changeData,
-            test_status: e
+            test_status: e,
         })
         setEstado(false)
     }
@@ -141,6 +145,7 @@ const CreateTestScreem = ({navigation}) => {
     const handleChange = (name, value) => {
         setChangeData({
             ...changeData,
+            user_id:idUser,
             [name]: value
         })
     }
@@ -169,7 +174,7 @@ const CreateTestScreem = ({navigation}) => {
                     {tests.length > 0 ? (
                         tests.map((e, index) => (
                             // <View key={index} style={styles.testView}>
-                            <View key={index} style={{ marginBottom: 10,marginHorizontal:15 }}>
+                            <View key={index} style={{ marginBottom: 10, marginHorizontal: 15 }}>
                                 <ImageBackground source={require('../../../../../images/ImagesFondo/test-image3.jpg')} resizeMode='cover' style={styles.ImageView} imageStyle={{ borderRadius: 5, }} />
                                 <View style={styles.marginText}>
                                     <View>
@@ -180,7 +185,7 @@ const CreateTestScreem = ({navigation}) => {
                                     </View>
                                     {e.test_status === true ? (<AntDesign name="checkcircle" size={40} color="#76ff03" />) : (<AntDesign name="closecircle" size={40} color="#ff1744" />)}
                                 </View>
-                                <View style={{flexDirection:'row',paddingLeft:20,paddingBottom:10}}>
+                                <View style={{ flexDirection: 'row', paddingLeft: 20, paddingBottom: 10 }}>
                                     <TouchableOpacity onPress={() => openModalEditTest(e)}>
                                         <SuccessButton name={'Actualizar'} />
                                     </TouchableOpacity>
@@ -366,15 +371,15 @@ const styles = StyleSheet.create({
         height: '100%',
         position: 'absolute',
         // marginHorizontal:15
-      },
-    marginText:{
-        flexDirection: 'row', 
-        justifyContent: 'space-between', 
-        alignItems: 'center', 
+    },
+    marginText: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
         marginBottom: 5,
-        paddingTop:5, 
-        paddingLeft:20,
-        paddingRight:20
+        paddingTop: 5,
+        paddingLeft: 20,
+        paddingRight: 20
     }
 })
 

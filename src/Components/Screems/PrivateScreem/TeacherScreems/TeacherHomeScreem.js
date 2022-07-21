@@ -80,14 +80,14 @@ const TeacherHomeScreem = ({ navigation }) => {
           tabBarLabelStyle: { fontFamily: 'Roboto_700Bold' },
           tabBarIcon: ({ size, color }) => (<Ionicons name='library-outline' size={size} color={color} />),
         }} />
-        <Tab.Screen name="HomeAdminTestVocational" component={HomeAdminTestVocational} options={{
+        {/* <Tab.Screen name="HomeAdminTestVocational" component={HomeAdminTestVocational} options={{
           headerLeft: () => (perfil),
           headerTitle: '',
           tabBarLabel: 'Test Vocacional',
           headerStyle: { backgroundColor: '#000010' },
           tabBarLabelStyle: { fontFamily: 'Roboto_700Bold' },
           tabBarIcon: ({ size, color }) => (<Entypo name="qq" size={size} color={color} />)
-        }} />
+        }} /> */}
         <Tab.Screen name="ResultsAdminScreem" component={ResultsAdminScreem} options={{
           headerLeft: () => (perfil),
           headerTitle: '',

@@ -2,6 +2,7 @@ import React from 'react'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import CreateTestScreem from './CreateTestScreem'
 import RealizeTestScreem from './RealizeTestScreem'
+import RealizeTestVocational from '../TestsVocational/RealizeTestVocational'
 
 const Nob = createMaterialTopTabNavigator()
 
@@ -16,6 +17,7 @@ const HomeAdminTestScreem = () => {
         }}>
             <Nob.Screen name='CreateTestScreem' component={CreateTestScreem} options={{ tabBarLabel: 'Nuevo' }} />
             <Nob.Screen name='RealizeTestScreem' component={RealizeTestScreem} options={{ tabBarLabel: 'Test' }} />
+            <Nob.Screen name='RealizeTestVocational' component={RealizeTestVocational} options={{ tabBarLabel: 'Test Orientacion Vocacional' }} />
         </Nob.Navigator>
     )
 }
