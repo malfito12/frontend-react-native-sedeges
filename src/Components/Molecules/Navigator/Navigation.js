@@ -22,6 +22,8 @@ import TestOrientationType from '../../Screems/PrivateScreem/TeacherScreems/Test
 import InstructionTestAptitudes from '../../Screems/PrivateScreem/TeacherScreems/TestsVocational/TestAptitudes/InstructionTestAptitudes'
 import InstructionTestIntereses from '../../Screems/PrivateScreem/TeacherScreems/TestsVocational/TestIntereses/InstructionTestIntereses'
 import PreguntasTestAptitudes from '../../Screems/PrivateScreem/TeacherScreems/TestsVocational/TestAptitudes/PreguntasTestAptitudes'
+import RegisterStudent from '../../Screems/PrivateScreem/TeacherScreems/Students/RegisterStudent'
+import StudentsAdminScreem from '../../Screems/PrivateScreem/TeacherScreems/Students/StudentsAdminScreem'
 
 const Stack = createNativeStackNavigator()
 
@@ -59,7 +61,7 @@ const Navigation = () => {
                             }}
                         // initialParams={{ post: () => logget() }}
                         />
-                        <Stack.Screen
+                        {/* <Stack.Screen
                             name='UsersScreem'
                             component={UsersScreem}
                             options={{
@@ -68,7 +70,7 @@ const Navigation = () => {
                                 title: 'Lista de Usuarios'
                             }}
                         // initialParams={{ post: () => logget() }}
-                        />
+                        /> */}
                         <Stack.Screen
                             name='DataPersonScreem'
                             component={DataPersonScreem}
@@ -166,6 +168,15 @@ const Navigation = () => {
                                 headerStyle: { backgroundColor: '#000010' },
                                 headerTintColor: 'white',
                                 title: 'Instrucciones'
+                            }}
+                        />
+                        <Stack.Screen
+                            name='RegisterStudent'
+                            component={RegisterStudent}
+                            options={{
+                                headerStyle: { backgroundColor: '#000010' },
+                                headerTintColor: 'white',
+                                title: 'Registro de Estudiantes'
                             }}
                         />
                     </>

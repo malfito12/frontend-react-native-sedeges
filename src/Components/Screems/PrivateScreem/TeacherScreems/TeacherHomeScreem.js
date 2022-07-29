@@ -2,7 +2,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import React, { useContext } from 'react'
 import { AuthContext } from '../../../Atoms/Context/AuthContext'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { FontAwesome5, Foundation, Ionicons, Feather, SimpleLineIcons, Entypo } from '@expo/vector-icons'
+import { FontAwesome5, Foundation, Ionicons, MaterialIcons, Feather, SimpleLineIcons, Entypo } from '@expo/vector-icons'
 import StudentsAdminScreem from './Students/StudentsAdminScreem'
 import ResultsAdminScreem from './Results/ResultsAdminScreem'
 import HomeAdminTestScreem from './Tests/HomeAdminTestScreem'
@@ -46,15 +46,7 @@ const TeacherHomeScreem = ({ navigation }) => {
 
         })}
       >
-        {/* <Tab.Screen name="StudentsAdminScreem" component={StudentsAdminScreem} options={{
-          headerLeft: () => (perfil),
-          headerTitle: '',
-          tabBarLabel: 'Estudiantes',
-          headerStyle: { backgroundColor: '#000010' },
-          headerTintColor: 'white',
-          tabBarLabelStyle: { fontFamily: 'Roboto_700Bold' },
-          tabBarIcon: ({ size, color }) => (<Ionicons name='school-outline' size={size} color={color} />),
-        }} /> */}
+
         <Tab.Screen name="UsersScreem" component={UsersScreem} options={{
           headerLeft: () => (perfil),
           headerTitle: '',
@@ -66,12 +58,27 @@ const TeacherHomeScreem = ({ navigation }) => {
           headerRight: () => (
             <View style={{ marginRight: 30 }}>
               <TouchableOpacity onPress={() => navigation.push('RegisterUserScreem')}>
-              <Ionicons name="person-add-outline" size={26} color="white" />
+                <Ionicons name="person-add-outline" size={26} color="white" />
               </TouchableOpacity>
             </View>
           )
         }} />
-
+        <Tab.Screen name="StudentsAdminScreem" component={StudentsAdminScreem} options={{
+          headerLeft: () => (perfil),
+          headerTitle: '',
+          tabBarLabel: 'Estudiantes',
+          headerStyle: { backgroundColor: '#000010' },
+          headerTintColor: 'white',
+          tabBarLabelStyle: { fontFamily: 'Roboto_700Bold' },
+          tabBarIcon: ({ size, color }) => (<Ionicons name='school-outline' size={size} color={color} />),
+          headerRight: () => (
+            <View style={{ marginRight: 30 }}>
+              <TouchableOpacity onPress={() => navigation.navigate('RegisterStudent')}>
+                <MaterialIcons name="add" size={26} color="white"  />
+              </TouchableOpacity>
+            </View>
+          )
+        }} />
         <Tab.Screen name="HomeAdminTestScreem" component={HomeAdminTestScreem} options={{
           headerLeft: () => (perfil),
           headerTitle: '',

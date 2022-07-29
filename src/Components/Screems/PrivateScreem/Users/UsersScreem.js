@@ -103,7 +103,7 @@ const UsersScreem = ({ navigation }) => {
   }
   //-.--------------------------------------------------------------------
   // console.log(users)
-  console.log(changeData)
+  // console.log(changeData)
   return (
     <>
       <Layaut>

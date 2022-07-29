@@ -132,9 +132,9 @@ const PerfilUserScreem = () => {
                             <TouchableOpacity  onPress={() => openModalEditUser(users[0])}>
                                 <SuccessButton name={'Actualizar'} />
                             </TouchableOpacity>
-                            <TouchableOpacity  >
+                            {/* <TouchableOpacity  >
                                 <SuccessButton name={'Cambiar Contraseña'} />
-                            </TouchableOpacity>
+                            </TouchableOpacity> */}
                             {/* <TouchableOpacity style={{width:'50%'}}  onPress={() => openModalDeleteUser(users[0])}>
                                 <CancelButton name={'Eliminar'} />
                             </TouchableOpacity> */}
