@@ -7,10 +7,16 @@ import AsyncStorageLib from '@react-native-async-storage/async-storage'
 import Layaut from '../../../Atoms/StyleLayaut/Layaut'
 import * as Progress from 'react-native-progress'
 import { AuthContext } from '../../../Atoms/Context/AuthContext'
-import { FontAwesome, MaterialIcons  } from '@expo/vector-icons'
+import { FontAwesome, MaterialIcons } from '@expo/vector-icons'
 import { LinearGradient } from 'expo-linear-gradient'
+import { useModalAlert, useModalAlertError } from '../../../Molecules/Hooks/useModalAlert'
+import { ErrorAlert, SuccesAlert } from '../../../Molecules/Alertas/Alerts'
 
 const UsersScreem = ({ navigation }) => {
+  const [openModalError, openModalAlertError, closeModalAlertError] = useModalAlertError(false)
+  const [openModal, openModalAlert, closeModalAlert] = useModalAlert(false)
+  const [message, setMessage] = useState(null)
+  const [progress, setProgress] = useState(false)
   const { isLoading } = useContext(AuthContext)
   const [users, setUsers] = useState([])
   const [refresing, setRefresing] = useState(false)
@@ -50,13 +56,24 @@ const UsersScreem = ({ navigation }) => {
   }
   const editUser = async () => {
     const id = changeData.user_id
+    setProgress(true)
     await axios.put(`${PORT_URL}users/${id}`, changeData)
       .then(resp => {
-        console.log(resp.data)
+        setProgress(false)
+        // console.log(resp.data)
+        setMessage(resp.data.message)
         getAllUsers()
         closeModalEditUser()
+        openModalAlert()
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        setProgress(false)
+        if (err.response) {
+          openModalAlertError()
+          setMessage(err.response.data.message)
+        }
+        console.log(err)
+      })
   }
   //---------REFRESH------
   const onRefresh = useCallback(async () => {
@@ -76,23 +93,36 @@ const UsersScreem = ({ navigation }) => {
     inputDelete: '',
   })
   const deleteNewUser = async (e) => {
+    setProgress(true)
     e.preventDefault()
-    if(changeData.user_rol==='admin'){
-      closeModalEditUser()
-      alert('no se puede eliminar a un administrador')
+    if (changeData.user_rol === 'admin') {
+      // closeModalEditUser()
+      setProgress(false)
+      setMessage('no se puede eliminar a un administrador')
+      openModalAlertError()
       return
     }
     if (changeDataDelete.inputDelete === 'Eliminar') {
       const id = changeData.user_id
       await axios.delete(`${PORT_URL}users/${id}`)
         .then(resp => {
-          alert(JSON.stringify(resp.data.message))
+          setProgress(false)
+          setMessage(resp.data.message)
           getAllUsers()
           closeModalEditUser()
+          openModalAlert()
         })
-        .catch(err => console.log(err))
+        .catch(err =>{ 
+          setProgress(false)
+          if(err.response){
+            setMessage(err.response.data.message)
+            openModalAlertError()
+          }
+          console.log(err)})
     } else {
-      alert('Error, La palabra no coincide')
+      setProgress(false)
+      setMessage('Error, La palabra no coincide')
+      openModalAlertError()
     }
   }
   const handleChangeDelete = (name, value) => {
@@ -120,9 +150,9 @@ const UsersScreem = ({ navigation }) => {
                 <Text style={styles.itemTitle}>{p.item.user_email}</Text>
                 {/* <Text style={styles.itemTitle}>{p.item.repeat_password}</Text> */}
               </View>
-              <LinearGradient style={{borderRadius:3,padding:5}} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#00c853', '#64dd17', '#aeea00']}>
-                <TouchableOpacity style={{flexDirection:'row',alignContent:'center',alignItems:'center'}}   onPress={() => openModalEditUser(p.item)}>
-                  <Text style={{ color: 'white',fontFamily:'Roboto_500Medium',paddingRight:3 }}>Opciones</Text>
+              <LinearGradient style={{ borderRadius: 3, padding: 5 }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#00c853', '#64dd17', '#aeea00']}>
+                <TouchableOpacity style={{ flexDirection: 'row', alignContent: 'center', alignItems: 'center' }} onPress={() => openModalEditUser(p.item)}>
+                  <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', paddingRight: 3 }}>Opciones</Text>
                   <MaterialIcons name="settings" size={24} color="white" />
                 </TouchableOpacity>
               </LinearGradient>
@@ -137,7 +167,7 @@ const UsersScreem = ({ navigation }) => {
       </Layaut>
       {/* ----------------------MODAL PROGRESS-------------------------------- */}
       <Modal
-        visible={isLoading}
+        visible={progress}
         transparent
         animationType='fade'
       >
@@ -145,6 +175,8 @@ const UsersScreem = ({ navigation }) => {
           <Progress.Circle borderWidth={3} size={40} indeterminate={true} />
         </View>
       </Modal>
+      <SuccesAlert isOpen={openModal} closeModal={closeModalAlert} text={message} />
+      <ErrorAlert isOpen={openModalError} closeModal={closeModalAlertError} text={message} />
       {/* <EditUser /> */}
       {/* --------------------MODAL EDIT-------------------------------- */}
       <Modal
@@ -254,8 +286,8 @@ const styles = StyleSheet.create({
     padding: 8,
     fontWeight: 'bold',
     fontFamily: 'Roboto_400Regular_Italic',
-    alignSelf:'flex-start',
-    marginHorizontal:10
+    alignSelf: 'flex-start',
+    marginHorizontal: 10
 
   },
   ViewButtonsModal: {
@@ -275,6 +307,12 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     width: '90%',
     // marginBottom:15
+  },
+  progressView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
   },
 })
 

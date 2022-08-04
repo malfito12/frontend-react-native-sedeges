@@ -25,8 +25,8 @@ export const AuthProvider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false)
     const [token, setToken] = useState({ token: undefined })
     const [user, setUser] = useState({ user: undefined, rol: undefined })
-    const [openModal,setOpenModal] = useState(false)
-    const [message,setMessage] = useState(null)
+    const [openModal, setOpenModal] = useState(false)
+    const [message, setMessage] = useState(null)
     // const [user, setUser] = useState([])
     // const [rol, setRol] = useState({ rol: undefined })
 
@@ -47,32 +47,41 @@ export const AuthProvider = ({ children }) => {
     if (!fontsLoaded) {
         return <AppLoading />
     }
+    
     const login = async (changeData) => {
-        var user_name = changeData.user_name.trim().replace(/\s\s+/g, ' ')
-        var user_password = changeData.user_password.trim().replace(/\s\s+/g, ' ')
-        setIsLoading(true)
-        await axios.post(`${PORT_URL}login`, { user_name, user_password })
-            .then((async (resp) => {
-                let data = resp.data
-                // setUser(JSON.stringify(data.user))
-                // setToken({ token: data.token })
-                AsyncStorageLib.setItem('token', JSON.stringify(data.token))
-                AsyncStorageLib.setItem('user', JSON.stringify(data.user))
-                AsyncStorageLib.setItem('rol', JSON.stringify(data.rol))
-                setIsLoading(false)
-            }))
-            .catch(err => {
-                if (err.response) {
-                    setOpenModal(true)
-                    setMessage(err.response.data.message)
-                    // alert('error contraseña incorrecta')
-                    // alert(JSON.stringify(err.response.data.message))
-                }
-                setTimeout(() => { setOpenModal(false) }, 3000)
-                setIsLoading(false)
-                console.log(err)
-            })
-
+        if(changeData.user_name===''||changeData.user_password===''){
+            setOpenModal(true)
+            setMessage('Llene todos los datos')
+            // setTimeout(() => { setOpenModal(false) }, 3000)
+            // console.log('dd')
+        }else{
+            var user_name = changeData.user_name.trim().replace(/\s\s+/g, ' ')
+            var user_password = changeData.user_password.trim().replace(/\s\s+/g, ' ')
+            setIsLoading(true)
+            await axios.post(`${PORT_URL}login`, { user_name, user_password })
+                .then((async (resp) => {
+                    let data = resp.data
+                    // setUser(JSON.stringify(data.user))
+                    // setToken({ token: data.token })
+                    AsyncStorageLib.setItem('token', JSON.stringify(data.token))
+                    AsyncStorageLib.setItem('user', JSON.stringify(data.user))
+                    AsyncStorageLib.setItem('rol', JSON.stringify(data.rol))
+                    setIsLoading(false)
+                }))
+                .catch(err => {
+                    if (err.response) {
+                        setOpenModal(true)
+                        setMessage(err.response.data.message)
+                    }
+                    // setOpenModal(false)
+                    // setTimeout(() => { setOpenModal(false) }, 3000)
+                    setIsLoading(false)
+                    console.log(err)
+                })
+        }
+    }
+    const closeModal=()=>{
+        setOpenModal(false)
     }
     // console.log(user.rol)
     const logout = async () => {
@@ -96,7 +105,7 @@ export const AuthProvider = ({ children }) => {
     }
     return (
         <>
-            <AuthContext.Provider value={{ isLoading, token, user, login, logout,openModal,setOpenModal,message }}>{children}</AuthContext.Provider>
+            <AuthContext.Provider value={{ isLoading, token, user, login, logout, openModal, closeModal, message }}>{children}</AuthContext.Provider>
         </>
     )
 }

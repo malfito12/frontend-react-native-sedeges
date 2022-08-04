@@ -11,7 +11,7 @@ import { SuccesAlert } from '../../Molecules/Alertas/Alerts';
 import { useModalAlert } from '../../Molecules/Hooks/useModalAlert';
 
 const LoginScreem = ({ navigation }) => {
-    const { isLoading, login,openModal,message } = useContext(AuthContext)
+    const { isLoading, login,openModal,closeModal,message } = useContext(AuthContext)
     // const [openModal,openModalAlert,closeModalAlert]=useModalAlert(false)
     // const [openModalAlert]=useModalAlert(false)
     const [hidePass, setHidePass] = useState({
@@ -116,10 +116,10 @@ const LoginScreem = ({ navigation }) => {
                 style={{ backgroundColor: 'white' }}
             >
                 <>
-                <Text style={{ marginTop: -16, marginBottom: 32 }}>{message}</Text>
-                {/* <TouchableOpacity style={{backgroundColor:'green'}}>
-                    <Text>OK</Text>
-                </TouchableOpacity> */}
+                <Text style={{ marginTop: -16, marginBottom: 10}}>{message}</Text>
+                <TouchableOpacity onPress={closeModal} style={{backgroundColor:'red',padding:5,borderRadius:3,margin:10}}>
+                    <Text style={{color:'white',fontFamily:'Roboto_500Medium'}}>Aceptar</Text>
+                </TouchableOpacity>
                 </>
             </FancyAlert>
         </>

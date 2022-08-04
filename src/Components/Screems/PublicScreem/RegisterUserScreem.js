@@ -9,8 +9,13 @@ import { LinearGradient } from 'expo-linear-gradient'
 import { Entypo } from '@expo/vector-icons';
 import sedeges from '../../../images/sedeges-logo.png'
 import { CancelButton, SuccessButton } from '../../Molecules/Buttons/Buttons'
+import { useModalAlert, useModalAlertError } from '../../Molecules/Hooks/useModalAlert'
+import { ErrorAlert, SuccesAlert } from '../../Molecules/Alertas/Alerts'
 
 const RegisterUserScreem = ({ navigation }) => {
+    const [openModal, openModalAlert, closeModalAlert] = useModalAlert(false)
+    const [openModalError, openModalAlertError, closeModalAlertError] = useModalAlertError(false)
+    const [message, setMessage] = useState(null)
     const [progress, setProgress] = useState(false)
     const [hidePass, setHidePass] = useState({
         iconPassword: 'eye',
@@ -28,6 +33,7 @@ const RegisterUserScreem = ({ navigation }) => {
         user_rol: 'Estudiante'
     })
     //---------------POST USER--------------------------
+    // var message=''
     const postUser = async () => {
         // console.log(changeData)
         // console.log(changeData)
@@ -39,39 +45,62 @@ const RegisterUserScreem = ({ navigation }) => {
         // console.log(ss)
 
         // console.log(espacio.test(ss))
-        const user= /(\W|^)[\w.\-]{3,16}(?!&|%|!|"|#|@)(?!\s)(\W|$)/g
+        const user = /(\W|^)[\w.\-]{3,16}(?!&|%|!|"|#|@)(?!\s)(\W|$)/g
         const email = /(\W|^)[\w.\-]{3,25}@(yahoo|hotmail|gmail)\.com(?!\s)(\W|$)/g
-        // const email = /{3,25}@(yahoo|hotmail|gmail)\.com(?!\s)/g
-
-
-        // setProgress(true)
+        const password = /(\W|^)[\w.\-]{8,16}(?!\s)(\W|$)/g
+        setProgress(true)
         if (changeData.user_name === '' || changeData.user_email === '' || changeData.user_password === '' || changeData.user_repeat_password === '') {
             setProgress(false)
-            return alert('Por favor, llene todos los datos')
+            setMessage('Por favor, llene todos los datos')
+            openModalAlertError()
+            return
             // } else if (!(validator.isEmail(changeData.user_email))) {
-        } else if(!user.test(changeData.user_name)){
+        } else if (!user.test(changeData.user_name)) {
             setProgress(false)
-            return alert('Error caracteres invalidos en usuario')
-        }else if (!email.test(changeData.user_email)) {
+            setMessage('Caracteres invalidos de usuario')
+            openModalAlertError()
+            return
+        } else if (!email.test(changeData.user_email)) {
             setProgress(false)
-            return alert('Caracteres invalidos en el correo')
+            setMessage('Caracteres invalidos de Correo Electronico')
+            openModalAlertError()
+            return
+        } else if (!password.test(changeData.user_password)) {
+            setProgress(false)
+            setMessage('La Contraseña debe tener almenos 8 caracteres sin espacios')
+            openModalAlertError()
+            return
         } else if (changeData.user_password !== changeData.user_repeat_password) {
             setProgress(false)
-            return alert('verifique que las contraseñas sean iguales')
+            setMessage('Verifique que las contraseñas sean iguales')
+            openModalAlertError()
+            return
         }
-
-        // await axios.post(`${PORT_URL}users`, changeData)
-        //     .then(resp => {
-        //         setProgress(false)
-        //         alert(resp.data.message)
-        //         // navigation.navigate('LoginScreem')
-        //         navigation.push('TeacherHomeScreem')
-        //         // console.log(resp.data)
-        //     })
-        //     .catch(err => {
-        //         setProgress(false)
-        //         console.log(err)
-        //     })
+        await axios.post(`${PORT_URL}users`, changeData)
+            .then(resp => {
+                setProgress(false)
+                openModalAlert()
+                setMessage(resp.data.message)
+                setChangeData({
+                    user_name: '',
+                    user_email: '',
+                    user_password: '',
+                    user_repeat_password: '',
+                    user_rol: 'Estudiante'
+                })
+                // alert(resp.data.message)
+                // navigation.navigate('LoginScreem')
+                // navigation.push('TeacherHomeScreem')
+                // console.log(resp.data)
+            })
+            .catch(err => {
+                setProgress(false)
+                if (err.response) {
+                    openModalAlertError()
+                    setMessage(err.response.data.message)
+                }
+                console.log(err)
+            })
 
         // const result=await postUsers(changeData)
         // console.log(result)
@@ -121,6 +150,7 @@ const RegisterUserScreem = ({ navigation }) => {
                         <TextInput
                             style={styles.input}
                             placeholder='max 16 caracteres'
+                            maxLength={16}
                             placeholderTextColor='#b0bec5'
                             onChangeText={text => handleChange('user_name', text)}
                             value={changeData.user_name}
@@ -138,7 +168,7 @@ const RegisterUserScreem = ({ navigation }) => {
                             <TextInput
                                 style={{ flex: 1, color: 'white' }}
                                 placeholderTextColor='#b0bec5'
-                                placeholder='Contraseña'
+                                placeholder='min 8 caracteres'
                                 secureTextEntry={hidePass.viewPassword}
                                 onChangeText={text => handleChange('user_password', text)}
                                 value={changeData.user_password}
@@ -152,7 +182,7 @@ const RegisterUserScreem = ({ navigation }) => {
                             <TextInput
                                 style={{ flex: 1, color: 'white' }}
                                 placeholderTextColor='#b0bec5'
-                                placeholder='Repita Contraseña'
+                                placeholder='min 8 caracteres'
                                 secureTextEntry={hidePass2.viewRepeatPassword}
                                 onChangeText={text => handleChange('user_repeat_password', text)}
                                 value={changeData.user_repeat_password}
@@ -168,9 +198,12 @@ const RegisterUserScreem = ({ navigation }) => {
                             placeholderTextColor='#545674'
                             onChangeText={text => handleChange('edad', text)}
                         /> */}
-                        <TouchableOpacity style={{ width: '100%' }} onPress={postUser} >
-                            <SuccessButton name={'Registrar'} />
-                        </TouchableOpacity>
+                        <LinearGradient style={{ borderRadius: 3, width: '100%' }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#00c853', '#64dd17', '#aeea00']}>
+                            <TouchableOpacity style={{ width: '100%', padding: 10 }} onPress={postUser} >
+                                {/* <TouchableOpacity style={{ width: '100%',padding:10 }} onPress={openModalAlert} > */}
+                                <Text style={{ color: 'white', alignSelf: 'center' }}>Registrar</Text>
+                            </TouchableOpacity>
+                        </LinearGradient>
                         {/* <TouchableOpacity style={{ width: '100%' }} onPress={() => navigation.navigate('TeacherHomeScreem')} >
                             <CancelButton name={'Cancelar'} />
                         </TouchableOpacity> */}
@@ -186,6 +219,8 @@ const RegisterUserScreem = ({ navigation }) => {
                     <Progress.Circle borderWidth={3} size={40} indeterminate={true} />
                 </View>
             </Modal>
+            <SuccesAlert isOpen={openModal} closeModal={closeModalAlert} text={message} />
+            <ErrorAlert isOpen={openModalError} closeModal={closeModalAlertError} text={message} />
         </>
     )
 }
@@ -255,11 +290,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 22,
     },
-    textLabel:{
-        color: 'white', 
-        marginBottom: 10, 
+    textLabel: {
+        color: 'white',
+        marginBottom: 10,
         fontFamily: 'Roboto_400Regular_Italic',
-        alignSelf:'flex-start'
+        alignSelf: 'flex-start'
     }
 })
 
