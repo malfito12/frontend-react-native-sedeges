@@ -39,7 +39,7 @@ const StudentsAdminScreem = ({navigation,route}) => {
     await getStudents()
     setRefresing(false)
   })
-  console.log(students)
+  // console.log(students)
   return (
     <Layaut>
       <ScrollView
@@ -52,7 +52,7 @@ const StudentsAdminScreem = ({navigation,route}) => {
       >
         {students.length > 0 ? (
           students.map((e, index) => (
-            <View key={index}>
+            <View key={index} style={{backgroundColor:'#12151C', margin:7,padding:10}}>
               <Text style={{color:'white',fontFamily: 'Roboto_500Medium',}}>{e.student_first_name} {e.student_last_name}</Text>
             </View>
           ))

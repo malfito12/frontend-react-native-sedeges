@@ -3,7 +3,8 @@ import React, { useState, useEffect } from 'react'
 import Layaut from '../../../../../Atoms/StyleLayaut/Layaut'
 import { cuestionarioAptitudes } from '../../../../../../TestData/CuestionarioAptitudes'
 
-const InstructionTestAptitudes = ({navigation}) => {
+const InstructionTestAptitudes = ({navigation,route}) => {
+    // console.log(route.params.student_id)
     const [data, setData] = useState([])
     useEffect(() => {
         getDataAptitudes()
@@ -23,7 +24,7 @@ const InstructionTestAptitudes = ({navigation}) => {
                     <Text style={{ color: 'white' }}>{data[0].contenido.instructions.b}</Text>
                     <Text style={{ color: 'white' }}>{data[0].contenido.instructions.c}</Text>
                     <Text style={{ color: 'white' }}>{data[0].contenido.instructions.d}</Text>
-                    <TouchableOpacity onPress={()=>navigation.navigate('PreguntasTestAptitudes',{contenido:data[0].contenido.cuestionario})} style={{borderRadius:3,padding:15,margin:10,backgroundColor:'green'}}>
+                    <TouchableOpacity onPress={()=>navigation.navigate('PreguntasTestAptitudes',{contenido:data[0].contenido.cuestionario,cont:0,student_id:route.params.student_id})} style={{borderRadius:3,padding:15,margin:10,backgroundColor:'green'}}>
                         <Text style={{color:'white'}}>Comenzar</Text>
                     </TouchableOpacity>
                 </View>

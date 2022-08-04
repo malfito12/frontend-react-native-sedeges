@@ -2,7 +2,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import React, { useContext } from 'react'
 import { AuthContext } from '../../../Atoms/Context/AuthContext'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { FontAwesome5, Foundation, Ionicons, MaterialIcons, Feather, SimpleLineIcons, Entypo } from '@expo/vector-icons'
+import { FontAwesome5, MaterialCommunityIcons, Foundation, Ionicons, MaterialIcons, Feather, SimpleLineIcons, Entypo } from '@expo/vector-icons'
 import StudentsAdminScreem from './Students/StudentsAdminScreem'
 import ResultsAdminScreem from './Results/ResultsAdminScreem'
 import HomeAdminTestScreem from './Tests/HomeAdminTestScreem'
@@ -48,7 +48,15 @@ const TeacherHomeScreem = ({ navigation }) => {
       >
 
         <Tab.Screen name="UsersScreem" component={UsersScreem} options={{
-          headerLeft: () => (perfil),
+          // headerLeft: () => (perfil),
+          headerLeft: () => (
+            <View style={{ marginHorizontal: 20 }}>
+              <TouchableOpacity onPress={logout} style={{flexDirection:'row',alignItems:'center'}}>
+                <MaterialCommunityIcons name="logout" size={24} color="red" />
+                <Text style={{color:'red'}}>Cerrar Sesión</Text>
+              </TouchableOpacity>
+            </View>
+          ),
           headerTitle: '',
           tabBarLabel: 'Usuarios',
           headerStyle: { backgroundColor: '#000010' },
@@ -64,7 +72,15 @@ const TeacherHomeScreem = ({ navigation }) => {
           )
         }} />
         <Tab.Screen name="StudentsAdminScreem" component={StudentsAdminScreem} options={{
-          headerLeft: () => (perfil),
+          // headerLeft: () => (perfil),
+          headerLeft: () => (
+            <View style={{ marginHorizontal: 20 }}>
+              <TouchableOpacity onPress={logout} style={{flexDirection:'row',alignItems:'center'}}>
+                <MaterialCommunityIcons name="logout" size={24} color="red" />
+                <Text style={{color:'red'}}>Cerrar Sesión</Text>
+              </TouchableOpacity>
+            </View>
+          ),
           headerTitle: '',
           tabBarLabel: 'Estudiantes',
           headerStyle: { backgroundColor: '#000010' },
@@ -74,13 +90,21 @@ const TeacherHomeScreem = ({ navigation }) => {
           headerRight: () => (
             <View style={{ marginRight: 30 }}>
               <TouchableOpacity onPress={() => navigation.navigate('RegisterStudent')}>
-                <MaterialIcons name="add" size={26} color="white"  />
+                <MaterialIcons name="add" size={26} color="white" />
               </TouchableOpacity>
             </View>
           )
         }} />
         <Tab.Screen name="HomeAdminTestScreem" component={HomeAdminTestScreem} options={{
-          headerLeft: () => (perfil),
+          // headerLeft: () => (perfil),
+          headerLeft: () => (
+            <View style={{ marginHorizontal: 20 }}>
+              <TouchableOpacity onPress={logout} style={{flexDirection:'row',alignItems:'center'}}>
+                <MaterialCommunityIcons name="logout" size={24} color="red" />
+                <Text style={{color:'red'}}>Cerrar Sesión</Text>
+              </TouchableOpacity>
+            </View>
+          ),
           headerTitle: '',
           tabBarLabel: 'Test',
           headerStyle: { backgroundColor: '#000010' },
@@ -95,14 +119,14 @@ const TeacherHomeScreem = ({ navigation }) => {
           tabBarLabelStyle: { fontFamily: 'Roboto_700Bold' },
           tabBarIcon: ({ size, color }) => (<Entypo name="qq" size={size} color={color} />)
         }} /> */}
-        <Tab.Screen name="ResultsAdminScreem" component={ResultsAdminScreem} options={{
+        {/* <Tab.Screen name="ResultsAdminScreem" component={ResultsAdminScreem} options={{
           headerLeft: () => (perfil),
           headerTitle: '',
           tabBarLabel: 'Resultados',
           headerStyle: { backgroundColor: '#000010' },
           tabBarLabelStyle: { fontFamily: 'Roboto_700Bold' },
           tabBarIcon: ({ size, color }) => (<Foundation name='results' size={size} color={color} />)
-        }} />
+        }} /> */}
       </Tab.Navigator>
     </>
   )

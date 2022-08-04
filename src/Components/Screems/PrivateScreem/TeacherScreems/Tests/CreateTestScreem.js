@@ -20,7 +20,7 @@ const CreateTestScreem = ({ navigation }) => {
 
     // const { user } = useContext(AuthContext)
     const [idUser, setIdUser] = useState([])
-    AsyncStorageLib.getItem('user').then(resp =>setIdUser(JSON.parse(resp)))
+    AsyncStorageLib.getItem('user').then(resp => setIdUser(JSON.parse(resp)))
     const [modalAddTest, setModalAddTest] = useState(false)
     const [modalEditTest, setModalEditTest] = useState(false)
     const [estado, setEstado] = useState(false)
@@ -145,7 +145,7 @@ const CreateTestScreem = ({ navigation }) => {
     const handleChange = (name, value) => {
         setChangeData({
             ...changeData,
-            user_id:idUser,
+            user_id: idUser,
             [name]: value
         })
     }
@@ -192,9 +192,9 @@ const CreateTestScreem = ({ navigation }) => {
                                     <TouchableOpacity onPress={() => deleteTest(e.test_id)}>
                                         <CancelButton name={'Eliminar'} />
                                     </TouchableOpacity>
-                                    {/* <TouchableOpacity onPress={() =>navigation.navigate('RealizeTestScreem') }>
-                                        <CancelButton name={'ir'} />
-                                    </TouchableOpacity> */}
+                                    <TouchableOpacity onPress={() => navigation.navigate('ResultsAdminScreem',{data:e})} style={{ alignSelf: 'center', borderRadius: 3, backgroundColor: '#ffa726', margin: 5, padding: 4 }}>
+                                        <Text style={{fontFamily:'Roboto_500Medium', color: 'white', alignSelf: 'center' }}>Resultados</Text>
+                                    </TouchableOpacity>
                                 </View>
                             </View>
                         ))

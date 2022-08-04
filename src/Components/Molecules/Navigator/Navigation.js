@@ -24,6 +24,10 @@ import InstructionTestIntereses from '../../Screems/PrivateScreem/TeacherScreems
 import PreguntasTestAptitudes from '../../Screems/PrivateScreem/TeacherScreems/TestsVocational/TestAptitudes/PreguntasTestAptitudes'
 import RegisterStudent from '../../Screems/PrivateScreem/TeacherScreems/Students/RegisterStudent'
 import StudentsAdminScreem from '../../Screems/PrivateScreem/TeacherScreems/Students/StudentsAdminScreem'
+import ResultsAptitudes from '../../Screems/PrivateScreem/TeacherScreems/Results/ResultsAptitudes'
+import ResultsAdminScreem from '../../Screems/PrivateScreem/TeacherScreems/Results/ResultsAdminScreem'
+import ResultsAptitudStudent from '../../Screems/PrivateScreem/TeacherScreems/Results/ResultsAptitudes/ResultsAptitudStudent'
+import RecoverPassword from '../../Screems/PublicScreem/RecoverPassword'
 
 const Stack = createNativeStackNavigator()
 
@@ -48,7 +52,7 @@ const Navigation = () => {
                                 headerTitleStyle: { fontSize: 16 },
                                 headerStyle: { backgroundColor: '#000010' },
                                 headerTintColor: 'white',
-                                headerLeft: () => <></>
+                                // headerLeft: () => <></>
                             }}
                         />
                         <Stack.Screen
@@ -158,7 +162,8 @@ const Navigation = () => {
                             options={{
                                 headerStyle: { backgroundColor: '#000010' },
                                 headerTintColor: 'white',
-                                title: 'Preguntas'
+                                title: 'Preguntas',
+                                headerLeft:()=><></>,
                             }}
                         />
                         <Stack.Screen
@@ -177,6 +182,33 @@ const Navigation = () => {
                                 headerStyle: { backgroundColor: '#000010' },
                                 headerTintColor: 'white',
                                 title: 'Registro de Estudiantes'
+                            }}
+                        />
+                        <Stack.Screen
+                            name='ResultsAptitudes'
+                            component={ResultsAptitudes}
+                            options={{
+                                headerStyle: { backgroundColor: '#000010' },
+                                headerTintColor: 'white',
+                                title: 'Resultados'
+                            }}
+                        />
+                        <Stack.Screen
+                            name='ResultsAdminScreem'
+                            component={ResultsAdminScreem}
+                            options={{
+                                headerStyle: { backgroundColor: '#000010' },
+                                headerTintColor: 'white',
+                                title: ''
+                            }}
+                        />
+                        <Stack.Screen
+                            name='ResultsAptitudStudent'
+                            component={ResultsAptitudStudent}
+                            options={{
+                                headerStyle: { backgroundColor: '#000010' },
+                                headerTintColor: 'white',
+                                title: 'Resultados'
                             }}
                         />
                     </>
@@ -261,6 +293,18 @@ const Navigation = () => {
                             component={LoginScreem}
                             options={{
                                 title: 'Bienvenidos a SEDEGES',
+                                headerTitleAlign: 'center',
+                                headerStyle: { backgroundColor: '#000010' },
+                                headerTintColor: 'white',
+                                headerTitleStyle: { fontSize: 16 }
+                            }}
+                        // initialParams={{ post: () => logget() }}
+                        />
+                        <Stack.Screen
+                            name='RecoverPassword'
+                            component={RecoverPassword}
+                            options={{
+                                title: 'Recuperar Contraseña',
                                 headerTitleAlign: 'center',
                                 headerStyle: { backgroundColor: '#000010' },
                                 headerTintColor: 'white',

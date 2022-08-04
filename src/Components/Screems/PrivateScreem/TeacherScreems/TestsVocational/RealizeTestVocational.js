@@ -43,6 +43,11 @@ const RealizeTestVocational = ({navigation}) => {
     setRefresing(false)
   })
   //-------------------------------------------
+  const realizeTest=(e)=>{
+    AsyncStorageLib.setItem('test_id',JSON.stringify(e))
+    navigation.navigate('TestOrientationType')
+  }
+  //-------------------------------------------
   return (
     <Layaut>
       <ScrollView
@@ -63,7 +68,7 @@ const RealizeTestVocational = ({navigation}) => {
                   {/* <Text style={styles.textStyles}>{e.test_description}</Text> */}
                 </View>
                 <LinearGradient style={{ width: '50%', borderRadius: 5, }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#e65100', '#fb8c00', '#ffa726']}>
-                  <TouchableOpacity onPress={() => navigation.navigate('TestOrientationType')} style={styles.buttonGoTest}>
+                  <TouchableOpacity onPress={()=>realizeTest(e.test_aptitud_id)} style={styles.buttonGoTest}>
                     <Text style={styles.textStyles}>Iniciar Test</Text>
                   </TouchableOpacity>
                 </LinearGradient>

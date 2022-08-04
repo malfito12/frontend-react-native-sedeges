@@ -39,30 +39,39 @@ const RegisterUserScreem = ({ navigation }) => {
         // console.log(ss)
 
         // console.log(espacio.test(ss))
-        setProgress(true)
+        const user= /(\W|^)[\w.\-]{3,16}(?!&|%|!|"|#|@)(?!\s)(\W|$)/g
+        const email = /(\W|^)[\w.\-]{3,25}@(yahoo|hotmail|gmail)\.com(?!\s)(\W|$)/g
+        // const email = /{3,25}@(yahoo|hotmail|gmail)\.com(?!\s)/g
+
+
+        // setProgress(true)
         if (changeData.user_name === '' || changeData.user_email === '' || changeData.user_password === '' || changeData.user_repeat_password === '') {
             setProgress(false)
             return alert('Por favor, llene todos los datos')
-        } else if (!(validator.isEmail(changeData.user_email))) {
+            // } else if (!(validator.isEmail(changeData.user_email))) {
+        } else if(!user.test(changeData.user_name)){
             setProgress(false)
-            return alert('Email incorrecto')
+            return alert('Error caracteres invalidos en usuario')
+        }else if (!email.test(changeData.user_email)) {
+            setProgress(false)
+            return alert('Caracteres invalidos en el correo')
         } else if (changeData.user_password !== changeData.user_repeat_password) {
             setProgress(false)
             return alert('verifique que las contraseñas sean iguales')
         }
 
-        await axios.post(`${PORT_URL}users`, changeData)
-            .then(resp => {
-                setProgress(false)
-                alert(resp.data.message)
-                // navigation.navigate('LoginScreem')
-                navigation.push('TeacherHomeScreem')
-                // console.log(resp.data)
-            })
-            .catch(err => {
-                setProgress(false)
-                console.log(err)
-            })
+        // await axios.post(`${PORT_URL}users`, changeData)
+        //     .then(resp => {
+        //         setProgress(false)
+        //         alert(resp.data.message)
+        //         // navigation.navigate('LoginScreem')
+        //         navigation.push('TeacherHomeScreem')
+        //         // console.log(resp.data)
+        //     })
+        //     .catch(err => {
+        //         setProgress(false)
+        //         console.log(err)
+        //     })
 
         // const result=await postUsers(changeData)
         // console.log(result)
@@ -108,20 +117,23 @@ const RegisterUserScreem = ({ navigation }) => {
                     </TouchableOpacity>
                     </View> */}
                     <View style={styles.container}>
+                        <Text style={styles.textLabel}>Nombre de Usuario</Text>
                         <TextInput
                             style={styles.input}
-                            placeholder='Nombre de Usuario'
+                            placeholder='max 16 caracteres'
                             placeholderTextColor='#b0bec5'
                             onChangeText={text => handleChange('user_name', text)}
                             value={changeData.user_name}
                         />
+                        <Text style={styles.textLabel}>Correo Electronico</Text>
                         <TextInput
                             style={styles.input}
-                            placeholder='Correo Electronico'
+                            placeholder='max 25 caracteres'
                             placeholderTextColor='#b0bec5'
                             onChangeText={text => handleChange('user_email', text)}
                             value={changeData.user_email}
                         />
+                        <Text style={styles.textLabel}>Contraseña</Text>
                         <View style={styles.passwordInput}>
                             <TextInput
                                 style={{ flex: 1, color: 'white' }}
@@ -135,6 +147,7 @@ const RegisterUserScreem = ({ navigation }) => {
                                 <Entypo name={hidePass.iconPassword} size={20} color='white' />
                             </TouchableOpacity>
                         </View>
+                        <Text style={styles.textLabel}>Repita Contraseña</Text>
                         <View style={styles.passwordInput}>
                             <TextInput
                                 style={{ flex: 1, color: 'white' }}
@@ -155,12 +168,12 @@ const RegisterUserScreem = ({ navigation }) => {
                             placeholderTextColor='#545674'
                             onChangeText={text => handleChange('edad', text)}
                         /> */}
-                        <TouchableOpacity style={{width:'100%'}} onPress={postUser} >
+                        <TouchableOpacity style={{ width: '100%' }} onPress={postUser} >
                             <SuccessButton name={'Registrar'} />
                         </TouchableOpacity>
-                        <TouchableOpacity style={{width:'100%'}} onPress={() => navigation.navigate('TeacherHomeScreem')} >
+                        {/* <TouchableOpacity style={{ width: '100%' }} onPress={() => navigation.navigate('TeacherHomeScreem')} >
                             <CancelButton name={'Cancelar'} />
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
                     </View>
                 </ScrollView>
             </Layaut>
@@ -181,7 +194,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         marginBottom: 10,
-        marginHorizontal:20
+        marginHorizontal: 20
     },
     input: {
         width: '100%',
@@ -242,6 +255,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 22,
     },
+    textLabel:{
+        color: 'white', 
+        marginBottom: 10, 
+        fontFamily: 'Roboto_400Regular_Italic',
+        alignSelf:'flex-start'
+    }
 })
 
 export default RegisterUserScreem

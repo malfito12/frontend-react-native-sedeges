@@ -25,6 +25,8 @@ export const AuthProvider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false)
     const [token, setToken] = useState({ token: undefined })
     const [user, setUser] = useState({ user: undefined, rol: undefined })
+    const [openModal,setOpenModal] = useState(false)
+    const [message,setMessage] = useState(null)
     // const [user, setUser] = useState([])
     // const [rol, setRol] = useState({ rol: undefined })
 
@@ -45,9 +47,9 @@ export const AuthProvider = ({ children }) => {
     if (!fontsLoaded) {
         return <AppLoading />
     }
-    const login = async (e) => {
-        var user_name = e.user_name.trim().replace(/\s\s+/g, ' ')
-        var user_password = e.user_password.trim().replace(/\s\s+/g, ' ')
+    const login = async (changeData) => {
+        var user_name = changeData.user_name.trim().replace(/\s\s+/g, ' ')
+        var user_password = changeData.user_password.trim().replace(/\s\s+/g, ' ')
         setIsLoading(true)
         await axios.post(`${PORT_URL}login`, { user_name, user_password })
             .then((async (resp) => {
@@ -60,7 +62,13 @@ export const AuthProvider = ({ children }) => {
                 setIsLoading(false)
             }))
             .catch(err => {
-                alert('error contraseña incorrecta')
+                if (err.response) {
+                    setOpenModal(true)
+                    setMessage(err.response.data.message)
+                    // alert('error contraseña incorrecta')
+                    // alert(JSON.stringify(err.response.data.message))
+                }
+                setTimeout(() => { setOpenModal(false) }, 3000)
                 setIsLoading(false)
                 console.log(err)
             })
@@ -87,6 +95,8 @@ export const AuthProvider = ({ children }) => {
             })
     }
     return (
-        <AuthContext.Provider value={{ isLoading, token, user, login, logout }}>{children}</AuthContext.Provider>
+        <>
+            <AuthContext.Provider value={{ isLoading, token, user, login, logout,openModal,setOpenModal,message }}>{children}</AuthContext.Provider>
+        </>
     )
 }
