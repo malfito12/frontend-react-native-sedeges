@@ -57,7 +57,7 @@ const RegisterUserScreem = ({ navigation }) => {
             // } else if (!(validator.isEmail(changeData.user_email))) {
         } else if (!user.test(changeData.user_name)) {
             setProgress(false)
-            setMessage('Caracteres invalidos de usuario')
+            setMessage('Caracteres Invalidos de Usuario')
             openModalAlertError()
             return
         } else if (!email.test(changeData.user_email)) {

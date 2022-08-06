@@ -4,17 +4,26 @@ import Layaut from '../../../../Atoms/StyleLayaut/Layaut'
 import * as Progress from 'react-native-progress'
 import axios from 'axios'
 import { PORT_URL } from '../../../../../PortUrl/PortUrl'
+import { useFocusEffect } from '@react-navigation/native'
 
-const StudentsAdminScreem = ({navigation,route}) => {
+const StudentsAdminScreem = ({ navigation, route }) => {
   const [students, setStudents] = useState([])
   const [progress, setProgress] = useState('none')
   const [exist, setExist] = useState('none')
   const [refresing, setRefresing] = useState(false)
-  
 
-  useEffect(() => {
-    getStudents()
-  }, [])
+
+  // useEffect(() => {
+  //   getStudents()
+  // }, [])
+
+  useFocusEffect(
+    useCallback(() => {
+      let isActive = true
+      getStudents()
+      return () => { isActive = false }
+    }, [])
+  )
   //--------------GET STUDENTS---------------
   // console.log(route.params)
   // if(route.params){
@@ -52,8 +61,8 @@ const StudentsAdminScreem = ({navigation,route}) => {
       >
         {students.length > 0 ? (
           students.map((e, index) => (
-            <View key={index} style={{backgroundColor:'#12151C', margin:7,padding:10}}>
-              <Text style={{color:'white',fontFamily: 'Roboto_500Medium',}}>{e.student_first_name} {e.student_last_name}</Text>
+            <View key={index} style={{ backgroundColor: '#12151C', margin: 7, padding: 10 }}>
+              <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', }}>{e.student_first_name} {e.student_last_name}</Text>
             </View>
           ))
         ) : (
