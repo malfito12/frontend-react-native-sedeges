@@ -1,3 +1,3 @@
-// export const PORT_URL='http://192.168.100.6:3000/'
-export const PORT_URL='http://192.168.0.9:3000/'
+export const PORT_URL='http://192.168.100.4:3000/'
+// export const PORT_URL='http://192.168.0.9:3000/'
 // export const PORT_URL='https://sedeges-backend.herokuapp.com/'

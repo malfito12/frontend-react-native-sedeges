@@ -47,8 +47,8 @@ const RegisterUserScreem = ({ navigation }) => {
         // console.log(espacio.test(ss))
         const user = /(\W|^)[\w.\-]{3,16}(?!&|%|!|"|#|@)(?!\s)(\W|$)/g
         const email = /(\W|^)[\w.\-]{3,25}@(yahoo|hotmail|gmail)\.com(?!\s)(\W|$)/g
-        const password = /(\W|^)[\w.\-]{8,16}(?!\s)(\W|$)/g
-        setProgress(true)
+        const password = /(\W|^)[\w.\-]{8,25}(?!\s)(\W|$)/g
+        
         if (changeData.user_name === '' || changeData.user_email === '' || changeData.user_password === '' || changeData.user_repeat_password === '') {
             setProgress(false)
             setMessage('Por favor, llene todos los datos')
@@ -76,6 +76,7 @@ const RegisterUserScreem = ({ navigation }) => {
             openModalAlertError()
             return
         }
+        setProgress(true)
         await axios.post(`${PORT_URL}users`, changeData)
             .then(resp => {
                 setProgress(false)
