@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 export const useModalAlert = (initial = false) => {
-    [openModal, setOpenModal] = useState(initial)
+    const [openModal, setOpenModal] = useState(initial)
     const openModalAlert = () => setOpenModal(true)
     const closeModalAlert = () => {
         // setTimeout(async() => {await setOpenModal(false) }, 2000)
@@ -11,7 +11,7 @@ export const useModalAlert = (initial = false) => {
     // return [openModal, openModalAlert]
 }
 export const useModalAlertError = (initial = false) => {
-    [openModalError, setOpenModalError] = useState(initial)
+    const [openModalError, setOpenModalError] = useState(initial)
     const openModalAlertError = () => setOpenModalError(true)
     const closeModalAlertError = () => {
         // setTimeout(async() => {await setOpenModal(false) }, 2000)

@@ -13,7 +13,7 @@ const ResultsAptitudes = ({ navigation, route }) => {
     }, [])
     //-----------GET STUDNETS------------------
     const getStudents = async () => {
-        await axios.get(`${PORT_URL}test-aptitudes-students/${route.params.data.test_id}`)
+        await axios.get(`${PORT_URL}test-aptitudes-students/${route.params.data.event_id}`)
         .then(resp=>{
             setStudents(resp.data)
         })
@@ -32,7 +32,7 @@ const ResultsAptitudes = ({ navigation, route }) => {
                 {students?(
                     students.map((e,index)=>(
                         <View key={index} style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between',backgroundColor:'#12151C', borderRadius:2, padding:5,margin:4}}>
-                            <Text style={{color:'white'}}>{e.student_first_name} {e.student_last_name}</Text>
+                            <Text style={{color:'white'}}>{e.student_first_name} {e.student_last_father_name} {e.student_last_mother_name}</Text>
                             <TouchableOpacity onPress={()=>resultStudent(e)} style={{backgroundColor:'green', borderRadius:2,padding:5,margin:5}}>
                                 <Text style={{color:'white'}}> Ver Resultados</Text>
                             </TouchableOpacity>

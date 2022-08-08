@@ -8,6 +8,8 @@ import ResultsAdminScreem from './Results/ResultsAdminScreem'
 import HomeAdminTestScreem from './Tests/HomeAdminTestScreem'
 import HomeAdminTestVocational from './TestsVocational/HomeAdminTestVocational'
 import UsersScreem from '../Users/UsersScreem'
+import ListViewEvents from './Eventos/ListViewEvents'
+import RealizeTestVocational from './TestsVocational/RealizeTestVocational'
 
 
 const Tab = createBottomTabNavigator()
@@ -51,9 +53,9 @@ const TeacherHomeScreem = ({ navigation }) => {
           // headerLeft: () => (perfil),
           headerLeft: () => (
             <View style={{ marginHorizontal: 20 }}>
-              <TouchableOpacity onPress={logout} style={{flexDirection:'row',alignItems:'center'}}>
+              <TouchableOpacity onPress={logout} style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <MaterialCommunityIcons name="logout" size={24} color="red" />
-                <Text style={{color:'red'}}>Cerrar Sesión</Text>
+                <Text style={{ color: 'red' }}>Cerrar Sesión</Text>
               </TouchableOpacity>
             </View>
           ),
@@ -75,9 +77,9 @@ const TeacherHomeScreem = ({ navigation }) => {
           // headerLeft: () => (perfil),
           headerLeft: () => (
             <View style={{ marginHorizontal: 20 }}>
-              <TouchableOpacity onPress={logout} style={{flexDirection:'row',alignItems:'center'}}>
+              <TouchableOpacity onPress={logout} style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <MaterialCommunityIcons name="logout" size={24} color="red" />
-                <Text style={{color:'red'}}>Cerrar Sesión</Text>
+                <Text style={{ color: 'red' }}>Cerrar Sesión</Text>
               </TouchableOpacity>
             </View>
           ),
@@ -95,13 +97,13 @@ const TeacherHomeScreem = ({ navigation }) => {
             </View>
           )
         }} />
-        <Tab.Screen name="HomeAdminTestScreem" component={HomeAdminTestScreem} options={{
+        {/* <Tab.Screen name="HomeAdminTestScreem" component={HomeAdminTestScreem} options={{
           // headerLeft: () => (perfil),
           headerLeft: () => (
             <View style={{ marginHorizontal: 20 }}>
-              <TouchableOpacity onPress={logout} style={{flexDirection:'row',alignItems:'center'}}>
+              <TouchableOpacity onPress={logout} style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <MaterialCommunityIcons name="logout" size={24} color="red" />
-                <Text style={{color:'red'}}>Cerrar Sesión</Text>
+                <Text style={{ color: 'red' }}>Cerrar Sesión</Text>
               </TouchableOpacity>
             </View>
           ),
@@ -110,7 +112,43 @@ const TeacherHomeScreem = ({ navigation }) => {
           headerStyle: { backgroundColor: '#000010' },
           tabBarLabelStyle: { fontFamily: 'Roboto_700Bold' },
           tabBarIcon: ({ size, color }) => (<Ionicons name='library-outline' size={size} color={color} />),
+        }} /> */}
+        <Tab.Screen name="ListViewEvents" component={ListViewEvents} options={{
+          // headerLeft: () => (perfil),
+          headerLeft: () => (
+            <View style={{ marginHorizontal: 20 }}>
+              <TouchableOpacity onPress={logout} style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <MaterialCommunityIcons name="logout" size={24} color="red" />
+                <Text style={{ color: 'red' }}>Cerrar Sesión</Text>
+              </TouchableOpacity>
+            </View>
+          ),
+          headerTitle: '',
+          tabBarLabel: 'Eventos',
+          headerStyle: { backgroundColor: '#000010' },
+          tabBarLabelStyle: { fontFamily: 'Roboto_700Bold' },
+          tabBarIcon: ({ size, color }) => (<Ionicons name='library-outline' size={size} color={color} />),
+          headerRight: () => (
+            <View style={{ marginRight: 30 }}>
+              <TouchableOpacity onPress={() => navigation.navigate('RegisterEvent')}>
+                <MaterialIcons name="add" size={26} color="white" />
+              </TouchableOpacity>
+            </View>
+          )
         }} />
+
+
+
+        {/* <Tab.Screen name="RealizeTestVocational" component={RealizeTestVocational} options={{
+          headerLeft: () => (perfil),
+          headerTitle: '',
+          title: 'R.Test',
+          headerStyle: { backgroundColor: '#000010' },
+          headerTintColor: 'white',
+          tabBarLabelStyle: { fontFamily: 'Roboto_700Bold' },
+        }} /> */}
+
+        
         {/* <Tab.Screen name="HomeAdminTestVocational" component={HomeAdminTestVocational} options={{
           headerLeft: () => (perfil),
           headerTitle: '',

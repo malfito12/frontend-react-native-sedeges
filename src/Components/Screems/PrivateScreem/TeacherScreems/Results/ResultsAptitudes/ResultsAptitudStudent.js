@@ -13,7 +13,7 @@ const ResultsAptitudStudent = ({ navigation, route }) => {
     }, [])
     const getResults = async () => {
         // await axios.get(`${PORT_URL}test-aptitudes-students-results/${route.params.data.student_id}`)
-        await axios.post(`${PORT_URL}test-aptitudes-students-results`,{student_id:route.params.data.student_id,test_id:route.params.data.test_aptitud_id})
+        await axios.post(`${PORT_URL}test-aptitudes-students-results`,{student_id:route.params.data.student_id,event_id:route.params.data.event_id})
             .then(resp => {
                 // console.log(resp.data)
                 setResult(resp.data)
@@ -26,7 +26,8 @@ const ResultsAptitudStudent = ({ navigation, route }) => {
         array.push({
             totalSeccion: sum,
             name: result[0].student_first_name,
-            lastName: result[0].student_last_name,
+            lastNameFather: result[0].student_last_father_name,
+            lastNameMother: result[0].student_last_mother_name,
             nameSeccion: result[i].seccion
         })
     }
@@ -48,12 +49,12 @@ const ResultsAptitudStudent = ({ navigation, route }) => {
             sumTotal=array[j].totalSeccion
         }
     }
-    console.log(array)
+    // console.log(array)
     return (
         <Layaut>
             {array.length > 0 ? (
                 <>
-                    <Text style={{ color: 'white' }}>{array[0].name} {array[0].lastName}</Text>
+                    <Text style={{ color: 'white' }}>{array[0].name} {array[0].lastNameFather} {array[0].lastNameMother}</Text>
                     <View style={{flexDirection:'row',justifyContent:'space-evenly',backgroundColor:'#12151C', padding:5,margin:5}}>
                         <Text style={{color:'white'}}>AREA</Text>
                         <Text style={{color:'white'}}>PD</Text>

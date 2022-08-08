@@ -76,14 +76,14 @@ const Home = ({ navigation }) => {
                 headerStyle: { backgroundColor: '#000010' },
                 headerTintColor: 'white',
             }} /> */}
-            <Tab.Screen name="RealizeTestScreem" component={RealizeTestScreem} options={{
+            {/* <Tab.Screen name="RealizeTestScreem" component={RealizeTestScreem} options={{
                 headerLeft: () => (perfil),
                 headerTitle: '',
                 title: 'Test',
                 headerStyle: { backgroundColor: '#000010' },
                 headerTintColor: 'white',
                 tabBarLabelStyle: { fontFamily: 'Roboto_700Bold' },
-            }} />
+            }} /> */}
             <Tab.Screen name="RealizeTestVocational" component={RealizeTestVocational} options={{
                 headerLeft: () => (perfil),
                 headerTitle: '',
@@ -92,7 +92,7 @@ const Home = ({ navigation }) => {
                 headerTintColor: 'white',
                 tabBarLabelStyle: { fontFamily: 'Roboto_700Bold' },
             }} />
-            <Tab.Screen name="ResultsHomeScreem" component={ResultsHomeScreem} options={{
+            {/* <Tab.Screen name="ResultsHomeScreem" component={ResultsHomeScreem} options={{
                 headerLeft: () => (perfil),
                 headerTitle: '',
                 title: 'Resultados',
@@ -107,7 +107,7 @@ const Home = ({ navigation }) => {
                 headerStyle: { backgroundColor: '#000010' },
                 headerTintColor: 'white',
                 tabBarLabelStyle: { fontFamily: 'Roboto_700Bold' },
-            }} />
+            }} /> */}
         </Tab.Navigator>
     )
 }

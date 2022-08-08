@@ -6,45 +6,54 @@ import fondoImage from '../../../../../images/ImagesFondo/test-analitico.jpg'
 import axios from 'axios'
 import { PORT_URL } from '../../../../../PortUrl/PortUrl'
 import AsyncStorageLib from '@react-native-async-storage/async-storage'
+import { useFocusEffect } from '@react-navigation/native'
 
 const RealizeTestVocational = ({navigation}) => {
-  const [tests, setTests] = useState([])
+  const [event, setEvent] = useState([])
   const [refresing, setRefresing] = useState(false)
 
-  useEffect(() => {
-    // let isRendered = true
-    //     axios.get(`${PORT_URL}testsAptitudesStatus`)
-    //         .then(resp => {
-    //             if (isRendered) {
-    //                 setTests(resp.data)
-    //             }
-    //             return null
-    //         })
-    //         .catch(err => console.log(err))
-    //     // getTests()
-    //     return () => {
-    //         isRendered = false
-    //     }
-    getTestsStatus()
-  }, [])
+  useFocusEffect(
+    useCallback(() => {
+      let isActive = true
+      getEvent()
+      return () => { isActive = false }
+    }, [])
+  )
+  // useEffect(() => {
+  //   // let isRendered = true
+  //   //     axios.get(`${PORT_URL}testsAptitudesStatus`)
+  //   //         .then(resp => {
+  //   //             if (isRendered) {
+  //   //                 setTests(resp.data)
+  //   //             }
+  //   //             return null
+  //   //         })
+  //   //         .catch(err => console.log(err))
+  //   //     // getTests()
+  //   //     return () => {
+  //   //         isRendered = false
+  //   //     }
+  //   // getTestsStatus()
+  //   getEvent()
+  // }, [])
 
-  const getTestsStatus = async () => {
-    await axios.get(`${PORT_URL}testsAptitudesStatus`)
-      .then(resp => {
-        setTests(resp.data)
-      })
-      .catch(err => { console.log(err) })
+  const getEvent=async()=>{
+    await axios.get(`${PORT_URL}get-event-status`)
+    .then(resp=>{
+      setEvent(resp.data)
+    })
+    .catch(err=>console.log(err))
   }
 
   //---------REFRESH------
   const onRefresh = useCallback(async () => {
     setRefresing(true)
-    await getTestsStatus()
+    await getEvent()
     setRefresing(false)
   })
   //-------------------------------------------
   const realizeTest=(e)=>{
-    AsyncStorageLib.setItem('test_id',JSON.stringify(e))
+    AsyncStorageLib.setItem('event_id',JSON.stringify(e))
     navigation.navigate('TestOrientationType')
   }
   //-------------------------------------------
@@ -58,17 +67,17 @@ const RealizeTestVocational = ({navigation}) => {
           refreshing={refresing}
         />}
       >
-        {tests.length > 0 ? (
-          tests.map((e, index) => (
+        {event.length > 0 ? (
+          event.map((e, index) => (
             <View key={index} style={{ marginBottom: 10 }}>
               <ImageBackground source={fondoImage} resizeMode="cover" style={styles.ImageView} imageStyle={{ borderRadius: 5, }} />
               <View style={styles.testView}>
                 <View style={{ paddingBottom: 10 }}>
-                  <Text style={{ fontSize: 16, ...styles.textStyles }}>{e.test_aptitud_name}</Text>
+                  <Text style={{ fontSize: 16, ...styles.textStyles }}>{e.event_name}</Text>
                   {/* <Text style={styles.textStyles}>{e.test_description}</Text> */}
                 </View>
                 <LinearGradient style={{ width: '50%', borderRadius: 5, }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#e65100', '#fb8c00', '#ffa726']}>
-                  <TouchableOpacity onPress={()=>realizeTest(e.test_aptitud_id)} style={styles.buttonGoTest}>
+                  <TouchableOpacity onPress={()=>realizeTest(e.event_id)} style={styles.buttonGoTest}>
                     <Text style={styles.textStyles}>Iniciar Test</Text>
                   </TouchableOpacity>
                 </LinearGradient>

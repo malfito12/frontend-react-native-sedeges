@@ -192,8 +192,8 @@ const CreateTestScreem = ({ navigation }) => {
                                     <TouchableOpacity onPress={() => deleteTest(e.test_id)}>
                                         <CancelButton name={'Eliminar'} />
                                     </TouchableOpacity>
-                                    <TouchableOpacity onPress={() => navigation.navigate('ResultsAdminScreem',{data:e})} style={{ alignSelf: 'center', borderRadius: 3, backgroundColor: '#ffa726', margin: 5, padding: 4 }}>
-                                        <Text style={{fontFamily:'Roboto_500Medium', color: 'white', alignSelf: 'center' }}>Resultados</Text>
+                                    <TouchableOpacity onPress={() => navigation.navigate('ResultsAdminScreem', { data: e })} style={{ alignSelf: 'center', borderRadius: 3, backgroundColor: '#ffa726', margin: 5, padding: 4 }}>
+                                        <Text style={{ fontFamily: 'Roboto_500Medium', color: 'white', alignSelf: 'center' }}>Resultados</Text>
                                     </TouchableOpacity>
                                 </View>
                             </View>
@@ -206,8 +206,7 @@ const CreateTestScreem = ({ navigation }) => {
                             </View>
                         </>
 
-                    )
-                    }
+                    )}
                 </ScrollView>
             </Layaut>
 

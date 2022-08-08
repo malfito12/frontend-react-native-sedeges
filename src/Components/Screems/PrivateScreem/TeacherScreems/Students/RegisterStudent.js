@@ -10,8 +10,11 @@ import { PORT_URL } from '../../../../../PortUrl/PortUrl'
 import { Picker } from '@react-native-picker/picker';
 import { useModalAlert, useModalAlertError } from '../../../../Molecules/Hooks/useModalAlert'
 import { ErrorAlert, SuccesAlert } from '../../../../Molecules/Alertas/Alerts'
+import AsyncStorageLib from '@react-native-async-storage/async-storage'
 
 const RegisterStudent = ({ navigation }) => {
+    const [idUser, setIdUser] = useState([])
+    AsyncStorageLib.getItem('user').then(resp => setIdUser(JSON.parse(resp)))
     const [openModal, openModalAlert, closeModalAlert] = useModalAlert(false)
     const [openModalError, openModalAlertError, closeModalAlertError] = useModalAlertError(false)
     const [message, setMessage] = useState(null)
@@ -27,7 +30,7 @@ const RegisterStudent = ({ navigation }) => {
         sex: '',
         ocupation: '',
         ci: '',
-        nameInstitution: ''
+        nameInstitution: '',
     })
     const openModalDate = (e) => {
         setOpen(true)
@@ -77,7 +80,8 @@ const RegisterStudent = ({ navigation }) => {
             sex: changeData.sex.trim().replace(/\s\s+/g, ' '),
             ocupation: changeData.ocupation.trim().replace(/\s\s+/g, ' '),
             ci: changeData.ci.trim().replace(/\s\s+/g, ' '),
-            nameInstitution: changeData.nameInstitution.trim().replace(/\s\s+/g, ' ')
+            nameInstitution: changeData.nameInstitution.trim().replace(/\s\s+/g, ' '),
+            user_id: idUser,
         })
         setProgress(true)
         await axios.post(`${PORT_URL}student`, data)
@@ -112,7 +116,6 @@ const RegisterStudent = ({ navigation }) => {
     const handleChange = (name, value) => {
         setChangeData({
             ...changeData,
-            // sex:sexo.tipo,
             [name]: value
         })
     }
@@ -175,7 +178,7 @@ const RegisterStudent = ({ navigation }) => {
                                 <View style={styles.inputDate}>
                                     <TextInput
                                         style={{ color: 'white' }}
-                                        placeholder='Ejm: 07/04/2002'
+                                        placeholder='Ejm: dd/mm/aaaa'
                                         placeholderTextColor='#b0bec5'
                                         // value={textData}
                                         defaultValue={textData}
@@ -288,6 +291,12 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         flexDirection: 'row',
         justifyContent: 'space-between'
+    },
+    progressView: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 22,
     },
 })
 

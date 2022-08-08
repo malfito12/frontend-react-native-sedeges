@@ -28,6 +28,7 @@ import ResultsAptitudes from '../../Screems/PrivateScreem/TeacherScreems/Results
 import ResultsAdminScreem from '../../Screems/PrivateScreem/TeacherScreems/Results/ResultsAdminScreem'
 import ResultsAptitudStudent from '../../Screems/PrivateScreem/TeacherScreems/Results/ResultsAptitudes/ResultsAptitudStudent'
 import RecoverPassword from '../../Screems/PublicScreem/RecoverPassword'
+import RegisterEvent from '../../Screems/PrivateScreem/TeacherScreems/Eventos/RegisterEvent'
 
 const Stack = createNativeStackNavigator()
 
@@ -90,7 +91,7 @@ const Navigation = () => {
                                 headerStyle: { backgroundColor: '#000010' },
                                 headerTintColor: 'white',
                                 title: 'Categorias',
-                                headerLeft:()=><></>,
+                                headerLeft: () => <></>,
                             }} />
                         <Stack.Screen
                             name='InicioTest'
@@ -163,7 +164,7 @@ const Navigation = () => {
                                 headerStyle: { backgroundColor: '#000010' },
                                 headerTintColor: 'white',
                                 title: 'Preguntas',
-                                headerLeft:()=><></>,
+                                headerLeft: () => <></>,
                             }}
                         />
                         <Stack.Screen
@@ -181,7 +182,8 @@ const Navigation = () => {
                             options={{
                                 headerStyle: { backgroundColor: '#000010' },
                                 headerTintColor: 'white',
-                                title: 'Registro de Estudiantes'
+                                title: 'Registro de Estudiantes',
+                                headerTitleStyle: { fontSize: 16 }
                             }}
                         />
                         <Stack.Screen
@@ -209,6 +211,16 @@ const Navigation = () => {
                                 headerStyle: { backgroundColor: '#000010' },
                                 headerTintColor: 'white',
                                 title: 'Resultados'
+                            }}
+                        />
+                        <Stack.Screen
+                            name='RegisterEvent'
+                            component={RegisterEvent}
+                            options={{
+                                headerStyle: { backgroundColor: '#000010' },
+                                headerTintColor: 'white',
+                                title: 'Registro de Eventos',
+                                headerTitleStyle: { fontSize: 16 }
                             }}
                         />
                     </>
@@ -283,6 +295,34 @@ const Navigation = () => {
                                 headerStyle: { backgroundColor: '#000010' },
                                 headerTintColor: 'white',
                                 title: 'Test Grafico'
+                            }}
+                        />
+                        <Stack.Screen
+                            name='TestOrientationType'
+                            component={TestOrientationType}
+                            options={{
+                                headerStyle: { backgroundColor: '#000010' },
+                                headerTintColor: 'white',
+                                title: 'Tests de Orientacion Vocacional'
+                            }}
+                        />
+                        <Stack.Screen
+                            name='InstructionTestAptitudes'
+                            component={InstructionTestAptitudes}
+                            options={{
+                                headerStyle: { backgroundColor: '#000010' },
+                                headerTintColor: 'white',
+                                title: 'Instrucciones'
+                            }}
+                        />
+                        <Stack.Screen
+                            name='PreguntasTestAptitudes'
+                            component={PreguntasTestAptitudes}
+                            options={{
+                                headerStyle: { backgroundColor: '#000010' },
+                                headerTintColor: 'white',
+                                title: 'Preguntas',
+                                headerLeft: () => <></>,
                             }}
                         />
                     </>
