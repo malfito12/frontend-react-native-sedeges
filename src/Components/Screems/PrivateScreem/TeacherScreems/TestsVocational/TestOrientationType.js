@@ -59,13 +59,19 @@ const TestOrientationType = ({ navigation }) => {
       {searchStudent.length>0 ? (
         <>
           <TouchableOpacity onPress={() => navigation.push('InstructionTestAptitudes',{student_id:searchStudent[0].student_id})} style={{ borderWidth: 1, borderColor: 'blue', padding: 20, marginBottom: 10, alignItems: 'center' }}>
+            <Text style={{ color: 'white' }}>COMENZAR</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.push('InstructionTestAptitudes',{student_id:searchStudent[0].student_id})} style={{ borderWidth: 1, borderColor: 'blue', padding: 20, marginBottom: 10, alignItems: 'center' }}>
+            <Text style={{ color: 'white' }}>CUESTIONARIO MADUREZ MENTAL</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.push('InstructionTestAptitudes',{student_id:searchStudent[0].student_id})} style={{ borderWidth: 1, borderColor: 'blue', padding: 20, marginBottom: 10, alignItems: 'center' }}>
             <Text style={{ color: 'white' }}>CUESTIONARIO DE APTITUDES</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.push('InstructionTestIntereses')} style={{ borderWidth: 1, borderColor: 'blue', padding: 20, marginBottom: 10, alignItems: 'center' }}>
             <Text style={{ color: 'white' }}>CUESTIONARIO DE INTERESES</Text>
           </TouchableOpacity>
         </>
-      ):(null)}
+      ):(<Text style={{alignSelf:'center'}}>No existe el Estudiante</Text>)}
     </Layaut>
   )
 }

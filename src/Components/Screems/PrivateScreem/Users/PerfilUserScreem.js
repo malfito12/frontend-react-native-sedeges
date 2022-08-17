@@ -89,7 +89,7 @@ const PerfilUserScreem = () => {
             [name]: value
         })
     }
-    console.log(users)
+    // console.log(users)
     return (
         <>
             <Layaut>

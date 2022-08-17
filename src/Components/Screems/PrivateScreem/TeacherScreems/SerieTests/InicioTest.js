@@ -11,7 +11,8 @@ const InicioTest = ({ navigation, route }) => {
         getTest()
     }, [])
     const getTest = async () => {
-        await AsyncStorageLib.getItem('test').then(resp => {
+        // await AsyncStorageLib.getItem('test').then(resp => {
+        await AsyncStorageLib.getItem('event_id').then(resp => {
             setTest(JSON.parse(resp))
         })
     }
@@ -67,8 +68,8 @@ const InicioTest = ({ navigation, route }) => {
         <Layaut>
             {/* <Text style={{ color: 'white' }}>Lee Atentamente cada grupo de oraciones escritas con letras mayusculas, asi como las 
             tres posibles respuestas, luego escoja la mas adecuada y consigne la letra de su respues</Text> */}
-            <Text style={{ color: 'white', alignSelf: 'center' }}>{test.test_name}</Text>
-            <Text style={{ color: 'white', alignSelf: 'center' }}>{test.test_description}</Text>
+            <Text style={{ color: 'white', alignSelf: 'center' }}>{test.event_name}</Text>
+            <Text style={{ color: 'white', alignSelf: 'center' }}>{test.event_description}</Text>
             <Text style={{ color: 'white', alignSelf: 'center' }}>{route.params.categoria}</Text>
             <FlatList
                 data={newArray}

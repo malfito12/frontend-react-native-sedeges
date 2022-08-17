@@ -94,11 +94,11 @@ const CategoryTest = ({ navigation, route }) => {
             </TouchableOpacity>
           </View>
         ))}
-        <LinearGradient style={{ borderRadius: 2, marginTop:30 }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#e65100', '#fb8c00', '#ffa726']}>
-          <TouchableOpacity style={{padding:10}} onPress={()=>navigation.navigate('RealizeTestScreem')}>
+        {/* <LinearGradient style={{ borderRadius: 2, marginTop:30 }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#e65100', '#fb8c00', '#ffa726']}>
+          <TouchableOpacity style={{padding:10}} onPress={()=>navigation.navigate('RealizeTestVocational')}>
             <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', alignSelf:'center' }} >Terminar y Guardar</Text>
           </TouchableOpacity>
-        </LinearGradient>
+        </LinearGradient> */}
       </ScrollView>
 
     </Layaut>

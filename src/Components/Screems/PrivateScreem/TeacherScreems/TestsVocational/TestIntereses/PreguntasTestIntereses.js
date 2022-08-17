@@ -1,13 +1,12 @@
-import { View, Text, ScrollView, TouchableOpacity, TextInput, Modal, StyleSheet } from 'react-native'
+import { View, Text, ScrollView, TouchableOpacity, Modal, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
 import Layaut from '../../../../../Atoms/StyleLayaut/Layaut'
 import AsyncStorageLib from '@react-native-async-storage/async-storage'
-import axios from 'axios'
 import { PORT_URL } from '../../../../../../PortUrl/PortUrl'
+import axios from 'axios'
 
 const array = []
-const PreguntasTestAptitudes = ({ navigation, route }) => {
-    // const data = route.params.contenido[0].contenido.preguntas
+const PreguntasTestIntereses = ({ navigation, route }) => {
     const data = route.params.contenido[route.params.cont].contenido.preguntas
     // console.log(data)
     const [user, setUser] = useState()
@@ -19,10 +18,9 @@ const PreguntasTestAptitudes = ({ navigation, route }) => {
         pregunta3: '1',
         pregunta4: '1',
         pregunta5: '1',
-
+        pregunta6: '1',
     })
     const [pre, setPre] = useState(null)
-
     //-------------------------------------------------
     const openModalResp = (pregunta) => {
         setPre(pregunta)
@@ -39,60 +37,40 @@ const PreguntasTestAptitudes = ({ navigation, route }) => {
             setChangeData({ ...changeData, pregunta4: num })
         } else if (pre === 'pregunta5') {
             setChangeData({ ...changeData, pregunta5: num })
+        } else if (pre === 'pregunta6') {
+            setChangeData({ ...changeData, pregunta6: num })
         }
         setModalResp(false)
-    }
-    //---------------------HANDLE CHANGE----------------------------
-    const handleChange = (name, value) => {
-        setChangeData({
-            ...changeData,
-            [name]: value
-        })
     }
     //-------------GUARDAR DATOS---------------------
     AsyncStorageLib.getItem('user').then(resp => setUser(JSON.parse(resp)))
     AsyncStorageLib.getItem('event_id').then(resp => setEvent(JSON.parse(resp)))
-    // var user=AsyncStorageLib.getItem('user')
-    // var test=AsyncStorageLib.getItem('test_id')
     const dataSave = () => {
         var serie = route.params.cont + 1
         var name = `Serie-${serie}`
         array.push({ seccion: name, respuestas: changeData, student_id: route.params.student_id, user_id: user, event_id: event })
-        // AsyncStorageLib.setItem(`Serie-${serie}`,changeData.pregunta1+'-'+changeData.pregunta2+'-'+changeData.pregunta3+'-'+changeData.pregunta4+'-'+changeData.pregunta5)
-        // AsyncStorageLib.setItem(`Serie-${serie}`,JSON.stringify([changeData.pregunta1,changeData.pregunta2,changeData.pregunta3,changeData.pregunta4,changeData.pregunta5]))
-        navigation.navigate('PreguntasTestAptitudes', { contenido: route.params.contenido, cont: route.params.cont + 1, student_id: route.params.student_id })
+        navigation.navigate('PreguntasTestIntereses', { contenido: route.params.contenido, cont: route.params.cont + 1, student_id: route.params.student_id })
         setChangeData({
             pregunta1: '1',
             pregunta2: '1',
             pregunta3: '1',
             pregunta4: '1',
             pregunta5: '1',
+            pregunta6: '1',
         })
     }
-    // const respData = []
     const dataSaveAndBack = async (e) => {
         e.preventDefault()
         var serie = route.params.cont + 1
         var name = `Serie-${serie}`
         array.push({ seccion: name, respuestas: changeData, student_id: route.params.student_id, user_id: user, event_id: event })
-        // respData.push({
-        //     ...array,
-        //     // student_id: route.params.student_id,
-        // })
-        // console.log(array)
-        await axios.post(`${PORT_URL}test-aptitudes`, array)
+        await axios.post(`${PORT_URL}test-intereses`, array)
             .then(resp => {
-                // console.log(resp.data)
                 alert(resp.data.message)
-                // navigation.navigate('TestOrientationType')
                 navigation.navigate('TypeTest')
             })
             .catch(err => console.log(err))
-        // console.log(respData)
-        // AsyncStorageLib.setItem(`Serie-${serie}`,JSON.stringify([changeData.pregunta1,changeData.pregunta2,changeData.pregunta3,changeData.pregunta4,changeData.pregunta5]))
     }
-    //-------------------------------------------------
-    // console.log(array)
     return (
         <>
             <Layaut>
@@ -100,7 +78,7 @@ const PreguntasTestAptitudes = ({ navigation, route }) => {
                     <View style={{ width: '75%' }}>
                         <ScrollView>
                             {data ? data.map((e, index) => (
-                                <View key={index} style={{ height: 91 }}>
+                                <View key={index} style={{ height: 71 }}>
                                     <Text style={{ color: 'white', marginHorizontal: 15, marginBottom: 5 }}>{e.content}</Text>
                                 </View>
                             )) : null}
@@ -108,35 +86,40 @@ const PreguntasTestAptitudes = ({ navigation, route }) => {
                     </View>
                     <View style={{ width: '25%' }}>
                         <ScrollView>
-                            <View style={{ height: 91 }}>
+                            <View style={{ height: 70 }}>
                                 <TouchableOpacity onPress={() => openModalResp('pregunta1')} style={styles.styleButtonSelect}>
                                     <Text style={{ alignSelf: 'center', color: 'white', fontFamily: 'Roboto_500Medium', fontSize: 15 }}>{changeData.pregunta1}</Text>
                                 </TouchableOpacity>
                             </View>
-                            <View style={{ height: 100 }}>
+                            <View style={{ height: 70 }}>
                                 <TouchableOpacity onPress={() => openModalResp('pregunta2')} style={styles.styleButtonSelect}>
                                     <Text style={{ alignSelf: 'center', color: 'white', fontFamily: 'Roboto_500Medium', fontSize: 15 }}>{changeData.pregunta2}</Text>
                                 </TouchableOpacity>
                             </View>
-                            <View style={{ height: 100 }}>
+                            <View style={{ height: 70 }}>
                                 <TouchableOpacity onPress={() => openModalResp('pregunta3')} style={styles.styleButtonSelect}>
                                     <Text style={{ alignSelf: 'center', color: 'white', fontFamily: 'Roboto_500Medium', fontSize: 15 }}>{changeData.pregunta3}</Text>
                                 </TouchableOpacity>
                             </View>
-                            <View style={{ height: 100 }}>
+                            <View style={{ height: 70 }}>
                                 <TouchableOpacity onPress={() => openModalResp('pregunta4')} style={styles.styleButtonSelect}>
                                     <Text style={{ alignSelf: 'center', color: 'white', fontFamily: 'Roboto_500Medium', fontSize: 15 }}>{changeData.pregunta4}</Text>
                                 </TouchableOpacity>
                             </View>
-                            <View style={{ height: 100 }}>
+                            <View style={{ height: 70 }}>
                                 <TouchableOpacity onPress={() => openModalResp('pregunta5')} style={styles.styleButtonSelect}>
                                     <Text style={{ alignSelf: 'center', color: 'white', fontFamily: 'Roboto_500Medium', fontSize: 15 }}>{changeData.pregunta5}</Text>
+                                </TouchableOpacity>
+                            </View>
+                            <View style={{ height: 70 }}>
+                                <TouchableOpacity onPress={() => openModalResp('pregunta6')} style={styles.styleButtonSelect}>
+                                    <Text style={{ alignSelf: 'center', color: 'white', fontFamily: 'Roboto_500Medium', fontSize: 15 }}>{changeData.pregunta6}</Text>
                                 </TouchableOpacity>
                             </View>
                         </ScrollView>
                     </View>
                 </View>
-                {route.params.cont == 10 ? (
+                {route.params.cont == 9 ? (
                     <TouchableOpacity onPress={dataSaveAndBack} style={{ alignSelf: 'center', width: '30%', borderRadius: 3, backgroundColor: 'red', margin: 10, padding: 15 }}>
                         <Text style={{ color: 'white', alignSelf: 'center' }}>Volver y Guardar</Text>
                     </TouchableOpacity>
@@ -146,11 +129,8 @@ const PreguntasTestAptitudes = ({ navigation, route }) => {
                         <Text style={{ color: 'white', alignSelf: 'center' }}>Siguiente</Text>
                     </TouchableOpacity>
                 )}
-                {/* <TouchableOpacity onPress={openModalResp} style={{ backgroundColor: 'red' }}>
-                        <Text>pruba</Text>
-                    </TouchableOpacity> */}
-
             </Layaut >
+            {/* -------------------------------------MODAL------------------ */}
             <Modal
                 visible={modalResp}
                 animationType='fade'
@@ -170,6 +150,9 @@ const PreguntasTestAptitudes = ({ navigation, route }) => {
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => closeModalResp(4)} style={styles.buttonNum}>
                                 <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', fontSize: 20 }}>4</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => closeModalResp(5)} style={styles.buttonNum}>
+                                <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', fontSize: 20 }}>5</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -205,4 +188,4 @@ const styles = StyleSheet.create({
         borderRadius: 2,
     }
 })
-export default PreguntasTestAptitudes
+export default PreguntasTestIntereses

@@ -139,14 +139,14 @@ const TeacherHomeScreem = ({ navigation }) => {
 
 
 
-        {/* <Tab.Screen name="RealizeTestVocational" component={RealizeTestVocational} options={{
+        <Tab.Screen name="RealizeTestVocational" component={RealizeTestVocational} options={{
           headerLeft: () => (perfil),
           headerTitle: '',
           title: 'R.Test',
           headerStyle: { backgroundColor: '#000010' },
           headerTintColor: 'white',
           tabBarLabelStyle: { fontFamily: 'Roboto_700Bold' },
-        }} /> */}
+        }} />
 
         
         {/* <Tab.Screen name="HomeAdminTestVocational" component={HomeAdminTestVocational} options={{

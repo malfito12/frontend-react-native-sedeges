@@ -54,9 +54,11 @@ const RealizeTestVocational = ({navigation}) => {
   //-------------------------------------------
   const realizeTest=(e)=>{
     AsyncStorageLib.setItem('event_id',JSON.stringify(e))
-    navigation.navigate('TestOrientationType')
+    // navigation.navigate('TestOrientationType')
+    navigation.navigate('SearchStudent',{event_id:e})
   }
   //-------------------------------------------
+  // console.log(event)
   return (
     <Layaut>
       <ScrollView
