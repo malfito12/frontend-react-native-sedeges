@@ -10,6 +10,7 @@ import HomeAdminTestVocational from './TestsVocational/HomeAdminTestVocational'
 import UsersScreem from '../Users/UsersScreem'
 import ListViewEvents from './Eventos/ListViewEvents'
 import RealizeTestVocational from './TestsVocational/RealizeTestVocational'
+import ListViewReceptions from './Receptions/ListViewReceptions'
 
 
 const Tab = createBottomTabNavigator()
@@ -73,6 +74,31 @@ const TeacherHomeScreem = ({ navigation }) => {
             </View>
           )
         }} />
+        <Tab.Screen name="ListViewReceptions" component={ListViewReceptions} options={{
+          // headerLeft: () => (perfil),
+          headerLeft: () => (
+            <View style={{ marginHorizontal: 20 }}>
+              <TouchableOpacity onPress={logout} style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <MaterialCommunityIcons name="logout" size={24} color="red" />
+                <Text style={{ color: 'red' }}>Cerrar Sesión</Text>
+              </TouchableOpacity>
+            </View>
+          ),
+          headerTitle: '',
+          tabBarLabel: 'Recepciones',
+          headerStyle: { backgroundColor: '#000010' },
+          headerTintColor: 'white',
+          tabBarLabelStyle: { fontFamily: 'Roboto_700Bold' },
+          tabBarIcon: ({ size, color }) => (<FontAwesome5 name="school" size={size} color={color} />),
+          headerRight: () => (
+            <View style={{ marginRight: 30 }}>
+              <TouchableOpacity onPress={() => navigation.push('RegisterReception')}>
+                <MaterialIcons name="add" size={26} color="white" />
+              </TouchableOpacity>
+            </View>
+          )
+        }} />
+
         <Tab.Screen name="StudentsAdminScreem" component={StudentsAdminScreem} options={{
           // headerLeft: () => (perfil),
           headerLeft: () => (
@@ -97,6 +123,7 @@ const TeacherHomeScreem = ({ navigation }) => {
             </View>
           )
         }} />
+        
         {/* <Tab.Screen name="HomeAdminTestScreem" component={HomeAdminTestScreem} options={{
           // headerLeft: () => (perfil),
           headerLeft: () => (
@@ -139,16 +166,16 @@ const TeacherHomeScreem = ({ navigation }) => {
 
 
 
-        <Tab.Screen name="RealizeTestVocational" component={RealizeTestVocational} options={{
+        {/* <Tab.Screen name="RealizeTestVocational" component={RealizeTestVocational} options={{
           headerLeft: () => (perfil),
           headerTitle: '',
           title: 'R.Test',
           headerStyle: { backgroundColor: '#000010' },
           headerTintColor: 'white',
           tabBarLabelStyle: { fontFamily: 'Roboto_700Bold' },
-        }} />
+        }} /> */}
 
-        
+
         {/* <Tab.Screen name="HomeAdminTestVocational" component={HomeAdminTestVocational} options={{
           headerLeft: () => (perfil),
           headerTitle: '',

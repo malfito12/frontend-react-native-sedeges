@@ -5,7 +5,7 @@ import AsyncStorageLib from '@react-native-async-storage/async-storage'
 import { PORT_URL } from '../../../../../../PortUrl/PortUrl'
 import axios from 'axios'
 
-const array = []
+var array = []
 const PreguntasTestIntereses = ({ navigation, route }) => {
     const data = route.params.contenido[route.params.cont].contenido.preguntas
     // console.log(data)
@@ -66,8 +66,9 @@ const PreguntasTestIntereses = ({ navigation, route }) => {
         array.push({ seccion: name, respuestas: changeData, student_id: route.params.student_id, user_id: user, event_id: event })
         await axios.post(`${PORT_URL}test-intereses`, array)
             .then(resp => {
+                array=[]
                 alert(resp.data.message)
-                navigation.navigate('TypeTest')
+                navigation.navigate('TypeTest',{student_id:route.params.student_id})
             })
             .catch(err => console.log(err))
     }

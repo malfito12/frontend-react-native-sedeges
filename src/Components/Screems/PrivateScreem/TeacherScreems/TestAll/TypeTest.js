@@ -12,37 +12,19 @@ const TypeTest = ({ navigation, route }) => {
     useFocusEffect(
         useCallback(() => {
             let isActive = true
-            // getResultsAptitudes()
-            getResultsIntereses()
+            getResultsAptitudes()
             return () => {isActive = false }
         }, [])
     )
-    // useEffect(() => {
-    //     const timer = setTimeout(() => {
-    //         setIsVisible(false);
-    //     });
-    //     return () => {
-    //         clearTimeout(timer);
-    //     }
-    // }, []);
 
     const getResultsAptitudes = async () => {
         await axios.get(`${PORT_URL}get-result-type-test-aptitudes?event_id=${route.params.event_id}&student_id=${route.params.student_id}`)
             .then(resp => {
-                setResultAptitudes(resp.data.message)
+                setResultAptitudes(resp.data.resultAp)
+                setResultIntereses(resp.data.resultIn)
             })
             .catch(err => console.log(err))
     }
-    const getResultsIntereses = async () => {
-        await axios.get(`${PORT_URL}get-result-type-test-intereses?event_id=${route.params.event_id}&student_id=${route.params.student_id}`)
-            .then(resp => {
-                setResultIntereses(resp.data.message)
-            })
-            .catch(err => console.log(err))
-    }
-    // console.log(resultAptitudes)
-    // console.log('---------------------')
-    // console.log(resultIntereses)
     return (
         <Layaut>
 

@@ -1,5 +1,5 @@
 import { View, Text, TextInput, Platform, TouchableOpacity, StyleSheet, ScrollView, Modal } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Layaut from '../../../../Atoms/StyleLayaut/Layaut'
 import { LinearGradient } from 'expo-linear-gradient'
 import DateTimePicker from '@react-native-community/datetimepicker'
@@ -21,6 +21,7 @@ const RegisterStudent = ({ navigation }) => {
     const [progress, setProgress] = useState(false)
     const [open, setOpen] = useState(false)
     const [textData, setTextData] = useState('')
+    const [reception, setReception] = useState([])
     const [changeData, setChangeData] = useState({
         firstName: '',
         lastNameFather: '',
@@ -30,8 +31,23 @@ const RegisterStudent = ({ navigation }) => {
         sex: '',
         ocupation: '',
         ci: '',
-        nameInstitution: '',
+        reception_id: ''
+        // nameInstitution: '',
     })
+
+    useEffect(() => {
+        getReceptions()
+    }, [])
+    //------GET RECEPTIONS-------------------
+    const getReceptions = async () => {
+        await axios.get(`${PORT_URL}get-receptions`)
+            .then(resp => {
+                setReception(resp.data)
+            })
+            .catch(err => console.log(err))
+    }
+
+
     const openModalDate = (e) => {
         setOpen(true)
     }
@@ -64,13 +80,13 @@ const RegisterStudent = ({ navigation }) => {
             changeData.age == '' ||
             changeData.sex == '' ||
             changeData.ocupation == '' ||
-            changeData.nameInstitution == '' ||
+            changeData.reception_id == '' ||
             changeData.ci == '') {
             setMessage('Llene todos los datos')
             openModalAlertError()
             return
         }
-        console.log(changeData)
+        // console.log(changeData)
         const data = ({
             firstName: changeData.firstName.trim().replace(/\s\s+/g, ' '),
             lastNameFather: changeData.lastNameFather.trim().replace(/\s\s+/g, ' '),
@@ -80,9 +96,10 @@ const RegisterStudent = ({ navigation }) => {
             sex: changeData.sex.trim().replace(/\s\s+/g, ' '),
             ocupation: changeData.ocupation.trim().replace(/\s\s+/g, ' '),
             ci: changeData.ci.trim().replace(/\s\s+/g, ' '),
-            nameInstitution: changeData.nameInstitution.trim().replace(/\s\s+/g, ' '),
             user_id: idUser,
+            reception_id: changeData.reception_id
         })
+        // console.log(data)
         setProgress(true)
         await axios.post(`${PORT_URL}student`, data)
             .then(resp => {
@@ -98,13 +115,14 @@ const RegisterStudent = ({ navigation }) => {
                     sex: '',
                     ocupation: '',
                     ci: '',
-                    nameInstitution: ''
+                    nameInstitution: '',
+                    reception_id: ''
                 })
                 // navigation.popToTop('StudentsAdminScreem')
             })
             .catch(err => {
                 setProgress(false)
-                if(err.response){
+                if (err.response) {
                     setMessage(err.response.data.message)
                     openModalAlertError()
                 }
@@ -114,6 +132,7 @@ const RegisterStudent = ({ navigation }) => {
     }
     //--------------CHANGE DATA--------------------
     const handleChange = (name, value) => {
+        // console.log(value)
         setChangeData({
             ...changeData,
             [name]: value
@@ -123,8 +142,8 @@ const RegisterStudent = ({ navigation }) => {
         <>
             <Layaut>
                 <ScrollView>
+                    {/* <Text style={{ color: 'white', marginBottom: 10, alignSelf: 'center', fontFamily: 'Roboto_500Medium' }}>Datos Personales</Text> */}
                     <View style={{ marginBottom: 10, padding: 5, borderRadius: 4 }}>
-                        <Text style={{ color: 'white', marginBottom: 10, alignSelf: 'center', fontFamily: 'Roboto_500Medium' }}>Datos Personales</Text>
                         <Text style={{ color: 'white', marginBottom: 10, fontFamily: 'Roboto_400Regular' }}>Nombre Completo</Text>
                         <TextInput
                             style={styles.input}
@@ -227,15 +246,16 @@ const RegisterStudent = ({ navigation }) => {
                                 style={{ color: 'white', height: 40 }}
                                 itemStyle={{ color: 'red' }}
                                 // selectedValue={selectedLanguage.tipo}
-                                selectedValue={changeData.nameInstitution}
+                                selectedValue={changeData.reception_id}
                                 onValueChange={(itemValue, itemIndex) =>
-                                    handleChange('nameInstitution', itemValue)
+                                    handleChange('reception_id', itemValue)
                                 }>
-                                <Picker.Item label="Seleccione ..." style={{ fontSize: 14 }} value="" />
-                                <Picker.Item label="Sedes Potosi" style={{ fontSize: 14 }} value="Sedes Potosi" />
-                                <Picker.Item label="Sedes Pueblito 1" style={{ fontSize: 14 }} value="Sedes Pueblito 1" />
-                                <Picker.Item label="Sedes Pueblito 2" style={{ fontSize: 14 }} value="Sedes Pueblito 2" />
-                                <Picker.Item label="Sedes Pueblito 3" style={{ fontSize: 14 }} value="Sedes Pueblito 3" />
+
+                                <Picker.Item label='Selecciones...' value='' style={{ fontSize: 14 }} />
+                                {reception.length > 0 ? reception.map((e, index) => (
+                                    <Picker.Item key={e.reception_id} label={e.reception_name} value={e.reception_id} style={{ fontSize: 14 }} />
+
+                                )) : (null)}
                             </Picker>
                         </View>
                         <LinearGradient style={{ borderRadius: 2 }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#00c853', '#64dd17', '#aeea00']}>

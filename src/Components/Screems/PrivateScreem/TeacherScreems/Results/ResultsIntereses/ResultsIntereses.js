@@ -1,19 +1,24 @@
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native'
-import React, { useState, useEffect } from 'react'
-import Layaut from '../../../../Atoms/StyleLayaut/Layaut'
+import React, { useCallback, useState } from 'react'
+import Layaut from '../../../../../Atoms/StyleLayaut/Layaut'
+import { useFocusEffect } from '@react-navigation/native'
+import { PORT_URL } from '../../../../../../PortUrl/PortUrl'
 import axios from 'axios'
-import { PORT_URL } from '../../../../../PortUrl/PortUrl'
 
-const ResultsAptitudes = ({ navigation, route }) => {
-    console.log(route.params.data)
-    const [students, setStudents] = useState([])
+const ResultsIntereses = ({navigation,route}) => {
+  const [students, setStudents] = useState([])
 
-    useEffect(() => {
-        getStudents()
-    }, [])
+    useFocusEffect(
+        useCallback(() => {
+            let isActive = true
+            getStudents()
+            return () => { isActive = false }
+        }, [])
+    )
+    
     //-----------GET STUDNETS------------------
     const getStudents = async () => {
-        await axios.get(`${PORT_URL}test-aptitudes-students/${route.params.data.event_id}`)
+        await axios.get(`${PORT_URL}test-intereses-students/${route.params.data.event_id}`)
         .then(resp=>{
             setStudents(resp.data)
         })
@@ -22,7 +27,7 @@ const ResultsAptitudes = ({ navigation, route }) => {
     //-----------------------------------------
     const resultStudent=(e)=>{
         // alert(JSON.stringify(e))
-        navigation.push('ResultsAptitudStudent',{data:e})
+        navigation.push('ResultsInteresStudent',{data:e})
     }
     // console.log(students)
     return (
@@ -48,4 +53,4 @@ const ResultsAptitudes = ({ navigation, route }) => {
     )
 }
 
-export default ResultsAptitudes
+export default ResultsIntereses

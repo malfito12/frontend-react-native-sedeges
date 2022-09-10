@@ -159,7 +159,8 @@ const ListViewEvents = ({navigation}) => {
                                     {/* <TouchableOpacity > */}
                                         <CancelButton name={'Eliminar'} />
                                     </TouchableOpacity>
-                                    <TouchableOpacity onPress={() => navigation.navigate('ResultsAdminScreem', { data: e })} style={{ alignSelf: 'center', borderRadius: 3, backgroundColor: '#ffa726', margin: 5, padding: 4 }}>
+                                    {/* <TouchableOpacity onPress={() => navigation.navigate('ResultsAdminScreem', { data: e })} style={{ alignSelf: 'center', borderRadius: 3, backgroundColor: '#ffa726', margin: 5, padding: 4 }}> */}
+                                    <TouchableOpacity onPress={() => navigation.navigate('ListViewStudentsResult', { data: e })} style={{ alignSelf: 'center', borderRadius: 3, backgroundColor: '#ffa726', margin: 5, padding: 4 }}>
                                     {/* <TouchableOpacity style={{ alignSelf: 'center', borderRadius: 3, backgroundColor: '#ffa726', margin: 5, padding: 4 }}> */}
                                         <Text style={{ fontFamily: 'Roboto_500Medium', color: 'white', alignSelf: 'center' }}>Resultados</Text>
                                     </TouchableOpacity>
