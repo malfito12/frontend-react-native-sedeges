@@ -77,7 +77,7 @@ const RealizeTestScreem = ({ navigation }) => {
                 </View>
                 <LinearGradient style={{width: '50%',borderRadius: 5,}} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#e65100', '#fb8c00', '#ffa726']}>
                   <TouchableOpacity onPress={() => prueba(e)} style={styles.buttonGoTest}>
-                    <Text style={styles.textStyles}>Iniciar Test</Text>
+                    <Text style={styles.textStyles}>Iniciar Testssss</Text>
                   </TouchableOpacity>
                 </LinearGradient>
               </View>

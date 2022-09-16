@@ -1,95 +1,72 @@
 import { View, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import Layaut from '../../../../Atoms/StyleLayaut/Layaut'
 import AsyncStorageLib from '@react-native-async-storage/async-storage'
 import { data } from '../../../../../TestData/TestData'
+import { useFocusEffect } from '@react-navigation/native'
 
-var lala1=0
+var lala1 = 0
 const InicioTest = ({ navigation, route }) => {
     const [test, setTest] = useState([])
-    useEffect(() => {
-        getTest()
-    }, [])
-    const getTest = async () => {
-        // await AsyncStorageLib.getItem('test').then(resp => {
+    const [result, setResult] = useState([])
+
+    useFocusEffect(
+        useCallback(() => {
+            let isActive = true
+            getInformacion()
+            return () => { isActive = false }
+        }, [])
+    )
+
+    //--------------OBTENER INFORMACION DE PREGUNTAS-------------------
+    const getInformacion = async () => {
         await AsyncStorageLib.getItem('event_id').then(resp => {
             setTest(JSON.parse(resp))
         })
-    }
-    //-----------------------------------
-
-    // const lala2=lala
-    // const lala2=data
-    
-    // console.log(lala2)
-
-    const newArray=[]
-    // for (var i = 0; i < lala2.length; i++) {
-    //     var num=i+1
-    //     var nuevo
-    //     if(num==1){
-    //         nuevo=route.params.avance1
-    //     }else if(num==2){
-    //         nuevo=route.params.avance2
-    //     }else if(num==3){
-    //         nuevo=route.params.avance3
-    //     }
-    //     if (route.params.id_cartegory === lala2[i].categoria) {
-    //         if(nuevo===0){
-    //             newArray.push(lala2[i])
-    //         }
-    //     }
-    //     // console.log('llena')
-    // }
-    //----------------------------------------------
-    // const go=(e)=>{
-    //     // console.log(newArray)
-    //     for(var i =0;i<newArray.length;i++){
-    //         if(e===newArray[i].id){
-    //             navigation.navigate('Instructions', { title: newArray[i].title, id: newArray[i].id, contenido: newArray[i].contenido, categoria:newArray[i].categoria, })
-    //             break
-    //         }
-    //     }
-    // }
-    //----------------------------------------------
-    for(var i=0;i<data.length;i++){
-        if(route.params.id_cartegory===data[i].categoria){
-            newArray.push(data[i])
+        if (route.params.factor === 'RELACIONES ESPACIALES') {
+            var resp = require('../../../../../TestData/DataMadurezMental')
+            setResult(resp.relacionesEspaciales)
+        } else if (route.params.factor === 'RAZONAMIENTO LOGICO') {
+            var resp = require('../../../../../TestData/DataMadurezMental')
+            setResult(resp.razonamientoLogico)
+        } else if (route.params.factor === 'RAZONAMIENTO NUMERICO') {
+            var resp = require('../../../../../TestData/DataMadurezMental')
+            setResult(resp.razonamientoNumerico)
+        } else if (route.params.factor === 'CONCEPTOS VERVALES') {
+            var resp = require('../../../../../TestData/DataMadurezMental')
+            setResult(resp.conceptosVervales)
         }
     }
-    // const go=(e)=>{
-    //     navigation.navigate('Instructions', { title: newArray[i].title, id: newArray[i].id, contenido: newArray[i].contenido, categoria:newArray[i].categoria, })
-    // }
-
-    // console.log(newArray)
-    // console.log(newData)
+    console.log(result)
 
     return (
         <Layaut>
-            {/* <Text style={{ color: 'white' }}>Lee Atentamente cada grupo de oraciones escritas con letras mayusculas, asi como las 
-            tres posibles respuestas, luego escoja la mas adecuada y consigne la letra de su respues</Text> */}
-            <Text style={{ color: 'white', alignSelf: 'center' }}>{test.event_name}</Text>
-            <Text style={{ color: 'white', alignSelf: 'center' }}>{test.event_description}</Text>
-            <Text style={{ color: 'white', alignSelf: 'center' }}>{route.params.categoria}</Text>
-            <FlatList
-                data={newArray}
-                // data={tests}
-                style={{ width: '100%' }}
-                keyExtractor={item => item.id}
-                renderItem={p => (
-                    <View style={styles.testView}>
-                        <View>
-                            <Text style={{fontFamily:'Roboto_500Medium'}}>{p.item.title}</Text>
-                            {/* <Text>{p.item.test_description}</Text> */}
-                        </View>
-                        {/* <TouchableOpacity onPress={() => navigation.navigate('Instructions', { title: p.item.title, id: p.item.id, contenido: p.item.contenido, categoria:p.item.categoria })} style={{ backgroundColor: '#78e08f', padding: 10, borderRadius: 3 }}> */}
-                        <TouchableOpacity onPress={() => navigation.navigate('Instructions', { title: p.item.title, id: p.item.id, contenido: p.item.contenido, categoria:p.item.categoria })} style={{ backgroundColor: '#78e08f', padding: 10, borderRadius: 3 }}>
-                        {/* <TouchableOpacity onPress={() => go(p.item.id)} style={{ backgroundColor: '#78e08f', padding: 10, borderRadius: 25 }}> */}
-                            <Text style={{ color: 'white',fontFamily:'Roboto_400Regular_Italic' }}>Comenzar</Text>
-                        </TouchableOpacity>
-                    </View>
-                )}
-            />
+            {result.length>0 ? (
+                <>
+                    {/* <Text style={{ color: 'white', alignSelf: 'center' }}>{test.event_name}</Text>
+                    <Text style={{ color: 'white', alignSelf: 'center' }}>{test.event_description}</Text> */}
+                    <Text style={{ color: 'white', alignSelf: 'center' }}>{result[0].factor}</Text>
+                    <FlatList
+                        data={result}
+                        // data={tests}
+                        style={{ width: '100%' }}
+                        keyExtractor={item => item.id}
+                        renderItem={p => (
+                            <View style={styles.testView}>
+                                <View>
+                                    <Text style={{ fontFamily: 'Roboto_500Medium' }}>{p.item.title}</Text>
+                                    {/* <Text>{p.item.test_description}</Text> */}
+                                </View>
+                                {/* <TouchableOpacity onPress={() => navigation.navigate('Instructions', { title: p.item.title, id: p.item.id, contenido: p.item.contenido, categoria:p.item.categoria })} style={{ backgroundColor: '#78e08f', padding: 10, borderRadius: 3 }}> */}
+                                <TouchableOpacity onPress={() => navigation.navigate('Instructions', { title: p.item.title, id: p.item.id, contenido: p.item.contenido, factor: p.item.factor,description:p.item.description })} style={{ backgroundColor: '#78e08f', padding: 10, borderRadius: 3 }}>
+                                    {/* <TouchableOpacity onPress={() => go(p.item.id)} style={{ backgroundColor: '#78e08f', padding: 10, borderRadius: 25 }}> */}
+                                    <Text style={{ color: 'white', fontFamily: 'Roboto_400Regular_Italic' }}>Comenzar</Text>
+                                </TouchableOpacity>
+                            </View>
+                        )}
+                    />
+                </>
+            ) : (null)}
         </Layaut>
     )
 }

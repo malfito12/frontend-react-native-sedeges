@@ -48,7 +48,7 @@ const SearchStudent = ({navigation,route}) => {
                     <View key={index} style={{ padding: 10 }}>
                         {/* <Text style={{ color: 'white' }}>id: {e.student_id}</Text> */}
                         <Text style={{ color: 'white' }}>Nombres: {e.student_first_name}</Text>
-                        <Text style={{ color: 'white' }}>Apellidos: {e.student_last_name}</Text>
+                        <Text style={{ color: 'white' }}>Apellidos: {e.student_last_father_name} {e.student_last_mother_name}</Text>
                         <Text style={{ color: 'white' }}>Sexo: {e.student_sex}</Text>
                         <Text style={{ color: 'white' }}>Edad: {e.student_age}</Text>
                         <Text style={{ color: 'white' }}>Ocupación: {e.student_ocupation}</Text>

@@ -19,23 +19,6 @@ const RealizeTestVocational = ({navigation}) => {
       return () => { isActive = false }
     }, [])
   )
-  // useEffect(() => {
-  //   // let isRendered = true
-  //   //     axios.get(`${PORT_URL}testsAptitudesStatus`)
-  //   //         .then(resp => {
-  //   //             if (isRendered) {
-  //   //                 setTests(resp.data)
-  //   //             }
-  //   //             return null
-  //   //         })
-  //   //         .catch(err => console.log(err))
-  //   //     // getTests()
-  //   //     return () => {
-  //   //         isRendered = false
-  //   //     }
-  //   // getTestsStatus()
-  //   getEvent()
-  // }, [])
 
   const getEvent=async()=>{
     await axios.get(`${PORT_URL}get-event-status`)

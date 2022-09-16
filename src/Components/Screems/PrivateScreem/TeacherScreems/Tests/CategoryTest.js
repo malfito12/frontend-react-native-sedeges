@@ -8,31 +8,13 @@ import AsyncStorageLib from '@react-native-async-storage/async-storage'
 import { LinearGradient } from 'expo-linear-gradient'
 
 const CategoryTest = ({ navigation, route }) => {
-  // const [avance, setAvance] = useState({
-  //   test1: 0,
-  //   test2: 0,
-  //   test3: 0,
-  //   test4: 0,
-  // })
-  // useEffect(()=>{
-  //   getData()
-  // },[])
-  // const getData=async()=>{
-  //   await AsyncStorageLib.getItem('prueba')
-  //   .then(resp=>{
-  //     if(resp){
-  //       setAvance({
-  //         ...avance,
-  //         test1:JSON.parse(resp)
-  //       })
-  //     }
-  //   })
-  //   // AsyncStorageLib.getItem('rol').then(resp => setRol(JSON.parse(resp)))
-  //   // if(aa){
-  //   //   setAvance({test1:aa})
-  //   // }
-  // }
-  // console.log(avance.test1)
+
+  const data=[
+    {title:'RELACIONES ESPACIALES',image:TestGrafico,navi:()=>navigation.navigate('InicioTest',{factor:'RELACIONES ESPACIALES'})},
+    {title:'RAZONAMIENTO LOGICO',image:TestAnalitico,navi:()=>navigation.navigate('InicioTest',{factor:'RAZONAMIENTO LOGICO'})},
+    {title:'RAZONAMIENTO NUMERICO',image:TestMatematico,navi:()=>navigation.navigate('InicioTest',{factor:'RAZONAMIENTO NUMERICO'})},
+    {title:'CONCEPTOS VERVALES',image:TestGrafico,navi:()=>navigation.navigate('InicioTest',{factor:'CONCEPTOS VERVALES'})},
+  ]
 
   const categoryDat = [
     {
@@ -43,9 +25,6 @@ const CategoryTest = ({ navigation, route }) => {
         {
           categoria: 'TEST GRAFICO',
           id_cartegory: 'test-grafico',
-          // avance1:avance.test1,
-          // avance2:avance.test2,
-          // avance3:avance.test3,
         })
     },
     {
@@ -84,9 +63,9 @@ const CategoryTest = ({ navigation, route }) => {
       /> */}
       <ScrollView>
 
-        {categoryDat.map((e, index) => (
+        {data.map((e, index) => (
           <View key={index} style={{ marginBottom: 10 }}>
-            <TouchableOpacity onPress={e.direction} style={styles.testView}>
+            <TouchableOpacity onPress={e.navi}  style={styles.testView}>
               <ImageBackground source={e.image} resizeMode='cover' style={styles.ImageView} imageStyle={{ borderRadius: 5, }} />
               <View style={{ padding: 30 }}>
                 <Text style={{ alignSelf: 'center', color: 'white', fontFamily: 'Roboto_500Medium' }}>{e.title}</Text>
