@@ -37,6 +37,7 @@ import ListViewStudentsReception from '../../Screems/PrivateScreem/TeacherScreem
 import ResultsIntereses from '../../Screems/PrivateScreem/TeacherScreems/Results/ResultsIntereses/ResultsIntereses'
 import ResultsInteresStudent from '../../Screems/PrivateScreem/TeacherScreems/Results/ResultsIntereses/ResultsInteresStudent'
 import ListViewStudentsResult from '../../Screems/PrivateScreem/TeacherScreems/Results/ListStudent/ListViewStudentsResult'
+import RazonamientoNumerico from '../../Screems/PrivateScreem/TeacherScreems/SerieTests/CategoriaTests/Perguntas/RazonamientoNumerico'
 
 const Stack = createNativeStackNavigator()
 
@@ -442,8 +443,16 @@ const Navigation = () => {
                             options={{
                                 headerStyle: { backgroundColor: '#000010' },
                                 headerTintColor: 'white',
-                                title: 'Preguntas',
-                                headerLeft: () => <></>,
+                                title: 'Razonamiento Numerico',
+                            }}
+                        />
+                        <Stack.Screen
+                            name='RazonamientoNumerico'
+                            component={RazonamientoNumerico}
+                            options={{
+                                headerStyle: { backgroundColor: '#000010' },
+                                headerTintColor: 'white',
+                                title: 'Razonamiento Numerico',
                             }}
                         />
                     </>

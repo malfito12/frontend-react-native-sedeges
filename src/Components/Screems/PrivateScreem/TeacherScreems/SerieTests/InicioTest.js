@@ -37,7 +37,7 @@ const InicioTest = ({ navigation, route }) => {
             setResult(resp.conceptosVervales)
         }
     }
-    console.log(result)
+    // console.log(result)
 
     return (
         <Layaut>

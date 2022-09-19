@@ -50,7 +50,7 @@ const Instructions = ({ navigation, route }) => {
                     <Text style={styles.textFont}>Instructions</Text>
                     <Text style={styles.textFont}>{route.params.title}</Text>
                     <Text style={styles.textFont}>{route.params.contenido.instructions}</Text>
-                    <TouchableOpacity style={styles.buttonStart} >
+                    <TouchableOpacity style={styles.buttonStart} onPress={()=>navigation.navigate('RazonamientoNumerico',{ data: preguntas, cont: 0, title: route.params.title})} >
                         <Text style={styles.textFont}>Vamos!!</Text>
                     </TouchableOpacity>
                 </View>
