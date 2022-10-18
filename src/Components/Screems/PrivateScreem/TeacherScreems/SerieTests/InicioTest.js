@@ -32,16 +32,16 @@ const InicioTest = ({ navigation, route }) => {
         } else if (route.params.factor === 'RAZONAMIENTO NUMERICO') {
             var resp = require('../../../../../TestData/DataMadurezMental')
             setResult(resp.razonamientoNumerico)
-        } else if (route.params.factor === 'CONCEPTOS VERVALES') {
+        } else if (route.params.factor === 'CONCEPTOS VERBALES') {
             var resp = require('../../../../../TestData/DataMadurezMental')
-            setResult(resp.conceptosVervales)
+            setResult(resp.conceptosVerBales)
         }
     }
     // console.log(result)
 
     return (
         <Layaut>
-            {result.length>0 ? (
+            {result.length > 0 ? (
                 <>
                     {/* <Text style={{ color: 'white', alignSelf: 'center' }}>{test.event_name}</Text>
                     <Text style={{ color: 'white', alignSelf: 'center' }}>{test.event_description}</Text> */}
@@ -58,7 +58,16 @@ const InicioTest = ({ navigation, route }) => {
                                     {/* <Text>{p.item.test_description}</Text> */}
                                 </View>
                                 {/* <TouchableOpacity onPress={() => navigation.navigate('Instructions', { title: p.item.title, id: p.item.id, contenido: p.item.contenido, categoria:p.item.categoria })} style={{ backgroundColor: '#78e08f', padding: 10, borderRadius: 3 }}> */}
-                                <TouchableOpacity onPress={() => navigation.navigate('Instructions', { title: p.item.title, id: p.item.id, contenido: p.item.contenido, factor: p.item.factor,description:p.item.description })} style={{ backgroundColor: '#78e08f', padding: 10, borderRadius: 3 }}>
+                                <TouchableOpacity
+                                    onPress={() => navigation.navigate('Instructions', {
+                                        title: p.item.title,
+                                        id: p.item.id,
+                                        contenido: p.item.contenido,
+                                        factor: p.item.factor,
+                                        description: p.item.description,
+                                        student_id: route.params.student_id
+                                    })}
+                                    style={{ backgroundColor: '#78e08f', padding: 10, borderRadius: 3 }}>
                                     {/* <TouchableOpacity onPress={() => go(p.item.id)} style={{ backgroundColor: '#78e08f', padding: 10, borderRadius: 25 }}> */}
                                     <Text style={{ color: 'white', fontFamily: 'Roboto_400Regular_Italic' }}>Comenzar</Text>
                                 </TouchableOpacity>

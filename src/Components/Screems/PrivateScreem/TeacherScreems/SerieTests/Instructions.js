@@ -8,11 +8,21 @@ const Instructions = ({ navigation, route }) => {
         newArray.push(route.params.contenido.preguntas[i])
     }
     var preguntas = []
-    for (var i = 0; i < 5; i++) {
-        var rand = Math.floor(Math.random() * newArray.length)// conbierte la posicion del array en numero entero
-        var rValue = newArray[rand]//obtiene el dato del array por el numero
-        const aa = newArray.splice(rand, 1)
-        preguntas.push(rValue)
+    if (route.params.factor === 'CONCEPTOS VERBALES') {
+        for (var i = 0; i < 10; i++) {
+            var rand = Math.floor(Math.random() * newArray.length)// conbierte la posicion del array en numero entero
+            var rValue = newArray[rand]//obtiene el dato del array por el numero
+            const aa = newArray.splice(rand, 1)
+            preguntas.push(rValue)
+        }
+    } else {
+        for (var i = 0; i < 5; i++) {
+            var rand = Math.floor(Math.random() * newArray.length)// conbierte la posicion del array en numero entero
+            var rValue = newArray[rand]//obtiene el dato del array por el numero
+            const aa = newArray.splice(rand, 1)
+            preguntas.push(rValue)
+        }
+
     }
     // console.log(preguntas)
     // console.log(route.params.title)
@@ -25,14 +35,34 @@ const Instructions = ({ navigation, route }) => {
                     <Text style={styles.textFont}>Instructions</Text>
                     <Text style={styles.textFont}>{route.params.title}</Text>
                     <Text style={styles.textFont}>{route.params.contenido.instructions}</Text>
-                    <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                        {route.params.contenido.ejm.resp.map((e, index) => (
-                            <View key={index} style={{ margin: 10 }}>
-                                <Image style={{ width: 120, height: 120, marginBottom: 10, alignSelf: 'center' }} source={e.respuesta} />
+                    {route.params.id == 1 ? (
+                        <View style={{ margin: 10 }}>
+                            <Image style={{ borderRadius: 75, width: 150, height: 150, marginBottom: 10, alignSelf: 'center' }} source={route.params.contenido.ejm.resp.respuesta} />
+                        </View>
+                    ) : route.params.id == 2 ? (
+                        <>
+                            <View style={{ margin: 10 }}>
+                                <Image style={{ borderRadius: 5, width: 100, height: 100, marginBottom: 10, alignSelf: 'center' }} source={route.params.contenido.ejm.resp[0].respuesta} />
                             </View>
-                        ))}
-                    </View>
-                    <TouchableOpacity style={styles.buttonStart} onPress={() => navigation.navigate('PreguntaTestGrafico', { data: preguntas, cont: 0, })}>
+                            <Text style={{ ...styles.textFont, alignSelf: 'center' }}>Opciones</Text>
+                            <View style={{ margin: 10, flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                                <Image style={{ borderRadius: 5, width: 110, height: 80, marginBottom: 10, alignSelf: 'center' }} source={route.params.contenido.ejm.resp[1].respuesta} />
+                                <Image style={{ borderRadius: 5, width: 110, height: 80, marginBottom: 10, alignSelf: 'center' }} source={route.params.contenido.ejm.resp[2].respuesta} />
+                            </View>
+                            <View style={{ margin: 10, flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                                <Image style={{ borderRadius: 5, width: 110, height: 80, marginBottom: 10, alignSelf: 'center' }} source={route.params.contenido.ejm.resp[3].respuesta} />
+                                <Image style={{ borderRadius: 5, borderColor: 'red', borderWidth: 2, width: 110, height: 80, marginBottom: 10, alignSelf: 'center' }} source={route.params.contenido.ejm.resp[4].respuesta} />
+                            </View>
+                        </>
+                        // <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                        //     {route.params.contenido.ejm.resp.map((e, index) => (
+                        //         <View key={index} style={{ margin: 4 }}>
+                        //             <Image style={{  width:60, height: 40, marginBottom: 10, alignSelf: 'center' }} source={e.respuesta} />
+                        //         </View>
+                        //     ))}
+                        // </View>
+                    ) : (null)}
+                    <TouchableOpacity style={styles.buttonStart} onPress={() => navigation.navigate('PreguntaTestGrafico', { data: preguntas, cont: 0, id: route.params.id, student_id: route.params.student_id, factor: route.params.factor, title: route.params.title })}>
                         <Text style={styles.textFont}>Vamos!!</Text>
                     </TouchableOpacity>
                 </>
@@ -41,7 +71,25 @@ const Instructions = ({ navigation, route }) => {
                     <Text style={styles.textFont}>Instructions</Text>
                     <Text style={styles.textFont}>{route.params.title}</Text>
                     <Text style={styles.textFont}>{route.params.contenido.instructions}</Text>
-                    <TouchableOpacity style={styles.buttonStart} onPress={() => navigation.navigate('Preguntas', { data: preguntas, cont: 0, description: route.params.description })}>
+                    {route.params.id === 3 ? (
+                        <>
+                            <View style={{ margin: 10 }}>
+                                <Image style={{ borderRadius: 5, width: 200, height: 120, marginBottom: 10, alignSelf: 'center' }} source={route.params.contenido.ejm.resp[0].respuesta} />
+                            </View>
+                            <Text style={{ ...styles.textFont, alignSelf: 'center' }}>Opciones</Text>
+                            <View style={{ margin: 10, flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                                <Image style={{ borderRadius: 5, width: 110, height: 80, marginBottom: 10, alignSelf: 'center' }} source={route.params.contenido.ejm.resp[1].respuesta} />
+                                <Image style={{ borderRadius: 5, width: 110, height: 80, marginBottom: 10, alignSelf: 'center' }} source={route.params.contenido.ejm.resp[2].respuesta} />
+                            </View>
+                            <View style={{ margin: 10, flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                                <Image style={{ borderRadius: 5, width: 110, height: 80, marginBottom: 10, alignSelf: 'center' }} source={route.params.contenido.ejm.resp[3].respuesta} />
+                                <Image style={{ borderRadius: 5, borderColor: 'red', borderWidth: 2, width: 110, height: 80, marginBottom: 10, alignSelf: 'center' }} source={route.params.contenido.ejm.resp[4].respuesta} />
+                            </View>
+                        </>
+                    ) : route.params.id === 4 ? (
+                        <Text></Text>
+                    ) : (null)}
+                    <TouchableOpacity style={styles.buttonStart} onPress={() => navigation.navigate('Preguntas', { data: preguntas, cont: 0, id: route.params.id, student_id: route.params.student_id, factor: route.params.factor, title: route.params.title })}>
                         <Text style={styles.textFont}>Vamos!!</Text>
                     </TouchableOpacity>
                 </>
@@ -50,16 +98,16 @@ const Instructions = ({ navigation, route }) => {
                     <Text style={styles.textFont}>Instructions</Text>
                     <Text style={styles.textFont}>{route.params.title}</Text>
                     <Text style={styles.textFont}>{route.params.contenido.instructions}</Text>
-                    <TouchableOpacity style={styles.buttonStart} onPress={()=>navigation.navigate('RazonamientoNumerico',{ data: preguntas, cont: 0, title: route.params.title})} >
+                    <TouchableOpacity style={styles.buttonStart} onPress={() => navigation.navigate('RazonamientoNumerico', { data: preguntas, cont: 0, id: route.params.id, student_id: route.params.student_id, factor: route.params.factor, title: route.params.title })} >
                         <Text style={styles.textFont}>Vamos!!</Text>
                     </TouchableOpacity>
                 </View>
-            ) : route.params.factor === 'CONCEPTOS VERVALES' ? (
+            ) : route.params.factor === 'CONCEPTOS VERBALES' ? (
                 <View>
                     <Text style={styles.textFont}>Instructions</Text>
                     <Text style={styles.textFont}>{route.params.title}</Text>
                     <Text style={styles.textFont}>{route.params.contenido.instructions}</Text>
-                    <TouchableOpacity style={styles.buttonStart} >
+                    <TouchableOpacity style={styles.buttonStart} onPress={() => navigation.navigate('ConceptosVerbales', { data: preguntas, cont: 0, id: route.params.id, student_id: route.params.student_id, factor: route.params.factor, title: route.params.title })}>
                         <Text style={styles.textFont}>Vamos!!</Text>
                     </TouchableOpacity>
                 </View>

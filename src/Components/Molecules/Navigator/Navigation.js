@@ -38,6 +38,7 @@ import ResultsIntereses from '../../Screems/PrivateScreem/TeacherScreems/Results
 import ResultsInteresStudent from '../../Screems/PrivateScreem/TeacherScreems/Results/ResultsIntereses/ResultsInteresStudent'
 import ListViewStudentsResult from '../../Screems/PrivateScreem/TeacherScreems/Results/ListStudent/ListViewStudentsResult'
 import RazonamientoNumerico from '../../Screems/PrivateScreem/TeacherScreems/SerieTests/CategoriaTests/Perguntas/RazonamientoNumerico'
+import ConceptosVerbales from '../../Screems/PrivateScreem/TeacherScreems/SerieTests/CategoriaTests/Perguntas/ConceptosVerbales'
 
 const Stack = createNativeStackNavigator()
 
@@ -453,6 +454,15 @@ const Navigation = () => {
                                 headerStyle: { backgroundColor: '#000010' },
                                 headerTintColor: 'white',
                                 title: 'Razonamiento Numerico',
+                            }}
+                        />
+                        <Stack.Screen
+                            name='ConceptosVerbales'
+                            component={ConceptosVerbales}
+                            options={{
+                                headerStyle: { backgroundColor: '#000010' },
+                                headerTintColor: 'white',
+                                title: 'Conceptos Verbales',
                             }}
                         />
                     </>

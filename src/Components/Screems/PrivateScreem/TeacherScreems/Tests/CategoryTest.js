@@ -10,59 +10,14 @@ import { LinearGradient } from 'expo-linear-gradient'
 const CategoryTest = ({ navigation, route }) => {
 
   const data=[
-    {title:'RELACIONES ESPACIALES',image:TestGrafico,navi:()=>navigation.navigate('InicioTest',{factor:'RELACIONES ESPACIALES'})},
-    {title:'RAZONAMIENTO LOGICO',image:TestAnalitico,navi:()=>navigation.navigate('InicioTest',{factor:'RAZONAMIENTO LOGICO'})},
-    {title:'RAZONAMIENTO NUMERICO',image:TestMatematico,navi:()=>navigation.navigate('InicioTest',{factor:'RAZONAMIENTO NUMERICO'})},
-    {title:'CONCEPTOS VERVALES',image:TestGrafico,navi:()=>navigation.navigate('InicioTest',{factor:'CONCEPTOS VERVALES'})},
-  ]
-
-  const categoryDat = [
-    {
-      id: 1,
-      title: 'TEST GRAFICO',
-      image: TestGrafico,
-      direction: () => navigation.push('InicioTest',
-        {
-          categoria: 'TEST GRAFICO',
-          id_cartegory: 'test-grafico',
-        })
-    },
-    {
-      id: 2,
-      title: 'TEST ANALITICO',
-      image: TestAnalitico,
-      direction: () => navigation.push('InicioTest',
-        {
-          categoria: 'TEST ANALITICO',
-          id_cartegory: 'test-analitico'
-        })
-    },
-    {
-      id: 3, title: 'TEST MATEMATICO',
-      image: TestMatematico,
-      direction: () => navigation.push('InicioTest',
-        {
-          categoria: 'TEST MATEMATICO',
-          id_cartegory: 'test-matematico'
-        })
-    },
+    {title:'RELACIONES ESPACIALES',image:TestGrafico,navi:()=>navigation.navigate('InicioTest',{factor:'RELACIONES ESPACIALES',student_id: route.params.student_id})},
+    {title:'RAZONAMIENTO LOGICO',image:TestAnalitico,navi:()=>navigation.navigate('InicioTest',{factor:'RAZONAMIENTO LOGICO',student_id: route.params.student_id})},
+    {title:'RAZONAMIENTO NUMERICO',image:TestMatematico,navi:()=>navigation.navigate('InicioTest',{factor:'RAZONAMIENTO NUMERICO',student_id: route.params.student_id})},
+    {title:'CONCEPTOS VERVALES',image:TestGrafico,navi:()=>navigation.navigate('InicioTest',{factor:'CONCEPTOS VERBALES',student_id: route.params.student_id})},
   ]
   return (
     <Layaut>
-      {/* <FlatList 
-      data={categoryDat}
-      style={{width:'100%'}}
-      keyExtractor={item=>item.id}
-      renderItem={c=>(
-          <View>
-              <TouchableOpacity onPress={c.item.direction}  style={styles.testView}>
-                  <Text style={{alignSelf:'center',fontFamily:'Roboto_500Medium'}}>{c.item.title}</Text>
-              </TouchableOpacity>
-          </View>
-      )}
-      /> */}
       <ScrollView>
-
         {data.map((e, index) => (
           <View key={index} style={{ marginBottom: 10 }}>
             <TouchableOpacity onPress={e.navi}  style={styles.testView}>
@@ -73,11 +28,6 @@ const CategoryTest = ({ navigation, route }) => {
             </TouchableOpacity>
           </View>
         ))}
-        {/* <LinearGradient style={{ borderRadius: 2, marginTop:30 }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#e65100', '#fb8c00', '#ffa726']}>
-          <TouchableOpacity style={{padding:10}} onPress={()=>navigation.navigate('RealizeTestVocational')}>
-            <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', alignSelf:'center' }} >Terminar y Guardar</Text>
-          </TouchableOpacity>
-        </LinearGradient> */}
       </ScrollView>
 
     </Layaut>
