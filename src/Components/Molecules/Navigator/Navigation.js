@@ -24,9 +24,8 @@ import InstructionTestIntereses from '../../Screems/PrivateScreem/TeacherScreems
 import PreguntasTestAptitudes from '../../Screems/PrivateScreem/TeacherScreems/TestsVocational/TestAptitudes/PreguntasTestAptitudes'
 import RegisterStudent from '../../Screems/PrivateScreem/TeacherScreems/Students/RegisterStudent'
 import StudentsAdminScreem from '../../Screems/PrivateScreem/TeacherScreems/Students/StudentsAdminScreem'
-import ResultsAptitudes from '../../Screems/PrivateScreem/TeacherScreems/Results/ResultsAptitudes/ResultsAptitudes'
 import ResultsAdminScreem from '../../Screems/PrivateScreem/TeacherScreems/Results/ResultsAdminScreem'
-import ResultsAptitudStudent from '../../Screems/PrivateScreem/TeacherScreems/Results/ResultsAptitudes/ResultsAptitudStudent'
+import ResultsAptitudStudent from '../../Screems/PrivateScreem/TeacherScreems/Results/ResultsTest/ResultsAptitudStudent'
 import RecoverPassword from '../../Screems/PublicScreem/RecoverPassword'
 import RegisterEvent from '../../Screems/PrivateScreem/TeacherScreems/Eventos/RegisterEvent'
 import SearchStudent from '../../Screems/PrivateScreem/TeacherScreems/TestAll/SearchStudent'
@@ -34,11 +33,12 @@ import TypeTest from '../../Screems/PrivateScreem/TeacherScreems/TestAll/TypeTes
 import PreguntasTestIntereses from '../../Screems/PrivateScreem/TeacherScreems/TestsVocational/TestIntereses/PreguntasTestIntereses'
 import RegisterReception from '../../Screems/PrivateScreem/TeacherScreems/Receptions/RegisterReception'
 import ListViewStudentsReception from '../../Screems/PrivateScreem/TeacherScreems/Students/ListViewStudentsReception'
-import ResultsIntereses from '../../Screems/PrivateScreem/TeacherScreems/Results/ResultsIntereses/ResultsIntereses'
-import ResultsInteresStudent from '../../Screems/PrivateScreem/TeacherScreems/Results/ResultsIntereses/ResultsInteresStudent'
+import ResultsInteresStudent from '../../Screems/PrivateScreem/TeacherScreems/Results/ResultsTest/ResultsInteresStudent'
 import ListViewStudentsResult from '../../Screems/PrivateScreem/TeacherScreems/Results/ListStudent/ListViewStudentsResult'
 import RazonamientoNumerico from '../../Screems/PrivateScreem/TeacherScreems/SerieTests/CategoriaTests/Perguntas/RazonamientoNumerico'
 import ConceptosVerbales from '../../Screems/PrivateScreem/TeacherScreems/SerieTests/CategoriaTests/Perguntas/ConceptosVerbales'
+import ResultsMadurezStudent from '../../Screems/PrivateScreem/TeacherScreems/Results/ResultsTest/ResultsMadurezStudent'
+import RegisterMaterial from '../../Screems/PrivateScreem/TeacherScreems/Materiales/RegisterMaterial'
 
 const Stack = createNativeStackNavigator()
 
@@ -234,15 +234,6 @@ const Navigation = () => {
                             }}
                         />
                         <Stack.Screen
-                            name='ResultsAptitudes'
-                            component={ResultsAptitudes}
-                            options={{
-                                headerStyle: { backgroundColor: '#000010' },
-                                headerTintColor: 'white',
-                                title: 'Resultados'
-                            }}
-                        />
-                        <Stack.Screen
                             name='ResultsAptitudStudent'
                             component={ResultsAptitudStudent}
                             options={{
@@ -252,8 +243,8 @@ const Navigation = () => {
                             }}
                         />
                         <Stack.Screen
-                            name='ResultsIntereses'
-                            component={ResultsIntereses}
+                            name='ResultsInteresStudent'
+                            component={ResultsInteresStudent}
                             options={{
                                 headerStyle: { backgroundColor: '#000010' },
                                 headerTintColor: 'white',
@@ -261,8 +252,8 @@ const Navigation = () => {
                             }}
                         />
                         <Stack.Screen
-                            name='ResultsInteresStudent'
-                            component={ResultsInteresStudent}
+                            name='ResultsMadurezStudent'
+                            component={ResultsMadurezStudent}
                             options={{
                                 headerStyle: { backgroundColor: '#000010' },
                                 headerTintColor: 'white',
@@ -306,6 +297,16 @@ const Navigation = () => {
                                 headerStyle: { backgroundColor: '#000010' },
                                 headerTintColor: 'white',
                                 title: 'Lista de Estudiantes',
+                                headerTitleStyle: { fontSize: 16 }
+                            }}
+                        />
+                        <Stack.Screen
+                            name='RegisterMaterial'
+                            component={RegisterMaterial}
+                            options={{
+                                headerStyle: { backgroundColor: '#000010' },
+                                headerTintColor: 'white',
+                                title: 'Registro Material',
                                 headerTitleStyle: { fontSize: 16 }
                             }}
                         />

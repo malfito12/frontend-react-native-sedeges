@@ -1,9 +1,13 @@
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Image, Modal } from 'react-native'
 import React, { useCallback, useState } from 'react'
 import Layaut from '../../../../../../Atoms/StyleLayaut/Layaut'
 import { useFocusEffect } from '@react-navigation/native'
 import AsyncStorageLib from '@react-native-async-storage/async-storage'
 import { useModalAlert, useModalAlertError } from '../../../../../../Molecules/Hooks/useModalAlert'
+import axios from 'axios'
+import * as Progress from 'react-native-progress'
+import { PORT_URL } from '../../../../../../../PortUrl/PortUrl'
+import { ErrorAlert, SuccesAlert } from '../../../../../../Molecules/Alertas/Alerts'
 // import {RadioButtons}
 
 var array = []
@@ -117,27 +121,27 @@ const Preguntas = ({ route, navigation }) => {
       setImage4(false)
       setRespuesta2(null)
       // console.log(array)
-      //   setProgress(true)
-      //   await axios.post(`${PORT_URL}post-result-madurez-t2`, array)
-      //     .then(resp => {
-      //       setMessage(resp.data.message)
-      //       setProgress(false)
-      //       openModalAlert()
-      //       navigation.navigate('CategoryTest', { student_id: route.params.student_id })
-      //     })
-      //     .catch(err => {
-      //       setProgress(false)
-      //       if (err.response) {
-      //         setMessage(err.response.data.message)
-      //         openModalAlertError()
-      //       }
-      //     })
-      // } else {
-      //   alert('Escoja una respuesta')
-      // }
-      navigation.navigate('InicioTest', { student_id: route.params.student_id,factor: route.params.description })
+      setProgress(true)
+      await axios.post(`${PORT_URL}post-result-madurez-t3`, array)
+        .then(resp => {
+          setMessage(resp.data.message)
+          setProgress(false)
+          openModalAlert()
+          // navigation.navigate('CategoryTest', { student_id: route.params.student_id })
+          navigation.navigate('InicioTest', { student_id: route.params.student_id, factor: route.params.description })
+        })
+        .catch(err => {
+          setProgress(false)
+          if (err.response) {
+            setMessage(err.response.data.message)
+            openModalAlertError()
+          }
+        })
+    } else {
+      alert('Escoja una respuesta')
     }
   }
+
   //---------------RAZONAMIENTO LOGICO 2-------------------------------
   // console.log()
 
@@ -189,7 +193,7 @@ const Preguntas = ({ route, navigation }) => {
       alert('Marque una respuesta')
     }
   }
-  const volver1 = () => {
+  const volver1 = async () => {
     if (pregunta1 == true || pregunta2 == true || pregunta3 == true) {
       var namePre = `Pregunta ${route.params.cont + 1}`
       array.push({
@@ -207,92 +211,122 @@ const Preguntas = ({ route, navigation }) => {
       setPregunta3(false)
       setRespuesta1(null)
       // console.log(array)
-      navigation.navigate('InicioTest', { student_id: route.params.student_id,factor: route.params.description })
-
+      // navigation.navigate('InicioTest', { student_id: route.params.student_id, factor: route.params.description })
+      await axios.post(`${PORT_URL}post-result-madurez-t4`, array)
+        .then(resp => {
+          setMessage(resp.data.message)
+          setProgress(false)
+          openModalAlert()
+          // navigation.navigate('CategoryTest', { student_id: route.params.student_id })
+          navigation.navigate('InicioTest', { student_id: route.params.student_id, factor: route.params.description })
+        })
+        .catch(err => {
+          setProgress(false)
+          if (err.response) {
+            setMessage(err.response.data.message)
+            openModalAlertError()
+          }
+        })
     } else {
       alert('Marque una respuesta')
     }
   }
   return (
-    <Layaut>
-      {route.params.id === 3 ? (
-        <>
-          <Text style={styles.textFont}>Preguntas</Text>
-          <Text style={styles.textFont}>{route.params.data[route.params.cont].pregunta.preguntas}</Text>
-          <View style={{ margin: 10 }}>
-            <Image style={styles.buttonImage2} source={route.params.data[route.params.cont].pregunta.resp[0].respuesta} />
-          </View>
-          <Text style={{ ...styles.textFont, alignSelf: 'center' }}>Opciones</Text>
+    <>
+      <Layaut>
+        {route.params.id === 3 ? (
+          <>
+            <Text style={styles.textFont}>Preguntas</Text>
+            <Text style={styles.textFont}>{route.params.data[route.params.cont].pregunta.preguntas}</Text>
+            <View style={{ margin: 10 }}>
+              <Image style={styles.buttonImage2} source={route.params.data[route.params.cont].pregunta.resp[0].respuesta} />
+            </View>
+            <Text style={{ ...styles.textFont, alignSelf: 'center' }}>Opciones</Text>
 
-          <View style={{ margin: 10, flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
-            <TouchableOpacity onPress={() => selecImage(1)}>
-              <Image style={image1 == true ? styles.buttonImageSelect : styles.buttonImage} source={route.params.data[route.params.cont].pregunta.resp[1].respuesta} />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => selecImage(2)}>
-              <Image style={image2 == true ? styles.buttonImageSelect : styles.buttonImage} source={route.params.data[route.params.cont].pregunta.resp[2].respuesta} />
-            </TouchableOpacity>
-          </View>
-          <View style={{ margin: 10, flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
-            <TouchableOpacity onPress={() => selecImage(3)}>
-              <Image style={image3 == true ? styles.buttonImageSelect : styles.buttonImage} source={route.params.data[route.params.cont].pregunta.resp[3].respuesta} />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => selecImage(4)}>
-              <Image style={image4 == true ? styles.buttonImageSelect : styles.buttonImage} source={route.params.data[route.params.cont].pregunta.resp[4].respuesta} />
-            </TouchableOpacity>
-          </View>
-          {route.params.cont == 4 ? (
-            <TouchableOpacity onPress={volver2} style={styles.buttonBack}>
-              {/* <TouchableOpacity onPress={() => enviar()} style={styles.buttonBack}> */}
-              {/* <TouchableOpacity onPress={() => navigation.navigate('InicioTest',{ categoria: 'TEST GRAFICO', id_cartegory: 'test-grafico' })} style={styles.buttonBack}> */}
-              <Text style={styles.textFont}>Volver</Text>
-            </TouchableOpacity>
-          ) : (
-            <TouchableOpacity style={styles.buttonNext} onPress={siguiente2} >
-              <Text style={styles.textFont}>Siguiente</Text>
-            </TouchableOpacity>
-          )}
-        </>
-      ) : route.params.id === 4 ? (
-        <>
-          <Text style={styles.textFont}>Preguntas</Text>
-          <Text style={styles.textFont}>{route.params.data[route.params.cont].pregunta.preguntas.a}</Text>
-          <Text style={styles.textFont}>{route.params.data[route.params.cont].pregunta.preguntas.b}</Text>
-          <Text style={styles.textFont}>{route.params.data[route.params.cont].pregunta.preguntas.c}</Text>
-          {/* {
+            <View style={{ margin: 10, flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
+              <TouchableOpacity onPress={() => selecImage(1)}>
+                <Image style={image1 == true ? styles.buttonImageSelect : styles.buttonImage} source={route.params.data[route.params.cont].pregunta.resp[1].respuesta} />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => selecImage(2)}>
+                <Image style={image2 == true ? styles.buttonImageSelect : styles.buttonImage} source={route.params.data[route.params.cont].pregunta.resp[2].respuesta} />
+              </TouchableOpacity>
+            </View>
+            <View style={{ margin: 10, flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
+              <TouchableOpacity onPress={() => selecImage(3)}>
+                <Image style={image3 == true ? styles.buttonImageSelect : styles.buttonImage} source={route.params.data[route.params.cont].pregunta.resp[3].respuesta} />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => selecImage(4)}>
+                <Image style={image4 == true ? styles.buttonImageSelect : styles.buttonImage} source={route.params.data[route.params.cont].pregunta.resp[4].respuesta} />
+              </TouchableOpacity>
+            </View>
+            {route.params.cont == 4 ? (
+              <TouchableOpacity onPress={volver2} style={styles.buttonBack}>
+                {/* <TouchableOpacity onPress={() => enviar()} style={styles.buttonBack}> */}
+                {/* <TouchableOpacity onPress={() => navigation.navigate('InicioTest',{ categoria: 'TEST GRAFICO', id_cartegory: 'test-grafico' })} style={styles.buttonBack}> */}
+                <Text style={styles.textFont}>Volver</Text>
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity style={styles.buttonNext} onPress={siguiente2} >
+                <Text style={styles.textFont}>Siguiente</Text>
+              </TouchableOpacity>
+            )}
+          </>
+        ) : route.params.id === 4 ? (
+          <>
+            <Text style={styles.textFont}>Preguntas</Text>
+            <Text style={styles.textFont}>{route.params.data[route.params.cont].pregunta.preguntas.a}</Text>
+            <Text style={styles.textFont}>{route.params.data[route.params.cont].pregunta.preguntas.b}</Text>
+            <Text style={styles.textFont}>{route.params.data[route.params.cont].pregunta.preguntas.c}</Text>
+            {/* {
             route.params.data[route.params.cont].pregunta.resp.map((e, index) => (
               <View key={index}>
                 <TouchableOpacity style={styles.buttonRespuesta} onPress={() => selectButton(e)}>
                   <Text style={{ fontFamily: 'Roboto_500Medium' }}>{e.respuesta}</Text>
                 </TouchableOpacity>
-              </View>
+                </View>
             ))
           } */}
-          <View>
-            <TouchableOpacity style={pregunta1 == true ? styles.buttonRespuestaSelect : styles.buttonRespuesta} onPress={() => selectButton(route.params.data[route.params.cont].pregunta.resp[0], 1)}>
-              <Text style={{ fontFamily: 'Roboto_500Medium' }}>{route.params.data[route.params.cont].pregunta.resp[0].respuesta}</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={pregunta2 == true ? styles.buttonRespuestaSelect : styles.buttonRespuesta} onPress={() => selectButton(route.params.data[route.params.cont].pregunta.resp[1], 2)}>
-              <Text style={{ fontFamily: 'Roboto_500Medium' }}>{route.params.data[route.params.cont].pregunta.resp[1].respuesta}</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={pregunta3 == true ? styles.buttonRespuestaSelect : styles.buttonRespuesta} onPress={() => selectButton(route.params.data[route.params.cont].pregunta.resp[2], 3)}>
-              <Text style={{ fontFamily: 'Roboto_500Medium' }}>{route.params.data[route.params.cont].pregunta.resp[2].respuesta}</Text>
-            </TouchableOpacity>
-          </View>
-          {route.params.cont == 4 ? (
-            // <TouchableOpacity onPress={() => navigation.navigate('CategoryTest', { categoria: 'TEST ANALITICO', id_cartegory: 'test-analitico' })} style={styles.buttonBack}>
-            <TouchableOpacity onPress={volver1} style={styles.buttonBack}>
-              <Text style={styles.textFont}>Volver</Text>
-            </TouchableOpacity>
-          ) : (
-            // <TouchableOpacity style={styles.buttonNext} onPress={() => navigation.navigate('Preguntas', { data: route.params.data, cont: route.params.cont + 1, description: route.params.description })} >
-            <TouchableOpacity style={styles.buttonNext} onPress={siguiente1} >
-              <Text style={styles.textFont}>Siguiente</Text>
-            </TouchableOpacity>
-          )}
-        </>
-      ) : (null)}
+            <View>
+              <TouchableOpacity style={pregunta1 == true ? styles.buttonRespuestaSelect : styles.buttonRespuesta} onPress={() => selectButton(route.params.data[route.params.cont].pregunta.resp[0], 1)}>
+                <Text style={{ fontFamily: 'Roboto_500Medium' }}>{route.params.data[route.params.cont].pregunta.resp[0].respuesta}</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={pregunta2 == true ? styles.buttonRespuestaSelect : styles.buttonRespuesta} onPress={() => selectButton(route.params.data[route.params.cont].pregunta.resp[1], 2)}>
+                <Text style={{ fontFamily: 'Roboto_500Medium' }}>{route.params.data[route.params.cont].pregunta.resp[1].respuesta}</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={pregunta3 == true ? styles.buttonRespuestaSelect : styles.buttonRespuesta} onPress={() => selectButton(route.params.data[route.params.cont].pregunta.resp[2], 3)}>
+                <Text style={{ fontFamily: 'Roboto_500Medium' }}>{route.params.data[route.params.cont].pregunta.resp[2].respuesta}</Text>
+              </TouchableOpacity>
+            </View>
+            {route.params.cont == 4 ? (
+              // <TouchableOpacity onPress={() => navigation.navigate('CategoryTest', { categoria: 'TEST ANALITICO', id_cartegory: 'test-analitico' })} style={styles.buttonBack}>
+              <TouchableOpacity onPress={volver1} style={styles.buttonBack}>
+                <Text style={styles.textFont}>Volver</Text>
+              </TouchableOpacity>
+            ) : (
+              // <TouchableOpacity style={styles.buttonNext} onPress={() => navigation.navigate('Preguntas', { data: route.params.data, cont: route.params.cont + 1, description: route.params.description })} >
+              <TouchableOpacity style={styles.buttonNext} onPress={siguiente1} >
+                <Text style={styles.textFont}>Siguiente</Text>
+              </TouchableOpacity>
+            )}
+          </>
+        ) : (null)}
 
-    </Layaut>
+      </Layaut>
+      {/* ---------------------ALERTS ------------------------ */}
+      <Modal
+        visible={progress}
+        transparent
+        animationType='fade'
+      >
+        <View style={styles.progressView}>
+          <Progress.Circle borderWidth={3} size={40} indeterminate={true} />
+        </View>
+      </Modal>
+      <SuccesAlert isOpen={openModal} closeModal={closeModalAlert} text={message} />
+      <ErrorAlert isOpen={openModalError} closeModal={closeModalAlertError} text={message} />
+
+    </>
+
   )
 }
 
@@ -361,6 +395,12 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     borderColor: 'red',
     borderWidth: 2
+  },
+  progressView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
   },
 
 })

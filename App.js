@@ -3,7 +3,6 @@ import Navigation from './src/Components/Molecules/Navigator/Navigation'
 import { AuthProvider } from './src/Components/Atoms/Context/AuthContext'
 
 
-
 export default function App() {
   return (
     <AuthProvider>

@@ -11,6 +11,7 @@ import UsersScreem from '../Users/UsersScreem'
 import ListViewEvents from './Eventos/ListViewEvents'
 import RealizeTestVocational from './TestsVocational/RealizeTestVocational'
 import ListViewReceptions from './Receptions/ListViewReceptions'
+import ListViewMaterial from './Materiales/ListViewMaterial'
 
 
 const Tab = createBottomTabNavigator()
@@ -154,10 +155,33 @@ const TeacherHomeScreem = ({ navigation }) => {
           tabBarLabel: 'Eventos',
           headerStyle: { backgroundColor: '#000010' },
           tabBarLabelStyle: { fontFamily: 'Roboto_700Bold' },
-          tabBarIcon: ({ size, color }) => (<Ionicons name='library-outline' size={size} color={color} />),
+          tabBarIcon: ({ size, color }) => (<MaterialIcons name="event" size={size} color={color} />),
           headerRight: () => (
             <View style={{ marginRight: 30 }}>
               <TouchableOpacity onPress={() => navigation.navigate('RegisterEvent')}>
+                <MaterialIcons name="add" size={26} color="white" />
+              </TouchableOpacity>
+            </View>
+          )
+        }} />
+        <Tab.Screen name="ListViewMaterial" component={ListViewMaterial} options={{
+          // headerLeft: () => (perfil),
+          headerLeft: () => (
+            <View style={{ marginHorizontal: 20 }}>
+              <TouchableOpacity onPress={logout} style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <MaterialCommunityIcons name="logout" size={24} color="red" />
+                <Text style={{ color: 'red' }}>Cerrar Sesión</Text>
+              </TouchableOpacity>
+            </View>
+          ),
+          headerTitle: '',
+          tabBarLabel: 'Material A.',
+          headerStyle: { backgroundColor: '#000010' },
+          tabBarLabelStyle: { fontFamily: 'Roboto_700Bold' },
+          tabBarIcon: ({ size, color }) => (<Ionicons name='library-outline' size={size} color={color} />),
+          headerRight: () => (
+            <View style={{ marginRight: 30 }}>
+              <TouchableOpacity onPress={() => navigation.navigate('RegisterMaterial')}>
                 <MaterialIcons name="add" size={26} color="white" />
               </TouchableOpacity>
             </View>

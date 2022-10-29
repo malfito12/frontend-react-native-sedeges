@@ -275,6 +275,7 @@ const ResultsAdminScreem = ({ navigation, route }) => {
   `;
   } else {
     html = `<p>Informacion incompleta</p>`
+    // alert('Prueba Incompleta')
   }
   const pdfGenerate = async () => {
     const file = await printToFileAsync({
@@ -287,7 +288,7 @@ const ResultsAdminScreem = ({ navigation, route }) => {
     <Layaut>
       <ScrollView>
         <View style={{ alignItems: 'center' }}>
-          <TouchableOpacity style={{ borderWidth: 1, borderRadius: 3, width: '100%', borderColor: 'green', padding: 20, margin: 10 }}>
+          <TouchableOpacity onPress={() => navigation.navigate('ResultsMadurezStudent', { data: route.params.data })} style={{ borderWidth: 1, borderRadius: 3, width: '100%', borderColor: 'green', padding: 20, margin: 10 }}>
             <Text style={{ color: 'white', alignSelf: 'center' }}>Test Normal</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate('ResultsAptitudStudent', { data: route.params.data })} style={{ borderWidth: 1, borderRadius: 3, width: '100%', borderColor: 'green', padding: 20, margin: 10 }}>

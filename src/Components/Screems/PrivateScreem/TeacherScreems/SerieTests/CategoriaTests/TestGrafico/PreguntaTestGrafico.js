@@ -106,7 +106,7 @@ const PreguntaTestGrafico = ({ route, navigation }) => {
                     setProgress(false)
                     openModalAlert()
                     // navigation.navigate('CategoryTest', { student_id: route.params.student_id })
-                    navigation.navigate('InicioTest', { student_id: route.params.student_id,factor: route.params.description })
+                    navigation.navigate('InicioTest', { student_id: route.params.student_id, factor: route.params.description })
                 })
                 .catch(err => {
                     setProgress(false)
@@ -205,7 +205,7 @@ const PreguntaTestGrafico = ({ route, navigation }) => {
                     setProgress(false)
                     openModalAlert()
                     // navigation.navigate('CategoryTest', { student_id: route.params.student_id })
-                    navigation.navigate('InicioTest', { student_id: route.params.student_id,factor: route.params.description })
+                    navigation.navigate('InicioTest', { student_id: route.params.student_id, factor: route.params.description })
                 })
                 .catch(err => {
                     setProgress(false)
@@ -214,7 +214,7 @@ const PreguntaTestGrafico = ({ route, navigation }) => {
                         openModalAlertError()
                     }
                 })
-        }else{
+        } else {
             alert('Escoja una respuesta')
         }
     }

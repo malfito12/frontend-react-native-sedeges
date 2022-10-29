@@ -31,7 +31,8 @@ const RegisterStudent = ({ navigation }) => {
         sex: '',
         ocupation: '',
         ci: '',
-        reception_id: ''
+        reception_id: '',
+        grado: ''
         // nameInstitution: '',
     })
 
@@ -81,7 +82,8 @@ const RegisterStudent = ({ navigation }) => {
             changeData.sex == '' ||
             changeData.ocupation == '' ||
             changeData.reception_id == '' ||
-            changeData.ci == '') {
+            changeData.ci == '',
+            changeData.grado=='') {
             setMessage('Llene todos los datos')
             openModalAlertError()
             return
@@ -97,6 +99,7 @@ const RegisterStudent = ({ navigation }) => {
             ocupation: changeData.ocupation.trim().replace(/\s\s+/g, ' '),
             ci: changeData.ci.trim().replace(/\s\s+/g, ' '),
             user_id: idUser,
+            grado: changeData.grado,
             reception_id: changeData.reception_id
         })
         // console.log(data)
@@ -116,7 +119,8 @@ const RegisterStudent = ({ navigation }) => {
                     ocupation: '',
                     ci: '',
                     nameInstitution: '',
-                    reception_id: ''
+                    reception_id: '',
+                    grado:''
                 })
                 // navigation.popToTop('StudentsAdminScreem')
             })
@@ -223,8 +227,7 @@ const RegisterStudent = ({ navigation }) => {
                                         selectedValue={changeData.sex}
                                         onValueChange={(itemValue, itemIndex) => {
                                             handleChange('sex', itemValue)
-                                        }
-                                        }>
+                                        }}>
                                         <Picker.Item label="Seleccione ..." style={{ fontSize: 14 }} value="" />
                                         <Picker.Item label="Masculino" style={{ fontSize: 14 }} value="M" />
                                         <Picker.Item label="Femenino" style={{ fontSize: 14 }} value="F" />
@@ -240,6 +243,23 @@ const RegisterStudent = ({ navigation }) => {
                             value={changeData.ocupation}
                             onChangeText={text => handleChange('ocupation', text)}
                         />
+                        <Text style={{ color: 'white', marginBottom: 10, fontFamily: 'Roboto_400Regular' }}>Grado del Estudiante</Text>
+                        <View style={{ borderRadius: 3, borderColor: '#10ac84', borderWidth: 1, marginBottom: 10 }}>
+                            <Picker
+                                style={{ color: 'white', height: 40 }}
+                                selectedValue={changeData.grado}
+                                onValueChange={(itemValue, itemIndex) => {
+                                    handleChange('grado', itemValue)
+                                }}>
+                                <Picker.Item label="Seleccione ..." style={{ fontSize: 14 }} value="" />
+                                <Picker.Item label="Primer Grado" style={{ fontSize: 14 }} value="Primer Grado" />
+                                <Picker.Item label="Segundo Grado" style={{ fontSize: 14 }} value="Segundo Grado" />
+                                <Picker.Item label="Tercer Grado" style={{ fontSize: 14 }} value="Tercer Grado" />
+                                <Picker.Item label="Cuarto Grado" style={{ fontSize: 14 }} value="Cuarto Grado" />
+                                <Picker.Item label="Quinto Grado" style={{ fontSize: 14 }} value="Quinto Grado" />
+                                <Picker.Item label="Sexto Grado" style={{ fontSize: 14 }} value="Sexto Grado" />
+                            </Picker>
+                        </View>
                         <Text style={{ color: 'white', marginBottom: 10, fontFamily: 'Roboto_400Regular' }}>Centro de Acogida</Text>
                         <View style={{ borderRadius: 3, borderColor: '#10ac84', borderWidth: 1, marginBottom: 10 }}>
                             <Picker

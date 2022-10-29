@@ -8,12 +8,13 @@ import { PORT_URL } from '../../../../../PortUrl/PortUrl'
 const TypeTest = ({ navigation, route }) => {
     const [resultAptitudes, setResultAptitudes] = useState([])
     const [resultIntereses, setResultIntereses] = useState([])
+    const [resultMadurez, setResultMadurez] = useState([])
     const [isVisible, setIsVisible] = useState(true);
     useFocusEffect(
         useCallback(() => {
             let isActive = true
             getResultsAptitudes()
-            return () => {isActive = false }
+            return () => { isActive = false }
         }, [])
     )
 
@@ -22,15 +23,21 @@ const TypeTest = ({ navigation, route }) => {
             .then(resp => {
                 setResultAptitudes(resp.data.resultAp)
                 setResultIntereses(resp.data.resultIn)
+                setResultMadurez(resp.data.resultMM)
             })
             .catch(err => console.log(err))
     }
     return (
         <Layaut>
-
-            <TouchableOpacity onPress={() => navigation.push('CategoryTest', { student_id: route.params.student_id })} style={{ borderWidth: 1, borderColor: 'blue', padding: 20, marginBottom: 10, alignItems: 'center' }}>
-                <Text style={{ color: 'white' }}>CUESTIONARIO MADUREZ MENTAL</Text>
-            </TouchableOpacity>
+            {resultMadurez === true ? (
+                <TouchableOpacity  style={{ borderWidth: 1, borderColor: 'blue', padding: 20, marginBottom: 10, alignItems: 'center' }}>
+                    <Text style={{ color: 'red' }}>CUESTIONARIO MADUREZ MENTAL</Text>
+                </TouchableOpacity>
+            ) : (
+                <TouchableOpacity onPress={() => navigation.push('CategoryTest', { student_id: route.params.student_id, event_id: route.params.event_id })} style={{ borderWidth: 1, borderColor: 'blue', padding: 20, marginBottom: 10, alignItems: 'center' }}>
+                    <Text style={{ color: 'white' }}>CUESTIONARIO MADUREZ MENTAL</Text>
+                </TouchableOpacity>
+            )}
             {resultAptitudes === true ? (
                 <TouchableOpacity style={{ borderWidth: 1, borderColor: 'blue', padding: 20, marginBottom: 10, alignItems: 'center' }}>
                     <Text style={{ color: 'red' }}>CUESTIONARIO DE APTITUDES</Text>

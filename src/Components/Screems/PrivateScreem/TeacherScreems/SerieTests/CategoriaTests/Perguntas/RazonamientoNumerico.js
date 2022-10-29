@@ -1,9 +1,13 @@
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, TextInput } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, TextInput, Modal } from 'react-native'
 import React, { useCallback, useState } from 'react'
 import Layaut from '../../../../../../Atoms/StyleLayaut/Layaut'
 import { useFocusEffect } from '@react-navigation/native'
+import * as Progress from 'react-native-progress'
 import AsyncStorageLib from '@react-native-async-storage/async-storage'
 import { useModalAlert, useModalAlertError } from '../../../../../../Molecules/Hooks/useModalAlert'
+import axios from 'axios'
+import { PORT_URL } from '../../../../../../../PortUrl/PortUrl'
+import { ErrorAlert, SuccesAlert } from '../../../../../../Molecules/Alertas/Alerts'
 
 var array = []
 const RazonamientoNumerico = ({ route, navigation }) => {
@@ -44,6 +48,11 @@ const RazonamientoNumerico = ({ route, navigation }) => {
 
   //-------------TEST 5 PRIMERA PARTE-----------------------
   const siguiente1 = () => {
+    const numero = /^([0-9])*$/g
+    if (!numero.test(changeData.respuesta)) {
+      alert('caracteres invalidos')
+      return
+    }
     var namePre = `Pregunta ${route.params.cont + 1}`
     if (changeData.respuesta !== '') {
       array.push({
@@ -69,7 +78,7 @@ const RazonamientoNumerico = ({ route, navigation }) => {
       alert('Escriba su respuesta')
     }
   }
-  const volver1 = () => {
+  const volver1 = async () => {
     var namePre = `Pregunta ${route.params.cont + 1}`
     if (changeData.respuesta !== '') {
       array.push({
@@ -83,8 +92,22 @@ const RazonamientoNumerico = ({ route, navigation }) => {
         respCorrecta: route.params.data[route.params.cont].pregunta.respCorrecta
       })
       setChangeData({ respuesta: '' })
-      console.log(array)
-      navigation.navigate('InicioTest', { student_id: route.params.student_id, factor: route.params.description })
+      setProgress(true)
+      await axios.post(`${PORT_URL}post-result-madurez-t5-parte1`, array)
+        .then(resp => {
+          setMessage(resp.data.message)
+          setProgress(false)
+          openModalAlert()
+          navigation.navigate('InicioTest', { student_id: route.params.student_id, factor: route.params.description })
+        })
+        .catch(err => {
+          setProgress(false)
+          if (err.response) {
+            setMessage(err.response.data.message)
+            openModalAlertError()
+          }
+        })
+      // console.log(array)
     } else {
       alert('Escriba su respuesta')
     }
@@ -162,7 +185,7 @@ const RazonamientoNumerico = ({ route, navigation }) => {
       alert('Marque una respuesta')
     }
   }
-  const volver2 = () => {
+  const volver2 = async () => {
     if (pregunta1 == true || pregunta2 == true || pregunta3 == true || pregunta4 == true || pregunta5 == true) {
       var namePre = `Pregunta ${route.params.cont + 1}`
       array.push({
@@ -181,8 +204,21 @@ const RazonamientoNumerico = ({ route, navigation }) => {
       setPregunta4(false)
       setPregunta5(false)
       setRespuesta1(null)
-      console.log(array)
-      navigation.navigate('InicioTest', { student_id: route.params.student_id, factor: route.params.description })
+      setProgress(true)
+      await axios.post(`${PORT_URL}post-result-madurez-t5-parte2`, array)
+        .then(resp => {
+          setMessage(resp.data.message)
+          setProgress(false)
+          openModalAlert()
+          navigation.navigate('InicioTest', { student_id: route.params.student_id, factor: route.params.description })
+        })
+        .catch(err => {
+          setProgress(false)
+          if (err.response) {
+            setMessage(err.response.data.message)
+            openModalAlertError()
+          }
+        })
     } else {
       alert('Marque una respuesta')
     }
@@ -248,7 +284,7 @@ const RazonamientoNumerico = ({ route, navigation }) => {
       alert('Marque una respuesta')
     }
   }
-  const volver3 = () => {
+  const volver3 = async () => {
     if (segundaPregunta1 == true || segundaPregunta2 == true || segundaPregunta3 == true || segundaPregunta4 == true) {
       var namePre = `Pregunta ${route.params.cont + 1}`
       array.push({
@@ -266,10 +302,25 @@ const RazonamientoNumerico = ({ route, navigation }) => {
       setSegundaPregunta3(false)
       setSegundaPregunta4(false)
       setRespuesta2(null)
-      console.log(array)
-      navigation.navigate('InicioTest', { student_id: route.params.student_id, factor: route.params.description })
+      setProgress(true)
+      await axios.post(`${PORT_URL}post-result-madurez-t6`, array)
+        .then(resp => {
+          setMessage(resp.data.message)
+          setProgress(false)
+          openModalAlert()
+          navigation.navigate('InicioTest', { student_id: route.params.student_id, factor: route.params.description })
+        })
+        .catch(err => {
+          setProgress(false)
+          if (err.response) {
+            setMessage(err.response.data.message)
+            openModalAlertError()
+          }
+        })
+      // console.log(array)
+      // navigation.navigate('InicioTest', { student_id: route.params.student_id, factor: route.params.description })
 
-    }else{
+    } else {
       alert('Marque una respuesta')
     }
   }
@@ -281,110 +332,126 @@ const RazonamientoNumerico = ({ route, navigation }) => {
     })
   }
   return (
-    <Layaut>
-      <ScrollView>
-        {route.params.id === 5 ? (
-          <>
-            <Text style={styles.textFont}>Preguntas</Text>
-            <Text style={styles.textFont}>{route.params.data[route.params.cont].pregunta.preguntas}</Text>
-            <View style={{ margin: 20, flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', marginHorizontal: 15 }}>
-              {route.params.data[route.params.cont].pregunta.resp.map((e, index) => (
-                // <TouchableOpacity key={index} style={styles.button}>
-                //   <Text style={{ alignSelf: 'center' }}>- {e.respuesta} -</Text>
-                // </TouchableOpacity>
-                <View key={index} >
-                  <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', fontSize: 17 }}>{e.respuesta} </Text>
-                </View>
-              ))}
-            </View>
-            <TextInput
-              style={styles.input}
-              placeholder='Intro. numero'
-              placeholderTextColor='#b0bec5'
-              keyboardType='numeric'
-              value={changeData.respuesta}
-              onChangeText={text => handleChange('respuesta', text)}
-            />
-            {route.params.cont == 4 ?
-              (
-                // <TouchableOpacity style={styles.buttonBack} onPress={() => navigation.navigate('InicioTest', { factor: route.params.description })} >
-                <TouchableOpacity style={styles.buttonBack} onPress={volver1} >
+    <>
+      <Layaut>
+        <ScrollView>
+          {route.params.id === 5 ? (
+            <>
+              <Text style={styles.textFont}>Preguntas</Text>
+              <Text style={styles.textFont}>{route.params.data[route.params.cont].pregunta.preguntas}</Text>
+              <View style={{ margin: 20, flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', marginHorizontal: 15 }}>
+                {route.params.data[route.params.cont].pregunta.resp.map((e, index) => (
+                  // <TouchableOpacity key={index} style={styles.button}>
+                  //   <Text style={{ alignSelf: 'center' }}>- {e.respuesta} -</Text>
+                  // </TouchableOpacity>
+                  <View key={index} >
+                    <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', fontSize: 17 }}>{e.respuesta} </Text>
+                  </View>
+                ))}
+              </View>
+              <Text style={{ color: 'white', alignSelf: 'center' }}>Introdusca solo Números</Text>
+              <TextInput
+                style={styles.input}
+                maxLength={2}
+                placeholder='Intro. numero'
+                placeholderTextColor='#b0bec5'
+                keyboardType='numeric'
+                value={changeData.respuesta}
+                onChangeText={text => handleChange('respuesta', text)}
+              />
+              {route.params.cont == 4 ?
+                (
+                  // <TouchableOpacity style={styles.buttonBack} onPress={() => navigation.navigate('InicioTest', { factor: route.params.description })} >
+                  <TouchableOpacity style={styles.buttonBack} onPress={volver1} >
+                    <Text style={styles.textFont}>Volver</Text>
+                  </TouchableOpacity>
+                ) : (
+                  // <TouchableOpacity style={styles.buttonNext} onPress={() => navigation.navigate('RazonamientoNumerico', { data: route.params.data, cont: route.params.cont + 1, description: route.params.description, id: route.params.id })} >
+                  <TouchableOpacity style={styles.buttonNext} onPress={siguiente1} >
+                    <Text style={styles.textFont}>Siguiente</Text>
+                  </TouchableOpacity>
+                )}
+            </>
+          ) : route.params.id === 6 ? (
+            <>
+              <Text style={styles.textFont}>Preguntas</Text>
+              <Text style={styles.textFont}>{route.params.data[route.params.cont].pregunta.preguntas[0].a}</Text>
+              <Text style={styles.textFont}>{route.params.data[route.params.cont].pregunta.preguntas[1].b}</Text>
+              <View>
+                <TouchableOpacity style={pregunta1 == true ? styles.buttonSelected : styles.button} onPress={() => selectButton(1)}>
+                  <Text style={{ fontFamily: 'Roboto_500Medium' }}>{route.params.data[route.params.cont].pregunta.resp[0].respuesta}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={pregunta2 == true ? styles.buttonSelected : styles.button} onPress={() => selectButton(2)}>
+                  <Text style={{ fontFamily: 'Roboto_500Medium' }}>{route.params.data[route.params.cont].pregunta.resp[1].respuesta}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={pregunta3 == true ? styles.buttonSelected : styles.button} onPress={() => selectButton(3)}>
+                  <Text style={{ fontFamily: 'Roboto_500Medium' }}>{route.params.data[route.params.cont].pregunta.resp[2].respuesta}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={pregunta4 == true ? styles.buttonSelected : styles.button} onPress={() => selectButton(4)}>
+                  <Text style={{ fontFamily: 'Roboto_500Medium' }}>{route.params.data[route.params.cont].pregunta.resp[3].respuesta}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={pregunta5 == true ? styles.buttonSelected : styles.button} onPress={() => selectButton(5)}>
+                  <Text style={{ fontFamily: 'Roboto_500Medium' }}>{route.params.data[route.params.cont].pregunta.resp[4].respuesta}</Text>
+                </TouchableOpacity>
+              </View>
+              {route.params.cont == 4 ? (
+                // <TouchableOpacity onPress={() => navigation.navigate('CategoryTest', { categoria: 'TEST ANALITICO', id_cartegory: 'test-analitico' })} style={styles.buttonBack}>
+                <TouchableOpacity onPress={volver2} style={styles.buttonBack}>
                   <Text style={styles.textFont}>Volver</Text>
                 </TouchableOpacity>
               ) : (
-                // <TouchableOpacity style={styles.buttonNext} onPress={() => navigation.navigate('RazonamientoNumerico', { data: route.params.data, cont: route.params.cont + 1, description: route.params.description, id: route.params.id })} >
-                <TouchableOpacity style={styles.buttonNext} onPress={siguiente1} >
+                <TouchableOpacity style={styles.buttonNext} onPress={siguiente2} >
                   <Text style={styles.textFont}>Siguiente</Text>
                 </TouchableOpacity>
               )}
-          </>
-        ) : route.params.id === 6 ? (
-          <>
-            <Text style={styles.textFont}>Preguntas</Text>
-            <Text style={styles.textFont}>{route.params.data[route.params.cont].pregunta.preguntas[0].a}</Text>
-            <Text style={styles.textFont}>{route.params.data[route.params.cont].pregunta.preguntas[1].b}</Text>
-            <View>
-              <TouchableOpacity style={pregunta1 == true ? styles.buttonSelected : styles.button} onPress={() => selectButton(1)}>
-                <Text style={{ fontFamily: 'Roboto_500Medium' }}>{route.params.data[route.params.cont].pregunta.resp[0].respuesta}</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={pregunta2 == true ? styles.buttonSelected : styles.button} onPress={() => selectButton(2)}>
-                <Text style={{ fontFamily: 'Roboto_500Medium' }}>{route.params.data[route.params.cont].pregunta.resp[1].respuesta}</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={pregunta3 == true ? styles.buttonSelected : styles.button} onPress={() => selectButton(3)}>
-                <Text style={{ fontFamily: 'Roboto_500Medium' }}>{route.params.data[route.params.cont].pregunta.resp[2].respuesta}</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={pregunta4 == true ? styles.buttonSelected : styles.button} onPress={() => selectButton(4)}>
-                <Text style={{ fontFamily: 'Roboto_500Medium' }}>{route.params.data[route.params.cont].pregunta.resp[3].respuesta}</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={pregunta5 == true ? styles.buttonSelected : styles.button} onPress={() => selectButton(5)}>
-                <Text style={{ fontFamily: 'Roboto_500Medium' }}>{route.params.data[route.params.cont].pregunta.resp[4].respuesta}</Text>
-              </TouchableOpacity>
-            </View>
-            {route.params.cont == 4 ? (
-              // <TouchableOpacity onPress={() => navigation.navigate('CategoryTest', { categoria: 'TEST ANALITICO', id_cartegory: 'test-analitico' })} style={styles.buttonBack}>
-              <TouchableOpacity onPress={volver2} style={styles.buttonBack}>
-                <Text style={styles.textFont}>Volver</Text>
-              </TouchableOpacity>
-            ) : (
-              <TouchableOpacity style={styles.buttonNext} onPress={siguiente2} >
-                <Text style={styles.textFont}>Siguiente</Text>
-              </TouchableOpacity>
-            )}
-          </>
-        ) : route.params.id === 7 ? (
-          <>
-            <Text style={styles.textFont}>Preguntas</Text>
-            <Text style={styles.textFont}>{route.params.data[route.params.cont].pregunta.preguntas[0].a}</Text>
-            <Text style={styles.textFont}>{route.params.data[route.params.cont].pregunta.preguntas[1].b}</Text>
-            <View>
-              <TouchableOpacity style={segundaPregunta1 == true ? styles.buttonSelected : styles.button} onPress={() => selectButton2(1)}>
-                <Text style={{ fontFamily: 'Roboto_500Medium' }}>{route.params.data[route.params.cont].pregunta.resp[0].respuesta}</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={segundaPregunta2 == true ? styles.buttonSelected : styles.button} onPress={() => selectButton2(2)}>
-                <Text style={{ fontFamily: 'Roboto_500Medium' }}>{route.params.data[route.params.cont].pregunta.resp[1].respuesta}</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={segundaPregunta3 == true ? styles.buttonSelected : styles.button} onPress={() => selectButton2(3)}>
-                <Text style={{ fontFamily: 'Roboto_500Medium' }}>{route.params.data[route.params.cont].pregunta.resp[2].respuesta}</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={segundaPregunta4 == true ? styles.buttonSelected : styles.button} onPress={() => selectButton2(4)}>
-                <Text style={{ fontFamily: 'Roboto_500Medium' }}>{route.params.data[route.params.cont].pregunta.resp[3].respuesta}</Text>
-              </TouchableOpacity>
-            </View>
-            {route.params.cont == 4 ? (
-              // <TouchableOpacity onPress={() => navigation.navigate('CategoryTest', { categoria: 'TEST ANALITICO', id_cartegory: 'test-analitico' })} style={styles.buttonBack}>
-              <TouchableOpacity onPress={volver3} style={styles.buttonBack}>
-                <Text style={styles.textFont}>Volver</Text>
-              </TouchableOpacity>
-            ) : (
-              <TouchableOpacity style={styles.buttonNext} onPress={siguiente3} >
-                <Text style={styles.textFont}>Siguiente</Text>
-              </TouchableOpacity>
-            )}
-          </>
-        ) : (null)}
+            </>
+          ) : route.params.id === 7 ? (
+            <>
+              <Text style={styles.textFont}>Preguntas</Text>
+              <Text style={styles.textFont}>{route.params.data[route.params.cont].pregunta.preguntas[0].a}</Text>
+              <Text style={styles.textFont}>{route.params.data[route.params.cont].pregunta.preguntas[1].b}</Text>
+              <View>
+                <TouchableOpacity style={segundaPregunta1 == true ? styles.buttonSelected : styles.button} onPress={() => selectButton2(1)}>
+                  <Text style={{ fontFamily: 'Roboto_500Medium' }}>{route.params.data[route.params.cont].pregunta.resp[0].respuesta}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={segundaPregunta2 == true ? styles.buttonSelected : styles.button} onPress={() => selectButton2(2)}>
+                  <Text style={{ fontFamily: 'Roboto_500Medium' }}>{route.params.data[route.params.cont].pregunta.resp[1].respuesta}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={segundaPregunta3 == true ? styles.buttonSelected : styles.button} onPress={() => selectButton2(3)}>
+                  <Text style={{ fontFamily: 'Roboto_500Medium' }}>{route.params.data[route.params.cont].pregunta.resp[2].respuesta}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={segundaPregunta4 == true ? styles.buttonSelected : styles.button} onPress={() => selectButton2(4)}>
+                  <Text style={{ fontFamily: 'Roboto_500Medium' }}>{route.params.data[route.params.cont].pregunta.resp[3].respuesta}</Text>
+                </TouchableOpacity>
+              </View>
+              {route.params.cont == 4 ? (
+                // <TouchableOpacity onPress={() => navigation.navigate('CategoryTest', { categoria: 'TEST ANALITICO', id_cartegory: 'test-analitico' })} style={styles.buttonBack}>
+                <TouchableOpacity onPress={volver3} style={styles.buttonBack}>
+                  <Text style={styles.textFont}>Volver</Text>
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity style={styles.buttonNext} onPress={siguiente3} >
+                  <Text style={styles.textFont}>Siguiente</Text>
+                </TouchableOpacity>
+              )}
+            </>
+          ) : (null)}
+        </ScrollView>
+      </Layaut >
+      {/* ---------------------ALERTS ------------------------ */}
+      <Modal
+        visible={progress}
+        transparent
+        animationType='fade'
+      >
+        <View style={styles.progressView}>
+          <Progress.Circle borderWidth={3} size={40} indeterminate={true} />
+        </View>
+      </Modal>
+      <SuccesAlert isOpen={openModal} closeModal={closeModalAlert} text={message} />
+      <ErrorAlert isOpen={openModalError} closeModal={closeModalAlertError} text={message} />
 
-      </ScrollView>
-    </Layaut >
+    </>
   )
 }
 
@@ -443,7 +510,7 @@ const styles = StyleSheet.create({
   },
   input: {
     fontFamily: 'Roboto_500Medium',
-    width: '80%',
+    width: '40%',
     marginBottom: 10,
     borderWidth: 1,
     color: 'white',
@@ -453,5 +520,11 @@ const styles = StyleSheet.create({
     borderColor: '#10ac84',
     margin: 15,
     alignSelf: 'center'
+  },
+  progressView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
   },
 })

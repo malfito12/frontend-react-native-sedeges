@@ -1,9 +1,13 @@
-import { View, Text, ScrollView, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Modal } from 'react-native'
 import React, { useCallback, useState } from 'react'
 import Layaut from '../../../../../../Atoms/StyleLayaut/Layaut'
 import { useFocusEffect } from '@react-navigation/native'
+import * as Progress from 'react-native-progress'
 import { useModalAlert, useModalAlertError } from '../../../../../../Molecules/Hooks/useModalAlert'
 import AsyncStorageLib from '@react-native-async-storage/async-storage'
+import axios from 'axios'
+import { PORT_URL } from '../../../../../../../PortUrl/PortUrl'
+import { ErrorAlert, SuccesAlert } from '../../../../../../Molecules/Alertas/Alerts'
 
 var array = []
 const ConceptosVerbales = ({ route, navigation }) => {
@@ -90,7 +94,7 @@ const ConceptosVerbales = ({ route, navigation }) => {
             alert('Marque una respuesta')
         }
     }
-    const volver = () => {
+    const volver = async () => {
         if (pregunta1 == true || pregunta2 == true || pregunta3 == true || pregunta4 == true) {
             var namePre = `Pregunta ${route.params.cont + 1}`
             array.push({
@@ -108,43 +112,74 @@ const ConceptosVerbales = ({ route, navigation }) => {
             setPregunta3(false)
             setPregunta4(false)
             setRespuesta1(null)
-            console.log(array)
-            navigation.navigate('InicioTest', { student_id: route.params.student_id, factor: route.params.description })
+            setProgress(true)
+            await axios.post(`${PORT_URL}post-result-madurez-t7`, array)
+                .then(resp => {
+                    setMessage(resp.data.message)
+                    setProgress(false)
+                    openModalAlert()
+                    // navigation.navigate('CategoryTest', { student_id: route.params.student_id })
+                    navigation.navigate('InicioTest', { student_id: route.params.student_id, factor: route.params.description })
+                })
+                .catch(err => {
+                    setProgress(false)
+                    if (err.response) {
+                        setMessage(err.response.data.message)
+                        openModalAlertError()
+                    }
+                })
+            // console.log(array)
+            // navigation.navigate('InicioTest', { student_id: route.params.student_id, factor: route.params.description })
         } else {
             alert('Marque una respuesta')
         }
     }
     return (
-        <Layaut>
-            <ScrollView>
-                <Text style={styles.textFont}>Preguntas</Text>
-                <Text style={styles.textFont}>{route.params.data[route.params.cont].pregunta.preguntas}</Text>
-                <View>
-                    <TouchableOpacity style={pregunta1 == true ? styles.buttonSelected : styles.button} onPress={() => selectButton(1)}>
-                        <Text style={{ fontFamily: 'Roboto_500Medium' }}>{route.params.data[route.params.cont].pregunta.resp[0].respuesta}</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={pregunta2 == true ? styles.buttonSelected : styles.button} onPress={() => selectButton(2)}>
-                        <Text style={{ fontFamily: 'Roboto_500Medium' }}>{route.params.data[route.params.cont].pregunta.resp[1].respuesta}</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={pregunta3 == true ? styles.buttonSelected : styles.button} onPress={() => selectButton(3)}>
-                        <Text style={{ fontFamily: 'Roboto_500Medium' }}>{route.params.data[route.params.cont].pregunta.resp[2].respuesta}</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={pregunta4 == true ? styles.buttonSelected : styles.button} onPress={() => selectButton(4)}>
-                        <Text style={{ fontFamily: 'Roboto_500Medium' }}>{route.params.data[route.params.cont].pregunta.resp[3].respuesta}</Text>
-                    </TouchableOpacity>
+        <>
+            <Layaut>
+                <ScrollView>
+                    <Text style={styles.textFont}>Preguntas</Text>
+                    <Text style={styles.textFont}>{route.params.data[route.params.cont].pregunta.preguntas}</Text>
+                    <View>
+                        <TouchableOpacity style={pregunta1 == true ? styles.buttonSelected : styles.button} onPress={() => selectButton(1)}>
+                            <Text style={{ fontFamily: 'Roboto_500Medium' }}>{route.params.data[route.params.cont].pregunta.resp[0].respuesta}</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={pregunta2 == true ? styles.buttonSelected : styles.button} onPress={() => selectButton(2)}>
+                            <Text style={{ fontFamily: 'Roboto_500Medium' }}>{route.params.data[route.params.cont].pregunta.resp[1].respuesta}</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={pregunta3 == true ? styles.buttonSelected : styles.button} onPress={() => selectButton(3)}>
+                            <Text style={{ fontFamily: 'Roboto_500Medium' }}>{route.params.data[route.params.cont].pregunta.resp[2].respuesta}</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={pregunta4 == true ? styles.buttonSelected : styles.button} onPress={() => selectButton(4)}>
+                            <Text style={{ fontFamily: 'Roboto_500Medium' }}>{route.params.data[route.params.cont].pregunta.resp[3].respuesta}</Text>
+                        </TouchableOpacity>
+                    </View>
+                    {route.params.cont == 9 ? (
+                        // <TouchableOpacity onPress={() => navigation.navigate('CategoryTest')} style={styles.buttonBack}>
+                        <TouchableOpacity onPress={volver} style={styles.buttonBack}>
+                            <Text style={styles.textFont}>Volver</Text>
+                        </TouchableOpacity>
+                    ) : (
+                        <TouchableOpacity style={styles.buttonNext} onPress={siguiente} >
+                            <Text style={styles.textFont}>Siguiente</Text>
+                        </TouchableOpacity>
+                    )}
+                </ScrollView>
+            </Layaut>
+            {/* ---------------------ALERTS ------------------------ */}
+            <Modal
+                visible={progress}
+                transparent
+                animationType='fade'
+            >
+                <View style={styles.progressView}>
+                    <Progress.Circle borderWidth={3} size={40} indeterminate={true} />
                 </View>
-                {route.params.cont == 9 ? (
-                    // <TouchableOpacity onPress={() => navigation.navigate('CategoryTest')} style={styles.buttonBack}>
-                    <TouchableOpacity onPress={volver} style={styles.buttonBack}>
-                        <Text style={styles.textFont}>Volver</Text>
-                    </TouchableOpacity>
-                ) : (
-                    <TouchableOpacity style={styles.buttonNext} onPress={siguiente} >
-                        <Text style={styles.textFont}>Siguiente</Text>
-                    </TouchableOpacity>
-                )}
-            </ScrollView>
-        </Layaut>
+            </Modal>
+            <SuccesAlert isOpen={openModal} closeModal={closeModalAlert} text={message} />
+            <ErrorAlert isOpen={openModalError} closeModal={closeModalAlertError} text={message} />
+
+        </>
     )
 }
 
@@ -163,7 +198,7 @@ const styles = StyleSheet.create({
         borderRadius: 3,
         width: '50%',
         alignSelf: 'center',
-        alignItems:'center'
+        alignItems: 'center'
     },
     buttonSelected: {
         backgroundColor: 'white',
@@ -172,9 +207,9 @@ const styles = StyleSheet.create({
         borderRadius: 3,
         width: '50%',
         alignSelf: 'center',
-        borderWidth:2,
-        borderColor:'red',
-        alignItems:'center'
+        borderWidth: 2,
+        borderColor: 'red',
+        alignItems: 'center'
     },
     buttonNext: {
         padding: 10,
@@ -199,5 +234,11 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    progressView: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 22,
     },
 })

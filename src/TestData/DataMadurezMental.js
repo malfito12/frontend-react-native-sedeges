@@ -902,15 +902,8 @@ export const razonamientoNumerico = [
         contenido: {
             instructions: 'En cada serie de nuemros, hay uno que es incorrecto. Busque ese número',
             ejm: {
-                preguntas: {
-                    a: '2 4 6 8 9 10 12 14',
-                    b: null,
-                },
-                resp: {
-                    a: null,
-                    b: null,
-                    c: null
-                }
+                preguntas: '2 4 6 8 9 10 12 14',
+                resp: '9'
             },
             preguntas: [
                 {
@@ -1211,10 +1204,7 @@ export const razonamientoNumerico = [
         contenido: {
             instructions: 'A continuacion hay varios problemas y frente a cada uno, de ellos cuatro respuestas posibles precedidas por letras. Busque cual es la respuesta correcta.',
             ejm: {
-                preguntas: {
-                    a: 'Si tu tienes 5 Bs. y gastas 3 Bs. ¿ cuantos Bs. te quedan ?',
-                    b: null,
-                },
+                preguntas: 'Si tu tienes 5 Bs. y gastas 3 Bs. ¿ cuantos Bs. te quedan ?',
                 resp: [
                     { respuesta: '1,00 Bs.' },
                     { respuesta: '2,00 Bs.' },
@@ -1477,10 +1467,7 @@ export const conceptosVerBales = [
         contenido: {
             instructions: 'Lo que usted tiene que hacer es decidir, cual de las cuatro palabras escritas con la letras minusculas posee un significado igual o semejante a la palabra escrita con mayúscula.',
             ejm: {
-                preguntas: {
-                    a: 'CAMINAR',
-                    b: null,
-                },
+                preguntas: 'CAMINAR',
                 resp: [
                     { respuesta: 'Jugar' },
                     { respuesta: 'Luchar' },
