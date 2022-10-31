@@ -3,11 +3,14 @@ import React, { useCallback, useState } from 'react'
 import Layaut from '../../../../../Atoms/StyleLayaut/Layaut'
 import { useFocusEffect } from '@react-navigation/native'
 import axios from 'axios'
+import * as Progress from 'react-native-progress'
 import { PORT_URL } from '../../../../../../PortUrl/PortUrl'
 import { BarChart, LineChart } from 'react-native-chart-kit'
 
 const ResultsInteresStudent = ({ navigation, route }) => {
   const [result, setResult] = useState([])
+  const [progressName, setProgressName] = useState('none')
+  const [exist, setExist] = useState('none')
   useFocusEffect(
     useCallback(() => {
       let isActive = true
@@ -16,10 +19,15 @@ const ResultsInteresStudent = ({ navigation, route }) => {
     }, [])
   )
   const getResults = async () => {
+    setProgressName('flex')
     // await axios.get(`${PORT_URL}test-aptitudes-students-results/${route.params.data.student_id}`)
     await axios.post(`${PORT_URL}test-intereses-students-results`, { student_id: route.params.data.student_id, event_id: route.params.data.event_id })
       .then(resp => {
         // console.log(resp.data)
+        if (resp.data.length === 0) {
+          setExist('flex')
+        }
+        setProgressName('none')
         setResult(resp.data)
       })
       .catch(err => console.log(err))
@@ -52,7 +60,7 @@ const ResultsInteresStudent = ({ navigation, route }) => {
 
   const data = {
     labels: ["T.A.", "T.F.", "T.D.", "T.C.", "T.J.", "T.G.", "T.B.", "T.H.", "T.E.", "T.I."],
-    datasets: [{data: data2}],
+    datasets: [{ data: data2 }],
   };
   const chartConfig = {
     backgroundGradientFrom: "#1E2923",
@@ -64,14 +72,14 @@ const ResultsInteresStudent = ({ navigation, route }) => {
     strokeWidth: 2,
     barPercentage: 0.5,
     useShadowColorFromDataset: false,
-    propsForHorizontalLabels: {fontSize: "16",x: "60"},
+    propsForHorizontalLabels: { fontSize: "16", x: "60" },
   };
   return (
     <Layaut>
       <ScrollView>
         {array.length > 0 ? (
           <>
-            <Text style={{ color: 'white',alignSelf:'center',marginBottom:10,fontFamily:'Roboto_500Medium' }}>{array[0].name} {array[0].lastNameFather} {array[0].lastNameMother}</Text>
+            <Text style={{ color: 'white', alignSelf: 'center', marginBottom: 10, fontFamily: 'Roboto_500Medium' }}>{array[0].name} {array[0].lastNameFather} {array[0].lastNameMother}</Text>
             <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', backgroundColor: '#12151C', padding: 5, margin: 5 }}>
               <Text style={{ color: 'white' }}>AREA</Text>
               <Text style={{ color: 'white' }}>PD</Text>
@@ -132,17 +140,24 @@ const ResultsInteresStudent = ({ navigation, route }) => {
               <Text style={{ color: 'white' }}>{sumTotal}</Text>
               <Text style={{ color: 'white' }}>M</Text>
             </View>
+            <Text style={{ marginTop: 40, alignSelf: 'center', color: 'white', fontFamily: 'Roboto_900Black', fontSize: 16 }}>GRAFICAS</Text>
+            <BarChart
+              data={data}
+              width={(Dimensions.get('window').width) - 50}
+              height={320}
+              chartConfig={chartConfig}
+              verticalLabelRotation={30}
+              fromZero
+            />
           </>
-        ) : (null)}
-        <Text style={{marginTop:40,alignSelf:'center',color:'white',fontFamily:'Roboto_900Black',fontSize:16}}>GRAFICAS</Text>
-        <BarChart
-          data={data}
-          width={(Dimensions.get('window').width) - 50}
-          height={320}
-          chartConfig={chartConfig}
-          verticalLabelRotation={30}
-          fromZero
-        />
+        ) : (
+          <>
+            <Text style={{ color: 'white', alignSelf: 'center', padding: 20, display: exist }}>No Existen Registros</Text>
+            <View style={{ display: progressName }}>
+              <Progress.Circle style={{ alignSelf: 'center' }} borderWidth={2} size={20} indeterminate={true} />
+            </View>
+          </>
+        )}
       </ScrollView>
     </Layaut>
   )

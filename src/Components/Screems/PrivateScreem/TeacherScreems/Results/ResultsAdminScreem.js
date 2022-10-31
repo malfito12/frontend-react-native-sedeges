@@ -12,14 +12,25 @@ const ResultsAdminScreem = ({ navigation, route }) => {
   // console.log(route.params.data)
   const [resultIntereses, setResultIntereses] = useState([])
   const [resultAptitudes, setResultAptitudes] = useState([])
+  const [resultMadurez, setResultMadurez] = useState([])
   useFocusEffect(
     useCallback(() => {
       let isActive = true
       getResultsIntereses()
       getResultsAptitudes()
+      getResults()
       return () => { isActive = false }
     }, [])
   )
+  //-------------INTERESES----------------
+  const getResults = async () => {
+    await axios.get(`${PORT_URL}get-result-madurez-student?event_id=${route.params.data.event_id}&student_id=${route.params.data.student_id}`)
+      .then(resp => {
+        setResultMadurez(resp.data)
+        // alert(JSON.stringify(resp.data))
+      })
+      .catch(err => console.log(err))
+  }
   //-------------INTERESES----------------
   const dataIntereses = ['AIRE LIBRE', 'ARTISTICO', 'CIENTIFICO', 'CALCULO', 'OFICINA', 'LITERARIO', 'MECANICO', 'MUSICAL', 'PERSUASIVO', 'SE. SOCIAL']
   const getResultsIntereses = async () => {
@@ -83,7 +94,7 @@ const ResultsAdminScreem = ({ navigation, route }) => {
   var carreraApitudes = ''
   var html = ''
   var html2 = `<br/>`
-  if (arrayIntereses.length > 0 && arrayAptitudes.length > 0) {
+  if (arrayIntereses.length > 0 && arrayAptitudes.length > 0 && resultMadurez.length > 0) {
     //--------------INTERES-------------
     sumTotalInteres = arrayIntereses[0].totalSeccion;
     for (var j = 0; j < arrayIntereses.length; j++) {
@@ -130,6 +141,45 @@ const ResultsAdminScreem = ({ navigation, route }) => {
         }
       }
     }
+    //---------------------------------------
+    var dataMadurez = [
+      {area:'Test I',pd: resultMadurez[0].datos_test.test1,pc: '',nivel: ''},
+      {area:'Test II', pd:resultMadurez[0].datos_test.test2, pc:'',nivel: ''},
+      {area:'Test III', pd:resultMadurez[0].datos_test.test3, pc:'', nivel:''},
+      {area:'Test IV', pd:resultMadurez[0].datos_test.test4, pc:'', nivel:''},
+      {area:'Test V', pd:resultMadurez[0].datos_test.test5, pc:'', nivel:''},
+      {area:'Test VI', pd:resultMadurez[0].datos_test.test6, pc:'', nivel:''},
+      {area:'Test VII', pd:resultMadurez[0].datos_test.test7, pc:'', nivel:''},
+      {area:'RELACIONES ESPACIALES',pd: resultMadurez[0].datos_test.relaciones_espaciales,pc: resultMadurez[0].datos_pc_nivel.pc_re,nivel: resultMadurez[0].datos_pc_nivel.nivel_re},
+      {area:'RAZONAMIENTO LOGICO',pd: resultMadurez[0].datos_test.razonamiento_logico, pc:resultMadurez[0].datos_pc_nivel.pc_rl,nivel: resultMadurez[0].datos_pc_nivel.nivel_rl},
+      {area:'RAZONAMIENTO NUMERICO',pd: resultMadurez[0].datos_test.razonamiento_numerico,pc: resultMadurez[0].datos_pc_nivel.pc_rn,nivel: resultMadurez[0].datos_pc_nivel.nivel_rn},
+      {area:'CONCEPTOS VERBALES',pd: resultMadurez[0].datos_test.conceptos_verbales,pc: resultMadurez[0].datos_pc_nivel.pc_cv,nivel: resultMadurez[0].datos_pc_nivel.nivel_cv},
+      {area:'TOTAL',pd: resultMadurez[0].datos_test.total,pc: '', nivel:''},
+    ]
+    const prueba = () => {
+      return (
+        <table>
+          <thead>
+            <tr>
+              <th>AREA</th>
+              <th>PD</th>
+              <th>PC</th>
+              <th>NIVEL</th>
+            </tr>
+          </thead>
+          <tbody>
+            {dataMadurez.map((e,index)=>(
+              <tr key={index}>
+                <td>{e.area}</td>
+                <td>{e.pd}</td>
+                <td>{e.pc}</td>
+                <td>{e.nivel}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )
+    }
     html = `
   <html>
   <head>
@@ -138,6 +188,9 @@ const ResultsAdminScreem = ({ navigation, route }) => {
     <title>Gráfico de barrasL</title>
 
     <style>
+        .style-table{
+          margin-top:10px;
+        }
         .chart-wrap {
             --chart-width: 420px;
             --grid-color: #aaa;
@@ -222,10 +275,106 @@ const ResultsAdminScreem = ({ navigation, route }) => {
 <body>
 
     <h5 align="center">INFORME DE INTERESES Y APTITUDES</h5>
-    <h5>ESCUELA : </h5>
     <h5>NOMBRE: ${arrayIntereses[0].name} ${arrayAptitudes[0].lastNameFather} ${arrayAptitudes[0].lastNameMother}</h5>
     <h5>FECHA DE NACIMIENTO : ${arrayIntereses[0].fechaNacimiento}</h5>
     <h5>EDAD: ${arrayIntereses[0].edad}</h5>
+    <h5 align="center">MADUREZ METAL</h5>
+    <div align='center'>
+      <table border='1'>
+      <thead>
+          <tr>
+            <th>AREA</th>
+            <th>PD</th>
+            <th>PC</th>
+            <th>NIVEL</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>${dataMadurez[0].area}</td>
+            <td>${dataMadurez[0].pd}</td>
+            <td colspan='2'>${dataMadurez[0].pc}</td>
+            
+          </tr>
+          <tr>
+            <td>${dataMadurez[1].area}</td>
+            <td>${dataMadurez[1].pd}</td>
+            <td colspan='2'>${dataMadurez[1].pc}</td>
+          </tr>
+          <tr>
+            <td>${dataMadurez[2].area}</td>
+            <td>${dataMadurez[2].pd}</td>
+            <td colspan='2'>${dataMadurez[2].pc}</td>
+          </tr>
+          <tr>
+            <td>${dataMadurez[3].area}</td>
+            <td>${dataMadurez[3].pd}</td>
+            <td colspan='2'>${dataMadurez[3].pc}</td>
+          </tr>
+          <tr>
+            <td>${dataMadurez[4].area}</td>
+            <td>${dataMadurez[4].pd}</td>
+            <td colspan='2'>${dataMadurez[4].pc}</td>
+          </tr>
+          <tr>
+            <td>${dataMadurez[5].area}</td>
+            <td>${dataMadurez[5].pd}</td>
+            <td colspan='2'>${dataMadurez[5].pc}</td>
+          </tr>
+          <tr>
+            <td>${dataMadurez[6].area}</td>
+            <td>${dataMadurez[6].pd}</td>
+            <td colspan='2'>${dataMadurez[6].pc}</td>
+          </tr>
+          <tr>
+            <td>${dataMadurez[7].area}</td>
+            <td>${dataMadurez[7].pd}</td>
+            <td>${dataMadurez[7].pc}</td>
+            <td>${dataMadurez[7].nivel}</td>
+          </tr>
+          <tr>
+            <td>${dataMadurez[8].area}</td>
+            <td>${dataMadurez[8].pd}</td>
+            <td>${dataMadurez[8].pc}</td>
+            <td>${dataMadurez[8].nivel}</td>
+          </tr>
+          <tr>
+            <td>${dataMadurez[9].area}</td>
+            <td>${dataMadurez[9].pd}</td>
+            <td>${dataMadurez[9].pc}</td>
+            <td>${dataMadurez[9].nivel}</td>
+          </tr>
+          <tr>
+            <td>${dataMadurez[10].area}</td>
+            <td>${dataMadurez[10].pd}</td>
+            <td>${dataMadurez[10].pc}</td>
+            <td>${dataMadurez[10].nivel}</td>
+          </tr>
+          <tr>
+            <td>${dataMadurez[11].area}</td>
+            <td>${dataMadurez[11].pd}</td>
+            <td>${dataMadurez[11].pc}</td>
+            <td>${dataMadurez[11].nivel}</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="style-table">
+        <thead></thead>
+        <tbody>
+            <tr>
+              <td>EDAD CRONOLOGICA</td>
+              <td>${resultMadurez[0].datos_test.edad_cronologica}</td>
+            </tr>
+            <tr>
+              <td>EDAD MENTAL</td>
+              <td>${resultMadurez[0].datos_test.edad_mental}</td>
+            </tr>
+              <td>COEFICIENTE INTELECTUAL</td>
+              <td>${resultMadurez[0].datos_test.coeficiente_intelectual}</td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
     <h5 align="center">INTERESES</h5>
     <div class="chart-wrap ">
         <!-- quitar el estilo "horizontal" para visualizar verticalmente -->
@@ -243,6 +392,9 @@ const ResultsAdminScreem = ({ navigation, route }) => {
             <div class="bar" style="--bar-value:${arrayIntereses[9].porcentaje};" data-name="Se Social ${arrayIntereses[9].totalSeccion}"></div>
         </div>
     </div>
+    <h5 style="margin-top:40">AREAS SOBRESALIENTES INTERESES : </h5>
+    <h5>INTERESES: ${nameIteres}</h5>
+    <p>${interes}</p>
     <h5 align="center">APTITUDES</h5>
     <div class="chart-wrap ">
         <!-- quitar el estilo "horizontal" para visualizar verticalmente -->
@@ -261,9 +413,7 @@ const ResultsAdminScreem = ({ navigation, route }) => {
             <div class="bar" style="--bar-value:${arrayAptitudes[10].porcentaje};" data-name="Social ${arrayAptitudes[10].totalSeccion}"></div>
         </div>
     </div>
-    <h5 style="margin-top:50">AREAS SOBRESALIENTES : </h5>
-    <h5>INTERESES: ${nameIteres}</h5>
-    <p>${interes}</p>
+    <h5 style="margin-top:40">AREAS SOBRESALIENTES APTITUDES : </h5>
     <h5>APTITUDES: ${nameApitud}</h5>
     <p>${aptitudes}</p>
     <h5>CARRERAS QUE SE RECOMIENDAN</h5>

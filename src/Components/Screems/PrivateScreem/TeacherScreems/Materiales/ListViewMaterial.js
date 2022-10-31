@@ -5,7 +5,7 @@ import Layaut from '../../../../Atoms/StyleLayaut/Layaut'
 const ListViewMaterial = () => {
   return (
     <Layaut>
-      <Text style={{color:'white'}}>ListViewMaterial</Text>
+      <Text style={{color:'white'}}>Materiales de Apoyo</Text>
     </Layaut>
   )
 }
