@@ -156,30 +156,6 @@ const ResultsAdminScreem = ({ navigation, route }) => {
       {area:'CONCEPTOS VERBALES',pd: resultMadurez[0].datos_test.conceptos_verbales,pc: resultMadurez[0].datos_pc_nivel.pc_cv,nivel: resultMadurez[0].datos_pc_nivel.nivel_cv},
       {area:'TOTAL',pd: resultMadurez[0].datos_test.total,pc: '', nivel:''},
     ]
-    const prueba = () => {
-      return (
-        <table>
-          <thead>
-            <tr>
-              <th>AREA</th>
-              <th>PD</th>
-              <th>PC</th>
-              <th>NIVEL</th>
-            </tr>
-          </thead>
-          <tbody>
-            {dataMadurez.map((e,index)=>(
-              <tr key={index}>
-                <td>{e.area}</td>
-                <td>{e.pd}</td>
-                <td>{e.pc}</td>
-                <td>{e.nivel}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )
-    }
     html = `
   <html>
   <head>
