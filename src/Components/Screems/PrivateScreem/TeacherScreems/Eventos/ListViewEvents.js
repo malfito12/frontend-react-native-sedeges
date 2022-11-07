@@ -12,7 +12,7 @@ import AsyncStorageLib from '@react-native-async-storage/async-storage'
 import { useModalAlert, useModalAlertError } from '../../../../Molecules/Hooks/useModalAlert'
 import { ErrorAlert, SuccesAlert } from '../../../../Molecules/Alertas/Alerts'
 
-const ListViewEvents = ({navigation}) => {
+const ListViewEvents = ({ navigation }) => {
     const [idUser, setIdUser] = useState([])
     AsyncStorageLib.getItem('user').then(resp => setIdUser(JSON.parse(resp)))
     const [openModal, openModalAlert, closeModalAlert] = useModalAlert(false)
@@ -25,10 +25,12 @@ const ListViewEvents = ({navigation}) => {
     const [refresing, setRefresing] = useState(false)
     const [modalEditTest, setModalEditTest] = useState(false)
     const [estado, setEstado] = useState(false)
+    const [openModalDelete, setOpenModalDelete] = useState(false)
     const [changeData, setChangeData] = useState({
         event_name: '',
         event_description: '',
         event_status: '',
+        event_id: '',
         user_id: '',
     })
     useFocusEffect(
@@ -61,6 +63,7 @@ const ListViewEvents = ({navigation}) => {
             event_name: '',
             event_description: '',
             event_status: '',
+            event_id: '',
             user_id: '',
         })
     }
@@ -89,7 +92,7 @@ const ListViewEvents = ({navigation}) => {
             .catch(err => {
                 console.log(err)
                 setProgress(false)
-                if(err.response){
+                if (err.response) {
                     setMessage(err.response.data.message)
                     openModalAlertError()
                 }
@@ -98,22 +101,33 @@ const ListViewEvents = ({navigation}) => {
 
     }
     //--------------DELETE EVENT---------------------------
-    const deleteEvent=async(e)=>{
+    const [removeEvent, setRemoveEvent] = useState({ event_name: '', event_id: '' })
+
+    const openModalDeleteEvent = (e) => {
+        setRemoveEvent({ event_name: e.event_name, event_id: e.event_id })
+        setOpenModalDelete(true)
+    }
+    const closeModalDeleteEvent = () => {
+        setOpenModalDelete(false)
+    }
+    const deleteEvent = async (e) => {
+        const id = removeEvent.event_id
         setProgress(true)
-        await axios.delete(`${PORT_URL}event/${e}`)
-        .then(resp=>{
-            setProgress(false)
-            setMessage(resp.data.message)
-            openModalAlert()
-            getEvents()
-        })
-        .catch(err=>{
-            setProgress(false)
-            if(err.response){
-                setMessage(err.response.data.message)
-                openModalAlertError()
-            }
-        })
+        await axios.delete(`${PORT_URL}event/${id}`)
+            .then(resp => {
+                setProgress(false)
+                setMessage(resp.data.message)
+                openModalAlert()
+                getEvents()
+                closeModalDeleteEvent()
+            })
+            .catch(err => {
+                setProgress(false)
+                if (err.response) {
+                    setMessage(err.response.data.message)
+                    openModalAlertError()
+                }
+            })
     }
     //--------------HANDLE CHANGE---------------------------
     const handleChange = (name, value) => {
@@ -155,13 +169,13 @@ const ListViewEvents = ({navigation}) => {
                                         {/* <TouchableOpacity > */}
                                         <SuccessButton name={'Actualizar'} />
                                     </TouchableOpacity>
-                                    <TouchableOpacity onPress={() => deleteEvent(e.event_id)}>
-                                    {/* <TouchableOpacity > */}
+                                    <TouchableOpacity onPress={() => openModalDeleteEvent(e)}>
+                                        {/* <TouchableOpacity > */}
                                         <CancelButton name={'Eliminar'} />
                                     </TouchableOpacity>
                                     {/* <TouchableOpacity onPress={() => navigation.navigate('ResultsAdminScreem', { data: e })} style={{ alignSelf: 'center', borderRadius: 3, backgroundColor: '#ffa726', margin: 5, padding: 4 }}> */}
                                     <TouchableOpacity onPress={() => navigation.navigate('ListViewStudentsResult', { data: e })} style={{ alignSelf: 'center', borderRadius: 3, backgroundColor: '#ffa726', margin: 5, padding: 4 }}>
-                                    {/* <TouchableOpacity style={{ alignSelf: 'center', borderRadius: 3, backgroundColor: '#ffa726', margin: 5, padding: 4 }}> */}
+                                        {/* <TouchableOpacity style={{ alignSelf: 'center', borderRadius: 3, backgroundColor: '#ffa726', margin: 5, padding: 4 }}> */}
                                         <Text style={{ fontFamily: 'Roboto_500Medium', color: 'white', alignSelf: 'center' }}>Resultados</Text>
                                     </TouchableOpacity>
                                 </View>
@@ -240,6 +254,28 @@ const ListViewEvents = ({navigation}) => {
                     </View>
                 </View>
             </Modal>
+            {/* -----------------------------------MODAL DELETE EVENT------------------------ */}
+            <Modal
+                visible={openModalDelete}
+                animationType='fade'
+                transparent
+            >
+                <View style={styles.centeredView}>
+                    <View style={{ ...styles.modalView, backgroundColor: '#335469', marginHorizontal: 20 }}>
+                        <Text style={{ alignSelf: 'center', fontFamily: 'Roboto_500Medium', color: 'white', padding: 15 }}>Estas Seguro de Eliminar a {removeEvent.event_name}</Text>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 5 }}>
+                            <LinearGradient style={{ borderRadius: 3 }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#00c853', '#64dd17', '#aeea00']}>
+                                <TouchableOpacity onPress={deleteEvent} style={{ padding: 5, width: '100%' }}>
+                                    <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium' }}>Aceptar</Text>
+                                </TouchableOpacity>
+                            </LinearGradient>
+                            <TouchableOpacity onPress={closeModalDeleteEvent} style={{ backgroundColor: 'red', marginLeft: 20, borderRadius: 3, padding: 5 }}>
+                                <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium' }}>Cancelar</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </View>
+            </Modal>
             {/* ---------------------ALERTS ------------------------ */}
             <Modal
                 visible={progress}
@@ -304,6 +340,16 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 22,
+    },
+    centeredView: {
+        flex: 1,
+        justifyContent: 'center',
+        marginTop: 22,
+    },
+    modalView: {
+        borderRadius: 3,
+        padding: 5,
+        alignItems: 'center',
     },
 })
 export default ListViewEvents

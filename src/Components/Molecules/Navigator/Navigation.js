@@ -1,5 +1,6 @@
 import { View, Text, TouchableOpacity } from 'react-native'
 import { NavigationContainer, StackActions } from '@react-navigation/native'
+import { MaterialIcons } from '@expo/vector-icons'
 import React, { useContext, useState, useEffect } from 'react'
 import LoginScreem from '../../Screems/PublicScreem/LoginScreem'
 import RegisterUserScreem from '../../Screems/PublicScreem/RegisterUserScreem'
@@ -283,12 +284,20 @@ const Navigation = () => {
                         <Stack.Screen
                             name='ListViewStudentsReception'
                             component={ListViewStudentsReception}
-                            options={{
+                            options={({navigation }) => ({
                                 headerStyle: { backgroundColor: '#000010' },
                                 headerTintColor: 'white',
                                 title: 'Lista de Estudiantes',
-                                headerTitleStyle: { fontSize: 16 }
-                            }}
+                                headerTitleStyle: { fontSize: 16 },
+                                headerRight: () => (
+                                    <View style={{ marginRight: 20 }}>
+                                        <TouchableOpacity onPress={() => navigation.navigate('RegisterStudent')}>
+                                            <MaterialIcons name="add" size={26} color="white" />
+                                        </TouchableOpacity>
+                                    </View>
+                                ),
+                            })}
+
                         />
                         <Stack.Screen
                             name='ListViewStudentsResult'

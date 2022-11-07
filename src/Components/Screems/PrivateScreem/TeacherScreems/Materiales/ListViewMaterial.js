@@ -156,7 +156,7 @@ const ListViewMaterial = () => {
       </Modal>
       {/* ---------------------ALERTS ------------------------ */}
       <Modal
-        visible={progress}
+        visible={progressRequest}
         transparent
         animationType='fade'
       >

@@ -100,7 +100,7 @@ const TeacherHomeScreem = ({ navigation }) => {
           )
         }} />
 
-        <Tab.Screen name="StudentsAdminScreem" component={StudentsAdminScreem} options={{
+        {/* <Tab.Screen name="StudentsAdminScreem" component={StudentsAdminScreem} options={{
           // headerLeft: () => (perfil),
           headerLeft: () => (
             <View style={{ marginHorizontal: 20 }}>
@@ -123,7 +123,7 @@ const TeacherHomeScreem = ({ navigation }) => {
               </TouchableOpacity>
             </View>
           )
-        }} />
+        }} /> */}
         
         {/* <Tab.Screen name="HomeAdminTestScreem" component={HomeAdminTestScreem} options={{
           // headerLeft: () => (perfil),
