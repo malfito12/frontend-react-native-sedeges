@@ -67,7 +67,7 @@ const RegisterStudent = ({ navigation }) => {
             birthDate: fDate,
         })
         setTextData(fDate)
-        closeModal();
+        closeModalDate();
     };
 
     //-----------POST STUDENT---------------
@@ -130,7 +130,7 @@ const RegisterStudent = ({ navigation }) => {
                     setMessage(err.response.data.message)
                     openModalAlertError()
                 }
-                console.log(err)
+                // console.log(err)
             })
         // console.log(changeData)
     }

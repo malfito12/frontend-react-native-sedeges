@@ -7,7 +7,6 @@ import axios from 'axios';
 import { PORT_URL } from '../../../../../PortUrl/PortUrl';
 import { WebView } from 'react-native-webview';
 import * as WebBrowser from 'expo-web-browser';
-import PDFReader from "rn-pdf-reader-js";
 import * as Print from 'expo-print';
 import { Picker } from '@react-native-picker/picker';
 import { LinearGradient } from 'expo-linear-gradient';

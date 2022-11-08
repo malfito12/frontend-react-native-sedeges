@@ -4,7 +4,6 @@ import Layaut from '../../../../Atoms/StyleLayaut/Layaut'
 import { useFocusEffect } from '@react-navigation/native'
 import { WebView } from 'react-native-webview';
 import * as WebBrowser from 'expo-web-browser';
-import PDFReader from "rn-pdf-reader-js";
 import * as Progress from 'react-native-progress'
 import * as Print from 'expo-print';
 import { PORT_URL } from '../../../../../PortUrl/PortUrl';

@@ -227,13 +227,6 @@ const ListViewReceptions = ({ navigation }) => {
                             onChangeText={text => handleChange('reception_municipio', text)}
                         />
                         <Text style={{ color: 'white', alignSelf: 'flex-start', marginHorizontal: 15, marginTop: 10, marginBottom: 5, fontFamily: 'Roboto_400Regular' }}>Localidad</Text>
-                        {/* <TextInput
-                            style={styles.textInput}
-                            placeholder='Max 25 Caracteres'
-                            maxLength={25}
-                            defaultValue={data.reception_provincia}
-                            onChangeText={text => handleChange('reception_localidad', text)}
-                        /> */}
                         <View style={styles.styleSelect}>
                             <Picker
                                 style={{ color: 'black' }}
@@ -270,7 +263,7 @@ const ListViewReceptions = ({ navigation }) => {
                     </View>
                 </View>
             </Modal>
-            {/* --------------------ACTUALIZAR RECEPSION-------------------------------- */}
+            {/* --------------------ELIMINAR RECEPSION-------------------------------- */}
             <Modal
                 visible={modalReceptionDelete}
                 animationType='fade'
