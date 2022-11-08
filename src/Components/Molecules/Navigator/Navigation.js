@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity } from 'react-native'
 import { NavigationContainer, StackActions } from '@react-navigation/native'
-import { MaterialIcons } from '@expo/vector-icons'
+import { MaterialIcons,MaterialCommunityIcons } from '@expo/vector-icons'
 import React, { useContext, useState, useEffect } from 'react'
 import LoginScreem from '../../Screems/PublicScreem/LoginScreem'
 import RegisterUserScreem from '../../Screems/PublicScreem/RegisterUserScreem'
@@ -9,7 +9,7 @@ import UsersScreem from '../../Screems/PrivateScreem/Users/UsersScreem'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { AuthContext } from '../../Atoms/Context/AuthContext'
 import TeacherHomeScreem from '../../Screems/PrivateScreem/TeacherScreems/TeacherHomeScreem'
-import InicioTestEst from '../../Screems/PrivateScreem/StudentScreems/SerieTest/InicioTestEst'
+// import InicioTestEst from '../../Screems/PrivateScreem/StudentScreems/SerieTest/InicioTestEst'
 import InicioTest from '../../Screems/PrivateScreem/TeacherScreems/SerieTests/InicioTest'
 import AsyncStorageLib from '@react-native-async-storage/async-storage'
 import Preguntas from '../../Screems/PrivateScreem/TeacherScreems/SerieTests/CategoriaTests/TestAnalitico/Preguntas'
@@ -40,11 +40,12 @@ import RazonamientoNumerico from '../../Screems/PrivateScreem/TeacherScreems/Ser
 import ConceptosVerbales from '../../Screems/PrivateScreem/TeacherScreems/SerieTests/CategoriaTests/Perguntas/ConceptosVerbales'
 import ResultsMadurezStudent from '../../Screems/PrivateScreem/TeacherScreems/Results/ResultsTest/ResultsMadurezStudent'
 import RegisterMaterial from '../../Screems/PrivateScreem/TeacherScreems/Materiales/RegisterMaterial'
+import ListViewTestStudent from '../../Screems/PrivateScreem/StudentScreems/Test/ListViewTestStudent'
 
 const Stack = createNativeStackNavigator()
 
 const Navigation = () => {
-    const { token, user } = useContext(AuthContext)
+    const { logout } = useContext(AuthContext)
     const [login, setLogin] = useState([])
     const [rol, setRol] = useState([])
     AsyncStorageLib.getItem('token').then(resp => setLogin(JSON.parse(resp)))
@@ -284,7 +285,7 @@ const Navigation = () => {
                         <Stack.Screen
                             name='ListViewStudentsReception'
                             component={ListViewStudentsReception}
-                            options={({navigation }) => ({
+                            options={({ navigation }) => ({
                                 headerStyle: { backgroundColor: '#000010' },
                                 headerTintColor: 'white',
                                 title: 'Lista de Estudiantes',
@@ -322,8 +323,25 @@ const Navigation = () => {
                     </>
                 ) : login && rol === 'Estudiante' ? (
                     <>
-                        <Stack.Screen name='Home' component={Home} options={{ headerShown: false }} />
+                        {/* <Stack.Screen name='Home' component={Home} options={{ headerShown: false }} /> */}
                         <Stack.Screen
+                            name='ListViewTestStudent'
+                            component={ListViewTestStudent}
+                            options={({ navigation }) => ({
+                                headerStyle: { backgroundColor: '#000010' },
+                                // headerTintColor: 'white',
+                                title: '',
+                                headerLeft: () => (
+                                    <View style={{ marginHorizontal: 20 }}>
+                                        <TouchableOpacity onPress={logout} style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                            <MaterialCommunityIcons name="logout" size={24} color="red" />
+                                            <Text style={{ color: 'red' }}>Cerrar Sesión</Text>
+                                        </TouchableOpacity>
+                                    </View>
+                                ),
+                            })}
+                        />
+                        {/* <Stack.Screen
                             name='PerfilUserScreem'
                             component={PerfilUserScreem}
                             options={{
@@ -331,8 +349,8 @@ const Navigation = () => {
                                 headerTintColor: 'white',
                                 title: 'Perfil'
                             }}
-                        />
-                        <Stack.Screen
+                        /> */}
+                        {/* <Stack.Screen
                             name='InicioTestEst'
                             component={InicioTestEst}
                             options={{
@@ -340,7 +358,7 @@ const Navigation = () => {
                                 headerTintColor: 'white',
                                 title: 'Lista de Tests'
                             }}
-                        />
+                        /> */}
                         <Stack.Screen
                             name='DataPersonScreem'
                             component={DataPersonScreem}
@@ -427,7 +445,8 @@ const Navigation = () => {
                             options={{
                                 headerStyle: { backgroundColor: '#000010' },
                                 headerTintColor: 'white',
-                                title: ''
+                                title: 'Busqueda de Estudiante',
+                                headerTitleStyle: { fontSize: 16 }
                             }}
                         />
                         <Stack.Screen

@@ -3,12 +3,15 @@ import React, { useCallback, useState, useEffect } from 'react'
 import Layaut from '../../../../Atoms/StyleLayaut/Layaut'
 import { useFocusEffect } from '@react-navigation/native'
 import axios from 'axios'
+import * as Progress from 'react-native-progress'
 import { PORT_URL } from '../../../../../PortUrl/PortUrl'
 
 const TypeTest = ({ navigation, route }) => {
     const [resultAptitudes, setResultAptitudes] = useState([])
     const [resultIntereses, setResultIntereses] = useState([])
     const [resultMadurez, setResultMadurez] = useState([])
+    const [progress, setProgress] = useState('none')
+    const [exist, setExist] = useState('none')
     const [isVisible, setIsVisible] = useState(true);
     useFocusEffect(
         useCallback(() => {
@@ -19,8 +22,13 @@ const TypeTest = ({ navigation, route }) => {
     )
 
     const getResultsAptitudes = async () => {
+        // setProgress('flex')
         await axios.get(`${PORT_URL}get-result-type-test-aptitudes?event_id=${route.params.event_id}&student_id=${route.params.student_id}`)
             .then(resp => {
+                // if (resp.data.length === 0) {
+                //     setExist('flex')
+                //     setProgress('none')
+                // }
                 setResultAptitudes(resp.data.resultAp)
                 setResultIntereses(resp.data.resultIn)
                 setResultMadurez(resp.data.resultMM)

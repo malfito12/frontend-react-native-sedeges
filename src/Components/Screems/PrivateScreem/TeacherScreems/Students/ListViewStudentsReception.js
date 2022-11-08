@@ -178,7 +178,7 @@ const ListViewStudentsReception = ({ navigation, route }) => {
             [name]: value
         })
     }
-    //---------REFRESH------
+    //-------------------------REFRESH--------------
     const onRefresh = useCallback(async () => {
         setRefresing(true)
         await getStudents()

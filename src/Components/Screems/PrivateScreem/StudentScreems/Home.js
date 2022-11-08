@@ -1,13 +1,7 @@
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import StudentScreem from './Students/StudentScreem'
 import { Foundation, Ionicons, Feather, SimpleLineIcons,Entypo } from '@expo/vector-icons'
-import TestHomeScreem from './Test/TestHomeScreem'
-import ResultsHomeScreem from './Results/ResultsHomeScreem'
-import OtrosHomeScreem from './Otros/OtrosHomeScreem'
-import InicioTestEst from './SerieTest/InicioTestEst'
-import RealizeTestScreem from '../TeacherScreems/Tests/RealizeTestScreem'
 import RealizeTestVocational from '../TeacherScreems/TestsVocational/RealizeTestVocational'
 
 
