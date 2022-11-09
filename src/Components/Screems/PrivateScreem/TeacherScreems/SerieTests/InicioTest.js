@@ -64,252 +64,229 @@ const InicioTest = ({ navigation, route }) => {
     // console.log(result)
     return (
         <Layaut>
-            {result.length > 0 ? (
-                <>
-                    <Text style={{ color: 'white', alignSelf: 'center' }}>{result[0].factor}</Text>
-                    {/* <FlatList
-                        data={result}
-                        // data={tests}
-                        style={{ width: '100%' }}
-                        keyExtractor={item => item.id}
-                        renderItem={p => (
-                            <View style={styles.testView}>
-                                <View>
-                                    <Text style={{ fontFamily: 'Roboto_500Medium' }}>{p.item.title}</Text>
-                                </View>
-                                <TouchableOpacity
-                                    onPress={() => navigation.navigate('Instructions', {
-                                        title: p.item.title,
-                                        id: p.item.id,
-                                        contenido: p.item.contenido,
-                                        factor: p.item.factor,
-                                        description: p.item.description,
-                                        student_id: route.params.student_id
-                                    })}
-                                    style={{ backgroundColor: '#78e08f', padding: 10, borderRadius: 3 }}>
-                                    <Text style={{ color: 'white', fontFamily: 'Roboto_400Regular_Italic' }}>Comenzar</Text>
-                                </TouchableOpacity>
-                            </View>
-                        )}
-                    /> */}
-                    <ScrollView>
-                        {result[0].factor === 'RELACIONES ESPACIALES' ? (
-                            <>
-                                <View style={styles.testView}>
-                                    <View>
-                                        <Text style={{ fontFamily: 'Roboto_500Medium' }}>{result[0].title}</Text>
+            <ScrollView>
+                {result.length > 0 ? (
+                    <>
+                        <Text style={{ color: 'white', alignSelf: 'center' }}>{result[0].factor}</Text>
+                        <ScrollView>
+                            {result[0].factor === 'RELACIONES ESPACIALES' ? (
+                                <>
+                                    <View style={styles.testView}>
+                                        <View>
+                                            <Text style={{ fontFamily: 'Roboto_500Medium' }}>{result[0].title}</Text>
+                                        </View>
+                                        {carriedOut.result_test1 == true ? (
+                                            <TouchableOpacity
+                                                style={{ backgroundColor: '#78e08f', padding: 10, borderRadius: 3 }}>
+                                                <Text style={{ color: 'red', fontFamily: 'Roboto_400Regular_Italic' }}>Comenzar</Text>
+                                            </TouchableOpacity>
+                                        ) : (
+                                            <TouchableOpacity
+                                                onPress={() => navigation.navigate('Instructions', {
+                                                    title: result[0].title,
+                                                    id: result[0].id,
+                                                    contenido: result[0].contenido,
+                                                    factor: result[0].factor,
+                                                    description: result[0].description,
+                                                    student_id: route.params.student_id
+                                                })}
+                                                style={{ backgroundColor: '#78e08f', padding: 10, borderRadius: 3 }}>
+                                                <Text style={{ color: 'white', fontFamily: 'Roboto_400Regular_Italic' }}>Comenzar</Text>
+                                            </TouchableOpacity>
+
+                                        )}
                                     </View>
-                                    {carriedOut.result_test1==true?(
-                                    <TouchableOpacity
-                                        style={{ backgroundColor: '#78e08f', padding: 10, borderRadius: 3 }}>
-                                        <Text style={{ color: 'red', fontFamily: 'Roboto_400Regular_Italic' }}>Comenzar</Text>
-                                    </TouchableOpacity>
-                                    ):(
-                                    <TouchableOpacity
-                                        onPress={() => navigation.navigate('Instructions', {
-                                            title: result[0].title,
-                                            id: result[0].id,
-                                            contenido:result[0].contenido,
-                                            factor: result[0].factor,
-                                            description: result[0].description,
-                                            student_id: route.params.student_id
-                                        })}
-                                        style={{ backgroundColor: '#78e08f', padding: 10, borderRadius: 3 }}>
-                                        <Text style={{ color: 'white', fontFamily: 'Roboto_400Regular_Italic' }}>Comenzar</Text>
-                                    </TouchableOpacity>
+                                    <View style={styles.testView}>
+                                        <View>
+                                            <Text style={{ fontFamily: 'Roboto_500Medium' }}>{result[1].title}</Text>
+                                        </View>
+                                        {carriedOut.result_test2 == true ? (
+                                            <TouchableOpacity
+                                                style={{ backgroundColor: '#78e08f', padding: 10, borderRadius: 3 }}>
+                                                <Text style={{ color: 'red', fontFamily: 'Roboto_400Regular_Italic' }}>Comenzar</Text>
+                                            </TouchableOpacity>
+                                        ) : (
+                                            <TouchableOpacity
+                                                onPress={() => navigation.navigate('Instructions', {
+                                                    title: result[1].title,
+                                                    id: result[1].id,
+                                                    contenido: result[1].contenido,
+                                                    factor: result[1].factor,
+                                                    description: result[1].description,
+                                                    student_id: route.params.student_id
+                                                })}
+                                                style={{ backgroundColor: '#78e08f', padding: 10, borderRadius: 3 }}>
+                                                <Text style={{ color: 'white', fontFamily: 'Roboto_400Regular_Italic' }}>Comenzar</Text>
+                                            </TouchableOpacity>
 
-                                    )}
-                                </View>
-                                <View style={styles.testView}>
-                                    <View>
-                                        <Text style={{ fontFamily: 'Roboto_500Medium' }}>{result[1].title}</Text>
+                                        )}
                                     </View>
-                                    {carriedOut.result_test2==true?(
-                                    <TouchableOpacity
-                                        style={{ backgroundColor: '#78e08f', padding: 10, borderRadius: 3 }}>
-                                        <Text style={{ color: 'red', fontFamily: 'Roboto_400Regular_Italic' }}>Comenzar</Text>
-                                    </TouchableOpacity>
-                                    ):(
-                                    <TouchableOpacity
-                                        onPress={() => navigation.navigate('Instructions', {
-                                            title: result[1].title,
-                                            id: result[1].id,
-                                            contenido:result[1].contenido,
-                                            factor: result[1].factor,
-                                            description: result[1].description,
-                                            student_id: route.params.student_id
-                                        })}
-                                        style={{ backgroundColor: '#78e08f', padding: 10, borderRadius: 3 }}>
-                                        <Text style={{ color: 'white', fontFamily: 'Roboto_400Regular_Italic' }}>Comenzar</Text>
-                                    </TouchableOpacity>
+                                </>
 
-                                    )}
-                                </View>
-                            </>
+                            ) : result[0].factor === 'RAZONAMIENTO LOGICO' ? (
+                                <>
+                                    <View style={styles.testView}>
+                                        <View>
+                                            <Text style={{ fontFamily: 'Roboto_500Medium' }}>{result[0].title}</Text>
+                                        </View>
+                                        {carriedOut.result_test3 == true ? (
+                                            <TouchableOpacity
+                                                style={{ backgroundColor: '#78e08f', padding: 10, borderRadius: 3 }}>
+                                                <Text style={{ color: 'red', fontFamily: 'Roboto_400Regular_Italic' }}>Comenzar</Text>
+                                            </TouchableOpacity>
+                                        ) : (
+                                            <TouchableOpacity
+                                                onPress={() => navigation.navigate('Instructions', {
+                                                    title: result[0].title,
+                                                    id: result[0].id,
+                                                    contenido: result[0].contenido,
+                                                    factor: result[0].factor,
+                                                    description: result[0].description,
+                                                    student_id: route.params.student_id
+                                                })}
+                                                style={{ backgroundColor: '#78e08f', padding: 10, borderRadius: 3 }}>
+                                                <Text style={{ color: 'white', fontFamily: 'Roboto_400Regular_Italic' }}>Comenzar</Text>
+                                            </TouchableOpacity>
 
-                        ) : result[0].factor === 'RAZONAMIENTO LOGICO' ? (
-                            <>
-                                <View style={styles.testView}>
-                                    <View>
-                                        <Text style={{ fontFamily: 'Roboto_500Medium' }}>{result[0].title}</Text>
+                                        )}
                                     </View>
-                                    {carriedOut.result_test3==true?(
-                                    <TouchableOpacity
-                                        style={{ backgroundColor: '#78e08f', padding: 10, borderRadius: 3 }}>
-                                        <Text style={{ color: 'red', fontFamily: 'Roboto_400Regular_Italic' }}>Comenzar</Text>
-                                    </TouchableOpacity>
-                                    ):(
-                                    <TouchableOpacity
-                                        onPress={() => navigation.navigate('Instructions', {
-                                            title: result[0].title,
-                                            id: result[0].id,
-                                            contenido:result[0].contenido,
-                                            factor: result[0].factor,
-                                            description: result[0].description,
-                                            student_id: route.params.student_id
-                                        })}
-                                        style={{ backgroundColor: '#78e08f', padding: 10, borderRadius: 3 }}>
-                                        <Text style={{ color: 'white', fontFamily: 'Roboto_400Regular_Italic' }}>Comenzar</Text>
-                                    </TouchableOpacity>
+                                    <View style={styles.testView}>
+                                        <View>
+                                            <Text style={{ fontFamily: 'Roboto_500Medium' }}>{result[1].title}</Text>
+                                        </View>
+                                        {carriedOut.result_test4 == true ? (
+                                            <TouchableOpacity
+                                                style={{ backgroundColor: '#78e08f', padding: 10, borderRadius: 3 }}>
+                                                <Text style={{ color: 'red', fontFamily: 'Roboto_400Regular_Italic' }}>Comenzar</Text>
+                                            </TouchableOpacity>
+                                        ) : (
+                                            <TouchableOpacity
+                                                onPress={() => navigation.navigate('Instructions', {
+                                                    title: result[1].title,
+                                                    id: result[1].id,
+                                                    contenido: result[1].contenido,
+                                                    factor: result[1].factor,
+                                                    description: result[1].description,
+                                                    student_id: route.params.student_id
+                                                })}
+                                                style={{ backgroundColor: '#78e08f', padding: 10, borderRadius: 3 }}>
+                                                <Text style={{ color: 'white', fontFamily: 'Roboto_400Regular_Italic' }}>Comenzar</Text>
+                                            </TouchableOpacity>
 
-                                    )}
-                                </View>
-                                <View style={styles.testView}>
-                                    <View>
-                                        <Text style={{ fontFamily: 'Roboto_500Medium' }}>{result[1].title}</Text>
+                                        )}
                                     </View>
-                                    {carriedOut.result_test4==true?(
-                                    <TouchableOpacity
-                                        style={{ backgroundColor: '#78e08f', padding: 10, borderRadius: 3 }}>
-                                        <Text style={{ color: 'red', fontFamily: 'Roboto_400Regular_Italic' }}>Comenzar</Text>
-                                    </TouchableOpacity>
-                                    ):(
-                                    <TouchableOpacity
-                                        onPress={() => navigation.navigate('Instructions', {
-                                            title: result[1].title,
-                                            id: result[1].id,
-                                            contenido:result[1].contenido,
-                                            factor: result[1].factor,
-                                            description: result[1].description,
-                                            student_id: route.params.student_id
-                                        })}
-                                        style={{ backgroundColor: '#78e08f', padding: 10, borderRadius: 3 }}>
-                                        <Text style={{ color: 'white', fontFamily: 'Roboto_400Regular_Italic' }}>Comenzar</Text>
-                                    </TouchableOpacity>
+                                </>
+                            ) : result[0].factor === 'RAZONAMIENTO NUMERICO' ? (
+                                <>
+                                    <View style={styles.testView}>
+                                        <View>
+                                            <Text style={{ fontFamily: 'Roboto_500Medium' }}>{result[0].title}</Text>
+                                        </View>
+                                        {carriedOut.result_test5_parte1 == true ? (
+                                            <TouchableOpacity
+                                                style={{ backgroundColor: '#78e08f', padding: 10, borderRadius: 3 }}>
+                                                <Text style={{ color: 'red', fontFamily: 'Roboto_400Regular_Italic' }}>Comenzar</Text>
+                                            </TouchableOpacity>
+                                        ) : (
+                                            <TouchableOpacity
+                                                onPress={() => navigation.navigate('Instructions', {
+                                                    title: result[0].title,
+                                                    id: result[0].id,
+                                                    contenido: result[0].contenido,
+                                                    factor: result[0].factor,
+                                                    description: result[0].description,
+                                                    student_id: route.params.student_id
+                                                })}
+                                                style={{ backgroundColor: '#78e08f', padding: 10, borderRadius: 3 }}>
+                                                <Text style={{ color: 'white', fontFamily: 'Roboto_400Regular_Italic' }}>Comenzar</Text>
+                                            </TouchableOpacity>
 
-                                    )}
-                                </View>
-                            </>
-                        ) : result[0].factor === 'RAZONAMIENTO NUMERICO' ? (
-                            <>
-                                <View style={styles.testView}>
-                                    <View>
-                                        <Text style={{ fontFamily: 'Roboto_500Medium' }}>{result[0].title}</Text>
+                                        )}
                                     </View>
-                                    {carriedOut.result_test5_parte1==true?(
-                                    <TouchableOpacity
-                                        style={{ backgroundColor: '#78e08f', padding: 10, borderRadius: 3 }}>
-                                        <Text style={{ color: 'red', fontFamily: 'Roboto_400Regular_Italic' }}>Comenzar</Text>
-                                    </TouchableOpacity>
-                                    ):(
-                                    <TouchableOpacity
-                                        onPress={() => navigation.navigate('Instructions', {
-                                            title: result[0].title,
-                                            id: result[0].id,
-                                            contenido:result[0].contenido,
-                                            factor: result[0].factor,
-                                            description: result[0].description,
-                                            student_id: route.params.student_id
-                                        })}
-                                        style={{ backgroundColor: '#78e08f', padding: 10, borderRadius: 3 }}>
-                                        <Text style={{ color: 'white', fontFamily: 'Roboto_400Regular_Italic' }}>Comenzar</Text>
-                                    </TouchableOpacity>
+                                    <View style={styles.testView}>
+                                        <View>
+                                            <Text style={{ fontFamily: 'Roboto_500Medium' }}>{result[1].title}</Text>
+                                        </View>
+                                        {carriedOut.result_test5_parte2 == true ? (
+                                            <TouchableOpacity
+                                                style={{ backgroundColor: '#78e08f', padding: 10, borderRadius: 3 }}>
+                                                <Text style={{ color: 'red', fontFamily: 'Roboto_400Regular_Italic' }}>Comenzar</Text>
+                                            </TouchableOpacity>
+                                        ) : (
+                                            <TouchableOpacity
+                                                onPress={() => navigation.navigate('Instructions', {
+                                                    title: result[1].title,
+                                                    id: result[1].id,
+                                                    contenido: result[1].contenido,
+                                                    factor: result[1].factor,
+                                                    description: result[1].description,
+                                                    student_id: route.params.student_id
+                                                })}
+                                                style={{ backgroundColor: '#78e08f', padding: 10, borderRadius: 3 }}>
+                                                <Text style={{ color: 'white', fontFamily: 'Roboto_400Regular_Italic' }}>Comenzar</Text>
+                                            </TouchableOpacity>
 
-                                    )}
-                                </View>
-                                <View style={styles.testView}>
-                                    <View>
-                                        <Text style={{ fontFamily: 'Roboto_500Medium' }}>{result[1].title}</Text>
+                                        )}
                                     </View>
-                                    {carriedOut.result_test5_parte2==true?(
-                                    <TouchableOpacity
-                                        style={{ backgroundColor: '#78e08f', padding: 10, borderRadius: 3 }}>
-                                        <Text style={{ color: 'red', fontFamily: 'Roboto_400Regular_Italic' }}>Comenzar</Text>
-                                    </TouchableOpacity>
-                                    ):(
-                                    <TouchableOpacity
-                                        onPress={() => navigation.navigate('Instructions', {
-                                            title: result[1].title,
-                                            id: result[1].id,
-                                            contenido:result[1].contenido,
-                                            factor: result[1].factor,
-                                            description: result[1].description,
-                                            student_id: route.params.student_id
-                                        })}
-                                        style={{ backgroundColor: '#78e08f', padding: 10, borderRadius: 3 }}>
-                                        <Text style={{ color: 'white', fontFamily: 'Roboto_400Regular_Italic' }}>Comenzar</Text>
-                                    </TouchableOpacity>
+                                    <View style={styles.testView}>
+                                        <View>
+                                            <Text style={{ fontFamily: 'Roboto_500Medium' }}>{result[2].title}</Text>
+                                        </View>
+                                        {carriedOut.result_test6 == true ? (
+                                            <TouchableOpacity
+                                                style={{ backgroundColor: '#78e08f', padding: 10, borderRadius: 3 }}>
+                                                <Text style={{ color: 'red', fontFamily: 'Roboto_400Regular_Italic' }}>Comenzar</Text>
+                                            </TouchableOpacity>
+                                        ) : (
+                                            <TouchableOpacity
+                                                onPress={() => navigation.navigate('Instructions', {
+                                                    title: result[2].title,
+                                                    id: result[2].id,
+                                                    contenido: result[2].contenido,
+                                                    factor: result[2].factor,
+                                                    description: result[2].description,
+                                                    student_id: route.params.student_id
+                                                })}
+                                                style={{ backgroundColor: '#78e08f', padding: 10, borderRadius: 3 }}>
+                                                <Text style={{ color: 'white', fontFamily: 'Roboto_400Regular_Italic' }}>Comenzar</Text>
+                                            </TouchableOpacity>
 
-                                    )}
-                                </View>
-                                <View style={styles.testView}>
-                                    <View>
-                                        <Text style={{ fontFamily: 'Roboto_500Medium' }}>{result[2].title}</Text>
+                                        )}
                                     </View>
-                                    {carriedOut.result_test6==true?(
-                                    <TouchableOpacity
-                                        style={{ backgroundColor: '#78e08f', padding: 10, borderRadius: 3 }}>
-                                        <Text style={{ color: 'red', fontFamily: 'Roboto_400Regular_Italic' }}>Comenzar</Text>
-                                    </TouchableOpacity>
-                                    ):(
-                                    <TouchableOpacity
-                                        onPress={() => navigation.navigate('Instructions', {
-                                            title: result[2].title,
-                                            id: result[2].id,
-                                            contenido:result[2].contenido,
-                                            factor: result[2].factor,
-                                            description: result[2].description,
-                                            student_id: route.params.student_id
-                                        })}
-                                        style={{ backgroundColor: '#78e08f', padding: 10, borderRadius: 3 }}>
-                                        <Text style={{ color: 'white', fontFamily: 'Roboto_400Regular_Italic' }}>Comenzar</Text>
-                                    </TouchableOpacity>
+                                </>
+                            ) : result[0].factor === 'CONCEPTOS VERBALES' ? (
+                                <>
+                                    <View style={styles.testView}>
+                                        <View>
+                                            <Text style={{ fontFamily: 'Roboto_500Medium' }}>{result[0].title}</Text>
+                                        </View>
+                                        {carriedOut.result_test7 == true ? (
+                                            <TouchableOpacity
+                                                style={{ backgroundColor: '#78e08f', padding: 10, borderRadius: 3 }}>
+                                                <Text style={{ color: 'red', fontFamily: 'Roboto_400Regular_Italic' }}>Comenzar</Text>
+                                            </TouchableOpacity>
+                                        ) : (
+                                            <TouchableOpacity
+                                                onPress={() => navigation.navigate('Instructions', {
+                                                    title: result[0].title,
+                                                    id: result[0].id,
+                                                    contenido: result[0].contenido,
+                                                    factor: result[0].factor,
+                                                    description: result[0].description,
+                                                    student_id: route.params.student_id
+                                                })}
+                                                style={{ backgroundColor: '#78e08f', padding: 10, borderRadius: 3 }}>
+                                                <Text style={{ color: 'white', fontFamily: 'Roboto_400Regular_Italic' }}>Comenzar</Text>
+                                            </TouchableOpacity>
 
-                                    )}
-                                </View>
-                            </>
-                        ) : result[0].factor === 'CONCEPTOS VERBALES' ? (
-                            <>
-                                <View style={styles.testView}>
-                                    <View>
-                                        <Text style={{ fontFamily: 'Roboto_500Medium' }}>{result[0].title}</Text>
+                                        )}
                                     </View>
-                                    {carriedOut.result_test7==true?(
-                                    <TouchableOpacity
-                                        style={{ backgroundColor: '#78e08f', padding: 10, borderRadius: 3 }}>
-                                        <Text style={{ color: 'red', fontFamily: 'Roboto_400Regular_Italic' }}>Comenzar</Text>
-                                    </TouchableOpacity>
-                                    ):(
-                                    <TouchableOpacity
-                                        onPress={() => navigation.navigate('Instructions', {
-                                            title: result[0].title,
-                                            id: result[0].id,
-                                            contenido:result[0].contenido,
-                                            factor: result[0].factor,
-                                            description: result[0].description,
-                                            student_id: route.params.student_id
-                                        })}
-                                        style={{ backgroundColor: '#78e08f', padding: 10, borderRadius: 3 }}>
-                                        <Text style={{ color: 'white', fontFamily: 'Roboto_400Regular_Italic' }}>Comenzar</Text>
-                                    </TouchableOpacity>
-
-                                    )}
-                                </View>
-                            </>
-                        ) : (null)}
-                    </ScrollView>
-                </>
-            ) : (null)}
+                                </>
+                            ) : (null)}
+                        </ScrollView>
+                    </>
+                ) : (null)}
+            </ScrollView>
         </Layaut>
     )
 }

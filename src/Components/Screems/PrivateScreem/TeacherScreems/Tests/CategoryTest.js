@@ -33,7 +33,7 @@ const CategoryTest = ({ navigation, route }) => {
     { title: 'RELACIONES ESPACIALES', image: TestGrafico, navi: () => navigation.navigate('InicioTest', { factor: 'RELACIONES ESPACIALES', student_id: route.params.student_id,event_id:route.params.event_id }) },
     { title: 'RAZONAMIENTO LOGICO', image: TestAnalitico, navi: () => navigation.navigate('InicioTest', { factor: 'RAZONAMIENTO LOGICO', student_id: route.params.student_id,event_id:route.params.event_id }) },
     { title: 'RAZONAMIENTO NUMERICO', image: TestMatematico, navi: () => navigation.navigate('InicioTest', { factor: 'RAZONAMIENTO NUMERICO', student_id: route.params.student_id,event_id:route.params.event_id }) },
-    { title: 'CONCEPTOS VERVALES', image: TestGrafico, navi: () => navigation.navigate('InicioTest', { factor: 'CONCEPTOS VERBALES', student_id: route.params.student_id,event_id:route.params.event_id }) },
+    { title: 'CONCEPTOS VERBALES', image: TestGrafico, navi: () => navigation.navigate('InicioTest', { factor: 'CONCEPTOS VERBALES', student_id: route.params.student_id,event_id:route.params.event_id }) },
   ]
   return (
     <Layaut>

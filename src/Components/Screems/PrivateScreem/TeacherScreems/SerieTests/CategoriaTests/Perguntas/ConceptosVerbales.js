@@ -8,6 +8,8 @@ import AsyncStorageLib from '@react-native-async-storage/async-storage'
 import axios from 'axios'
 import { PORT_URL } from '../../../../../../../PortUrl/PortUrl'
 import { ErrorAlert, SuccesAlert } from '../../../../../../Molecules/Alertas/Alerts'
+import { FontAwesome } from '@expo/vector-icons';
+import { FancyAlert } from 'react-native-expo-fancy-alerts'
 
 var array = []
 const ConceptosVerbales = ({ route, navigation }) => {
@@ -33,6 +35,15 @@ const ConceptosVerbales = ({ route, navigation }) => {
     const [pregunta3, setPregunta3] = useState(false)
     const [pregunta4, setPregunta4] = useState(false)
     const [respuesta1, setRespuesta1] = useState(null)
+
+    const [alert, setAlert] = useState(false)
+    const openModalAlertSuccess = () => {
+        setAlert(true)
+    }
+    const closeModalAlertSuccess = () => {
+        setAlert(false)
+        navigation.navigate('InicioTest', { student_id: route.params.student_id, factor: route.params.description })
+    }
 
     //-------------CONCEPTOS VERVALES---------------
 
@@ -91,7 +102,8 @@ const ConceptosVerbales = ({ route, navigation }) => {
                 title: route.params.title,
             })
         } else {
-            alert('Marque una respuesta')
+            setMessage('Escoja una respuesta')
+            openModalAlertError()
         }
     }
     const volver = async () => {
@@ -115,11 +127,8 @@ const ConceptosVerbales = ({ route, navigation }) => {
             setProgress(true)
             await axios.post(`${PORT_URL}post-result-madurez-t7`, array)
                 .then(resp => {
-                    setMessage(resp.data.message)
                     setProgress(false)
-                    openModalAlert()
-                    // navigation.navigate('CategoryTest', { student_id: route.params.student_id })
-                    navigation.navigate('InicioTest', { student_id: route.params.student_id, factor: route.params.description })
+                    openModalAlertSuccess()
                 })
                 .catch(err => {
                     setProgress(false)
@@ -131,7 +140,8 @@ const ConceptosVerbales = ({ route, navigation }) => {
             // console.log(array)
             // navigation.navigate('InicioTest', { student_id: route.params.student_id, factor: route.params.description })
         } else {
-            alert('Marque una respuesta')
+            setMessage('Escoja una respuesta')
+            openModalAlertError()
         }
     }
     return (
@@ -157,7 +167,7 @@ const ConceptosVerbales = ({ route, navigation }) => {
                     {route.params.cont == 9 ? (
                         // <TouchableOpacity onPress={() => navigation.navigate('CategoryTest')} style={styles.buttonBack}>
                         <TouchableOpacity onPress={volver} style={styles.buttonBack}>
-                            <Text style={styles.textFont}>Volver</Text>
+                            <Text style={styles.textFont}>Guardar</Text>
                         </TouchableOpacity>
                     ) : (
                         <TouchableOpacity style={styles.buttonNext} onPress={siguiente} >
@@ -178,7 +188,29 @@ const ConceptosVerbales = ({ route, navigation }) => {
             </Modal>
             <SuccesAlert isOpen={openModal} closeModal={closeModalAlert} text={message} />
             <ErrorAlert isOpen={openModalError} closeModal={closeModalAlertError} text={message} />
-
+            {/* ---------------------ALERTS SUCCESS------------------------ */}
+            <FancyAlert
+                visible={alert}
+                icon={<View style={{
+                    flex: 1,
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    backgroundColor: 'green',
+                    borderRadius: 50,
+                    width: '100%',
+                }}>
+                    <FontAwesome name="check" size={24} color="white" />
+                </View>}
+                style={{ backgroundColor: 'white' }}
+            >
+                <>
+                    <Text style={{ marginTop: -16, marginBottom: 10 }}>Informacion Registrada</Text>
+                    <TouchableOpacity onPress={closeModalAlertSuccess} style={{ backgroundColor: 'green', padding: 5, margin: 5, borderRadius: 3 }}>
+                        <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', alignSelf: 'center' }}>Aceptar</Text>
+                    </TouchableOpacity>
+                </>
+            </FancyAlert>
         </>
     )
 }

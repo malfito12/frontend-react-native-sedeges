@@ -8,6 +8,9 @@ import { useModalAlert, useModalAlertError } from '../../../../../../Molecules/H
 import axios from 'axios'
 import { PORT_URL } from '../../../../../../../PortUrl/PortUrl'
 import { ErrorAlert, SuccesAlert } from '../../../../../../Molecules/Alertas/Alerts'
+import { FontAwesome } from '@expo/vector-icons';
+import { FancyAlert } from 'react-native-expo-fancy-alerts'
+
 
 var array = []
 const RazonamientoNumerico = ({ route, navigation }) => {
@@ -46,6 +49,14 @@ const RazonamientoNumerico = ({ route, navigation }) => {
     }, [])
   )
 
+  const [alert, setAlert] = useState(false)
+  const openModalAlertSuccess = () => {
+    setAlert(true)
+  }
+  const closeModalAlertSuccess = () => {
+    setAlert(false)
+    navigation.navigate('InicioTest', { student_id: route.params.student_id, factor: route.params.description })
+  }
   //-------------TEST 5 PRIMERA PARTE-----------------------
   const siguiente1 = () => {
     const numero = /^([0-9])*$/g
@@ -75,7 +86,8 @@ const RazonamientoNumerico = ({ route, navigation }) => {
         title: route.params.title,
       })
     } else {
-      alert('Escriba su respuesta')
+      setMessage('Escoja una respuesta')
+      openModalAlertError()
     }
   }
   const volver1 = async () => {
@@ -95,10 +107,8 @@ const RazonamientoNumerico = ({ route, navigation }) => {
       setProgress(true)
       await axios.post(`${PORT_URL}post-result-madurez-t5-parte1`, array)
         .then(resp => {
-          setMessage(resp.data.message)
           setProgress(false)
-          openModalAlert()
-          navigation.navigate('InicioTest', { student_id: route.params.student_id, factor: route.params.description })
+          openModalAlertSuccess()
         })
         .catch(err => {
           setProgress(false)
@@ -109,7 +119,8 @@ const RazonamientoNumerico = ({ route, navigation }) => {
         })
       // console.log(array)
     } else {
-      alert('Escriba su respuesta')
+      setMessage('Escoja una respuesta')
+      openModalAlertError()
     }
   }
   //-------------TEST 5 SEGUNDA PARTE-----------------------
@@ -182,7 +193,8 @@ const RazonamientoNumerico = ({ route, navigation }) => {
         title: route.params.title,
       })
     } else {
-      alert('Marque una respuesta')
+      setMessage('Escoja una respuesta')
+      openModalAlertError()
     }
   }
   const volver2 = async () => {
@@ -207,10 +219,8 @@ const RazonamientoNumerico = ({ route, navigation }) => {
       setProgress(true)
       await axios.post(`${PORT_URL}post-result-madurez-t5-parte2`, array)
         .then(resp => {
-          setMessage(resp.data.message)
           setProgress(false)
-          openModalAlert()
-          navigation.navigate('InicioTest', { student_id: route.params.student_id, factor: route.params.description })
+          openModalAlertSuccess()
         })
         .catch(err => {
           setProgress(false)
@@ -220,7 +230,8 @@ const RazonamientoNumerico = ({ route, navigation }) => {
           }
         })
     } else {
-      alert('Marque una respuesta')
+      setMessage('Escoja una respuesta')
+      openModalAlertError()
     }
   }
   //-------------TEST 6 -----------------------
@@ -281,7 +292,8 @@ const RazonamientoNumerico = ({ route, navigation }) => {
         title: route.params.title,
       })
     } else {
-      alert('Marque una respuesta')
+      setMessage('Escoja una respuesta')
+      openModalAlertError()
     }
   }
   const volver3 = async () => {
@@ -305,10 +317,8 @@ const RazonamientoNumerico = ({ route, navigation }) => {
       setProgress(true)
       await axios.post(`${PORT_URL}post-result-madurez-t6`, array)
         .then(resp => {
-          setMessage(resp.data.message)
           setProgress(false)
-          openModalAlert()
-          navigation.navigate('InicioTest', { student_id: route.params.student_id, factor: route.params.description })
+          openModalAlertSuccess()
         })
         .catch(err => {
           setProgress(false)
@@ -321,7 +331,8 @@ const RazonamientoNumerico = ({ route, navigation }) => {
       // navigation.navigate('InicioTest', { student_id: route.params.student_id, factor: route.params.description })
 
     } else {
-      alert('Marque una respuesta')
+      setMessage('Escoja una respuesta')
+      openModalAlertError()
     }
   }
   //-------------HANDLE CHANGE-----------------------
@@ -363,7 +374,7 @@ const RazonamientoNumerico = ({ route, navigation }) => {
                 (
                   // <TouchableOpacity style={styles.buttonBack} onPress={() => navigation.navigate('InicioTest', { factor: route.params.description })} >
                   <TouchableOpacity style={styles.buttonBack} onPress={volver1} >
-                    <Text style={styles.textFont}>Volver</Text>
+                    <Text style={styles.textFont}>Guardar</Text>
                   </TouchableOpacity>
                 ) : (
                   // <TouchableOpacity style={styles.buttonNext} onPress={() => navigation.navigate('RazonamientoNumerico', { data: route.params.data, cont: route.params.cont + 1, description: route.params.description, id: route.params.id })} >
@@ -397,7 +408,7 @@ const RazonamientoNumerico = ({ route, navigation }) => {
               {route.params.cont == 4 ? (
                 // <TouchableOpacity onPress={() => navigation.navigate('CategoryTest', { categoria: 'TEST ANALITICO', id_cartegory: 'test-analitico' })} style={styles.buttonBack}>
                 <TouchableOpacity onPress={volver2} style={styles.buttonBack}>
-                  <Text style={styles.textFont}>Volver</Text>
+                  <Text style={styles.textFont}>Guardar</Text>
                 </TouchableOpacity>
               ) : (
                 <TouchableOpacity style={styles.buttonNext} onPress={siguiente2} >
@@ -427,7 +438,7 @@ const RazonamientoNumerico = ({ route, navigation }) => {
               {route.params.cont == 4 ? (
                 // <TouchableOpacity onPress={() => navigation.navigate('CategoryTest', { categoria: 'TEST ANALITICO', id_cartegory: 'test-analitico' })} style={styles.buttonBack}>
                 <TouchableOpacity onPress={volver3} style={styles.buttonBack}>
-                  <Text style={styles.textFont}>Volver</Text>
+                  <Text style={styles.textFont}>Guardar</Text>
                 </TouchableOpacity>
               ) : (
                 <TouchableOpacity style={styles.buttonNext} onPress={siguiente3} >
@@ -450,7 +461,29 @@ const RazonamientoNumerico = ({ route, navigation }) => {
       </Modal>
       <SuccesAlert isOpen={openModal} closeModal={closeModalAlert} text={message} />
       <ErrorAlert isOpen={openModalError} closeModal={closeModalAlertError} text={message} />
-
+      {/* ---------------------ALERTS SUCCESS------------------------ */}
+      <FancyAlert
+        visible={alert}
+        icon={<View style={{
+          flex: 1,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: 'green',
+          borderRadius: 50,
+          width: '100%',
+        }}>
+          <FontAwesome name="check" size={24} color="white" />
+        </View>}
+        style={{ backgroundColor: 'white' }}
+      >
+        <>
+          <Text style={{ marginTop: -16, marginBottom: 10 }}>Informacion Registrada</Text>
+          <TouchableOpacity onPress={closeModalAlertSuccess} style={{ backgroundColor: 'green', padding: 5, margin: 5, borderRadius: 3 }}>
+            <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', alignSelf: 'center' }}>Aceptar</Text>
+          </TouchableOpacity>
+        </>
+      </FancyAlert>
     </>
   )
 }
