@@ -10,6 +10,7 @@ import { PORT_URL } from '../../../../../../../PortUrl/PortUrl'
 import { ErrorAlert, SuccesAlert } from '../../../../../../Molecules/Alertas/Alerts'
 import { FontAwesome } from '@expo/vector-icons';
 import { FancyAlert } from 'react-native-expo-fancy-alerts'
+import { LinearGradient } from 'expo-linear-gradient'
 
 
 var array = []
@@ -86,7 +87,7 @@ const RazonamientoNumerico = ({ route, navigation }) => {
         title: route.params.title,
       })
     } else {
-      setMessage('Escoja una respuesta')
+      setMessage('Coloque un número en el espacio')
       openModalAlertError()
     }
   }
@@ -119,7 +120,7 @@ const RazonamientoNumerico = ({ route, navigation }) => {
         })
       // console.log(array)
     } else {
-      setMessage('Escoja una respuesta')
+      setMessage('Coloque un Número en el espacio')
       openModalAlertError()
     }
   }
@@ -348,14 +349,13 @@ const RazonamientoNumerico = ({ route, navigation }) => {
         <ScrollView>
           {route.params.id === 5 ? (
             <>
-              <Text style={styles.textFont}>Preguntas</Text>
-              <Text style={styles.textFont}>{route.params.data[route.params.cont].pregunta.preguntas}</Text>
+              <Text style={{ ...styles.textFont, fontSize: 15 }}>{route.params.data[route.params.cont].pregunta.preguntas}</Text>
               <View style={{ margin: 20, flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', marginHorizontal: 15 }}>
                 {route.params.data[route.params.cont].pregunta.resp.map((e, index) => (
                   // <TouchableOpacity key={index} style={styles.button}>
                   //   <Text style={{ alignSelf: 'center' }}>- {e.respuesta} -</Text>
                   // </TouchableOpacity>
-                  <View key={index} >
+                  <View key={index} style={{ backgroundColor: '#ef6c00', justifyContent: 'center', alignItems: 'center', borderRadius: 20, width: 30, height: 30 }}>
                     <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', fontSize: 17 }}>{e.respuesta} </Text>
                   </View>
                 ))}
@@ -372,21 +372,25 @@ const RazonamientoNumerico = ({ route, navigation }) => {
               />
               {route.params.cont == 4 ?
                 (
-                  // <TouchableOpacity style={styles.buttonBack} onPress={() => navigation.navigate('InicioTest', { factor: route.params.description })} >
-                  <TouchableOpacity style={styles.buttonBack} onPress={volver1} >
-                    <Text style={styles.textFont}>Guardar</Text>
-                  </TouchableOpacity>
+                  <LinearGradient style={{ borderRadius: 2, marginTop: 20, width: '87%', alignSelf: 'center' }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#c62828', '#d32f2f', '#f44336']}>
+                    <TouchableOpacity style={{ padding: 12 }} onPress={volver1} >
+                      <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', alignSelf: 'center' }}>Guardar</Text>
+                    </TouchableOpacity>
+                  </LinearGradient>
                 ) : (
-                  // <TouchableOpacity style={styles.buttonNext} onPress={() => navigation.navigate('RazonamientoNumerico', { data: route.params.data, cont: route.params.cont + 1, description: route.params.description, id: route.params.id })} >
-                  <TouchableOpacity style={styles.buttonNext} onPress={siguiente1} >
-                    <Text style={styles.textFont}>Siguiente</Text>
-                  </TouchableOpacity>
+                  <LinearGradient style={{ borderRadius: 2, marginTop: 20, width: '87%', alignSelf: 'center' }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#00c853', '#64dd17', '#aeea00']}>
+                    <TouchableOpacity style={{ padding: 12 }} onPress={siguiente1}>
+                      <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', alignSelf: 'center' }}>Siguiente</Text>
+                    </TouchableOpacity>
+                  </LinearGradient>
                 )}
             </>
           ) : route.params.id === 6 ? (
             <>
-              <Text style={styles.textFont}>Preguntas</Text>
-              <Text style={styles.textFont}>{route.params.data[route.params.cont].pregunta.preguntas[0].a}</Text>
+              <Text style={styles.textFont}>SERIE</Text>
+              <View style={{ backgroundColor: '#ef6c00', width: '60%', alignSelf: 'center', borderRadius: 15, marginBottom: 10 }}>
+                <Text style={styles.textFont}>{route.params.data[route.params.cont].pregunta.preguntas[0].a}</Text>
+              </View>
               <Text style={styles.textFont}>{route.params.data[route.params.cont].pregunta.preguntas[1].b}</Text>
               <View>
                 <TouchableOpacity style={pregunta1 == true ? styles.buttonSelected : styles.button} onPress={() => selectButton(1)}>
@@ -406,19 +410,22 @@ const RazonamientoNumerico = ({ route, navigation }) => {
                 </TouchableOpacity>
               </View>
               {route.params.cont == 4 ? (
-                // <TouchableOpacity onPress={() => navigation.navigate('CategoryTest', { categoria: 'TEST ANALITICO', id_cartegory: 'test-analitico' })} style={styles.buttonBack}>
-                <TouchableOpacity onPress={volver2} style={styles.buttonBack}>
-                  <Text style={styles.textFont}>Guardar</Text>
-                </TouchableOpacity>
+                <LinearGradient style={{ borderRadius: 2, marginTop: 20, width: '87%', alignSelf: 'center' }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#c62828', '#d32f2f', '#f44336']}>
+                  <TouchableOpacity style={{ padding: 12 }} onPress={volver2} >
+                    <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', alignSelf: 'center' }}>Guardar</Text>
+                  </TouchableOpacity>
+                </LinearGradient>
               ) : (
-                <TouchableOpacity style={styles.buttonNext} onPress={siguiente2} >
-                  <Text style={styles.textFont}>Siguiente</Text>
-                </TouchableOpacity>
+                <LinearGradient style={{ borderRadius: 2, marginTop: 20, width: '87%', alignSelf: 'center' }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#00c853', '#64dd17', '#aeea00']}>
+                  <TouchableOpacity style={{ padding: 12 }} onPress={siguiente2}>
+                    <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', alignSelf: 'center' }}>Siguiente</Text>
+                  </TouchableOpacity>
+                </LinearGradient>
               )}
             </>
           ) : route.params.id === 7 ? (
             <>
-              <Text style={styles.textFont}>Preguntas</Text>
+              <Text style={styles.textFont}>PREGUNTA</Text>
               <Text style={styles.textFont}>{route.params.data[route.params.cont].pregunta.preguntas[0].a}</Text>
               <Text style={styles.textFont}>{route.params.data[route.params.cont].pregunta.preguntas[1].b}</Text>
               <View>
@@ -436,14 +443,17 @@ const RazonamientoNumerico = ({ route, navigation }) => {
                 </TouchableOpacity>
               </View>
               {route.params.cont == 4 ? (
-                // <TouchableOpacity onPress={() => navigation.navigate('CategoryTest', { categoria: 'TEST ANALITICO', id_cartegory: 'test-analitico' })} style={styles.buttonBack}>
-                <TouchableOpacity onPress={volver3} style={styles.buttonBack}>
-                  <Text style={styles.textFont}>Guardar</Text>
-                </TouchableOpacity>
+                <LinearGradient style={{ borderRadius: 2, marginTop: 20, width: '87%', alignSelf: 'center' }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#c62828', '#d32f2f', '#f44336']}>
+                  <TouchableOpacity style={{ padding: 12 }} onPress={volver3} >
+                    <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', alignSelf: 'center' }}>Guardar</Text>
+                  </TouchableOpacity>
+                </LinearGradient>
               ) : (
-                <TouchableOpacity style={styles.buttonNext} onPress={siguiente3} >
-                  <Text style={styles.textFont}>Siguiente</Text>
-                </TouchableOpacity>
+                <LinearGradient style={{ borderRadius: 2, marginTop: 20, width: '87%', alignSelf: 'center' }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#00c853', '#64dd17', '#aeea00']}>
+                  <TouchableOpacity style={{ padding: 12 }} onPress={siguiente3}>
+                    <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', alignSelf: 'center' }}>Siguiente</Text>
+                  </TouchableOpacity>
+                </LinearGradient>
               )}
             </>
           ) : (null)}
@@ -495,7 +505,8 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto_500Medium',
     color: 'white',
     marginHorizontal: 20,
-    padding: 5
+    padding: 5,
+
   },
   button: {
     backgroundColor: 'white',
@@ -530,7 +541,8 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto_500Medium',
     color: 'white',
     marginHorizontal: 20,
-    padding: 10
+    padding: 10,
+    alignSelf: 'center'
   },
   buttonBack: {
     padding: 10,
@@ -543,7 +555,7 @@ const styles = StyleSheet.create({
   },
   input: {
     fontFamily: 'Roboto_500Medium',
-    width: '40%',
+    width: '33%',
     marginBottom: 10,
     borderWidth: 1,
     color: 'white',

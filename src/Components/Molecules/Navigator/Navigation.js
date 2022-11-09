@@ -399,7 +399,8 @@ const Navigation = () => {
                             options={{
                                 headerStyle: { backgroundColor: '#000010' },
                                 headerTintColor: 'white',
-                                title: 'Preguntas'
+                                title: 'Razonamiento Logico',
+                                headerTitleStyle: { fontSize: 16 }
                             }}
                         />
                         <Stack.Screen
@@ -483,6 +484,7 @@ const Navigation = () => {
                                 headerStyle: { backgroundColor: '#000010' },
                                 headerTintColor: 'white',
                                 title: 'Razonamiento Numerico',
+                                headerTitleStyle: { fontSize: 16 }
                             }}
                         />
                         <Stack.Screen

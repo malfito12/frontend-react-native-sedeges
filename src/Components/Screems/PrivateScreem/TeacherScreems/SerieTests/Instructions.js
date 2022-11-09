@@ -1,6 +1,7 @@
 import { View, Text, TouchableOpacity, StyleSheet, Image, ScrollView } from 'react-native'
 import React from 'react'
 import Layaut from '../../../../Atoms/StyleLayaut/Layaut'
+import { LinearGradient } from 'expo-linear-gradient'
 
 const Instructions = ({ navigation, route }) => {
     var newArray = []
@@ -33,8 +34,7 @@ const Instructions = ({ navigation, route }) => {
             <ScrollView>
                 {route.params.factor === 'RELACIONES ESPACIALES' ? (
                     <>
-                        <Text style={styles.textFont}>Instructions</Text>
-                        <Text style={styles.textFont}>{route.params.title}</Text>
+                        <Text style={{ ...styles.textFont, fontSize: 18 }}>{route.params.title}</Text>
                         <Text style={styles.textFont}>{route.params.contenido.instructions}</Text>
                         {route.params.id == 1 ? (
                             <View style={{ margin: 10 }}>
@@ -45,7 +45,7 @@ const Instructions = ({ navigation, route }) => {
                                 <View style={{ margin: 10 }}>
                                     <Image style={{ borderRadius: 5, width: 100, height: 100, marginBottom: 10, alignSelf: 'center' }} source={route.params.contenido.ejm.resp[0].respuesta} />
                                 </View>
-                                <Text style={{ ...styles.textFont, alignSelf: 'center' }}>Opciones</Text>
+                                <Text style={{ ...styles.textFont, alignSelf: 'center' }}>OPCIONES</Text>
                                 <View style={{ margin: 10, flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
                                     <Image style={{ borderRadius: 5, width: 110, height: 80, marginBottom: 10, alignSelf: 'center' }} source={route.params.contenido.ejm.resp[1].respuesta} />
                                     <Image style={{ borderRadius: 5, width: 110, height: 80, marginBottom: 10, alignSelf: 'center' }} source={route.params.contenido.ejm.resp[2].respuesta} />
@@ -63,21 +63,22 @@ const Instructions = ({ navigation, route }) => {
                             //     ))}
                             // </View>
                         ) : (null)}
-                        <TouchableOpacity style={styles.buttonStart} onPress={() => navigation.navigate('PreguntaTestGrafico', { data: preguntas, cont: 0, id: route.params.id, student_id: route.params.student_id, factor: route.params.factor, title: route.params.title })}>
-                            <Text style={styles.textFont}>Vamos!!</Text>
-                        </TouchableOpacity>
+                        <LinearGradient style={{ borderRadius: 2, marginTop: 10, width: '87%', alignSelf: 'center' }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#00c853', '#64dd17', '#aeea00']}>
+                            <TouchableOpacity style={{ padding: 12 }} onPress={() => navigation.navigate('PreguntaTestGrafico', { data: preguntas, cont: 0, id: route.params.id, student_id: route.params.student_id, factor: route.params.factor, title: route.params.title })}>
+                                <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', alignSelf: 'center' }}>Vamos!!</Text>
+                            </TouchableOpacity>
+                        </LinearGradient>
                     </>
                 ) : route.params.factor === 'RAZONAMIENTO LOGICO' ? (
                     <>
-                        <Text style={styles.textFont}>Instructions</Text>
-                        <Text style={styles.textFont}>{route.params.title}</Text>
+                        <Text style={{ ...styles.textFont, fontSize: 18 }}>{route.params.title}</Text>
                         <Text style={styles.textFont}>{route.params.contenido.instructions}</Text>
                         {route.params.id === 3 ? (
                             <>
                                 <View style={{ margin: 10 }}>
                                     <Image style={{ borderRadius: 5, width: 200, height: 120, marginBottom: 10, alignSelf: 'center' }} source={route.params.contenido.ejm.resp[0].respuesta} />
                                 </View>
-                                <Text style={{ ...styles.textFont, alignSelf: 'center' }}>Opciones</Text>
+                                <Text style={{ ...styles.textFont, alignSelf: 'center' }}>OPCIONES</Text>
                                 <View style={{ margin: 10, flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
                                     <Image style={{ borderRadius: 5, width: 110, height: 80, marginBottom: 10, alignSelf: 'center' }} source={route.params.contenido.ejm.resp[1].respuesta} />
                                     <Image style={{ borderRadius: 5, width: 110, height: 80, marginBottom: 10, alignSelf: 'center' }} source={route.params.contenido.ejm.resp[2].respuesta} />
@@ -89,9 +90,9 @@ const Instructions = ({ navigation, route }) => {
                             </>
                         ) : route.params.id === 4 ? (
                             <View style={{ marginTop: 20 }}>
-                                <Text style={{ fontFamily: 'Roboto_500Medium', color: 'white', marginBottom: 5 }}>Ejemplo</Text>
-                                <Text style={{ fontFamily: 'Roboto_500Medium', color: 'white', marginBottom: 5 }}>{route.params.contenido.ejm.preguntas.a}</Text>
-                                <Text style={{ fontFamily: 'Roboto_500Medium', color: 'white', marginBottom: 5 }}>{route.params.contenido.ejm.preguntas.b}</Text>
+                                <Text style={styles.textFont}>EJEMPLO</Text>
+                                <Text style={styles.textFont}>{route.params.contenido.ejm.preguntas.a}</Text>
+                                <Text style={styles.textFont}>{route.params.contenido.ejm.preguntas.b}</Text>
                                 <View style={styles.buttonRespuesta}>
                                     <Text style={{ fontFamily: 'Roboto_500Medium' }}>{route.params.contenido.ejm.resp[0].respuesta}</Text>
                                 </View>
@@ -103,26 +104,29 @@ const Instructions = ({ navigation, route }) => {
                                 </View>
                             </View>
                         ) : (null)}
-                        <TouchableOpacity style={styles.buttonStart} onPress={() => navigation.navigate('Preguntas', { data: preguntas, cont: 0, id: route.params.id, student_id: route.params.student_id, factor: route.params.factor, title: route.params.title })}>
-                            <Text style={styles.textFont}>Vamos!!</Text>
-                        </TouchableOpacity>
+                        <LinearGradient style={{ borderRadius: 2, marginTop: 10, width: '87%', alignSelf: 'center' }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#00c853', '#64dd17', '#aeea00']}>
+                            <TouchableOpacity style={{ padding: 12 }} onPress={() => navigation.navigate('Preguntas', { data: preguntas, cont: 0, id: route.params.id, student_id: route.params.student_id, factor: route.params.factor, title: route.params.title })}>
+                                <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', alignSelf: 'center' }}>Vamos!!</Text>
+                            </TouchableOpacity>
+                        </LinearGradient>
                     </>
                 ) : route.params.factor === 'RAZONAMIENTO NUMERICO' ? (
                     <View>
-                        <Text style={styles.textFont}>Instructions</Text>
-                        <Text style={styles.textFont}>{route.params.title}</Text>
+                        <Text style={{ ...styles.textFont, fontSize: 18 }}>{route.params.title}</Text>
                         <Text style={styles.textFont}>{route.params.contenido.instructions}</Text>
                         {route.params.id === 5 ? (
                             <View style={{ marginTop: 20 }}>
-                                <Text style={{ fontFamily: 'Roboto_500Medium', color: 'white', marginBottom: 20 }}>Ejemplo</Text>
-                                <Text style={{ fontFamily: 'Roboto_500Medium', color: 'white', marginBottom: 5, alignSelf: 'center', fontSize: 25 }}>{route.params.contenido.ejm.preguntas}</Text>
+                                <Text style={styles.textFont}>EJEMPLO</Text>
+                                <Text style={{ ...styles.textFont, fontSize: 25 }}>{route.params.contenido.ejm.preguntas}</Text>
                                 <Text style={{ margin: 15, padding: 15, backgroundColor: 'white', alignSelf: 'center', borderRadius: 3 }}>{route.params.contenido.ejm.resp}</Text>
                             </View>
                         ) : route.params.id == 6 ? (
-                            <View style={{ marginTop: 20 }}>
-                                <Text style={{ fontFamily: 'Roboto_500Medium', color: 'white', marginBottom: 5 }}>Ejemplo</Text>
-                                <Text style={{ fontFamily: 'Roboto_500Medium', color: 'white', marginBottom: 5, alignSelf: 'center', fontSize: 20 }}>{route.params.contenido.ejm.preguntas.a}</Text>
-                                <Text style={{ fontFamily: 'Roboto_500Medium', color: 'white', marginBottom: 5 }}>{route.params.contenido.ejm.preguntas.b}</Text>
+                            <View style={{ marginTop: 10 }}>
+                                <Text style={styles.textFont}>EJEMPLO</Text>
+                                <View style={{ backgroundColor: '#ef6c00', width: '70%',height:40,justifyContent:'center',alignItems:'center', alignSelf: 'center', borderRadius: 15, marginBottom: 10 }}>
+                                    <Text style={{ ...styles.textFont, fontSize: 15 }}>{route.params.contenido.ejm.preguntas.a}</Text>
+                                </View>
+                                <Text style={styles.textFont}>{route.params.contenido.ejm.preguntas.b}</Text>
                                 <View style={styles.buttonRespuesta}>
                                     <Text style={{ fontFamily: 'Roboto_500Medium' }}>{route.params.contenido.ejm.resp[0].respuesta}</Text>
                                 </View>
@@ -140,8 +144,8 @@ const Instructions = ({ navigation, route }) => {
                                 </View>
                             </View>
                         ) : route.params.id == 7 ? (
-                            <View style={{ marginTop: 20 }}>
-                                <Text style={{ fontFamily: 'Roboto_500Medium', color: 'white', marginBottom: 5 }}>Ejemplo</Text>
+                            <View style={{ marginTop: 10 }}>
+                                <Text style={styles.textFont}>EJEMPLO</Text>
                                 <Text style={{ fontFamily: 'Roboto_500Medium', color: 'white', marginBottom: 5, alignSelf: 'center', fontSize: 16 }}>{route.params.contenido.ejm.preguntas}</Text>
                                 <View style={styles.buttonRespuesta}>
                                     <Text style={{ fontFamily: 'Roboto_500Medium' }}>{route.params.contenido.ejm.resp[0].respuesta}</Text>
@@ -157,18 +161,21 @@ const Instructions = ({ navigation, route }) => {
                                 </View>
                             </View>
                         ) : (null)}
-                        <TouchableOpacity style={styles.buttonStart} onPress={() => navigation.navigate('RazonamientoNumerico', { data: preguntas, cont: 0, id: route.params.id, student_id: route.params.student_id, factor: route.params.factor, title: route.params.title })} >
-                            <Text style={styles.textFont}>Vamos!!</Text>
-                        </TouchableOpacity>
+                        <LinearGradient style={{ borderRadius: 2, marginTop: 10, width: '87%', alignSelf: 'center' }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#00c853', '#64dd17', '#aeea00']}>
+                            <TouchableOpacity style={{ padding: 12 }} onPress={() => navigation.navigate('RazonamientoNumerico', { data: preguntas, cont: 0, id: route.params.id, student_id: route.params.student_id, factor: route.params.factor, title: route.params.title })} >
+                                <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', alignSelf: 'center' }}>Vamos!!</Text>
+                            </TouchableOpacity>
+                        </LinearGradient>
                     </View>
                 ) : route.params.factor === 'CONCEPTOS VERBALES' ? (
                     <View>
-                        <Text style={styles.textFont}>Instructions</Text>
-                        <Text style={styles.textFont}>{route.params.title}</Text>
+                        <Text style={{ ...styles.textFont, fontSize: 18 }}>{route.params.title}</Text>
                         <Text style={styles.textFont}>{route.params.contenido.instructions}</Text>
-                        <View style={{ marginTop: 20 }}>
-                            <Text style={{ fontFamily: 'Roboto_500Medium', color: 'white', marginBottom: 5 }}>Ejemplo</Text>
-                            <Text style={{ fontFamily: 'Roboto_500Medium', color: 'white', marginBottom: 5, alignSelf: 'center', fontSize: 16 }}>{route.params.contenido.ejm.preguntas}</Text>
+                        <View style={{ marginTop: 10 }}>
+                            <Text style={styles.textFont}>EJEMPLO</Text>
+                            <View style={{ backgroundColor: '#ef6c00', width: '60%',height:40,justifyContent:'center',alignItems:'center', alignSelf: 'center', borderRadius: 15, marginBottom: 10 }}>
+                                <Text style={{ fontFamily: 'Roboto_500Medium', color: 'white', alignSelf: 'center', fontSize: 16 }}>{route.params.contenido.ejm.preguntas}</Text>
+                            </View>
                             <View style={styles.buttonRespuesta}>
                                 <Text style={{ fontFamily: 'Roboto_500Medium' }}>{route.params.contenido.ejm.resp[0].respuesta}</Text>
                             </View>
@@ -182,9 +189,11 @@ const Instructions = ({ navigation, route }) => {
                                 <Text style={{ fontFamily: 'Roboto_500Medium' }}>{route.params.contenido.ejm.resp[3].respuesta}</Text>
                             </View>
                         </View>
-                        <TouchableOpacity style={styles.buttonStart} onPress={() => navigation.navigate('ConceptosVerbales', { data: preguntas, cont: 0, id: route.params.id, student_id: route.params.student_id, factor: route.params.factor, title: route.params.title })}>
-                            <Text style={styles.textFont}>Vamos!!</Text>
-                        </TouchableOpacity>
+                        <LinearGradient style={{ borderRadius: 2, marginTop: 10, width: '87%', alignSelf: 'center' }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#00c853', '#64dd17', '#aeea00']}>
+                            <TouchableOpacity style={{ padding: 12 }} onPress={() => navigation.navigate('ConceptosVerbales', { data: preguntas, cont: 0, id: route.params.id, student_id: route.params.student_id, factor: route.params.factor, title: route.params.title })}>
+                                <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', alignSelf: 'center' }}>Vamos!!</Text>
+                            </TouchableOpacity>
+                        </LinearGradient>
                     </View>
                 ) : (null)}
                 {/* <TouchableOpacity onPress={() => navigation.push('PruebaTest', { data: info })} style={{ backgroundColor: 'red', alignSelf: 'center', padding: 5 }}>
@@ -207,7 +216,9 @@ const styles = StyleSheet.create({
     textFont: {
         fontFamily: 'Roboto_500Medium',
         color: 'white',
-        fontSize: 14
+        fontSize: 14,
+        margin: 5,
+        alignSelf: 'center',
     },
     buttonRespuesta: {
         padding: 13,

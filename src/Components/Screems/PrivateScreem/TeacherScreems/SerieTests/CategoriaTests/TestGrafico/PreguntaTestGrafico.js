@@ -10,6 +10,7 @@ import { useModalAlert, useModalAlertError } from '../../../../../../Molecules/H
 import { ErrorAlert, SuccesAlert } from '../../../../../../Molecules/Alertas/Alerts'
 import { FontAwesome } from '@expo/vector-icons';
 import { FancyAlert } from 'react-native-expo-fancy-alerts'
+import { LinearGradient } from 'expo-linear-gradient'
 
 var array = []
 const PreguntaTestGrafico = ({ route, navigation }) => {
@@ -250,7 +251,6 @@ const PreguntaTestGrafico = ({ route, navigation }) => {
                 <ScrollView>
                     {route.params.id == 1 ? (
                         <>
-                            <Text style={styles.textFont}>Preguntas</Text>
                             <Text style={styles.textFont}>{route.params.data[route.params.cont].pregunta.preguntas}</Text>
                             <View style={{ margin: 10 }}>
                                 <Image style={{ borderRadius: 75, width: 150, height: 150, marginBottom: 10, alignSelf: 'center' }} source={route.params.data[route.params.cont].pregunta.resp.respuesta} />
@@ -264,25 +264,26 @@ const PreguntaTestGrafico = ({ route, navigation }) => {
                                 </TouchableOpacity>
                             </View>
                             {route.params.cont == 4 ? (
-                                <TouchableOpacity onPress={volver1} style={styles.buttonBack}>
-                                    {/* <TouchableOpacity onPress={() => enviar()} style={styles.buttonBack}> */}
-                                    {/* <TouchableOpacity onPress={() => navigation.navigate('InicioTest',{ categoria: 'TEST GRAFICO', id_cartegory: 'test-grafico' })} style={styles.buttonBack}> */}
-                                    <Text style={styles.textFont}>Guardar</Text>
-                                </TouchableOpacity>
+                                <LinearGradient style={{ borderRadius: 2, marginTop: 20, width: '87%', alignSelf: 'center' }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#c62828', '#d32f2f', '#f44336']}>
+                                    <TouchableOpacity style={{ padding: 12 }} onPress={volver1} >
+                                        <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', alignSelf: 'center' }}>Guardar</Text>
+                                    </TouchableOpacity>
+                                </LinearGradient>
                             ) : (
-                                <TouchableOpacity style={styles.buttonNext} onPress={siguiente1} >
-                                    <Text style={styles.textFont}>Siguiente</Text>
-                                </TouchableOpacity>
+                                <LinearGradient style={{ borderRadius: 2, marginTop: 20, width: '87%', alignSelf: 'center' }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#00c853', '#64dd17', '#aeea00']}>
+                                    <TouchableOpacity style={{ padding: 12 }} onPress={siguiente1}>
+                                        <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', alignSelf: 'center' }}>Siguiente</Text>
+                                    </TouchableOpacity>
+                                </LinearGradient>
                             )}
                         </>
                     ) : route.params.id == 2 ? (
                         <>
-                            <Text style={styles.textFont}>Preguntas</Text>
                             <Text style={styles.textFont}>{route.params.data[route.params.cont].pregunta.preguntas}</Text>
                             <View style={{ margin: 10 }}>
                                 <Image style={styles.buttonImage} source={route.params.data[route.params.cont].pregunta.resp[0].respuesta} />
                             </View>
-                            <Text style={{ ...styles.textFont, alignSelf: 'center' }}>Opciones</Text>
+                            <Text style={{ ...styles.textFont, alignSelf: 'center' }}>OPCIONES</Text>
                             <View style={{ margin: 10, flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
                                 <TouchableOpacity onPress={() => selecImage(1)}>
                                     <Image style={image1 == true ? styles.buttonImageSelect : styles.buttonImage} source={route.params.data[route.params.cont].pregunta.resp[1].respuesta} />
@@ -300,13 +301,18 @@ const PreguntaTestGrafico = ({ route, navigation }) => {
                                 </TouchableOpacity>
                             </View>
                             {route.params.cont == 4 ? (
-                                <TouchableOpacity onPress={volver2} style={styles.buttonBack}>
-                                    <Text style={styles.textFont}>Guardar</Text>
-                                </TouchableOpacity>
+                                <LinearGradient style={{ borderRadius: 2, marginTop: 20, width: '87%', alignSelf: 'center' }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#c62828', '#d32f2f', '#f44336']}>
+                                    <TouchableOpacity style={{ padding: 12 }} onPress={volver2} >
+                                        <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', alignSelf: 'center' }}>Guardar</Text>
+                                    </TouchableOpacity>
+                                </LinearGradient>
                             ) : (
-                                <TouchableOpacity style={styles.buttonNext} onPress={siguiente2}>
-                                    <Text style={styles.textFont}>Siguiente</Text>
-                                </TouchableOpacity>
+                                <LinearGradient style={{ borderRadius: 2, marginTop: 20, width: '87%', alignSelf: 'center' }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#00c853', '#64dd17', '#aeea00']}>
+                                    <TouchableOpacity style={{ padding: 12 }} onPress={siguiente2}>
+                                        <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', alignSelf: 'center' }}>Siguiente</Text>
+                                    </TouchableOpacity>
+                                </LinearGradient>
+
                             )}
                         </>
                     ) : (null)}
@@ -356,7 +362,8 @@ const styles = StyleSheet.create({
         fontFamily: 'Roboto_500Medium',
         color: 'white',
         marginHorizontal: 20,
-        padding: 10
+        padding: 10,
+        alignSelf:'center'
     },
     buttonNext: {
         padding: 10,

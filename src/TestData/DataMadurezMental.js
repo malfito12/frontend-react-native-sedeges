@@ -1,6 +1,6 @@
 export const relacionesEspaciales = [
     {
-        title: 'test 1',
+        title: 'TEST 1',
         id: 1,
         factor: 'RELACIONES ESPACIALES',
         description: 'grafico',
@@ -159,7 +159,7 @@ export const relacionesEspaciales = [
         }
     },
     {
-        title: 'test 2',
+        title: 'TEST 2',
         id: 2,
         factor: 'RELACIONES ESPACIALES',
         description: 'grafico',
@@ -396,7 +396,7 @@ export const relacionesEspaciales = [
 
 export const razonamientoLogico = [
     {
-        title: 'test 3',
+        title: 'TEST 3',
         id: 3,
         factor: 'RAZONAMIENTO LOGICO',
         description: 'grafico',
@@ -630,7 +630,7 @@ export const razonamientoLogico = [
         }
     },
     {
-        title: 'test 4',
+        title: 'TEST 4',
         id: 4,
         factor: 'RAZONAMIENTO LOGICO',
         description: 'logico',
@@ -895,7 +895,7 @@ export const razonamientoLogico = [
 
 export const razonamientoNumerico = [
     {
-        title: 'test 5 - Primera Parte',
+        title: 'TEST 5 - PRIMERA PARTE',
         id: 5,
         factor: 'RAZONAMIENTO NUMERICO',
         description: 'logico',
@@ -1088,7 +1088,7 @@ export const razonamientoNumerico = [
         }
     },
     {
-        title: 'test 5 - Segunda Parte',
+        title: 'TEST 5 - SEGUNDA PARTE',
         id: 6,
         factor: 'RAZONAMIENTO NUMERICO',
         description: 'logico',
@@ -1197,7 +1197,7 @@ export const razonamientoNumerico = [
         }
     },
     {
-        title: 'test 6',
+        title: 'TEST 6',
         id: 7,
         factor: 'RAZONAMIENTO NUMERICO',
         description: 'logico',
@@ -1460,7 +1460,7 @@ export const razonamientoNumerico = [
 
 export const conceptosVerBales = [
     {
-        title: 'test 7',
+        title: 'TEST 7',
         id: 8,
         factor: 'CONCEPTOS VERBALES',
         description: 'logico',

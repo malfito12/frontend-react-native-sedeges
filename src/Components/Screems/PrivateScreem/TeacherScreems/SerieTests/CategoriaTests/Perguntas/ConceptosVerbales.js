@@ -10,6 +10,7 @@ import { PORT_URL } from '../../../../../../../PortUrl/PortUrl'
 import { ErrorAlert, SuccesAlert } from '../../../../../../Molecules/Alertas/Alerts'
 import { FontAwesome } from '@expo/vector-icons';
 import { FancyAlert } from 'react-native-expo-fancy-alerts'
+import { LinearGradient } from 'expo-linear-gradient'
 
 var array = []
 const ConceptosVerbales = ({ route, navigation }) => {
@@ -148,8 +149,10 @@ const ConceptosVerbales = ({ route, navigation }) => {
         <>
             <Layaut>
                 <ScrollView>
-                    <Text style={styles.textFont}>Preguntas</Text>
-                    <Text style={styles.textFont}>{route.params.data[route.params.cont].pregunta.preguntas}</Text>
+                    <Text style={styles.textFont}>PALABRA</Text>
+                    <View style={{ backgroundColor: '#ef6c00', width: '60%', height: 40, justifyContent: 'center', alignItems: 'center', alignSelf: 'center', borderRadius: 15, marginBottom: 10 }}>
+                        <Text style={styles.textFont}>{route.params.data[route.params.cont].pregunta.preguntas}</Text>
+                    </View>
                     <View>
                         <TouchableOpacity style={pregunta1 == true ? styles.buttonSelected : styles.button} onPress={() => selectButton(1)}>
                             <Text style={{ fontFamily: 'Roboto_500Medium' }}>{route.params.data[route.params.cont].pregunta.resp[0].respuesta}</Text>
@@ -165,14 +168,17 @@ const ConceptosVerbales = ({ route, navigation }) => {
                         </TouchableOpacity>
                     </View>
                     {route.params.cont == 9 ? (
-                        // <TouchableOpacity onPress={() => navigation.navigate('CategoryTest')} style={styles.buttonBack}>
-                        <TouchableOpacity onPress={volver} style={styles.buttonBack}>
-                            <Text style={styles.textFont}>Guardar</Text>
-                        </TouchableOpacity>
+                        <LinearGradient style={{ borderRadius: 2, marginTop: 20, width: '87%', alignSelf: 'center' }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#c62828', '#d32f2f', '#f44336']}>
+                            <TouchableOpacity style={{ padding: 12 }} onPress={volver} >
+                                <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', alignSelf: 'center' }}>Guardar</Text>
+                            </TouchableOpacity>
+                        </LinearGradient>
                     ) : (
-                        <TouchableOpacity style={styles.buttonNext} onPress={siguiente} >
-                            <Text style={styles.textFont}>Siguiente</Text>
-                        </TouchableOpacity>
+                        <LinearGradient style={{ borderRadius: 2, marginTop: 20, width: '87%', alignSelf: 'center' }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#00c853', '#64dd17', '#aeea00']}>
+                            <TouchableOpacity style={{ padding: 12 }} onPress={siguiente}>
+                                <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', alignSelf: 'center' }}>Siguiente</Text>
+                            </TouchableOpacity>
+                        </LinearGradient>
                     )}
                 </ScrollView>
             </Layaut>
@@ -256,7 +262,8 @@ const styles = StyleSheet.create({
         fontFamily: 'Roboto_500Medium',
         color: 'white',
         marginHorizontal: 20,
-        padding: 10
+        padding: 10,
+        alignSelf: 'center'
     },
     buttonBack: {
         padding: 10,

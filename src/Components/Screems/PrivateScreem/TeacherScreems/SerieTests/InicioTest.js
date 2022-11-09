@@ -67,7 +67,7 @@ const InicioTest = ({ navigation, route }) => {
             <ScrollView>
                 {result.length > 0 ? (
                     <>
-                        <Text style={{ color: 'white', alignSelf: 'center' }}>{result[0].factor}</Text>
+                        <Text style={{ color: 'white', alignSelf: 'center',fontFamily: 'Roboto_500Medium' }}>{result[0].factor}</Text>
                         <ScrollView>
                             {result[0].factor === 'RELACIONES ESPACIALES' ? (
                                 <>

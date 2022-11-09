@@ -4,8 +4,7 @@ import Layaut from '../../../../Atoms/StyleLayaut/Layaut'
 import TestMatematico from '../../../../../images/ImagesFondo/test-matematico.jpg'
 import TestGrafico from '../../../../../images/ImagesFondo/test-grafico.jpg'
 import TestAnalitico from '../../../../../images/ImagesFondo/test-analitico.jpg'
-import AsyncStorageLib from '@react-native-async-storage/async-storage'
-import { LinearGradient } from 'expo-linear-gradient'
+import TestConceptosVerbales from '../../../../../images/ImagesFondo/test-conceptos-verbales.png'
 import { useFocusEffect } from '@react-navigation/native'
 import axios from 'axios'
 import { PORT_URL } from '../../../../../PortUrl/PortUrl'
@@ -33,7 +32,7 @@ const CategoryTest = ({ navigation, route }) => {
     { title: 'RELACIONES ESPACIALES', image: TestGrafico, navi: () => navigation.navigate('InicioTest', { factor: 'RELACIONES ESPACIALES', student_id: route.params.student_id,event_id:route.params.event_id }) },
     { title: 'RAZONAMIENTO LOGICO', image: TestAnalitico, navi: () => navigation.navigate('InicioTest', { factor: 'RAZONAMIENTO LOGICO', student_id: route.params.student_id,event_id:route.params.event_id }) },
     { title: 'RAZONAMIENTO NUMERICO', image: TestMatematico, navi: () => navigation.navigate('InicioTest', { factor: 'RAZONAMIENTO NUMERICO', student_id: route.params.student_id,event_id:route.params.event_id }) },
-    { title: 'CONCEPTOS VERBALES', image: TestGrafico, navi: () => navigation.navigate('InicioTest', { factor: 'CONCEPTOS VERBALES', student_id: route.params.student_id,event_id:route.params.event_id }) },
+    { title: 'CONCEPTOS VERBALES', image: TestConceptosVerbales, navi: () => navigation.navigate('InicioTest', { factor: 'CONCEPTOS VERBALES', student_id: route.params.student_id,event_id:route.params.event_id }) },
   ]
   return (
     <Layaut>
