@@ -97,7 +97,7 @@ export const descriptionResultsIntereses=[
         description_id:3,
         intereses:'CALCULO',
         explicacion:`Te gusta y te esfuerzas por resolver problemas numéricos. En el colegio le encontrabas más satisfacción a la resolución de los problemas de matemática antes que a las demás materias. `,
-        profesion:'Auditores, Contadores públocos, Economistas, Estadísticos, Matemáticos, Funcionarios bancarios.'
+        profesion:'Auditores, Contadores públicos, Economistas, Estadísticos, Matemáticos, Funcionarios bancarios.'
     },
     {
         description_id:4,

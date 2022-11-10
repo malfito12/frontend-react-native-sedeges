@@ -3,12 +3,12 @@ export const cuetionarioIntereses = [
         id_test_intereses:3,
         contenido: {
             instructions: {
-                guia: 'Este cuestionario tiene como objetivo ayudarte a conocer tus verdaderos intereses ocupacionales. Para que puedas dar mejores resultados es necesario que contestes con veracidad y exactitud.A medida  que leas cada idea, piensa ¿qué tanto me gusta hacer esto?; debes de responder en números frente a las preguntas de cada sección y colocarlos en tu hoja de respuestas de acuerdo a la siguiente graduación de agrado o desagrado.',
-                a: '1 = Me desagrada mucho o Totalmente',
-                b: '2 = Me desagrada algo o en parte',
-                c: '3 = Me es indiferente',
-                d: '4 = Me Gusta algo o en parte',
-                e: '5 = Me gusta mucho',
+                guia: 'Este cuestionario tiene como objetivo ayudarte a conocer tus verdaderos intereses ocupacionales. Para que puedas dar mejores resultados es necesario que contestes con veracidad y exactitud. A medida  que leas cada idea, piensa ¿qué tanto me gusta hacer esto?; debes de responder las preguntas de cada sección de acuerdo a la siguiente graduación de agrado o desagrado.',
+                a: '1  Me desagrada mucho o Totalmente',
+                b: '2  Me desagrada algo o en parte',
+                c: '3  Me es indiferente',
+                d: '4  Me gusta algo o en parte',
+                e: '5  Me gusta mucho',
             },
             cuestionario: [
                 {

@@ -24,12 +24,24 @@ const ListViewReceptions = ({ navigation }) => {
     const [modalReceptionUpdate, setModalReceptionUpdate] = useState(false)
     const [modalReceptionDelete, setModalReceptionDelete] = useState(false)
     const [data, setData] = useState([])
+    const [dataReception, setDataReception] = useState({
+        reception_name: '',
+        reception_municipio: '',
+        reception_provincia: '',
+        reception_id: ''
+    })
     const [changeData, setChangeData] = useState({
         reception_name: '',
         reception_municipio: '',
         reception_provincia: '',
         reception_id: ''
     })
+    const cleanUp = {
+        reception_name: '',
+        reception_municipio: '',
+        reception_provincia: '',
+        reception_id: ''
+    }
 
     useFocusEffect(
         useCallback(() => {
@@ -53,8 +65,10 @@ const ListViewReceptions = ({ navigation }) => {
     }
     //------------MODAL OPTIONS-----------------------
     const openModalOptionsReception = (e) => {
-        setData(e)
-        setChangeData(e)
+        // setData(e)
+
+        setDataReception(e)
+        // setChangeData(e)
         // console.log(e)
         setOpenModalOptions(true)
     }
@@ -64,14 +78,17 @@ const ListViewReceptions = ({ navigation }) => {
     //-----------------GO SCREEM STUDENT--------------------------
     const goScreemStudent = () => {
         closeModalOptionsReception()
-        navigation.navigate('ListViewStudentsReception', { data: data })
+        // navigation.navigate('ListViewStudentsReception', { data: data })
+        navigation.navigate('ListViewStudentsReception', { data: dataReception })
     }
 
     //---------UPDARE RECEPTION----------------------------
     const openModalReception = () => {
+        setChangeData(dataReception)
         setModalReceptionUpdate(true)
     }
     const closeModalReception = () => {
+        setChangeData(cleanUp)
         setModalReceptionUpdate(false)
     }
     const updateReception = async () => {
@@ -95,21 +112,27 @@ const ListViewReceptions = ({ navigation }) => {
             })
     }
     // -------------------DELETE reception----------------------
+    const [removeReception, setRemoveReception] = useState({ reception_id: '', reception_name: '' })
     const openModalReceptionDelete = () => {
+        setRemoveReception({reception_id:dataReception.reception_id,reception_name:dataReception.reception_name})
         setModalReceptionDelete(true)
     }
     const closeModalReceptionDelete = () => {
+        setRemoveReception({ reception_id: '', reception_name: '' })
         setModalReceptionDelete(false)
     }
     const deleteReception = async () => {
-        // console.log(changeData)
+        // console.log(changeData
+        const id=removeReception.reception_id
         setProgress(true)
-        await axios.delete(`${PORT_URL}delete-reception/${changeData.reception_id}`)
+        await axios.delete(`${PORT_URL}delete-reception/${id}`)
             .then(resp => {
                 setMessage(resp.data.message)
                 setProgress(false)
                 openModalAlert()
                 getReceptions()
+                closeModalReceptionDelete()
+                closeModalOptionsReception()
             })
             .catch(err => {
                 setProgress(false)
@@ -176,7 +199,7 @@ const ListViewReceptions = ({ navigation }) => {
                             <FontAwesome name="window-close" size={30} color="#424242" />
                         </TouchableOpacity>
                         <Text style={{ alignSelf: 'flex-start', marginHorizontal: 15, fontSize: 15, fontWeight: 'bold', alignSelf: 'center' }}>Centro de Acogida</Text>
-                        <Text style={{ alignSelf: 'flex-start', marginHorizontal: 15, marginBottom: 5, fontSize: 15, fontWeight: 'bold', alignSelf: 'center' }}>{data.reception_name} - {changeData.reception_provincia}</Text>
+                        <Text style={{ alignSelf: 'flex-start', marginHorizontal: 15, marginBottom: 5, fontSize: 15, fontWeight: 'bold', alignSelf: 'center' }}>{dataReception.reception_name} - {dataReception.reception_provincia}</Text>
                         <View style={{ width: '100%', marginBottom: 5 }}>
                             <LinearGradient style={{ borderRadius: 3, marginHorizontal: 15 }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#00c853', '#64dd17', '#aeea00']}>
                                 <TouchableOpacity onPress={goScreemStudent} style={{ width: '100%', padding: 10 }} >
@@ -234,7 +257,7 @@ const ListViewReceptions = ({ navigation }) => {
                                 onValueChange={(itemValue, itemIndex) => {
                                     handleChange('reception_provincia', itemValue)
                                 }}>
-                                <Picker.Item enabled={false} label={changeData.reception_provincia} style={{ fontSize: 14 }} value={changeData.reception_municipio} />
+                                {/* <Picker.Item enabled={false} label={changeData.reception_provincia} style={{ fontSize: 14 }} value={changeData.reception_municipio} /> */}
                                 <Picker.Item label="Alonso de Ibáñez" style={{ fontSize: 14 }} value="Alonso de Ibáñez" />
                                 <Picker.Item label="Antonio Quijarro" style={{ fontSize: 14 }} value="Antonio Quijarro" />
                                 <Picker.Item label="Bernardino Bilbao" style={{ fontSize: 14 }} value="Bernardino Bilbao" />
@@ -271,7 +294,7 @@ const ListViewReceptions = ({ navigation }) => {
             >
                 <View style={styles.centeredView}>
                     <View style={{ ...styles.modalView, backgroundColor: '#335469', marginHorizontal: 20 }}>
-                        <Text style={{ color: 'white', alignSelf: 'flex-start', marginHorizontal: 15, margin: 10, fontFamily: 'Roboto_500Medium', alignSelf: 'center' }}>Eliminar a la recepsion {changeData.reception_name}</Text>
+                        <Text style={{ color: 'white', alignSelf: 'flex-start', marginHorizontal: 15, margin: 10, fontFamily: 'Roboto_500Medium', alignSelf: 'center' }}>Eliminar a la recepsion {dataReception.reception_name}</Text>
                         <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 5 }}>
                             <LinearGradient style={{ borderRadius: 3 }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#00c853', '#64dd17', '#aeea00']}>
                                 <TouchableOpacity onPress={deleteReception} style={{ padding: 5, width: '100%' }}>

@@ -245,7 +245,7 @@ const ListViewStudentsReception = ({ navigation, route }) => {
                     </View>
                 </View>
             </Modal>
-            {/* --------------------ACTUALIZAR RECEPSION-------------------------------- */}
+            {/* --------------------ACTUALIZAR ESTUDIANTE-------------------------------- */}
             <Modal
                 visible={modalStudentUpdate}
                 animationType='fade'

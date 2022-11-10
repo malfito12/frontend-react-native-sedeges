@@ -4,10 +4,10 @@ export const cuestionarioAptitudes = [
         contenido: {
             instructions: {
                 guia: 'EN LA LISTA DE ACTIVIDADES DEBES PONER QUE TAN APTO TE CONSIDERAS PARA CADA UNA DE ELLAS GUIANDOTE POR LO SIGUIENTE:',
-                a: '1 = si te consideras incompetente',
-                b: '2 = si te consideras medianamente competente',
-                c: '3 = si te consideras campetente',
-                d: '4 = si te consideraras muy competente',
+                a: '1  si te consideras incompetente',
+                b: '2  si te consideras medianamente competente',
+                c: '3  si te consideras campetente',
+                d: '4  si te consideraras muy competente',
             },
             cuestionario: [
                 {
