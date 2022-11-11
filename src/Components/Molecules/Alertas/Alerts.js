@@ -24,7 +24,7 @@ export const SuccesAlert = ({isOpen,closeModal,text}) => {
             style={{ backgroundColor: 'white' }}
         >
             <>
-                <Text style={{ marginTop: -16, marginBottom: 10 }}>{text}</Text>
+                <Text style={{ marginTop: -16, marginBottom: 10,fontFamily:'Roboto_500Medium' }}>{text}</Text>
                 <TouchableOpacity onPress={closeModal} style={{ backgroundColor: 'green',padding:5,margin:5,borderRadius:3  }}>
                     <Text style={{color:'white',fontFamily:'Roboto_500Medium',alignSelf:'center'}}>Aceptar</Text>
                 </TouchableOpacity>
@@ -51,7 +51,7 @@ export const ErrorAlert = ({isOpen,closeModal,text}) => {
             style={{ backgroundColor: 'white' }}
         >
             <>
-                <Text style={{ marginTop: -16, marginBottom: 10 }}>{text}</Text>
+                <Text style={{ marginTop: -16, marginBottom: 10,fontFamily:'Roboto_500Medium' }}>{text}</Text>
                 <TouchableOpacity onPress={closeModal} style={{ backgroundColor: 'red',padding:5,margin:5,borderRadius:3 }}>
                     <Text style={{color:'white',fontFamily:'Roboto_500Medium'}}>Aceptar</Text>
                 </TouchableOpacity>

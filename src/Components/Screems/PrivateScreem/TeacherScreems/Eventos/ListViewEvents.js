@@ -215,22 +215,24 @@ const ListViewEvents = ({ navigation }) => {
                                 value={changeData.event_description}
                             />
                             {changeData.event_status === true ? (
-                                <TouchableOpacity onPress={openStatus} style={{ ...styles.buttonStatus, backgroundColor: 'green', width: '90%', alignItems: 'center' }}>
-                                    {/* <TouchableOpacity  style={{ ...styles.buttonStatus, backgroundColor: 'green', width: '90%', alignItems: 'center' }}> */}
-                                    <Text>Vigente</Text>
-                                </TouchableOpacity>
+                                <LinearGradient style={{ borderRadius: 2, marginBottom: 5, width: '90%', alignSelf: 'center' }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#00c853', '#64dd17', '#aeea00']}>
+                                    <TouchableOpacity style={{ padding: 10 }} onPress={openStatus}>
+                                        <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', alignSelf: 'center' }}>Vigente</Text>
+                                    </TouchableOpacity>
+                                </LinearGradient>
                             ) : (
-                                <TouchableOpacity onPress={openStatus} style={{ ...styles.buttonStatus, backgroundColor: 'red', width: '90%', alignItems: 'center' }}>
-                                    {/* <TouchableOpacity  style={{ ...styles.buttonStatus, backgroundColor: 'red', width: '90%', alignItems: 'center' }}> */}
-                                    <Text>Cerrado</Text>
-                                </TouchableOpacity>
+                                <LinearGradient style={{ borderRadius: 2, marginBottom: 5, width: '90%', alignSelf: 'center' }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#c62828', '#d32f2f', '#f44336']}>
+                                    <TouchableOpacity style={{ padding: 10 }} onPress={openStatus} >
+                                        <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', alignSelf: 'center' }}>Cerrado</Text>
+                                    </TouchableOpacity>
+                                </LinearGradient>
                             )}
                             <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', width: '100%' }}>
                                 <TouchableOpacity onPress={editTests}>
                                     <SuccessButton name={'Actualizar'} />
                                 </TouchableOpacity>
                                 <TouchableOpacity onPress={closeModalEditTest}>
-                                    <CancelButton name={'Cancel'} />
+                                    <CancelButton name={'Cancelar'} />
                                 </TouchableOpacity>
                             </View>
                         </View>
@@ -245,12 +247,16 @@ const ListViewEvents = ({ navigation }) => {
             >
                 <View style={styles.centeredView}>
                     <View style={styles.modalView2}>
-                        <TouchableOpacity style={{ backgroundColor: 'green', padding: 5, margin: 5 }} onPress={() => closeStatus(true)}>
-                            <Text>Vigente</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={{ backgroundColor: 'red', padding: 5, margin: 5 }} onPress={() => closeStatus(false)}>
-                            <Text>Cerrado</Text>
-                        </TouchableOpacity>
+                        <LinearGradient style={{ borderRadius: 2, marginBottom: 5, width: '90%', alignSelf: 'center' }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#00c853', '#64dd17', '#aeea00']}>
+                            <TouchableOpacity style={{ padding: 10 }} onPress={() => closeStatus(true)}>
+                                <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', alignSelf: 'center' }}>Vigente</Text>
+                            </TouchableOpacity>
+                        </LinearGradient>
+                        <LinearGradient style={{ borderRadius: 2, width: '90%', alignSelf: 'center' }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#c62828', '#d32f2f', '#f44336']}>
+                            <TouchableOpacity style={{ padding: 10 }} onPress={() => closeStatus(false)} >
+                                <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', alignSelf: 'center' }}>Cerrado</Text>
+                            </TouchableOpacity>
+                        </LinearGradient>
                     </View>
                 </View>
             </Modal>
@@ -331,9 +337,10 @@ const styles = StyleSheet.create({
     modalView2: {
         backgroundColor: 'white',
         borderRadius: 8,
-        padding: 5,
+        padding: 10,
+        backgroundColor:'#e8eaf6',
         alignItems: 'center',
-        marginHorizontal: 15,
+        marginHorizontal: 20,
     },
     progressView: {
         flex: 1,

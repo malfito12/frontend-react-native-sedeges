@@ -211,7 +211,7 @@ const ConceptosVerbales = ({ route, navigation }) => {
                 style={{ backgroundColor: 'white' }}
             >
                 <>
-                    <Text style={{ marginTop: -16, marginBottom: 10 }}>Informacion Registrada</Text>
+                    <Text style={{ marginTop: -16, marginBottom: 10,fontFamily:'Roboto_500Medium' }}>Informacion Registrada</Text>
                     <TouchableOpacity onPress={closeModalAlertSuccess} style={{ backgroundColor: 'green', padding: 5, margin: 5, borderRadius: 3 }}>
                         <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', alignSelf: 'center' }}>Aceptar</Text>
                     </TouchableOpacity>

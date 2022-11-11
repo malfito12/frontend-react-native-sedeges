@@ -1,15 +1,25 @@
-import { View, Text, TouchableOpacity, Dimensions, ScrollView } from 'react-native'
+import { View, Text, TouchableOpacity, Dimensions, ScrollView, TouchableNativeFeedback, Image, ImageBackground, StyleSheet } from 'react-native'
 import React, { useState, useEffect, useCallback } from 'react'
 import Layaut from '../../../../Atoms/StyleLayaut/Layaut'
-import { printToFileAsync } from 'expo-print'
+// import { printToFileAsync } from 'expo-print'
+import * as Print from 'expo-print';
 import { shareAsync } from 'expo-sharing'
 import { useFocusEffect } from '@react-navigation/native'
+import { Entypo } from '@expo/vector-icons';
 import axios from 'axios'
 import { PORT_URL } from '../../../../../PortUrl/PortUrl'
+import TestMadurez from '../../../../../images/ImagesFondo/test-madurez-mental.png'
+import TestAptitudes from '../../../../../images/ImagesFondo/test-aptitudes.jpg'
+import TestIntereses from '../../../../../images/ImagesFondo/test-intereses.jpg'
 import { descriptionResultsIntereses, descriptionResultsAptitudes } from '../../../../../TestData/DescriptionResults'
+import { LinearGradient } from 'expo-linear-gradient'
+import { useModalAlertError } from '../../../../Molecules/Hooks/useModalAlert'
+import { ErrorAlert } from '../../../../Molecules/Alertas/Alerts'
 
 const ResultsAdminScreem = ({ navigation, route }) => {
   // console.log(route.params.data)
+  const [openModalError, openModalAlertError, closeModalAlertError] = useModalAlertError(false)
+  const [message, setMessage] = useState(null)
   const [resultIntereses, setResultIntereses] = useState([])
   const [resultAptitudes, setResultAptitudes] = useState([])
   const [resultMadurez, setResultMadurez] = useState([])
@@ -143,18 +153,18 @@ const ResultsAdminScreem = ({ navigation, route }) => {
     }
     //---------------------------------------
     var dataMadurez = [
-      {area:'Test I',pd: resultMadurez[0].datos_test.test1,pc: '',nivel: ''},
-      {area:'Test II', pd:resultMadurez[0].datos_test.test2, pc:'',nivel: ''},
-      {area:'Test III', pd:resultMadurez[0].datos_test.test3, pc:'', nivel:''},
-      {area:'Test IV', pd:resultMadurez[0].datos_test.test4, pc:'', nivel:''},
-      {area:'Test V', pd:resultMadurez[0].datos_test.test5, pc:'', nivel:''},
-      {area:'Test VI', pd:resultMadurez[0].datos_test.test6, pc:'', nivel:''},
-      {area:'Test VII', pd:resultMadurez[0].datos_test.test7, pc:'', nivel:''},
-      {area:'RELACIONES ESPACIALES',pd: resultMadurez[0].datos_test.relaciones_espaciales,pc: resultMadurez[0].datos_pc_nivel.pc_re,nivel: resultMadurez[0].datos_pc_nivel.nivel_re},
-      {area:'RAZONAMIENTO LOGICO',pd: resultMadurez[0].datos_test.razonamiento_logico, pc:resultMadurez[0].datos_pc_nivel.pc_rl,nivel: resultMadurez[0].datos_pc_nivel.nivel_rl},
-      {area:'RAZONAMIENTO NUMERICO',pd: resultMadurez[0].datos_test.razonamiento_numerico,pc: resultMadurez[0].datos_pc_nivel.pc_rn,nivel: resultMadurez[0].datos_pc_nivel.nivel_rn},
-      {area:'CONCEPTOS VERBALES',pd: resultMadurez[0].datos_test.conceptos_verbales,pc: resultMadurez[0].datos_pc_nivel.pc_cv,nivel: resultMadurez[0].datos_pc_nivel.nivel_cv},
-      {area:'TOTAL',pd: resultMadurez[0].datos_test.total,pc: '', nivel:''},
+      { area: 'Test I', pd: resultMadurez[0].datos_test.test1, pc: '', nivel: '' },
+      { area: 'Test II', pd: resultMadurez[0].datos_test.test2, pc: '', nivel: '' },
+      { area: 'Test III', pd: resultMadurez[0].datos_test.test3, pc: '', nivel: '' },
+      { area: 'Test IV', pd: resultMadurez[0].datos_test.test4, pc: '', nivel: '' },
+      { area: 'Test V', pd: resultMadurez[0].datos_test.test5, pc: '', nivel: '' },
+      { area: 'Test VI', pd: resultMadurez[0].datos_test.test6, pc: '', nivel: '' },
+      { area: 'Test VII', pd: resultMadurez[0].datos_test.test7, pc: '', nivel: '' },
+      { area: 'RELACIONES ESPACIALES', pd: resultMadurez[0].datos_test.relaciones_espaciales, pc: resultMadurez[0].datos_pc_nivel.pc_re, nivel: resultMadurez[0].datos_pc_nivel.nivel_re },
+      { area: 'RAZONAMIENTO LOGICO', pd: resultMadurez[0].datos_test.razonamiento_logico, pc: resultMadurez[0].datos_pc_nivel.pc_rl, nivel: resultMadurez[0].datos_pc_nivel.nivel_rl },
+      { area: 'RAZONAMIENTO NUMERICO', pd: resultMadurez[0].datos_test.razonamiento_numerico, pc: resultMadurez[0].datos_pc_nivel.pc_rn, nivel: resultMadurez[0].datos_pc_nivel.nivel_rn },
+      { area: 'CONCEPTOS VERBALES', pd: resultMadurez[0].datos_test.conceptos_verbales, pc: resultMadurez[0].datos_pc_nivel.pc_cv, nivel: resultMadurez[0].datos_pc_nivel.nivel_cv },
+      { area: 'TOTAL', pd: resultMadurez[0].datos_test.total, pc: '', nivel: '' },
     ]
     html = `
   <html>
@@ -170,7 +180,7 @@ const ResultsAdminScreem = ({ navigation, route }) => {
         .chart-wrap {
             --chart-width: 420px;
             --grid-color: #aaa;
-            --bar-color: #F16335;
+            --bar-color: #64b5f6;
             --bar-thickness: 30px;
             --bar-rounded: 3px;
             --bar-spacing: 10px;
@@ -334,6 +344,21 @@ const ResultsAdminScreem = ({ navigation, route }) => {
           </tr>
         </tbody>
       </table>
+    </div>
+    <h5>EDAD CRONOLOGICA</h5>
+    <p>La edad cronologica obteniddo a partir de la fecha de nacimiento y la fecha en el que realizo el test calculado en meses</p>
+    <p align='center'>Fecha de Nacimiento = ${resultMadurez[0].datos_opcionales.edad_nacimiento_est}</p>
+    <p align='center'>Fecha Registro de Test = ${resultMadurez[0].datos_opcionales.edad_register_test_est}</p>
+    <p align='center'>Cantidad de meses optenido = ${resultMadurez[0].datos_opcionales.edad_nacimiento_meses_est}</p>
+    <h5>EDAD MENTAL</h5>
+    <p>La edad mental obtenido de la tabla normas de edad mental, a partir de la suma total de los resultados en los diferentes test, </p>
+    <p align='center'>Suma Total = ${resultMadurez[0].datos_opcionales.edad_mental_sum}</p>
+    <p align='center'>Resultado de la tabla = ${resultMadurez[0].datos_opcionales.edad_mental_sum} = ${resultMadurez[0].datos_test.edad_mental}</p>
+    <h5>COEFICIENTE INTELECTUAL</h5>
+    <p>El coeficiente intelectual obtenido con la siguinte formula de calculo</p>
+    <p align='center'>CI = (edad mental / edad cronologica) * 100</p>
+    <p align='center'>CI = ( ${resultMadurez[0].datos_test.edad_mental} / ${resultMadurez[0].datos_test.edad_cronologica}) * 100 = ${resultMadurez[0].datos_test.coeficiente_intelectual}</p>
+    <div align='center'>
       <table class="style-table">
         <thead></thead>
         <tbody>
@@ -401,36 +426,84 @@ const ResultsAdminScreem = ({ navigation, route }) => {
   `;
   } else {
     html = `<p>Informacion incompleta</p>`
-    // alert('Prueba Incompleta')
   }
   const pdfGenerate = async () => {
-    const file = await printToFileAsync({
-      html: html,
-      base64: false
-    })
-    await shareAsync(file.uri)
+    if (resultMadurez.length > 0 && resultAptitudes.length > 0 && resultIntereses.length > 0) {
+      // const file = await printToFileAsync({
+      //   html: html,
+      //   base64: false
+      // })
+      // await shareAsync(file.uri)
+      await Print.printAsync({
+        html,
+      });
+    } else {
+      setMessage('Falta Informacion para elaborar reportes')
+      openModalAlertError()
+    }
   }
   return (
     <Layaut>
-      <ScrollView>
-        <View style={{ alignItems: 'center' }}>
-          <TouchableOpacity onPress={() => navigation.navigate('ResultsMadurezStudent', { data: route.params.data })} style={{ borderWidth: 1, borderRadius: 3, width: '100%', borderColor: 'green', padding: 20, margin: 10 }}>
-            <Text style={{ color: 'white', alignSelf: 'center' }}>Test Normal</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('ResultsAptitudStudent', { data: route.params.data })} style={{ borderWidth: 1, borderRadius: 3, width: '100%', borderColor: 'green', padding: 20, margin: 10 }}>
-            <Text style={{ color: 'white', alignSelf: 'center' }}>Test Aptitudes</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('ResultsInteresStudent', { data: route.params.data })} style={{ borderWidth: 1, borderRadius: 3, width: '100%', borderColor: 'green', padding: 20, margin: 10 }}>
-            <Text style={{ color: 'white', alignSelf: 'center' }}>Test Intereses</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={pdfGenerate} style={{ borderWidth: 1, borderColor: 'blue', padding: 20, marginBottom: 10, alignItems: 'center' }}>
-            <Text style={{ color: 'white' }}>Reporte de Resultados</Text>
-          </TouchableOpacity>
+      <>
+        <ScrollView>
+          <View style={{ marginBottom: 10 }}>
+            <TouchableOpacity style={styles.testView} onPress={() => navigation.navigate('ResultsMadurezStudent', { data: route.params.data })} >
+              <ImageBackground source={TestMadurez} resizeMode='cover' style={styles.ImageView} imageStyle={{ borderRadius: 5, }} />
+              <Text style={{ alignSelf: 'center', color: 'white', fontFamily: 'Roboto_500Medium' }}>TEST MADUREZ MENTAL</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={{ marginBottom: 10 }}>
+            <TouchableOpacity style={styles.testView} onPress={() => navigation.navigate('ResultsAptitudStudent', { data: route.params.data })} >
+              <ImageBackground source={TestAptitudes} resizeMode='cover' style={styles.ImageView} imageStyle={{ borderRadius: 5, }} />
+              <Text style={{ alignSelf: 'center', color: 'white', fontFamily: 'Roboto_500Medium' }}>TEST APTITUDES</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={{ marginBottom: 10 }}>
+            <TouchableOpacity style={styles.testView} onPress={() => navigation.navigate('ResultsInteresStudent', { data: route.params.data })}  >
+              <ImageBackground source={TestIntereses} resizeMode='cover' style={styles.ImageView} imageStyle={{ borderRadius: 5, }} />
+              <Text style={{ alignSelf: 'center', color: 'white', fontFamily: 'Roboto_500Medium' }}>TEST INTERESES</Text>
+            </TouchableOpacity>
+          </View>
 
-        </View>
-      </ScrollView>
+          <Text style={styles.textStyles}>REPORTE RESULTADOS</Text>
+          <LinearGradient style={{ borderRadius: 2, marginBottom: 10, width: '70%', alignSelf: 'center' }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#ef6c00', '#f57c00', '#fb8c00']}>
+            <TouchableOpacity onPress={pdfGenerate} style={{ padding: 10 }}>
+              <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium' }}>Imprimir Resultados</Text>
+                <Entypo name="print" size={24} color="white" />
+              </View>
+            </TouchableOpacity>
+          </LinearGradient>
+
+        </ScrollView>
+        {/* ---------------------ALERTS ------------------------ */}
+        <ErrorAlert isOpen={openModalError} closeModal={closeModalAlertError} text={message} />
+      </>
     </Layaut>
   )
 }
 
 export default ResultsAdminScreem
+
+const styles = StyleSheet.create({
+  testView: {
+    borderRadius: 5,
+    height: 90,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  ImageView: {
+    opacity: 0.5,
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+  },
+  textStyles: {
+    fontFamily: 'Roboto_500Medium',
+    marginBottom: 10,
+    color: 'white',
+    alignSelf: 'center',
+    marginTop: 20
+  },
+})

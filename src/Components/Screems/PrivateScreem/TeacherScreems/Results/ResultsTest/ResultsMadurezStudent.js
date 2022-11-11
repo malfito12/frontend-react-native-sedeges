@@ -83,7 +83,7 @@ const ResultsMadurezStudent = ({ navigation, route }) => {
           </>
         ) : (
           <>
-            <Text style={{ color: 'white', alignSelf: 'center', padding: 20, display: exist }}>No Existen Registros</Text>
+            <Text style={{ color: 'white', alignSelf: 'center', padding: 20, display: exist }}>No Existen Registros o Informacion incompleta</Text>
             <View style={{ display: progressName }}>
               <Progress.Circle style={{ alignSelf: 'center' }} borderWidth={2} size={20} indeterminate={true} />
             </View>

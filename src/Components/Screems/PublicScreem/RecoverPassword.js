@@ -73,7 +73,7 @@ const RecoverPassword = ({ navigation }) => {
                             <Text style={{ color: 'white', fontFamily: 'Roboto_900Black_Italic' }}>Enviar</Text>
                         </TouchableOpacity>
                     </LinearGradient>
-                    <Text style={{ color: 'white', marginBottom: 10, fontFamily: 'Roboto_700Bold', fontSize: 14, alignSelf: 'center' }}>Tiene que coincidir tanto la cuenta como el email.</Text>
+                    <Text style={{ color: 'white', marginBottom: 10, fontFamily: 'Roboto_700Bold', fontSize: 14, alignSelf: 'center' }}>Tiene que coincidir tanto la cuenta como el Correo Electronico.</Text>
 
                 </View>
             </Layaut>
