@@ -199,7 +199,7 @@ const ListViewStudentsReception = ({ navigation, route }) => {
                     {students.length > 0 ? (
                         students.map((e, index) => (
                             <View key={index} style={styles.viewCard}>
-                                <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', }}>{e.student_first_name} {e.student_last_name}</Text>
+                                <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', }}>{e.student_first_name} {e.student_last_father_name} {e.student_last_father_name}</Text>
                                 <LinearGradient style={{ borderRadius: 3 }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#00c853', '#64dd17', '#aeea00']}>
                                     <TouchableOpacity style={{ padding: 5 }} onPress={() => openModalOptionsStudent(e)}>
                                         <Ionicons name="options" size={24} color="white" />
@@ -229,7 +229,7 @@ const ListViewStudentsReception = ({ navigation, route }) => {
                             <FontAwesome name="window-close" size={30} color="#424242" />
                         </TouchableOpacity>
                         <Text style={{ alignSelf: 'flex-start', marginHorizontal: 15, fontSize: 15, fontWeight: 'bold', alignSelf: 'center' }}>INFORMACION DEL ESTUDIANTE</Text>
-                        <Text style={{ alignSelf: 'flex-start', marginHorizontal: 15, marginBottom: 5, fontSize: 15, fontWeight: 'bold', alignSelf: 'center' }}>{changeData.student_first_name} {changeData.student_last_father_name} {changeData.student_last_mother_name}</Text>
+                        <Text style={{ alignSelf: 'flex-start', marginHorizontal: 15, marginBottom: 5, fontSize: 15, fontWeight: 'bold', alignSelf: 'center' }}>{dataStudent.student_first_name} {dataStudent.student_last_father_name} {dataStudent.student_last_mother_name}</Text>
                         <View style={{ width: '100%', marginBottom: 5 }}>
                             <LinearGradient style={{ borderRadius: 3, marginHorizontal: 15 }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#00c853', '#64dd17', '#aeea00']}>
                                 <TouchableOpacity onPress={() => openModalEditStudent()} style={{ width: '100%', padding: 10 }}  >

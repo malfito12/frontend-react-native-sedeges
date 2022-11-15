@@ -1,46 +1,41 @@
 import { View, Text, TouchableOpacity } from 'react-native'
 import { NavigationContainer, StackActions } from '@react-navigation/native'
-import { MaterialIcons,MaterialCommunityIcons } from '@expo/vector-icons'
+import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons'
 import React, { useContext, useState, useEffect } from 'react'
 import LoginScreem from '../../Screems/PublicScreem/LoginScreem'
-import RegisterUserScreem from '../../Screems/PublicScreem/RegisterUserScreem'
 import Home from '../../Screems/PrivateScreem/StudentScreems/Home'
-import UsersScreem from '../../Screems/PrivateScreem/Users/UsersScreem'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { AuthContext } from '../../Atoms/Context/AuthContext'
 import TeacherHomeScreem from '../../Screems/PrivateScreem/TeacherScreems/TeacherHomeScreem'
 // import InicioTestEst from '../../Screems/PrivateScreem/StudentScreems/SerieTest/InicioTestEst'
-import InicioTest from '../../Screems/PrivateScreem/TeacherScreems/SerieTests/InicioTest'
 import AsyncStorageLib from '@react-native-async-storage/async-storage'
-import Preguntas from '../../Screems/PrivateScreem/TeacherScreems/SerieTests/CategoriaTests/TestAnalitico/Preguntas'
-import CategoryTest from '../../Screems/PrivateScreem/TeacherScreems/Tests/CategoryTest'
-import PruebaTest from '../../Screems/PrivateScreem/TeacherScreems/SerieTests/CategoriaTests/TestAnalitico/PruebaTest'
-import Instructions from '../../Screems/PrivateScreem/TeacherScreems/SerieTests/Instructions'
-import PreguntaTestGrafico from '../../Screems/PrivateScreem/TeacherScreems/SerieTests/CategoriaTests/TestGrafico/PreguntaTestGrafico'
-import PerfilUserScreem from '../../Screems/PrivateScreem/Users/PerfilUserScreem'
-import DataPersonScreem from '../../Screems/PrivateScreem/TeacherScreems/Tests/DataPersonScreem'
-import TestOrientationType from '../../Screems/PrivateScreem/TeacherScreems/TestsVocational/TestOrientationType'
-import InstructionTestAptitudes from '../../Screems/PrivateScreem/TeacherScreems/TestsVocational/TestAptitudes/InstructionTestAptitudes'
-import InstructionTestIntereses from '../../Screems/PrivateScreem/TeacherScreems/TestsVocational/TestIntereses/InstructionTestIntereses'
-import PreguntasTestAptitudes from '../../Screems/PrivateScreem/TeacherScreems/TestsVocational/TestAptitudes/PreguntasTestAptitudes'
+import CategoryTest from '../../Screems/PrivateScreem/StudentScreems/Test/TestMadurez/CategoryTest'
+import InstructionTestAptitudes from '../../Screems/PrivateScreem/StudentScreems/Test/TestAptitudes/InstructionTestAptitudes'
+import InstructionTestIntereses from '../../Screems/PrivateScreem/StudentScreems/Test/TestIntereses/InstructionTestIntereses'
+import PreguntasTestAptitudes from '../../Screems/PrivateScreem/StudentScreems/Test/TestAptitudes/PreguntasTestAptitudes'
 import RegisterStudent from '../../Screems/PrivateScreem/TeacherScreems/Students/RegisterStudent'
-import StudentsAdminScreem from '../../Screems/PrivateScreem/TeacherScreems/Students/StudentsAdminScreem'
 import ResultsAdminScreem from '../../Screems/PrivateScreem/TeacherScreems/Results/ResultsAdminScreem'
 import ResultsAptitudStudent from '../../Screems/PrivateScreem/TeacherScreems/Results/ResultsTest/ResultsAptitudStudent'
 import RecoverPassword from '../../Screems/PublicScreem/RecoverPassword'
 import RegisterEvent from '../../Screems/PrivateScreem/TeacherScreems/Eventos/RegisterEvent'
-import SearchStudent from '../../Screems/PrivateScreem/TeacherScreems/TestAll/SearchStudent'
-import TypeTest from '../../Screems/PrivateScreem/TeacherScreems/TestAll/TypeTest'
-import PreguntasTestIntereses from '../../Screems/PrivateScreem/TeacherScreems/TestsVocational/TestIntereses/PreguntasTestIntereses'
+import SearchStudent from '../../Screems/PrivateScreem/StudentScreems/Inicio/SearchStudent'
+import PreguntasTestIntereses from '../../Screems/PrivateScreem/StudentScreems/Test/TestIntereses/PreguntasTestIntereses'
 import RegisterReception from '../../Screems/PrivateScreem/TeacherScreems/Receptions/RegisterReception'
 import ListViewStudentsReception from '../../Screems/PrivateScreem/TeacherScreems/Students/ListViewStudentsReception'
 import ResultsInteresStudent from '../../Screems/PrivateScreem/TeacherScreems/Results/ResultsTest/ResultsInteresStudent'
 import ListViewStudentsResult from '../../Screems/PrivateScreem/TeacherScreems/Results/ListStudent/ListViewStudentsResult'
-import RazonamientoNumerico from '../../Screems/PrivateScreem/TeacherScreems/SerieTests/CategoriaTests/Perguntas/RazonamientoNumerico'
-import ConceptosVerbales from '../../Screems/PrivateScreem/TeacherScreems/SerieTests/CategoriaTests/Perguntas/ConceptosVerbales'
 import ResultsMadurezStudent from '../../Screems/PrivateScreem/TeacherScreems/Results/ResultsTest/ResultsMadurezStudent'
 import RegisterMaterial from '../../Screems/PrivateScreem/TeacherScreems/Materiales/RegisterMaterial'
-import ListViewTestStudent from '../../Screems/PrivateScreem/StudentScreems/Test/ListViewTestStudent'
+import ListViewTestStudent from '../../Screems/PrivateScreem/StudentScreems/Inicio/ListViewTestStudent'
+import TypeTest from '../../Screems/PrivateScreem/StudentScreems/Inicio/TypeTest'
+import InicioTestMadurez from '../../Screems/PrivateScreem/StudentScreems/Test/TestMadurez/InicioTestMadurez'
+import InstructionTestMadurez from '../../Screems/PrivateScreem/StudentScreems/Test/TestMadurez/InstructionTestMadurez'
+import PreguntasRelacionesEspaciales from '../../Screems/PrivateScreem/StudentScreems/Test/TestMadurez/RelacionesEspaciales/PreguntasRelacionesEspaciales'
+import PreguntasRazonamientoLogico from '../../Screems/PrivateScreem/StudentScreems/Test/TestMadurez/RazonamientoLogico/PreguntasRazonamientoLogico'
+import PreguntasRazonamientoNumerico from '../../Screems/PrivateScreem/StudentScreems/Test/TestMadurez/RazonamientoNumerico/PreguntasRazonamientoNumerico'
+import PreguntasConceptosVerbales from '../../Screems/PrivateScreem/StudentScreems/Test/TestMadurez/ConceptosVerbales/PreguntasConceptosVerbales'
+import RegisterUserScreem from '../../Screems/PrivateScreem/AdminScreems/Users/RegisterUserScreem'
+import AdminHomeScreem from '../../Screems/PrivateScreem/AdminScreems/AdminHomeScreem'
 
 const Stack = createNativeStackNavigator()
 
@@ -53,9 +48,10 @@ const Navigation = () => {
     return (
         <NavigationContainer>
             <Stack.Navigator>
-                {login && rol === 'admin' ? (
+                {login && rol === 'ADMINISTRADOR' ? (
                     <>
-                        <Stack.Screen name='TeacherHomeScreem' component={TeacherHomeScreem} options={{ headerShown: false }} />
+                        <Stack.Screen name='AdminHomeScreem' component={AdminHomeScreem} options={{ headerShown: false }} />
+                        {/* -------------------------------USUARIOS---------------------------- */}
                         <Stack.Screen
                             name='RegisterUserScreem'
                             component={RegisterUserScreem}
@@ -68,153 +64,34 @@ const Navigation = () => {
                                 // headerLeft: () => <></>
                             }}
                         />
+                        {/* -------------------------------RECEPCIONES---------------------------- */}
                         <Stack.Screen
-                            name='PerfilUserScreem'
-                            component={PerfilUserScreem}
+                            name='RegisterReception'
+                            component={RegisterReception}
                             options={{
                                 headerStyle: { backgroundColor: '#000010' },
                                 headerTintColor: 'white',
-                                title: 'Perfil'
-                            }}
-                        // initialParams={{ post: () => logget() }}
-                        />
-                        {/* <Stack.Screen
-                            name='UsersScreem'
-                            component={UsersScreem}
-                            options={{
-                                headerStyle: { backgroundColor: '#000010' },
-                                headerTintColor: 'white',
-                                title: 'Lista de Usuarios'
-                            }}
-                        // initialParams={{ post: () => logget() }}
-                        /> */}
-                        <Stack.Screen
-                            name='DataPersonScreem'
-                            component={DataPersonScreem}
-                            options={{
-                                headerStyle: { backgroundColor: '#000010' },
-                                headerTintColor: 'white',
-                                title: 'Información'
-                            }} />
-                        <Stack.Screen
-                            name='CategoryTest'
-                            component={CategoryTest}
-                            options={{
-                                headerStyle: { backgroundColor: '#000010' },
-                                headerTintColor: 'white',
-                                title: 'Categorias',
-                                // headerLeft: () => <></>,
-                            }} />
-                        <Stack.Screen
-                            name='InicioTest'
-                            component={InicioTest}
-                            options={{
-                                headerStyle: { backgroundColor: '#000010' },
-                                headerTintColor: 'white',
-                                title: 'Lista de Tests'
-                            }}
-                        // initialParams={{ lala:AsyncStorageLib.getItem('test') }}
-                        />
-                        <Stack.Screen
-                            name='Instructions'
-                            component={Instructions}
-                            options={{
-                                headerStyle: { backgroundColor: '#000010' },
-                                headerTintColor: 'white',
-                                title: 'Instrucciones'
+                                title: 'Registro de Recepciones',
+                                headerTitleStyle: { fontSize: 16 }
                             }}
                         />
+                        {/* -------------------------------ESTUDIANTES---------------------------- */}
                         <Stack.Screen
-                            name='Preguntas'
-                            component={Preguntas}
-                            options={{
+                            name='ListViewStudentsReception'
+                            component={ListViewStudentsReception}
+                            options={({ navigation }) => ({
                                 headerStyle: { backgroundColor: '#000010' },
                                 headerTintColor: 'white',
-                                title: 'Preguntas'
-                            }}
-                        />
-                        <Stack.Screen
-                            name='PreguntaTestGrafico'
-                            component={PreguntaTestGrafico}
-                            options={{
-                                headerStyle: { backgroundColor: '#000010' },
-                                headerTintColor: 'white',
-                                title: 'Test Grafico'
-                            }}
-                        />
-                        <Stack.Screen
-                            name='PruebaTest'
-                            component={PruebaTest}
-                            options={{
-                                headerStyle: { backgroundColor: '#000010' },
-                                headerTintColor: 'white',
-                                title: 'Preguntas'
-                            }}
-                        />
-                        {/* <Stack.Screen
-                            name='TestOrientationType'
-                            component={TestOrientationType}
-                            options={{
-                                headerStyle: { backgroundColor: '#000010' },
-                                headerTintColor: 'white',
-                                title: 'Tests de Orientacion Vocacional'
-                            }}
-                        /> */}
-                        <Stack.Screen
-                            name='SearchStudent'
-                            component={SearchStudent}
-                            options={{
-                                headerStyle: { backgroundColor: '#000010' },
-                                headerTintColor: 'white',
-                                title: ''
-                            }}
-                        />
-                        <Stack.Screen
-                            name='TypeTest'
-                            component={TypeTest}
-                            options={{
-                                headerStyle: { backgroundColor: '#000010' },
-                                headerTintColor: 'white',
-                                title: 'Tipo de Cuestionario'
-                            }}
-                        />
-                        <Stack.Screen
-                            name='InstructionTestAptitudes'
-                            component={InstructionTestAptitudes}
-                            options={{
-                                headerStyle: { backgroundColor: '#000010' },
-                                headerTintColor: 'white',
-                                title: 'Instrucciones'
-                            }}
-                        />
-                        <Stack.Screen
-                            name='PreguntasTestAptitudes'
-                            component={PreguntasTestAptitudes}
-                            options={{
-                                headerStyle: { backgroundColor: '#000010' },
-                                headerTintColor: 'white',
-                                title: 'Preguntas',
-                                headerLeft: () => <></>,
-                            }}
-                        />
-                        <Stack.Screen
-                            name='PreguntasTestIntereses'
-                            component={PreguntasTestIntereses}
-                            options={{
-                                headerStyle: { backgroundColor: '#000010' },
-                                headerTintColor: 'white',
-                                title: 'Preguntas',
-                                headerLeft: () => <></>,
-                            }}
-                        />
-                        <Stack.Screen
-                            name='InstructionTestIntereses'
-                            component={InstructionTestIntereses}
-                            options={{
-                                headerStyle: { backgroundColor: '#000010' },
-                                headerTintColor: 'white',
-                                title: 'Instrucciones'
-                            }}
+                                title: 'Lista de Estudiantes',
+                                headerTitleStyle: { fontSize: 16 },
+                                headerRight: () => (
+                                    <View style={{ marginRight: 20 }}>
+                                        <TouchableOpacity onPress={() => navigation.navigate('RegisterStudent')}>
+                                            <MaterialIcons name="add" size={26} color="white" />
+                                        </TouchableOpacity>
+                                    </View>
+                                ),
+                            })}
                         />
                         <Stack.Screen
                             name='RegisterStudent'
@@ -226,13 +103,39 @@ const Navigation = () => {
                                 headerTitleStyle: { fontSize: 16 }
                             }}
                         />
+                        {/* -------------------------------EVENTOS---------------------------- */}
                         <Stack.Screen
-                            name='ResultsAdminScreem'
-                            component={ResultsAdminScreem}
+                            name='RegisterEvent'
+                            component={RegisterEvent}
                             options={{
                                 headerStyle: { backgroundColor: '#000010' },
                                 headerTintColor: 'white',
-                                title: ''
+                                title: 'Registro de Eventos',
+                                headerTitleStyle: { fontSize: 16 }
+                            }}
+                        />
+
+                        {/* -------------------------------MATERIAL DE APOYO---------------------------- */}
+                        <Stack.Screen
+                            name='RegisterMaterial'
+                            component={RegisterMaterial}
+                            options={{
+                                headerStyle: { backgroundColor: '#000010' },
+                                headerTintColor: 'white',
+                                title: 'Registro Material',
+                                headerTitleStyle: { fontSize: 16 }
+                            }}
+                        />
+
+                        {/* ---------------------------------RESULTADOS------------------------------- */}
+                        <Stack.Screen
+                            name='ListViewStudentsResult'
+                            component={ListViewStudentsResult}
+                            options={{
+                                headerStyle: { backgroundColor: '#000010' },
+                                headerTintColor: 'white',
+                                title: 'Lista de Estudiantes',
+                                headerTitleStyle: { fontSize: 16 }
                             }}
                         />
                         <Stack.Screen
@@ -263,15 +166,20 @@ const Navigation = () => {
                             }}
                         />
                         <Stack.Screen
-                            name='RegisterEvent'
-                            component={RegisterEvent}
+                            name='ResultsAdminScreem'
+                            component={ResultsAdminScreem}
                             options={{
                                 headerStyle: { backgroundColor: '#000010' },
                                 headerTintColor: 'white',
-                                title: 'Registro de Eventos',
-                                headerTitleStyle: { fontSize: 16 }
+                                title: ''
                             }}
                         />
+
+                    </>
+                ) : login && rol === 'SUPERVISOR' ? (
+                    <>
+                        <Stack.Screen name='TeacherHomeScreem' component={TeacherHomeScreem} options={{ headerShown: false }} />
+                        {/* -------------------------------RECEPCIONES---------------------------- */}
                         <Stack.Screen
                             name='RegisterReception'
                             component={RegisterReception}
@@ -282,6 +190,7 @@ const Navigation = () => {
                                 headerTitleStyle: { fontSize: 16 }
                             }}
                         />
+                        {/* -------------------------------ESTUDIANTES---------------------------- */}
                         <Stack.Screen
                             name='ListViewStudentsReception'
                             component={ListViewStudentsReception}
@@ -298,8 +207,42 @@ const Navigation = () => {
                                     </View>
                                 ),
                             })}
-
                         />
+                        <Stack.Screen
+                            name='RegisterStudent'
+                            component={RegisterStudent}
+                            options={{
+                                headerStyle: { backgroundColor: '#000010' },
+                                headerTintColor: 'white',
+                                title: 'Registro de Estudiantes',
+                                headerTitleStyle: { fontSize: 16 }
+                            }}
+                        />
+                        {/* -------------------------------EVENTOS---------------------------- */}
+                        <Stack.Screen
+                            name='RegisterEvent'
+                            component={RegisterEvent}
+                            options={{
+                                headerStyle: { backgroundColor: '#000010' },
+                                headerTintColor: 'white',
+                                title: 'Registro de Eventos',
+                                headerTitleStyle: { fontSize: 16 }
+                            }}
+                        />
+
+                        {/* -------------------------------MATERIAL DE APOYO---------------------------- */}
+                        <Stack.Screen
+                            name='RegisterMaterial'
+                            component={RegisterMaterial}
+                            options={{
+                                headerStyle: { backgroundColor: '#000010' },
+                                headerTintColor: 'white',
+                                title: 'Registro Material',
+                                headerTitleStyle: { fontSize: 16 }
+                            }}
+                        />
+
+                        {/* ---------------------------------RESULTADOS------------------------------- */}
                         <Stack.Screen
                             name='ListViewStudentsResult'
                             component={ListViewStudentsResult}
@@ -311,19 +254,46 @@ const Navigation = () => {
                             }}
                         />
                         <Stack.Screen
-                            name='RegisterMaterial'
-                            component={RegisterMaterial}
+                            name='ResultsAptitudStudent'
+                            component={ResultsAptitudStudent}
                             options={{
                                 headerStyle: { backgroundColor: '#000010' },
                                 headerTintColor: 'white',
-                                title: 'Registro Material',
-                                headerTitleStyle: { fontSize: 16 }
+                                title: 'Resultados'
+                            }}
+                        />
+                        <Stack.Screen
+                            name='ResultsInteresStudent'
+                            component={ResultsInteresStudent}
+                            options={{
+                                headerStyle: { backgroundColor: '#000010' },
+                                headerTintColor: 'white',
+                                title: 'Resultados'
+                            }}
+                        />
+                        <Stack.Screen
+                            name='ResultsMadurezStudent'
+                            component={ResultsMadurezStudent}
+                            options={{
+                                headerStyle: { backgroundColor: '#000010' },
+                                headerTintColor: 'white',
+                                title: 'Resultados'
+                            }}
+                        />
+                        <Stack.Screen
+                            name='ResultsAdminScreem'
+                            component={ResultsAdminScreem}
+                            options={{
+                                headerStyle: { backgroundColor: '#000010' },
+                                headerTintColor: 'white',
+                                title: ''
                             }}
                         />
                     </>
-                ) : login && rol === 'Estudiante' ? (
+                ) : login && rol === 'USUARIO' ? (
                     <>
                         {/* <Stack.Screen name='Home' component={Home} options={{ headerShown: false }} /> */}
+                        {/* ------------------------------INCIO---------------------------------- */}
                         <Stack.Screen
                             name='ListViewTestStudent'
                             component={ListViewTestStudent}
@@ -340,105 +310,6 @@ const Navigation = () => {
                                     </View>
                                 ),
                             })}
-                        />
-                        {/* <Stack.Screen
-                            name='PerfilUserScreem'
-                            component={PerfilUserScreem}
-                            options={{
-                                headerStyle: { backgroundColor: '#000010' },
-                                headerTintColor: 'white',
-                                title: 'Perfil'
-                            }}
-                        /> */}
-                        {/* <Stack.Screen
-                            name='InicioTestEst'
-                            component={InicioTestEst}
-                            options={{
-                                headerStyle: { backgroundColor: '#000010' },
-                                headerTintColor: 'white',
-                                title: 'Lista de Tests'
-                            }}
-                        /> */}
-                        <Stack.Screen
-                            name='DataPersonScreem'
-                            component={DataPersonScreem}
-                            options={{
-                                headerStyle: { backgroundColor: '#000010' },
-                                headerTintColor: 'white',
-                                title: 'Información'
-                            }} />
-                        <Stack.Screen
-                            name='CategoryTest'
-                            component={CategoryTest}
-                            options={{
-                                headerStyle: { backgroundColor: '#000010' },
-                                headerTintColor: 'white',
-                                title: 'Categorias'
-                            }} />
-                        <Stack.Screen
-                            name='InicioTest'
-                            component={InicioTest}
-                            options={{
-                                headerStyle: { backgroundColor: '#000010' },
-                                headerTintColor: 'white',
-                                title: 'Lista de Tests'
-                            }}
-                        />
-                        <Stack.Screen
-                            name='Instructions'
-                            component={Instructions}
-                            options={{
-                                headerStyle: { backgroundColor: '#000010' },
-                                headerTintColor: 'white',
-                                title: 'Instrucciones'
-                            }}
-                        />
-                        <Stack.Screen
-                            name='Preguntas'
-                            component={Preguntas}
-                            options={{
-                                headerStyle: { backgroundColor: '#000010' },
-                                headerTintColor: 'white',
-                                title: 'Razonamiento Logico',
-                                headerTitleStyle: { fontSize: 16 }
-                            }}
-                        />
-                        <Stack.Screen
-                            name='PreguntaTestGrafico'
-                            component={PreguntaTestGrafico}
-                            options={{
-                                headerStyle: { backgroundColor: '#000010' },
-                                headerTintColor: 'white',
-                                title: 'Test Grafico'
-                            }}
-                        />
-                        <Stack.Screen
-                            name='TestOrientationType'
-                            component={TestOrientationType}
-                            options={{
-                                headerStyle: { backgroundColor: '#000010' },
-                                headerTintColor: 'white',
-                                title: 'Tests de Orientacion Vocacional'
-                            }}
-                        />
-                        <Stack.Screen
-                            name='InstructionTestAptitudes'
-                            component={InstructionTestAptitudes}
-                            options={{
-                                headerStyle: { backgroundColor: '#000010' },
-                                headerTintColor: 'white',
-                                title: 'Instrucciones'
-                            }}
-                        />
-                        <Stack.Screen
-                            name='PreguntasTestAptitudes'
-                            component={PreguntasTestAptitudes}
-                            options={{
-                                headerStyle: { backgroundColor: '#000010' },
-                                headerTintColor: 'white',
-                                title: 'Preguntas',
-                                headerLeft: () => <></>,
-                            }}
                         />
                         <Stack.Screen
                             name='SearchStudent'
@@ -459,6 +330,93 @@ const Navigation = () => {
                                 title: 'Tipo de Cuestionario'
                             }}
                         />
+                        {/* ----------------------------------TEST MADUREZ METAL------------------------------------ */}
+                        <Stack.Screen
+                            name='CategoryTest'
+                            component={CategoryTest}
+                            options={{
+                                headerStyle: { backgroundColor: '#000010' },
+                                headerTintColor: 'white',
+                                title: 'Categorias'
+                            }} />
+                        <Stack.Screen
+                            name='InicioTestMadurez'
+                            component={InicioTestMadurez}
+                            options={{
+                                headerStyle: { backgroundColor: '#000010' },
+                                headerTintColor: 'white',
+                                title: 'Lista de Tests'
+                            }}
+                        />
+                        <Stack.Screen
+                            name='InstructionTestMadurez'
+                            component={InstructionTestMadurez}
+                            options={{
+                                headerStyle: { backgroundColor: '#000010' },
+                                headerTintColor: 'white',
+                                title: 'Instrucciones'
+                            }}
+                        />
+                        <Stack.Screen
+                            name='PreguntasRelacionesEspaciales'
+                            component={PreguntasRelacionesEspaciales}
+                            options={{
+                                headerStyle: { backgroundColor: '#000010' },
+                                headerTintColor: 'white',
+                                title: 'Test Grafico'
+                            }}
+                        />
+                        <Stack.Screen
+                            name='PreguntasRazonamientoLogico'
+                            component={PreguntasRazonamientoLogico}
+                            options={{
+                                headerStyle: { backgroundColor: '#000010' },
+                                headerTintColor: 'white',
+                                title: 'Razonamiento Logico',
+                                headerTitleStyle: { fontSize: 16 }
+                            }}
+                        />
+                        <Stack.Screen
+                            name='PreguntasRazonamientoNumerico'
+                            component={PreguntasRazonamientoNumerico}
+                            options={{
+                                headerStyle: { backgroundColor: '#000010' },
+                                headerTintColor: 'white',
+                                title: 'Razonamiento Numerico',
+                                headerTitleStyle: { fontSize: 16 }
+                            }}
+                        />
+                        <Stack.Screen
+                            name='PreguntasConceptosVerbales'
+                            component={PreguntasConceptosVerbales}
+                            options={{
+                                headerStyle: { backgroundColor: '#000010' },
+                                headerTintColor: 'white',
+                                title: 'Conceptos Verbales',
+                            }}
+                        />
+                        {/* ----------------------------------TEST APTITUDES------------------------------------ */}
+                        <Stack.Screen
+                            name='InstructionTestAptitudes'
+                            component={InstructionTestAptitudes}
+                            options={{
+                                headerStyle: { backgroundColor: '#000010' },
+                                headerTintColor: 'white',
+                                title: 'Instrucciones'
+                            }}
+                        />
+                        <Stack.Screen
+                            name='PreguntasTestAptitudes'
+                            component={PreguntasTestAptitudes}
+                            options={{
+                                headerStyle: { backgroundColor: '#000010' },
+                                headerTintColor: 'white',
+                                title: 'Preguntas',
+                                // headerLeft: () => <></>,
+                            }}
+                        />
+                        {/* ----------------------------------TEST INTERESES------------------------------------ */}
+
                         <Stack.Screen
                             name='InstructionTestIntereses'
                             component={InstructionTestIntereses}
@@ -477,25 +435,7 @@ const Navigation = () => {
                                 title: 'Razonamiento Numerico',
                             }}
                         />
-                        <Stack.Screen
-                            name='RazonamientoNumerico'
-                            component={RazonamientoNumerico}
-                            options={{
-                                headerStyle: { backgroundColor: '#000010' },
-                                headerTintColor: 'white',
-                                title: 'Razonamiento Numerico',
-                                headerTitleStyle: { fontSize: 16 }
-                            }}
-                        />
-                        <Stack.Screen
-                            name='ConceptosVerbales'
-                            component={ConceptosVerbales}
-                            options={{
-                                headerStyle: { backgroundColor: '#000010' },
-                                headerTintColor: 'white',
-                                title: 'Conceptos Verbales',
-                            }}
-                        />
+
                     </>
                 ) : (
                     <>
@@ -509,7 +449,6 @@ const Navigation = () => {
                                 headerTintColor: 'white',
                                 headerTitleStyle: { fontSize: 16 }
                             }}
-                        // initialParams={{ post: () => logget() }}
                         />
                         <Stack.Screen
                             name='RecoverPassword'
@@ -521,20 +460,7 @@ const Navigation = () => {
                                 headerTintColor: 'white',
                                 headerTitleStyle: { fontSize: 16 }
                             }}
-                        // initialParams={{ post: () => logget() }}
                         />
-                        {/* <Stack.Screen
-                            name='RegisterUserScreem'
-                            component={RegisterUserScreem}
-                            options={{
-                                title: 'Bienvenidos a SEDEGES',
-                                headerTitleAlign: 'center',
-                                headerTitleStyle: { fontSize: 16 },
-                                headerStyle: { backgroundColor: '#000010' },
-                                headerTintColor: 'white',
-                                headerLeft: () => <></>
-                            }}
-                        /> */}
                     </>
                 )}
             </Stack.Navigator>

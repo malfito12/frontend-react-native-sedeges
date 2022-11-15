@@ -1,13 +1,13 @@
 import { View, TouchableOpacity, Text, FlatList, StyleSheet, ImageBackground, ScrollView, TextInput } from 'react-native'
 import React, { useState, useEffect, useCallback } from 'react'
-import Layaut from '../../../../Atoms/StyleLayaut/Layaut'
-import TestMatematico from '../../../../../images/ImagesFondo/test-matematico.jpg'
-import TestGrafico from '../../../../../images/ImagesFondo/test-grafico.jpg'
-import TestAnalitico from '../../../../../images/ImagesFondo/test-analitico.jpg'
-import TestConceptosVerbales from '../../../../../images/ImagesFondo/test-conceptos-verbales.png'
+import Layaut from '../../../../../Atoms/StyleLayaut/Layaut'
+import TestMatematico from '../../../../../../images/ImagesFondo/test-matematico.jpg'
+import TestGrafico from '../../../../../../images/ImagesFondo/test-grafico.jpg'
+import TestAnalitico from '../../../../../../images/ImagesFondo/test-analitico.jpg'
+import TestConceptosVerbales from '../../../../../../images/ImagesFondo/test-conceptos-verbales.png'
 import { useFocusEffect } from '@react-navigation/native'
 import axios from 'axios'
-import { PORT_URL } from '../../../../../PortUrl/PortUrl'
+import { PORT_URL } from '../../../../../../PortUrl/PortUrl'
 
 const CategoryTest = ({ navigation, route }) => {
   // alert(JSON.stringify(route.params))
@@ -29,10 +29,10 @@ const CategoryTest = ({ navigation, route }) => {
   }
 
   const data = [
-    { title: 'RELACIONES ESPACIALES', image: TestGrafico, navi: () => navigation.navigate('InicioTest', { factor: 'RELACIONES ESPACIALES', student_id: route.params.student_id,event_id:route.params.event_id }) },
-    { title: 'RAZONAMIENTO LOGICO', image: TestAnalitico, navi: () => navigation.navigate('InicioTest', { factor: 'RAZONAMIENTO LOGICO', student_id: route.params.student_id,event_id:route.params.event_id }) },
-    { title: 'RAZONAMIENTO NUMERICO', image: TestMatematico, navi: () => navigation.navigate('InicioTest', { factor: 'RAZONAMIENTO NUMERICO', student_id: route.params.student_id,event_id:route.params.event_id }) },
-    { title: 'CONCEPTOS VERBALES', image: TestConceptosVerbales, navi: () => navigation.navigate('InicioTest', { factor: 'CONCEPTOS VERBALES', student_id: route.params.student_id,event_id:route.params.event_id }) },
+    { title: 'RELACIONES ESPACIALES', image: TestGrafico, navi: () => navigation.navigate('InicioTestMadurez', { factor: 'RELACIONES ESPACIALES', student_id: route.params.student_id,event_id:route.params.event_id }) },
+    { title: 'RAZONAMIENTO LOGICO', image: TestAnalitico, navi: () => navigation.navigate('InicioTestMadurez', { factor: 'RAZONAMIENTO LOGICO', student_id: route.params.student_id,event_id:route.params.event_id }) },
+    { title: 'RAZONAMIENTO NUMERICO', image: TestMatematico, navi: () => navigation.navigate('InicioTestMadurez', { factor: 'RAZONAMIENTO NUMERICO', student_id: route.params.student_id,event_id:route.params.event_id }) },
+    { title: 'CONCEPTOS VERBALES', image: TestConceptosVerbales, navi: () => navigation.navigate('InicioTestMadurez', { factor: 'CONCEPTOS VERBALES', student_id: route.params.student_id,event_id:route.params.event_id }) },
   ]
   return (
     <Layaut>

@@ -1,19 +1,18 @@
-import { View, Text, ScrollView, TouchableOpacity, TextInput, Modal, StyleSheet } from 'react-native'
+import { View, Text, ScrollView, TouchableOpacity, Modal, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
 import Layaut from '../../../../../Atoms/StyleLayaut/Layaut'
 import AsyncStorageLib from '@react-native-async-storage/async-storage'
-import axios from 'axios'
 import { PORT_URL } from '../../../../../../PortUrl/PortUrl'
+import axios from 'axios'
+import * as Progress from 'react-native-progress'
 import { FontAwesome } from '@expo/vector-icons';
 import { FancyAlert } from 'react-native-expo-fancy-alerts'
 import { useModalAlert, useModalAlertError } from '../../../../../Molecules/Hooks/useModalAlert'
 import { ErrorAlert, SuccesAlert } from '../../../../../Molecules/Alertas/Alerts'
-import * as Progress from 'react-native-progress'
 import { LinearGradient } from 'expo-linear-gradient'
 
 var array = []
-const PreguntasTestAptitudes = ({ navigation, route }) => {
-    // const data = route.params.contenido[0].contenido.preguntas
+const PreguntasTestIntereses = ({ navigation, route }) => {
     const data = route.params.contenido[route.params.cont].contenido.preguntas
     // console.log(data)
     const [openModal, openModalAlert, closeModalAlert] = useModalAlert(false)
@@ -29,12 +28,13 @@ const PreguntasTestAptitudes = ({ navigation, route }) => {
         pregunta3: '0',
         pregunta4: '0',
         pregunta5: '0',
+        pregunta6: '0',
         textPregunta1: 'sin respuesta',
         textPregunta2: 'sin respuesta',
         textPregunta3: 'sin respuesta',
         textPregunta4: 'sin respuesta',
         textPregunta5: 'sin respuesta',
-
+        textPregunta6: 'sin respuesta',
     })
     const cleanUp = {
         pregunta1: '0',
@@ -42,15 +42,16 @@ const PreguntasTestAptitudes = ({ navigation, route }) => {
         pregunta3: '0',
         pregunta4: '0',
         pregunta5: '0',
+        pregunta6: '0',
         textPregunta1: 'sin respuesta',
         textPregunta2: 'sin respuesta',
         textPregunta3: 'sin respuesta',
         textPregunta4: 'sin respuesta',
         textPregunta5: 'sin respuesta',
+        textPregunta6: 'sin respuesta',
     }
     const [pre, setPre] = useState(null)
     const [alert, setAlert] = useState(false)
-
     const openModalAlertSuccess = () => {
         setAlert(true)
     }
@@ -74,6 +75,8 @@ const PreguntasTestAptitudes = ({ navigation, route }) => {
             setChangeData({ ...changeData, pregunta4: num, textPregunta4: text })
         } else if (pre === 'pregunta5') {
             setChangeData({ ...changeData, pregunta5: num, textPregunta5: text })
+        } else if (pre === 'pregunta6') {
+            setChangeData({ ...changeData, pregunta6: num, textPregunta6: text })
         }
         setModalResp(false)
     }
@@ -81,40 +84,31 @@ const PreguntasTestAptitudes = ({ navigation, route }) => {
     AsyncStorageLib.getItem('user').then(resp => setUser(JSON.parse(resp)))
     AsyncStorageLib.getItem('event_id').then(resp => setEvent(JSON.parse(resp)))
     const dataSave = () => {
-        if (changeData.pregunta1 != '0' && changeData.pregunta2 != '0' && changeData.pregunta3 != '0' && changeData.pregunta5 != '0') {
+        if (changeData.pregunta1 != '0' && changeData.pregunta2 != '0' && changeData.pregunta3 != '0' && changeData.pregunta5 != '0' && changeData.pregunta6 != '0') {
             var serie = route.params.cont + 1
             var name = `Serie-${serie}`
             array.push({ seccion: name, respuestas: changeData, student_id: route.params.student_id, user_id: user, event_id: event })
-            navigation.navigate('PreguntasTestAptitudes', { contenido: route.params.contenido, cont: route.params.cont + 1, student_id: route.params.student_id })
+            navigation.navigate('PreguntasTestIntereses', { contenido: route.params.contenido, cont: route.params.cont + 1, student_id: route.params.student_id })
             setChangeData(cleanUp)
         } else {
             setMessage('Asegurese de responder todas las preguntas')
             openModalAlertError()
         }
     }
-    // const respData = []
     const dataSaveAndBack = async (e) => {
         e.preventDefault()
-        setProgress(true)
-        if (changeData.pregunta1 != '0' && changeData.pregunta2 != '0' && changeData.pregunta3 != '0' && changeData.pregunta5 != '0') {
+        if (changeData.pregunta1 != '0' && changeData.pregunta2 != '0' && changeData.pregunta3 != '0' && changeData.pregunta5 != '0' && changeData.pregunta6 != '0') {
             var serie = route.params.cont + 1
             var name = `Serie-${serie}`
             array.push({ seccion: name, respuestas: changeData, student_id: route.params.student_id, user_id: user, event_id: event })
-            // respData.push({
-            //     ...array,
-            //     // student_id: route.params.student_id,
-            // })
-            // console.log(array)
             setProgress(true)
-            await axios.post(`${PORT_URL}test-aptitudes`, array)
+            await axios.post(`${PORT_URL}test-intereses`, array)
                 .then(resp => {
                     array = []
                     setProgress(false)
                     openModalAlertSuccess()
                     setChangeData(cleanUp)
-                    // console.log(resp.data)
                     // alert(resp.data.message)
-                    // navigation.navigate('TestOrientationType')
                     // navigation.navigate('TypeTest', { student_id: route.params.student_id })
                 })
                 .catch(err => {
@@ -128,11 +122,7 @@ const PreguntasTestAptitudes = ({ navigation, route }) => {
             setMessage('Asegurese de responder todas las preguntas')
             openModalAlertError()
         }
-        // console.log(respData)
-        // AsyncStorageLib.setItem(`Serie-${serie}`,JSON.stringify([changeData.pregunta1,changeData.pregunta2,changeData.pregunta3,changeData.pregunta4,changeData.pregunta5]))
     }
-    //-------------------------------------------------
-    // console.log(array)
     return (
         <>
             <Layaut>
@@ -178,12 +168,20 @@ const PreguntasTestAptitudes = ({ navigation, route }) => {
                                 </TouchableOpacity>
                             </LinearGradient>
                         </View>
+                        <View style={{ justifyContent: 'center', alignItems: 'center', margin: 20 }}>
+                            <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', marginHorizontal: 15 }}>{data[5].content}</Text>
+                            <LinearGradient style={{ borderRadius: 25, marginTop: 10, width: '80%', alignSelf: 'center' }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={changeData.pregunta6 != '0' ? ['#ef6c00', '#f57c00', '#fb8c00'] : ['#00c853', '#64dd17', '#aeea00']}>
+                                <TouchableOpacity style={{ padding: 12 }} onPress={() => openModalResp('pregunta6')}>
+                                    <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', alignSelf: 'center' }}>{changeData.textPregunta6}</Text>
+                                </TouchableOpacity>
+                            </LinearGradient>
+                        </View>
                     </View>
                     {/* <View style={{ flexDirection: 'row' }}>
                         <View style={{ width: '75%' }}>
                             <ScrollView>
                                 {data ? data.map((e, index) => (
-                                    <View key={index} style={{ height: 91 }}>
+                                    <View key={index} style={{ height: 71 }}>
                                         <Text style={{ color: 'white', marginHorizontal: 15, marginBottom: 5 }}>{e.content}</Text>
                                     </View>
                                 )) : null}
@@ -191,35 +189,40 @@ const PreguntasTestAptitudes = ({ navigation, route }) => {
                         </View>
                         <View style={{ width: '25%' }}>
                             <ScrollView>
-                                <View style={{ height: 91 }}>
+                                <View style={{ height: 70 }}>
                                     <TouchableOpacity onPress={() => openModalResp('pregunta1')} style={styles.styleButtonSelect}>
                                         <Text style={{ alignSelf: 'center', color: 'white', fontFamily: 'Roboto_500Medium', fontSize: 15 }}>{changeData.pregunta1}</Text>
                                     </TouchableOpacity>
                                 </View>
-                                <View style={{ height: 100 }}>
+                                <View style={{ height: 70 }}>
                                     <TouchableOpacity onPress={() => openModalResp('pregunta2')} style={styles.styleButtonSelect}>
                                         <Text style={{ alignSelf: 'center', color: 'white', fontFamily: 'Roboto_500Medium', fontSize: 15 }}>{changeData.pregunta2}</Text>
                                     </TouchableOpacity>
                                 </View>
-                                <View style={{ height: 100 }}>
+                                <View style={{ height: 70 }}>
                                     <TouchableOpacity onPress={() => openModalResp('pregunta3')} style={styles.styleButtonSelect}>
                                         <Text style={{ alignSelf: 'center', color: 'white', fontFamily: 'Roboto_500Medium', fontSize: 15 }}>{changeData.pregunta3}</Text>
                                     </TouchableOpacity>
                                 </View>
-                                <View style={{ height: 100 }}>
+                                <View style={{ height: 70 }}>
                                     <TouchableOpacity onPress={() => openModalResp('pregunta4')} style={styles.styleButtonSelect}>
                                         <Text style={{ alignSelf: 'center', color: 'white', fontFamily: 'Roboto_500Medium', fontSize: 15 }}>{changeData.pregunta4}</Text>
                                     </TouchableOpacity>
                                 </View>
-                                <View style={{ height: 100 }}>
+                                <View style={{ height: 70 }}>
                                     <TouchableOpacity onPress={() => openModalResp('pregunta5')} style={styles.styleButtonSelect}>
                                         <Text style={{ alignSelf: 'center', color: 'white', fontFamily: 'Roboto_500Medium', fontSize: 15 }}>{changeData.pregunta5}</Text>
+                                    </TouchableOpacity>
+                                </View>
+                                <View style={{ height: 70 }}>
+                                    <TouchableOpacity onPress={() => openModalResp('pregunta6')} style={styles.styleButtonSelect}>
+                                        <Text style={{ alignSelf: 'center', color: 'white', fontFamily: 'Roboto_500Medium', fontSize: 15 }}>{changeData.pregunta6}</Text>
                                     </TouchableOpacity>
                                 </View>
                             </ScrollView>
                         </View>
                     </View> */}
-                    {route.params.cont == 10 ? (
+                    {route.params.cont == 9 ? (
                         <LinearGradient style={{ borderRadius: 2, marginTop: 20, width: '87%', alignSelf: 'center' }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#c62828', '#d32f2f', '#f44336']}>
                             <TouchableOpacity style={{ padding: 12 }} onPress={dataSaveAndBack} >
                                 <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', alignSelf: 'center' }}>Guardar</Text>
@@ -231,11 +234,10 @@ const PreguntasTestAptitudes = ({ navigation, route }) => {
                                 <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', alignSelf: 'center' }}>Siguiente</Text>
                             </TouchableOpacity>
                         </LinearGradient>
-
                     )}
-
                 </ScrollView>
             </Layaut >
+            {/* -------------------------------------MODAL------------------ */}
             <Modal
                 visible={modalResp}
                 animationType='fade'
@@ -243,28 +245,33 @@ const PreguntasTestAptitudes = ({ navigation, route }) => {
             >
                 <View style={styles.centeredView}>
                     <View style={styles.modalView}>
-                        <TouchableOpacity style={{ alignSelf: 'flex-end',marginHorizontal:15,marginTop:10 }} onPress={()=>setModalResp(false)}>
+                        <TouchableOpacity style={{ alignSelf: 'flex-end', marginHorizontal: 15, marginTop: 10 }} onPress={() => setModalResp(false)}>
                             <FontAwesome name="window-close" size={30} color="white" />
                         </TouchableOpacity>
-                        <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', marginBottom: 10 }}>TE CONSIDERAS</Text>
+                        <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', marginBottom: 10 }}>ESCOJA UNA RESPUESTA</Text>
                         <LinearGradient style={{ borderRadius: 20, marginBottom: 10, width: '80%' }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#ef6c00', '#f57c00', '#fb8c00']}>
-                            <TouchableOpacity onPress={() => closeModalResp(1, 'Incompetente')} style={{ padding: 10, width: '100%', alignItems: 'center' }}>
-                                <Text style={{ color: 'white', fontFamily: 'Roboto_400Regular_Italic' }}>Incompetente</Text>
+                            <TouchableOpacity onPress={() => closeModalResp(1, 'Me desagrada mucho')} style={{ padding: 10, width: '100%', alignItems: 'center' }}>
+                                <Text style={{ color: 'white', fontFamily: 'Roboto_400Regular_Italic' }}>Me desagrada mucho</Text>
                             </TouchableOpacity>
                         </LinearGradient>
                         <LinearGradient style={{ borderRadius: 20, marginBottom: 10, width: '80%' }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#ef6c00', '#f57c00', '#fb8c00']}>
-                            <TouchableOpacity onPress={() => closeModalResp(2, 'Medianamente Competente')} style={{ padding: 10, width: '100%', alignItems: 'center' }}>
-                                <Text style={{ color: 'white', fontFamily: 'Roboto_400Regular_Italic' }}>Medianamente Competente</Text>
+                            <TouchableOpacity onPress={() => closeModalResp(2, 'Me desagrada algo')} style={{ padding: 10, width: '100%', alignItems: 'center' }}>
+                                <Text style={{ color: 'white', fontFamily: 'Roboto_400Regular_Italic' }}>Me desagrada algo</Text>
                             </TouchableOpacity>
                         </LinearGradient>
                         <LinearGradient style={{ borderRadius: 20, marginBottom: 10, width: '80%' }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#ef6c00', '#f57c00', '#fb8c00']}>
-                            <TouchableOpacity onPress={() => closeModalResp(3, 'Competente')} style={{ padding: 10, width: '100%', alignItems: 'center' }}>
-                                <Text style={{ color: 'white', fontFamily: 'Roboto_400Regular_Italic' }}>Competente</Text>
+                            <TouchableOpacity onPress={() => closeModalResp(3, 'Me es indiferente')} style={{ padding: 10, width: '100%', alignItems: 'center' }}>
+                                <Text style={{ color: 'white', fontFamily: 'Roboto_400Regular_Italic' }}>Me es indiferente</Text>
                             </TouchableOpacity>
                         </LinearGradient>
                         <LinearGradient style={{ borderRadius: 20, marginBottom: 10, width: '80%' }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#ef6c00', '#f57c00', '#fb8c00']}>
-                            <TouchableOpacity onPress={() => closeModalResp(4, 'Muy Competente')} style={{ padding: 10, width: '100%', alignItems: 'center' }}>
-                                <Text style={{ color: 'white', fontFamily: 'Roboto_400Regular_Italic' }}>Muy Competente</Text>
+                            <TouchableOpacity onPress={() => closeModalResp(4, 'Me gusta algo')} style={{ padding: 10, width: '100%', alignItems: 'center' }}>
+                                <Text style={{ color: 'white', fontFamily: 'Roboto_400Regular_Italic' }}>Me gusta algo</Text>
+                            </TouchableOpacity>
+                        </LinearGradient>
+                        <LinearGradient style={{ borderRadius: 20, marginBottom: 10, width: '80%' }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#ef6c00', '#f57c00', '#fb8c00']}>
+                            <TouchableOpacity onPress={() => closeModalResp(5, 'Me gusta mucho')} style={{ padding: 10, width: '100%', alignItems: 'center' }}>
+                                <Text style={{ color: 'white', fontFamily: 'Roboto_400Regular_Italic' }}>Me gusta mucho</Text>
                             </TouchableOpacity>
                         </LinearGradient>
                         {/* <View style={{ flexDirection: 'row', justifyContent: 'space-around', width: '70%', alignItems: 'center' }}>
@@ -279,6 +286,9 @@ const PreguntasTestAptitudes = ({ navigation, route }) => {
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => closeModalResp(4)} style={styles.buttonNum}>
                                 <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', fontSize: 20 }}>4</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => closeModalResp(5)} style={styles.buttonNum}>
+                                <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', fontSize: 20 }}>5</Text>
                             </TouchableOpacity>
                         </View> */}
                     </View>
@@ -309,15 +319,17 @@ const PreguntasTestAptitudes = ({ navigation, route }) => {
                     borderRadius: 50,
                     width: '100%',
                 }}>
-                    <FontAwesome name="check" size={24} color="white" />
+                    <TouchableOpacity onPress={closeModalAlertSuccess} >
+                        <FontAwesome name="check" size={24} color="white" />
+                    </TouchableOpacity>
                 </View>}
                 style={{ backgroundColor: 'white' }}
             >
                 <>
-                    <Text style={{ marginTop: -16, marginBottom: 10 }}>Informacion Registrada</Text>
-                    <TouchableOpacity onPress={closeModalAlertSuccess} style={{ backgroundColor: 'green', padding: 5, margin: 5, borderRadius: 3 }}>
+                    <Text style={{ marginTop: -16, marginBottom: 30, fontFamily: 'Roboto_500Medium' }}>Informacion Registrada</Text>
+                    {/* <TouchableOpacity onPress={closeModalAlertSuccess} style={{ backgroundColor: 'green', padding: 5, margin: 5, borderRadius: 3 }}>
                         <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', alignSelf: 'center' }}>Aceptar</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                 </>
             </FancyAlert>
         </>
@@ -359,4 +371,4 @@ const styles = StyleSheet.create({
         marginTop: 22,
     },
 })
-export default PreguntasTestAptitudes
+export default PreguntasTestIntereses

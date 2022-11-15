@@ -13,7 +13,7 @@ import { FancyAlert } from 'react-native-expo-fancy-alerts'
 import { LinearGradient } from 'expo-linear-gradient'
 
 var array = []
-const ConceptosVerbales = ({ route, navigation }) => {
+const PreguntasConceptosVerbales = ({ route, navigation }) => {
     useFocusEffect(
         useCallback(() => {
             let isActive = true
@@ -43,7 +43,7 @@ const ConceptosVerbales = ({ route, navigation }) => {
     }
     const closeModalAlertSuccess = () => {
         setAlert(false)
-        navigation.navigate('InicioTest', { student_id: route.params.student_id, factor: route.params.description })
+        navigation.navigate('InicioTestMadurez', { student_id: route.params.student_id, factor: route.params.description })
     }
 
     //-------------CONCEPTOS VERVALES---------------
@@ -94,7 +94,7 @@ const ConceptosVerbales = ({ route, navigation }) => {
             setPregunta3(false)
             setPregunta4(false)
             setRespuesta1(null)
-            navigation.navigate('ConceptosVerbales', {
+            navigation.navigate('PreguntasConceptosVerbales', {
                 factor: route.params.factor,
                 data: route.params.data,
                 cont: route.params.cont + 1,
@@ -206,22 +206,24 @@ const ConceptosVerbales = ({ route, navigation }) => {
                     borderRadius: 50,
                     width: '100%',
                 }}>
-                    <FontAwesome name="check" size={24} color="white" />
+                    <TouchableOpacity onPress={closeModalAlertSuccess} >
+                        <FontAwesome name="check" size={24} color="white" />
+                    </TouchableOpacity>
                 </View>}
                 style={{ backgroundColor: 'white' }}
             >
                 <>
-                    <Text style={{ marginTop: -16, marginBottom: 10,fontFamily:'Roboto_500Medium' }}>Informacion Registrada</Text>
-                    <TouchableOpacity onPress={closeModalAlertSuccess} style={{ backgroundColor: 'green', padding: 5, margin: 5, borderRadius: 3 }}>
+                    <Text style={{ marginTop: -16, marginBottom: 30, fontFamily: 'Roboto_500Medium' }}>Informacion Registrada</Text>
+                    {/* <TouchableOpacity onPress={closeModalAlertSuccess} style={{ backgroundColor: 'green', padding: 5, margin: 5, borderRadius: 3 }}>
                         <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', alignSelf: 'center' }}>Aceptar</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                 </>
             </FancyAlert>
         </>
     )
 }
 
-export default ConceptosVerbales
+export default PreguntasConceptosVerbales
 const styles = StyleSheet.create({
     textFont: {
         fontFamily: 'Roboto_500Medium',

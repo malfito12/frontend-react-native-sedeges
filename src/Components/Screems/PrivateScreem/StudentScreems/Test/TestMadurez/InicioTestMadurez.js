@@ -1,14 +1,14 @@
 import { View, Text, FlatList, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
 import React, { useState, useEffect, useCallback } from 'react'
-import Layaut from '../../../../Atoms/StyleLayaut/Layaut'
+import Layaut from '../../../../../Atoms/StyleLayaut/Layaut'
 import AsyncStorageLib from '@react-native-async-storage/async-storage'
-import { data } from '../../../../../TestData/TestData'
+import { data } from '../../../../../../TestData/TestData'
 import { useFocusEffect } from '@react-navigation/native'
 import axios from 'axios'
-import { PORT_URL } from '../../../../../PortUrl/PortUrl'
+import { PORT_URL } from '../../../../../../PortUrl/PortUrl'
 
 var lala1 = 0
-const InicioTest = ({ navigation, route }) => {
+const InicioTestMadurez = ({ navigation, route }) => {
     const [test, setTest] = useState([])
     const [result, setResult] = useState([])
     const [carriedOut, setCarriedOut] = useState([])
@@ -27,7 +27,7 @@ const InicioTest = ({ navigation, route }) => {
             setTest(JSON.parse(resp))
         })
         if (route.params.factor === 'RELACIONES ESPACIALES') {
-            var resp = require('../../../../../TestData/DataMadurezMental')
+            var resp = require('../../../../../../TestData/DataMadurezMental')
             await axios.get(`${PORT_URL}get-carried-out-madurez-RE?event_id=${route.params.event_id}&student_id=${route.params.student_id}`)
                 .then(resp => {
                     setCarriedOut(resp.data)
@@ -36,7 +36,7 @@ const InicioTest = ({ navigation, route }) => {
             setResult(resp.relacionesEspaciales)
 
         } else if (route.params.factor === 'RAZONAMIENTO LOGICO') {
-            var resp = require('../../../../../TestData/DataMadurezMental')
+            var resp = require('../../../../../../TestData/DataMadurezMental')
             await axios.get(`${PORT_URL}get-carried-out-madurez-RL?event_id=${route.params.event_id}&student_id=${route.params.student_id}`)
                 .then(resp => {
                     setCarriedOut(resp.data)
@@ -44,7 +44,7 @@ const InicioTest = ({ navigation, route }) => {
                 .catch(err => console.log(err))
             setResult(resp.razonamientoLogico)
         } else if (route.params.factor === 'RAZONAMIENTO NUMERICO') {
-            var resp = require('../../../../../TestData/DataMadurezMental')
+            var resp = require('../../../../../../TestData/DataMadurezMental')
             await axios.get(`${PORT_URL}get-carried-out-madurez-RN?event_id=${route.params.event_id}&student_id=${route.params.student_id}`)
                 .then(resp => {
                     setCarriedOut(resp.data)
@@ -52,7 +52,7 @@ const InicioTest = ({ navigation, route }) => {
                 .catch(err => console.log(err))
             setResult(resp.razonamientoNumerico)
         } else if (route.params.factor === 'CONCEPTOS VERBALES') {
-            var resp = require('../../../../../TestData/DataMadurezMental')
+            var resp = require('../../../../../../TestData/DataMadurezMental')
             await axios.get(`${PORT_URL}get-carried-out-madurez-CV?event_id=${route.params.event_id}&student_id=${route.params.student_id}`)
                 .then(resp => {
                     setCarriedOut(resp.data)
@@ -82,7 +82,7 @@ const InicioTest = ({ navigation, route }) => {
                                             </TouchableOpacity>
                                         ) : (
                                             <TouchableOpacity
-                                                onPress={() => navigation.navigate('Instructions', {
+                                                onPress={() => navigation.navigate('InstructionTestMadurez', {
                                                     title: result[0].title,
                                                     id: result[0].id,
                                                     contenido: result[0].contenido,
@@ -107,7 +107,7 @@ const InicioTest = ({ navigation, route }) => {
                                             </TouchableOpacity>
                                         ) : (
                                             <TouchableOpacity
-                                                onPress={() => navigation.navigate('Instructions', {
+                                                onPress={() => navigation.navigate('InstructionTestMadurez', {
                                                     title: result[1].title,
                                                     id: result[1].id,
                                                     contenido: result[1].contenido,
@@ -136,7 +136,7 @@ const InicioTest = ({ navigation, route }) => {
                                             </TouchableOpacity>
                                         ) : (
                                             <TouchableOpacity
-                                                onPress={() => navigation.navigate('Instructions', {
+                                                onPress={() => navigation.navigate('InstructionTestMadurez', {
                                                     title: result[0].title,
                                                     id: result[0].id,
                                                     contenido: result[0].contenido,
@@ -161,7 +161,7 @@ const InicioTest = ({ navigation, route }) => {
                                             </TouchableOpacity>
                                         ) : (
                                             <TouchableOpacity
-                                                onPress={() => navigation.navigate('Instructions', {
+                                                onPress={() => navigation.navigate('InstructionTestMadurez', {
                                                     title: result[1].title,
                                                     id: result[1].id,
                                                     contenido: result[1].contenido,
@@ -189,7 +189,7 @@ const InicioTest = ({ navigation, route }) => {
                                             </TouchableOpacity>
                                         ) : (
                                             <TouchableOpacity
-                                                onPress={() => navigation.navigate('Instructions', {
+                                                onPress={() => navigation.navigate('InstructionTestMadurez', {
                                                     title: result[0].title,
                                                     id: result[0].id,
                                                     contenido: result[0].contenido,
@@ -214,7 +214,7 @@ const InicioTest = ({ navigation, route }) => {
                                             </TouchableOpacity>
                                         ) : (
                                             <TouchableOpacity
-                                                onPress={() => navigation.navigate('Instructions', {
+                                                onPress={() => navigation.navigate('InstructionTestMadurez', {
                                                     title: result[1].title,
                                                     id: result[1].id,
                                                     contenido: result[1].contenido,
@@ -239,7 +239,7 @@ const InicioTest = ({ navigation, route }) => {
                                             </TouchableOpacity>
                                         ) : (
                                             <TouchableOpacity
-                                                onPress={() => navigation.navigate('Instructions', {
+                                                onPress={() => navigation.navigate('InstructionTestMadurez', {
                                                     title: result[2].title,
                                                     id: result[2].id,
                                                     contenido: result[2].contenido,
@@ -267,7 +267,7 @@ const InicioTest = ({ navigation, route }) => {
                                             </TouchableOpacity>
                                         ) : (
                                             <TouchableOpacity
-                                                onPress={() => navigation.navigate('Instructions', {
+                                                onPress={() => navigation.navigate('InstructionTestMadurez', {
                                                     title: result[0].title,
                                                     id: result[0].id,
                                                     contenido: result[0].contenido,
@@ -304,4 +304,4 @@ const styles = StyleSheet.create({
 
 
 
-export default InicioTest
+export default InicioTestMadurez

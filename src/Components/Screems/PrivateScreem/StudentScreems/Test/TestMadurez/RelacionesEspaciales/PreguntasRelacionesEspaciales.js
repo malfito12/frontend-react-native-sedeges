@@ -13,7 +13,7 @@ import { FancyAlert } from 'react-native-expo-fancy-alerts'
 import { LinearGradient } from 'expo-linear-gradient'
 
 var array = []
-const PreguntaTestGrafico = ({ route, navigation }) => {
+const PreguntasRelacionesEspaciales = ({ route, navigation }) => {
     useFocusEffect(
         useCallback(() => {
             let isActive = true
@@ -62,7 +62,7 @@ const PreguntaTestGrafico = ({ route, navigation }) => {
     }
     const closeModalAlertSuccess = () => {
         setAlert(false)
-        navigation.navigate('InicioTest', { student_id: route.params.student_id, factor: route.params.description })
+        navigation.navigate('InicioTestMadurez', { student_id: route.params.student_id, factor: route.params.description })
     }
     const siguiente1 = () => {
         if (option1 == true || option2 == true) {
@@ -81,7 +81,7 @@ const PreguntaTestGrafico = ({ route, navigation }) => {
             setOption1(false)
             setOption2(false)
             setRespuesta1(null)
-            navigation.navigate('PreguntaTestGrafico', {
+            navigation.navigate('PreguntasRelacionesEspaciales', {
                 factor: route.params.factor,
                 data: route.params.data,
                 cont: route.params.cont + 1,
@@ -183,7 +183,7 @@ const PreguntaTestGrafico = ({ route, navigation }) => {
             setImage3(false)
             setImage4(false)
             setRespuesta2(null)
-            navigation.navigate('PreguntaTestGrafico', {
+            navigation.navigate('PreguntasRelacionesEspaciales', {
                 factor: route.params.factor,
                 data: route.params.data,
                 cont: route.params.cont + 1,
@@ -238,12 +238,6 @@ const PreguntaTestGrafico = ({ route, navigation }) => {
             setMessage('Escoja una respuesta')
             openModalAlertError()
         }
-    }
-    var sum = 7
-    const enviar = async () => {
-        await AsyncStorageLib.setItem('prueba', JSON.stringify(sum))
-        // navigation.navigate('CategoryTest')
-        navigation.push('CategoryTest')
     }
     return (
         <>
@@ -343,15 +337,17 @@ const PreguntaTestGrafico = ({ route, navigation }) => {
                     borderRadius: 50,
                     width: '100%',
                 }}>
-                    <FontAwesome name="check" size={24} color="white" />
+                    <TouchableOpacity onPress={closeModalAlertSuccess} >
+                        <FontAwesome name="check" size={24} color="white" />
+                    </TouchableOpacity>
                 </View>}
                 style={{ backgroundColor: 'white' }}
             >
                 <>
-                    <Text style={{ marginTop: -16, marginBottom: 10,fontFamily:'Roboto_500Medium' }}>Informacion Registrada</Text>
-                    <TouchableOpacity onPress={closeModalAlertSuccess} style={{ backgroundColor: 'green', padding: 5, margin: 5, borderRadius: 3 }}>
+                    <Text style={{ marginTop: -16, marginBottom: 30, fontFamily: 'Roboto_500Medium' }}>Informacion Registrada</Text>
+                    {/* <TouchableOpacity onPress={closeModalAlertSuccess} style={{ backgroundColor: 'green', padding: 5, margin: 5, borderRadius: 3 }}>
                         <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', alignSelf: 'center' }}>Aceptar</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                 </>
             </FancyAlert>
         </>
@@ -363,7 +359,7 @@ const styles = StyleSheet.create({
         color: 'white',
         marginHorizontal: 20,
         padding: 10,
-        alignSelf:'center'
+        alignSelf: 'center'
     },
     buttonNext: {
         padding: 10,
@@ -431,4 +427,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default PreguntaTestGrafico
+export default PreguntasRelacionesEspaciales

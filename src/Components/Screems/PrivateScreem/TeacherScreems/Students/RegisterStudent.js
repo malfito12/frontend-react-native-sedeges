@@ -221,7 +221,7 @@ const RegisterStudent = ({ navigation }) => {
                             </View>
                             <View style={{ width: '38%' }}>
                                 <Text style={{ color: 'white', marginBottom: 10, fontFamily: 'Roboto_400Regular' }}>Sexo</Text>
-                                <View style={{ borderRadius: 3, borderColor: '#10ac84', borderWidth: 1, marginBottom: 10 }}>
+                                <View style={styles.styleSelect}>
                                     <Picker
                                         style={{ color: 'white', height: 40 }}
                                         selectedValue={changeData.sex}
@@ -244,7 +244,7 @@ const RegisterStudent = ({ navigation }) => {
                             onChangeText={text => handleChange('ocupation', text)}
                         />
                         <Text style={{ color: 'white', marginBottom: 10, fontFamily: 'Roboto_400Regular' }}>Grado del Estudiante</Text>
-                        <View style={{ borderRadius: 3, borderColor: '#10ac84', borderWidth: 1, marginBottom: 10 }}>
+                        <View style={styles.styleSelect}>
                             <Picker
                                 style={{ color: 'white', height: 40 }}
                                 selectedValue={changeData.grado}
@@ -261,7 +261,7 @@ const RegisterStudent = ({ navigation }) => {
                             </Picker>
                         </View>
                         <Text style={{ color: 'white', marginBottom: 10, fontFamily: 'Roboto_400Regular' }}>Centro de Acogida</Text>
-                        <View style={{ borderRadius: 3, borderColor: '#10ac84', borderWidth: 1, marginBottom: 10 }}>
+                        <View style={styles.styleSelect}>
                             <Picker
                                 style={{ color: 'white', height: 40 }}
                                 itemStyle={{ color: 'red' }}
@@ -271,7 +271,7 @@ const RegisterStudent = ({ navigation }) => {
                                     handleChange('reception_id', itemValue)
                                 }>
 
-                                <Picker.Item label='Selecciones...' value='' style={{ fontSize: 14 }} />
+                                <Picker.Item label='Seleccione...' value='' style={{ fontSize: 14 }} />
                                 {reception.length > 0 ? reception.map((e, index) => (
                                     <Picker.Item key={e.reception_id} label={e.reception_name} value={e.reception_id} style={{ fontSize: 14 }} />
 
@@ -338,6 +338,17 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 22,
     },
+    styleSelect: {
+        borderRadius: 3,
+        borderWidth: 1,
+        borderColor: '#10ac84',
+        height: 40,
+        padding: 4,
+        overflow: 'hidden',
+        justifyContent: 'center',
+        display: 'flex',
+        marginBottom:10
+    }
 })
 
 export default RegisterStudent

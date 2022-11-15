@@ -1,19 +1,19 @@
 import { View, TouchableOpacity, ScrollView, TextInput, Text, FlatList, StyleSheet, RefreshControl, Modal } from 'react-native'
 import React, { useState, useEffect, useCallback, useContext } from 'react'
 import axios from 'axios'
-import { PORT_URL } from '../../../../PortUrl/PortUrl'
 import AsyncStorageLib from '@react-native-async-storage/async-storage'
 // import EditUser from '../../../src/Modals/EditUser'
-import Layaut from '../../../Atoms/StyleLayaut/Layaut'
 import * as Progress from 'react-native-progress'
-import { AuthContext } from '../../../Atoms/Context/AuthContext'
 import { FontAwesome, MaterialIcons, Entypo } from '@expo/vector-icons'
 import { LinearGradient } from 'expo-linear-gradient'
-import { useModalAlert, useModalAlertError } from '../../../Molecules/Hooks/useModalAlert'
-import { ErrorAlert, SuccesAlert } from '../../../Molecules/Alertas/Alerts'
 import { useFocusEffect } from '@react-navigation/native'
+import { PORT_URL } from '../../../../../PortUrl/PortUrl'
+import Layaut from '../../../../Atoms/StyleLayaut/Layaut'
+import { AuthContext } from '../../../../Atoms/Context/AuthContext'
+import { useModalAlert, useModalAlertError } from '../../../../Molecules/Hooks/useModalAlert'
+import { ErrorAlert, SuccesAlert } from '../../../../Molecules/Alertas/Alerts'
 
-const UsersScreem = ({ navigation }) => {
+const ListViewUsers = ({ navigation }) => {
   const [openModalError, openModalAlertError, closeModalAlertError] = useModalAlertError(false)
   const [openModal, openModalAlert, closeModalAlert] = useModalAlert(false)
   const [message, setMessage] = useState(null)
@@ -23,6 +23,7 @@ const UsersScreem = ({ navigation }) => {
   const [refresing, setRefresing] = useState(false)
   const [openModalEdit, setOpenModalEdit] = useState(false)
   const [openModalEditEmail, setOpenModalEditEmail] = useState(false)
+  const [openModalEditData, setOpenModalEditData] = useState(false)
   const [openModalEditPassword, setOpenModalEditPassword] = useState(false)
   const [openModalDelete, setOpenModalDelete] = useState(false)
   const [changeData, setChangeData] = useState({
@@ -63,7 +64,7 @@ const UsersScreem = ({ navigation }) => {
   //------------EDIT USER EMAIL----------------
   const [newEmail, setNewEmail] = useState({ user_id: '', user_email: '' })
   const openModalEditEmailUser = (e) => {
-    setNewEmail({ user_id: e })
+    setNewEmail({ user_id: e.user_id })
     setOpenModalEditEmail(true)
   }
   const closeModalEditEmailUser = () => {
@@ -186,9 +187,9 @@ const UsersScreem = ({ navigation }) => {
       })
   }
   //---------DELETE USER------------------------
-  const [removeUser, setRemoveUser] = useState({ user_id: '', user_name: '',user_rol:'' })
+  const [removeUser, setRemoveUser] = useState({ user_id: '', user_name: '', user_rol: '' })
   const openModalDeleteUser = (e) => {
-    setRemoveUser({ user_id: e.user_id, user_name: e.user_name,user_rol:e.user_rol })
+    setRemoveUser({ user_id: e.user_id, user_name: e.user_name, user_rol: e.user_rol })
     setOpenModalDelete(true)
   }
   const closeModalDeleteUser = () => {
@@ -196,27 +197,27 @@ const UsersScreem = ({ navigation }) => {
   }
   const deleteUser = async () => {
     // console.log(removeUser)
-    if(removeUser.user_rol=='admin'){
+    if (removeUser.user_rol == 'ADMINISTRADOR') {
       setMessage('Error, No Tiene Permiso para Eliminar a Este Usuario')
       return
     }
     setProgress(true)
     await axios.delete(`${PORT_URL}users/${removeUser.user_id}`)
-    .then(resp=>{
-      setMessage(resp.data.message)
-      setProgress(false)
-      openModalAlert()
-      closeModalDeleteUser()
-      closeModalEditUser()
-      getAllUsers()
-    })
-    .catch(err=>{
-      setProgress(false)
-      if(err.response){
-        setMessage(err.response.data.message)
-        openModalAlertError()
-      }
-    })
+      .then(resp => {
+        setMessage(resp.data.message)
+        setProgress(false)
+        openModalAlert()
+        closeModalDeleteUser()
+        closeModalEditUser()
+        getAllUsers()
+      })
+      .catch(err => {
+        setProgress(false)
+        if (err.response) {
+          setMessage(err.response.data.message)
+          openModalAlertError()
+        }
+      })
 
   }
   //---------REFRESH--------------------------------------
@@ -225,7 +226,7 @@ const UsersScreem = ({ navigation }) => {
     await getAllUsers()
     setRefresing(false)
   })
- 
+
   //-.--------------------------------------------------------------------
   // console.log(users)
   // console.log(changeData)
@@ -284,7 +285,7 @@ const UsersScreem = ({ navigation }) => {
             <Text style={{ alignSelf: 'flex-start', marginHorizontal: 15, marginBottom: 10 }}>Correo Electronico: {changeData.user_email}</Text>
             <View style={{ width: '100%', marginBottom: 5 }}>
               <LinearGradient style={{ borderRadius: 3, marginHorizontal: 15 }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#00c853', '#64dd17', '#aeea00']}>
-                <TouchableOpacity style={{ width: '100%', padding: 10 }} onPress={() => openModalEditEmailUser(changeData.user_id)} >
+                <TouchableOpacity style={{ width: '100%', padding: 10 }} onPress={() => openModalEditEmailUser(changeData)} >
                   <Text style={{ color: 'white', fontFamily: 'Roboto_400Regular_Italic', alignSelf: 'center' }}>Cambiar Correo Electronico</Text>
                 </TouchableOpacity>
               </LinearGradient>
@@ -304,6 +305,39 @@ const UsersScreem = ({ navigation }) => {
           </View>
         </View>
       </Modal>
+      {/* -------------------------------MODAL EDIT DATA--------------------- */}
+      <Modal
+        visible={openModalEditEmail}
+        animationType='fade'
+        transparent
+      >
+        <View style={styles.centeredView}>
+          <View style={{ ...styles.modalView, backgroundColor: '#335469', marginHorizontal: 20 }}>
+            <Text style={{ color: 'white', alignSelf: 'flex-start', marginHorizontal: 15, marginTop: 10, marginBottom: 10, fontFamily: 'Roboto_400Regular' }}>Actual Correo Electronico</Text>
+            <TextInput
+              style={styles.textInput}
+              placeholder='Min 6 Caracteres'
+              value={changeData.user_email}
+            />
+            <Text style={{ color: 'white', alignSelf: 'flex-start', marginHorizontal: 15, marginTop: 10, marginBottom: 10, fontFamily: 'Roboto_400Regular' }}>Nuevo Correo Electronico</Text>
+            <TextInput
+              style={styles.textInput}
+              placeholder='Min 6 Caracteres'
+              onChangeText={text => handleChangeNewEmail('user_email', text)}
+            />
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 5 }}>
+              <LinearGradient style={{ borderRadius: 3 }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#00c853', '#64dd17', '#aeea00']}>
+                <TouchableOpacity onPress={postNewEmail} style={{ padding: 5, width: '100%' }}>
+                  <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium' }}>Apceptar</Text>
+                </TouchableOpacity>
+              </LinearGradient>
+              <TouchableOpacity onPress={closeModalEditEmailUser} style={{ backgroundColor: 'red', marginLeft: 20, borderRadius: 3, padding: 5 }}>
+                <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium' }}>Cancelar</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
       {/* -------------------------------MODAL EDIT EMAIL--------------------- */}
       <Modal
         visible={openModalEditEmail}
@@ -312,6 +346,12 @@ const UsersScreem = ({ navigation }) => {
       >
         <View style={styles.centeredView}>
           <View style={{ ...styles.modalView, backgroundColor: '#335469', marginHorizontal: 20 }}>
+            <Text style={{ color: 'white', alignSelf: 'flex-start', marginHorizontal: 15, marginTop: 10, marginBottom: 10, fontFamily: 'Roboto_400Regular' }}>Actual Correo Electronico</Text>
+            <TextInput
+              style={styles.textInput}
+              placeholder='Min 6 Caracteres'
+              value={changeData.user_email}
+            />
             <Text style={{ color: 'white', alignSelf: 'flex-start', marginHorizontal: 15, marginTop: 10, marginBottom: 10, fontFamily: 'Roboto_400Regular' }}>Nuevo Correo Electronico</Text>
             <TextInput
               style={styles.textInput}
@@ -406,7 +446,7 @@ const UsersScreem = ({ navigation }) => {
       >
         <View style={styles.centeredView}>
           <View style={{ ...styles.modalView, backgroundColor: '#335469', marginHorizontal: 20 }}>
-            <Text style={{alignSelf:'center',fontFamily: 'Roboto_500Medium',color:'white',padding:15}}>Estas Seguro de Eliminar a {removeUser.user_name}</Text>
+            <Text style={{ alignSelf: 'center', fontFamily: 'Roboto_500Medium', color: 'white', padding: 15 }}>Estas Seguro de Eliminar a {removeUser.user_name}</Text>
             <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 5 }}>
               <LinearGradient style={{ borderRadius: 3 }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#00c853', '#64dd17', '#aeea00']}>
                 <TouchableOpacity onPress={deleteUser} style={{ padding: 5, width: '100%' }}>
@@ -471,4 +511,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default UsersScreem
+export default ListViewUsers

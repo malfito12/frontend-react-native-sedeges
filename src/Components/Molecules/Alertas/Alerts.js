@@ -1,10 +1,10 @@
 import { View, Text, TouchableOpacity } from 'react-native'
-import React,{useState,useCallback} from 'react'
+import React, { useState, useCallback } from 'react'
 import { FancyAlert } from 'react-native-expo-fancy-alerts';
-import { Entypo,FontAwesome } from '@expo/vector-icons';
+import { Entypo, FontAwesome } from '@expo/vector-icons';
 
 // export const SuccesAlert = ({isOpen,closeModal}) => {
-export const SuccesAlert = ({isOpen,closeModal,text}) => {
+export const SuccesAlert = ({ isOpen, closeModal, text }) => {
     // console.log(closeModal)
     // const navigation
     return (
@@ -19,20 +19,22 @@ export const SuccesAlert = ({isOpen,closeModal,text}) => {
                 borderRadius: 50,
                 width: '100%',
             }}>
-                <FontAwesome name="check" size={24} color="white" />
+                <TouchableOpacity onPress={closeModal}>
+                    <FontAwesome name="check" size={24} color="white" />
+                </TouchableOpacity>
             </View>}
             style={{ backgroundColor: 'white' }}
         >
             <>
-                <Text style={{ marginTop: -16, marginBottom: 10,fontFamily:'Roboto_500Medium' }}>{text}</Text>
-                <TouchableOpacity onPress={closeModal} style={{ backgroundColor: 'green',padding:5,margin:5,borderRadius:3  }}>
-                    <Text style={{color:'white',fontFamily:'Roboto_500Medium',alignSelf:'center'}}>Aceptar</Text>
-                </TouchableOpacity>
+                <Text style={{ marginTop: -16, marginBottom: 30, fontFamily: 'Roboto_500Medium' }}>{text}</Text>
+                {/* <TouchableOpacity onPress={closeModal} style={{ backgroundColor: 'green', padding: 5, margin: 5, borderRadius: 3 }}>
+                    <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', alignSelf: 'center' }}>Aceptar</Text>
+                </TouchableOpacity> */}
             </>
         </FancyAlert>
     )
 }
-export const ErrorAlert = ({isOpen,closeModal,text}) => {
+export const ErrorAlert = ({ isOpen, closeModal, text }) => {
     // console.log(closeModal)
     return (
         <FancyAlert
@@ -46,15 +48,17 @@ export const ErrorAlert = ({isOpen,closeModal,text}) => {
                 borderRadius: 50,
                 width: '100%',
             }}>
-                <FontAwesome name="close" size={24} color="white" />
+                <TouchableOpacity onPress={closeModal}>
+                    <FontAwesome name="close" size={24} color="white" />
+                </TouchableOpacity>
             </View>}
             style={{ backgroundColor: 'white' }}
         >
             <>
-                <Text style={{ marginTop: -16, marginBottom: 10,fontFamily:'Roboto_500Medium' }}>{text}</Text>
-                <TouchableOpacity onPress={closeModal} style={{ backgroundColor: 'red',padding:5,margin:5,borderRadius:3 }}>
-                    <Text style={{color:'white',fontFamily:'Roboto_500Medium'}}>Aceptar</Text>
-                </TouchableOpacity>
+                <Text style={{ marginTop: -16, marginBottom: 30, fontFamily: 'Roboto_500Medium' }}>{text}</Text>
+                {/* <TouchableOpacity onPress={closeModal} style={{ backgroundColor: 'red', padding: 5, margin: 5, borderRadius: 3 }}>
+                    <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium' }}>Aceptar</Text>
+                </TouchableOpacity> */}
             </>
         </FancyAlert>
     )

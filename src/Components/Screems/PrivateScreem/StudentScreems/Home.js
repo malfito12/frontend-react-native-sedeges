@@ -2,7 +2,6 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Foundation, Ionicons, Feather, SimpleLineIcons,Entypo } from '@expo/vector-icons'
-import RealizeTestVocational from '../TeacherScreems/TestsVocational/RealizeTestVocational'
 
 
 const Tab = createBottomTabNavigator()
@@ -78,14 +77,14 @@ const Home = ({ navigation }) => {
                 headerTintColor: 'white',
                 tabBarLabelStyle: { fontFamily: 'Roboto_700Bold' },
             }} /> */}
-            <Tab.Screen name="RealizeTestVocational" component={RealizeTestVocational} options={{
+            {/* <Tab.Screen name="RealizeTestVocational" component={RealizeTestVocational} options={{
                 headerLeft: () => (perfil),
                 headerTitle: '',
                 title: 'Test Vocacional',
                 headerStyle: { backgroundColor: '#000010' },
                 headerTintColor: 'white',
                 tabBarLabelStyle: { fontFamily: 'Roboto_700Bold' },
-            }} />
+            }} /> */}
             {/* <Tab.Screen name="ResultsHomeScreem" component={ResultsHomeScreem} options={{
                 headerLeft: () => (perfil),
                 headerTitle: '',

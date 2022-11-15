@@ -260,7 +260,7 @@ const ResultsAdminScreem = ({ navigation, route }) => {
 
 <body>
 
-    <h5 align="center">INFORME DE INTERESES Y APTITUDES</h5>
+    <h5 align="center">INFORME DE RESULTADOS</h5>
     <h5>NOMBRE: ${arrayIntereses[0].name} ${arrayAptitudes[0].lastNameFather} ${arrayAptitudes[0].lastNameMother}</h5>
     <h5>FECHA DE NACIMIENTO : ${arrayIntereses[0].fechaNacimiento}</h5>
     <h5>EDAD: ${arrayIntereses[0].edad}</h5>
@@ -346,16 +346,16 @@ const ResultsAdminScreem = ({ navigation, route }) => {
       </table>
     </div>
     <h5>EDAD CRONOLOGICA</h5>
-    <p>La edad cronologica obteniddo a partir de la fecha de nacimiento y la fecha en el que realizo el test calculado en meses</p>
+    <p>Edad Cronologica obteniddo a partir de la fecha de nacimiento y la fecha en el que realizo el test calculado en meses</p>
     <p align='center'>Fecha de Nacimiento = ${resultMadurez[0].datos_opcionales.edad_nacimiento_est}</p>
     <p align='center'>Fecha Registro de Test = ${resultMadurez[0].datos_opcionales.edad_register_test_est}</p>
     <p align='center'>Cantidad de meses optenido = ${resultMadurez[0].datos_opcionales.edad_nacimiento_meses_est}</p>
     <h5>EDAD MENTAL</h5>
-    <p>La edad mental obtenido de la tabla normas de edad mental, a partir de la suma total de los resultados en los diferentes test, </p>
+    <p>Edad Mental obtenido de la tabla normas de edad mental, a partir de la suma total de los resultados en los diferentes test, </p>
     <p align='center'>Suma Total = ${resultMadurez[0].datos_opcionales.edad_mental_sum}</p>
     <p align='center'>Resultado de la tabla = ${resultMadurez[0].datos_opcionales.edad_mental_sum} = ${resultMadurez[0].datos_test.edad_mental}</p>
     <h5>COEFICIENTE INTELECTUAL</h5>
-    <p>El coeficiente intelectual obtenido con la siguinte formula de calculo</p>
+    <p>Coeficiente Intelectual obtenido con la siguinte operación de calculo</p>
     <p align='center'>CI = (edad mental / edad cronologica) * 100</p>
     <p align='center'>CI = ( ${resultMadurez[0].datos_test.edad_mental} / ${resultMadurez[0].datos_test.edad_cronologica}) * 100 = ${resultMadurez[0].datos_test.coeficiente_intelectual}</p>
     <div align='center'>

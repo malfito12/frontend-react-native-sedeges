@@ -1,9 +1,9 @@
 import { View, Text, TouchableOpacity, StyleSheet, Image, ScrollView } from 'react-native'
 import React from 'react'
-import Layaut from '../../../../Atoms/StyleLayaut/Layaut'
+import Layaut from '../../../../../Atoms/StyleLayaut/Layaut'
 import { LinearGradient } from 'expo-linear-gradient'
 
-const Instructions = ({ navigation, route }) => {
+const InstructionTestMadurez = ({ navigation, route }) => {
     var newArray = []
     for (var i = 0; i < route.params.contenido.preguntas.length; i++) {
         newArray.push(route.params.contenido.preguntas[i])
@@ -55,16 +55,9 @@ const Instructions = ({ navigation, route }) => {
                                     <Image style={{ borderRadius: 5, borderColor: 'red', borderWidth: 2, width: 110, height: 80, marginBottom: 10, alignSelf: 'center' }} source={route.params.contenido.ejm.resp[4].respuesta} />
                                 </View>
                             </>
-                            // <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                            //     {route.params.contenido.ejm.resp.map((e, index) => (
-                            //         <View key={index} style={{ margin: 4 }}>
-                            //             <Image style={{  width:60, height: 40, marginBottom: 10, alignSelf: 'center' }} source={e.respuesta} />
-                            //         </View>
-                            //     ))}
-                            // </View>
                         ) : (null)}
                         <LinearGradient style={{ borderRadius: 2, marginTop: 10, width: '87%', alignSelf: 'center' }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#00c853', '#64dd17', '#aeea00']}>
-                            <TouchableOpacity style={{ padding: 12 }} onPress={() => navigation.navigate('PreguntaTestGrafico', { data: preguntas, cont: 0, id: route.params.id, student_id: route.params.student_id, factor: route.params.factor, title: route.params.title })}>
+                            <TouchableOpacity style={{ padding: 12 }} onPress={() => navigation.navigate('PreguntasRelacionesEspaciales', { data: preguntas, cont: 0, id: route.params.id, student_id: route.params.student_id, factor: route.params.factor, title: route.params.title })}>
                                 <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', alignSelf: 'center' }}>Vamos!!</Text>
                             </TouchableOpacity>
                         </LinearGradient>
@@ -105,7 +98,7 @@ const Instructions = ({ navigation, route }) => {
                             </View>
                         ) : (null)}
                         <LinearGradient style={{ borderRadius: 2, marginTop: 10, width: '87%', alignSelf: 'center' }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#00c853', '#64dd17', '#aeea00']}>
-                            <TouchableOpacity style={{ padding: 12 }} onPress={() => navigation.navigate('Preguntas', { data: preguntas, cont: 0, id: route.params.id, student_id: route.params.student_id, factor: route.params.factor, title: route.params.title })}>
+                            <TouchableOpacity style={{ padding: 12 }} onPress={() => navigation.navigate('PreguntasRazonamientoLogico', { data: preguntas, cont: 0, id: route.params.id, student_id: route.params.student_id, factor: route.params.factor, title: route.params.title })}>
                                 <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', alignSelf: 'center' }}>Vamos!!</Text>
                             </TouchableOpacity>
                         </LinearGradient>
@@ -162,7 +155,7 @@ const Instructions = ({ navigation, route }) => {
                             </View>
                         ) : (null)}
                         <LinearGradient style={{ borderRadius: 2, marginTop: 10, width: '87%', alignSelf: 'center' }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#00c853', '#64dd17', '#aeea00']}>
-                            <TouchableOpacity style={{ padding: 12 }} onPress={() => navigation.navigate('RazonamientoNumerico', { data: preguntas, cont: 0, id: route.params.id, student_id: route.params.student_id, factor: route.params.factor, title: route.params.title })} >
+                            <TouchableOpacity style={{ padding: 12 }} onPress={() => navigation.navigate('PreguntasRazonamientoNumerico', { data: preguntas, cont: 0, id: route.params.id, student_id: route.params.student_id, factor: route.params.factor, title: route.params.title })} >
                                 <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', alignSelf: 'center' }}>Vamos!!</Text>
                             </TouchableOpacity>
                         </LinearGradient>
@@ -190,7 +183,7 @@ const Instructions = ({ navigation, route }) => {
                             </View>
                         </View>
                         <LinearGradient style={{ borderRadius: 2, marginTop: 10, width: '87%', alignSelf: 'center' }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#00c853', '#64dd17', '#aeea00']}>
-                            <TouchableOpacity style={{ padding: 12 }} onPress={() => navigation.navigate('ConceptosVerbales', { data: preguntas, cont: 0, id: route.params.id, student_id: route.params.student_id, factor: route.params.factor, title: route.params.title })}>
+                            <TouchableOpacity style={{ padding: 12 }} onPress={() => navigation.navigate('PreguntasConceptosVerbales', { data: preguntas, cont: 0, id: route.params.id, student_id: route.params.student_id, factor: route.params.factor, title: route.params.title })}>
                                 <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', alignSelf: 'center' }}>Vamos!!</Text>
                             </TouchableOpacity>
                         </LinearGradient>
@@ -230,4 +223,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default Instructions
+export default InstructionTestMadurez

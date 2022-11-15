@@ -1,16 +1,15 @@
 import { View, Text, Modal, TextInput, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native'
 import React, { useState } from 'react'
-import Layaut from '../../Atoms/StyleLayaut/Layaut'
-import { PORT_URL } from '../../../PortUrl/PortUrl'
 import axios from 'axios'
 import validator from 'validator'
 import * as Progress from 'react-native-progress'
 import { LinearGradient } from 'expo-linear-gradient'
 import { Entypo } from '@expo/vector-icons';
-import sedeges from '../../../images/sedeges-logo.png'
-import { CancelButton, SuccessButton } from '../../Molecules/Buttons/Buttons'
-import { useModalAlert, useModalAlertError } from '../../Molecules/Hooks/useModalAlert'
-import { ErrorAlert, SuccesAlert } from '../../Molecules/Alertas/Alerts'
+import { PORT_URL } from '../../../../../PortUrl/PortUrl'
+import Layaut from '../../../../Atoms/StyleLayaut/Layaut'
+import { Picker } from '@react-native-picker/picker';
+import { useModalAlert, useModalAlertError } from '../../../../Molecules/Hooks/useModalAlert'
+import { ErrorAlert, SuccesAlert } from '../../../../Molecules/Alertas/Alerts'
 
 const RegisterUserScreem = ({ navigation }) => {
     const [openModal, openModalAlert, closeModalAlert] = useModalAlert(false)
@@ -30,10 +29,9 @@ const RegisterUserScreem = ({ navigation }) => {
         user_email: '',
         user_password: '',
         user_repeat_password: '',
-        user_rol: 'Estudiante'
+        user_rol: ''
     })
     //---------------POST USER--------------------------
-    // var message=''
     const postUser = async () => {
         // console.log(changeData)
         // console.log(changeData)
@@ -48,8 +46,8 @@ const RegisterUserScreem = ({ navigation }) => {
         const user = /(\W|^)[\w.\-]{3,16}(?!&|%|!|"|#|@)(?!\s)(\W|$)/g
         const email = /(\W|^)[\w.\-]{3,25}@(yahoo|hotmail|gmail)\.com(?!\s)(\W|$)/g
         const password = /(\W|^)[\w.\-]{8,25}(?!\s)(\W|$)/g
-        
-        if (changeData.user_name === '' || changeData.user_email === '' || changeData.user_password === '' || changeData.user_repeat_password === '') {
+
+        if (changeData.user_name === '' || changeData.user_email === '' || changeData.user_password === '' || changeData.user_repeat_password === ''|| changeData.user_rol==='') {
             setProgress(false)
             setMessage('Por favor, llene todos los datos')
             openModalAlertError()
@@ -57,7 +55,7 @@ const RegisterUserScreem = ({ navigation }) => {
             // } else if (!(validator.isEmail(changeData.user_email))) {
         } else if (!user.test(changeData.user_name)) {
             setProgress(false)
-            setMessage('Caracteres Invalidos de Usuario')
+            setMessage('Usuario no valido, Evite usar caracteres especiales o espacios')
             openModalAlertError()
             return
         } else if (!email.test(changeData.user_email)) {
@@ -87,7 +85,7 @@ const RegisterUserScreem = ({ navigation }) => {
                     user_email: '',
                     user_password: '',
                     user_repeat_password: '',
-                    user_rol: 'Estudiante'
+                    user_rol: ''
                 })
                 // alert(resp.data.message)
                 // navigation.navigate('LoginScreem')
@@ -192,22 +190,26 @@ const RegisterUserScreem = ({ navigation }) => {
                                 <Entypo name={hidePass2.iconRepeatPassword} size={20} color='white' />
                             </TouchableOpacity>
                         </View>
-                        {/* <TextInput
-                            keyboardType='numeric'
-                            style={styles.input}
-                            placeholder='Edad'
-                            placeholderTextColor='#545674'
-                            onChangeText={text => handleChange('edad', text)}
-                        /> */}
+                        <Text style={styles.textLabel}>Rol</Text>
+                        <View style={styles.styleSelect}>
+                            <Picker
+                                style={{ color: 'white' }}
+                                selectedValue={changeData.user_rol}
+                                onValueChange={(itemValue, itemIndex) => {
+                                    handleChange('user_rol', itemValue)
+                                }}>
+                                <Picker.Item label="Seleccione ..." style={{ fontSize: 14 }} value="" />
+                                <Picker.Item label="ADMINISTRADOR" style={{ fontSize: 14 }} value="ADMINISTRADOR" />
+                                <Picker.Item label="SUPERVISOR" style={{ fontSize: 14 }} value="SUPERVISOR" />
+                                <Picker.Item label="USUARIO" style={{ fontSize: 14 }} value="USUARIO" />
+                            </Picker>
+                        </View>
                         <LinearGradient style={{ borderRadius: 3, width: '100%' }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#00c853', '#64dd17', '#aeea00']}>
                             <TouchableOpacity style={{ width: '100%', padding: 10 }} onPress={postUser} >
-                                {/* <TouchableOpacity style={{ width: '100%',padding:10 }} onPress={openModalAlert} > */}
                                 <Text style={{ color: 'white', alignSelf: 'center' }}>Registrar</Text>
                             </TouchableOpacity>
                         </LinearGradient>
-                        {/* <TouchableOpacity style={{ width: '100%' }} onPress={() => navigation.navigate('TeacherHomeScreem')} >
-                            <CancelButton name={'Cancelar'} />
-                        </TouchableOpacity> */}
+
                     </View>
                 </ScrollView>
             </Layaut>
@@ -296,6 +298,18 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         fontFamily: 'Roboto_400Regular_Italic',
         alignSelf: 'flex-start'
+    },
+    styleSelect: {
+        borderRadius: 3,
+        borderWidth: 1,
+        borderColor: '#10ac84',
+        height: 40,
+        padding: 4,
+        overflow: 'hidden',
+        justifyContent: 'center',
+        display: 'flex',
+        width:'100%',
+        marginBottom:20
     }
 })
 

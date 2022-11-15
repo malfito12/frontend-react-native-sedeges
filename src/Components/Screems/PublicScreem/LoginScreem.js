@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, TextInput, Image, Modal, TouchableOpacity, Scro
 import React, { useState, useContext, useCallback } from 'react'
 import Layaut from '../../Atoms/StyleLayaut/Layaut'
 import { LinearGradient } from 'expo-linear-gradient'
-import { Entypo,FontAwesome } from '@expo/vector-icons';
+import { Entypo, FontAwesome } from '@expo/vector-icons';
 import * as Progress from 'react-native-progress'
 import sedeges from '../../../images/sedeges-logo.png'
 import { AuthContext } from '../../Atoms/Context/AuthContext'
@@ -11,7 +11,7 @@ import { SuccesAlert } from '../../Molecules/Alertas/Alerts';
 import { useModalAlert } from '../../Molecules/Hooks/useModalAlert';
 
 const LoginScreem = ({ navigation }) => {
-    const { isLoading, login,openModal,closeModal,message } = useContext(AuthContext)
+    const { isLoading, login, openModal, closeModal, message } = useContext(AuthContext)
     // const [openModal,openModalAlert,closeModalAlert]=useModalAlert(false)
     // const [openModalAlert]=useModalAlert(false)
     const [hidePass, setHidePass] = useState({
@@ -37,7 +37,7 @@ const LoginScreem = ({ navigation }) => {
         // setHidePass(!hidePass)
     }
     //-----------message-----------------
-    const mess=()=>{
+    const mess = () => {
         setVisible(true)
     }
     // const toggleAlert = useCallback(() => {
@@ -75,7 +75,7 @@ const LoginScreem = ({ navigation }) => {
                             </TouchableOpacity>
                         </View>
                         <LinearGradient style={{ borderRadius: 3 }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#00c853', '#64dd17', '#aeea00']}>
-                            <TouchableOpacity style={{ width: '100%', padding: 10, alignItems: 'center' }} onPress={() => { login(changeData)}} >
+                            <TouchableOpacity style={{ width: '100%', padding: 10, alignItems: 'center' }} onPress={() => { login(changeData) }} >
                                 {/* <TouchableOpacity style={{ width: '100%', padding: 10, alignItems: 'center' }}  onPress={openModalAlert}> */}
                                 <Text style={{ color: 'white', fontFamily: 'Roboto_900Black_Italic' }}>Iniciar Sesion</Text>
                             </TouchableOpacity>
@@ -111,15 +111,17 @@ const LoginScreem = ({ navigation }) => {
                     borderRadius: 50,
                     width: '100%',
                 }}>
-                    <FontAwesome name="close" size={24} color="white" />
+                    <TouchableOpacity onPress={closeModal} >
+                        <FontAwesome name="close" size={24} color="white" />
+                    </TouchableOpacity>
                 </View>}
                 style={{ backgroundColor: 'white' }}
             >
                 <>
-                <Text style={{ marginTop: -16, marginBottom: 10}}>{message}</Text>
-                <TouchableOpacity onPress={closeModal} style={{backgroundColor:'red',padding:5,borderRadius:3,margin:10}}>
+                    <Text style={{ marginTop: -16, marginBottom: 30, fontFamily: 'Roboto_500Medium'  }}>{message}</Text>
+                    {/* <TouchableOpacity onPress={closeModal} style={{backgroundColor:'red',padding:5,borderRadius:3,margin:10}}>
                     <Text style={{color:'white',fontFamily:'Roboto_500Medium'}}>Aceptar</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
                 </>
             </FancyAlert>
         </>

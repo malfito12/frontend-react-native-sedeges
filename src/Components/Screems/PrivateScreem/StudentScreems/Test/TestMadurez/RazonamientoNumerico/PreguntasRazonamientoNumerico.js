@@ -14,7 +14,7 @@ import { LinearGradient } from 'expo-linear-gradient'
 
 
 var array = []
-const RazonamientoNumerico = ({ route, navigation }) => {
+const PreguntasRazonamientoNumerico = ({ route, navigation }) => {
   const [changeData, setChangeData] = useState({ respuesta: '' })
   const [user, setUser] = useState()
   const [event, setEvent] = useState()
@@ -56,7 +56,7 @@ const RazonamientoNumerico = ({ route, navigation }) => {
   }
   const closeModalAlertSuccess = () => {
     setAlert(false)
-    navigation.navigate('InicioTest', { student_id: route.params.student_id, factor: route.params.description })
+    navigation.navigate('InicioTestMadurez', { student_id: route.params.student_id, factor: route.params.description })
   }
   //-------------TEST 5 PRIMERA PARTE-----------------------
   const siguiente1 = () => {
@@ -78,7 +78,7 @@ const RazonamientoNumerico = ({ route, navigation }) => {
         respCorrecta: route.params.data[route.params.cont].pregunta.respCorrecta
       })
       setChangeData({ respuesta: '' })
-      navigation.navigate('RazonamientoNumerico', {
+      navigation.navigate('PreguntasRazonamientoNumerico', {
         factor: route.params.factor,
         data: route.params.data,
         cont: route.params.cont + 1,
@@ -185,7 +185,7 @@ const RazonamientoNumerico = ({ route, navigation }) => {
       setPregunta4(false)
       setPregunta5(false)
       setRespuesta1(null)
-      navigation.navigate('RazonamientoNumerico', {
+      navigation.navigate('PreguntasRazonamientoNumerico', {
         factor: route.params.factor,
         data: route.params.data,
         cont: route.params.cont + 1,
@@ -284,7 +284,7 @@ const RazonamientoNumerico = ({ route, navigation }) => {
       setSegundaPregunta3(false)
       setSegundaPregunta4(false)
       setRespuesta2(null)
-      navigation.navigate('RazonamientoNumerico', {
+      navigation.navigate('PreguntasRazonamientoNumerico', {
         factor: route.params.factor,
         data: route.params.data,
         cont: route.params.cont + 1,
@@ -483,22 +483,24 @@ const RazonamientoNumerico = ({ route, navigation }) => {
           borderRadius: 50,
           width: '100%',
         }}>
-          <FontAwesome name="check" size={24} color="white" />
+          <TouchableOpacity onPress={closeModalAlertSuccess} >
+            <FontAwesome name="check" size={24} color="white" />
+          </TouchableOpacity>
         </View>}
         style={{ backgroundColor: 'white' }}
       >
         <>
-          <Text style={{ marginTop: -16, marginBottom: 10,fontFamily:'Roboto_500Medium' }}>Informacion Registrada</Text>
-          <TouchableOpacity onPress={closeModalAlertSuccess} style={{ backgroundColor: 'green', padding: 5, margin: 5, borderRadius: 3 }}>
+          <Text style={{ marginTop: -16, marginBottom: 30, fontFamily: 'Roboto_500Medium' }}>Informacion Registrada</Text>
+          {/* <TouchableOpacity onPress={closeModalAlertSuccess} style={{ backgroundColor: 'green', padding: 5, margin: 5, borderRadius: 3 }}>
             <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', alignSelf: 'center' }}>Aceptar</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </>
       </FancyAlert>
     </>
   )
 }
 
-export default RazonamientoNumerico
+export default PreguntasRazonamientoNumerico
 
 const styles = StyleSheet.create({
   textFont: {

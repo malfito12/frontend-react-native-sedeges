@@ -7,11 +7,13 @@ import axios from 'axios'
 import AsyncStorageLib from '@react-native-async-storage/async-storage'
 import { LinearGradient } from 'expo-linear-gradient'
 import fondoImage from '../../../../../images/ImagesFondo/test-analitico.jpg'
+import * as Progress from 'react-native-progress'
 
 const ListViewTestStudent = ({ navigation }) => {
     const [event, setEvent] = useState([])
     const [refresing, setRefresing] = useState(false)
-
+    const [progress, setProgress] = useState('none')
+    const [exist, setExist] = useState('none')
     useFocusEffect(
         useCallback(() => {
             let isActive = true
@@ -22,8 +24,13 @@ const ListViewTestStudent = ({ navigation }) => {
 
     //-------------GET EVENTOS------------------------------
     const getEvent = async () => {
+        setProgress('flex')
         await axios.get(`${PORT_URL}get-event-status`)
             .then(resp => {
+                if (resp.data.length === 0) {
+                    setExist('flex')
+                }
+                setProgress('none')
                 setEvent(resp.data)
             })
             .catch(err => console.log(err))
@@ -52,7 +59,7 @@ const ListViewTestStudent = ({ navigation }) => {
                         refreshing={refresing}
                     />}
                 >
-                    <View style={{padding:5}}>
+                    <View style={{ padding: 5 }}>
                         {event.length > 0 ? (
                             event.map((e, index) => (
                                 <View key={index} style={{ marginBottom: 10 }}>
@@ -71,9 +78,12 @@ const ListViewTestStudent = ({ navigation }) => {
                                 </View>
                             ))
                         ) : (
-                            <View>
-                                <Text style={{ alignSelf: 'center', color: 'white' }}>No Existe Informacion</Text>
-                            </View>
+                            <>
+                                <Text style={{ color: 'white', alignSelf: 'center', padding: 20, display: exist }}>Eventos Inhabilitados</Text>
+                                <View style={{ display: progress }}>
+                                    <Progress.Circle style={{ alignSelf: 'center' }} borderWidth={2} size={20} indeterminate={true} />
+                                </View>
+                            </>
                         )}
                     </View>
                 </ScrollView>
