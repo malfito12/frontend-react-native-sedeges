@@ -88,7 +88,7 @@ export const AuthProvider = ({ children }) => {
         setIsLoading(true)
         await axios.post(`${PORT_URL}logout`, {})
             .then(resp => {
-                console.log(resp.data)
+                // console.log(resp.data)
                 AsyncStorageLib.removeItem('token')
                 AsyncStorageLib.removeItem('user')
                 AsyncStorageLib.removeItem('rol')

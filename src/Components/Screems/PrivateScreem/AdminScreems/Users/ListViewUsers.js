@@ -3,6 +3,7 @@ import React, { useState, useEffect, useCallback, useContext } from 'react'
 import axios from 'axios'
 import AsyncStorageLib from '@react-native-async-storage/async-storage'
 // import EditUser from '../../../src/Modals/EditUser'
+import { Picker } from '@react-native-picker/picker';
 import * as Progress from 'react-native-progress'
 import { FontAwesome, MaterialIcons, Entypo } from '@expo/vector-icons'
 import { LinearGradient } from 'expo-linear-gradient'
@@ -26,6 +27,7 @@ const ListViewUsers = ({ navigation }) => {
   const [openModalEditData, setOpenModalEditData] = useState(false)
   const [openModalEditPassword, setOpenModalEditPassword] = useState(false)
   const [openModalDelete, setOpenModalDelete] = useState(false)
+  const [dataUser, setDataUser] = useState({ user_id: '', user_name: '', user_rol: '' })
   const [changeData, setChangeData] = useState({
     user_id: '',
     user_email: '',
@@ -43,6 +45,7 @@ const ListViewUsers = ({ navigation }) => {
       return () => { isActive = false }
     }, [])
   )
+  const cleanUp = { user_id: '', user_name: '', user_rol: '' }
   //------GET USERS-------------
   const getAllUsers = async (e) => {
     // const id = user.user
@@ -54,7 +57,7 @@ const ListViewUsers = ({ navigation }) => {
   }
   //--------MODAL EDIT USER------------------------
   const openModalEditUser = (e) => {
-    setChangeData(e)
+    setDataUser(e)
     setOpenModalEdit(true)
   }
   const closeModalEditUser = () => {
@@ -62,9 +65,9 @@ const ListViewUsers = ({ navigation }) => {
   }
 
   //------------EDIT USER EMAIL----------------
-  const [newEmail, setNewEmail] = useState({ user_id: '', user_email: '' })
+  const [newEmail, setNewEmail] = useState({ user_id: '', user_email: '',actual_email:'' })
   const openModalEditEmailUser = (e) => {
-    setNewEmail({ user_id: e.user_id })
+    setNewEmail({ user_id: e.user_id,user_email:e.user_email,actual_email:e.user_email })
     setOpenModalEditEmail(true)
   }
   const closeModalEditEmailUser = () => {
@@ -107,6 +110,55 @@ const ListViewUsers = ({ navigation }) => {
         }
       })
   }
+  //-------------------EDIT DATA USER-ROL--------------------------------
+
+  const openModalEditDataUser = (e) => {
+    setChangeData({user_id:e.user_id,user_name:e.user_name,user_rol:e.user_rol})
+    setOpenModalEditData(true)
+  }
+  const closeModalEditDataUser = () => {
+    setChangeData(cleanUp)
+    setOpenModalEditData(false)
+  }
+  const editDataUser = async () => {
+    const user = /(\W|^)[\w.\-]{3,16}(?!&|%|!|"|#|@)(?!\s)(\W|$)/g
+    const id = changeData.user_id
+    if (changeData.user_name === '' || changeData.user_rol === '') {
+      setProgress(false)
+      setMessage('Por favor, llene todos los datos')
+      openModalAlertError()
+      return
+      // } else if (!(validator.isEmail(changeData.user_email))) {
+    } else if (!user.test(changeData.user_name)) {
+      setProgress(false)
+      setMessage('Usuario no valido, Evite usar caracteres especiales o espacios')
+      openModalAlertError()
+      return
+    }
+    setProgress(true)
+    await axios.put(`${PORT_URL}user/${id}`, changeData)
+      .then(resp => {
+        setMessage(resp.data.message)
+        openModalAlert()
+        closeModalEditDataUser()
+        closeModalEditUser()
+        getAllUsers()
+        setProgress(false)
+      })
+      .catch(err=>{
+        setProgress(false)
+        if(err.response){
+          setMessage(err.response.data.message)
+          openModalAlertError()
+        }
+      })
+  }
+  const handleChange = (name, value) => {
+    setChangeData({
+      ...changeData,
+      [name]: value
+    })
+  }
   //---------CHANGE NEW PASSWORD USER--------------------------
   const [newPassword, setNewPassword] = useState({ user_id: '', user_previous_password: '', user_new_password: '', user_repeat_password: '' })
   const [hidePass, setHidePass] = useState({
@@ -146,7 +198,7 @@ const ListViewUsers = ({ navigation }) => {
     }
   }
   const changePasswordUser = async () => {
-    console.log(newPassword)
+    // console.log(newPassword)
     const previouPass = /(\W|^)[\w.\-]{6,25}(?!\s)(\W|$)/g
     const newPass = /(\W|^)[\w.\-]{6,25}(?!\s)(\W|$)/g
     if (newPassword.user_previous_password === '' || newPassword.user_new_password === '' || newPassword.user_repeat_password === '') {
@@ -187,22 +239,22 @@ const ListViewUsers = ({ navigation }) => {
       })
   }
   //---------DELETE USER------------------------
-  const [removeUser, setRemoveUser] = useState({ user_id: '', user_name: '', user_rol: '' })
   const openModalDeleteUser = (e) => {
-    setRemoveUser({ user_id: e.user_id, user_name: e.user_name, user_rol: e.user_rol })
+    setChangeData({ user_id: e.user_id, user_name: e.user_name })
     setOpenModalDelete(true)
   }
   const closeModalDeleteUser = () => {
+    setChangeData(cleanUp)
     setOpenModalDelete(false)
   }
   const deleteUser = async () => {
     // console.log(removeUser)
-    if (removeUser.user_rol == 'ADMINISTRADOR') {
+    if (changeData.user_rol == 'ADMINISTRADOR') {
       setMessage('Error, No Tiene Permiso para Eliminar a Este Usuario')
       return
     }
     setProgress(true)
-    await axios.delete(`${PORT_URL}users/${removeUser.user_id}`)
+    await axios.delete(`${PORT_URL}users/${changeData.user_id}`)
       .then(resp => {
         setMessage(resp.data.message)
         setProgress(false)
@@ -281,58 +333,32 @@ const ListViewUsers = ({ navigation }) => {
               <FontAwesome name="window-close" size={30} color="#424242" />
             </TouchableOpacity>
             <Text style={{ alignSelf: 'flex-start', marginHorizontal: 15, marginBottom: 5, fontSize: 15, fontWeight: 'bold', }}>Información de Usuario</Text>
-            <Text style={{ alignSelf: 'flex-start', marginHorizontal: 15, marginBottom: 5 }}>Nombre de Usuario: {changeData.user_name}</Text>
-            <Text style={{ alignSelf: 'flex-start', marginHorizontal: 15, marginBottom: 10 }}>Correo Electronico: {changeData.user_email}</Text>
+            <Text style={{ alignSelf: 'flex-start', marginHorizontal: 15, marginBottom: 5 }}>Nombre de Usuario: {dataUser.user_name}</Text>
+            <Text style={{ alignSelf: 'flex-start', marginHorizontal: 15, marginBottom: 10 }}>Correo Electronico: {dataUser.user_email}</Text>
             <View style={{ width: '100%', marginBottom: 5 }}>
               <LinearGradient style={{ borderRadius: 3, marginHorizontal: 15 }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#00c853', '#64dd17', '#aeea00']}>
-                <TouchableOpacity style={{ width: '100%', padding: 10 }} onPress={() => openModalEditEmailUser(changeData)} >
+                <TouchableOpacity style={{ width: '100%', padding: 10 }} onPress={() => openModalEditDataUser(dataUser)} >
+                  <Text style={{ color: 'white', fontFamily: 'Roboto_400Regular_Italic', alignSelf: 'center' }}>Actualizar Datos Usuario</Text>
+                </TouchableOpacity>
+              </LinearGradient>
+            </View>
+            <View style={{ width: '100%', marginBottom: 5 }}>
+              <LinearGradient style={{ borderRadius: 3, marginHorizontal: 15 }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#00c853', '#64dd17', '#aeea00']}>
+                <TouchableOpacity style={{ width: '100%', padding: 10 }} onPress={() => openModalEditEmailUser(dataUser)} >
                   <Text style={{ color: 'white', fontFamily: 'Roboto_400Regular_Italic', alignSelf: 'center' }}>Cambiar Correo Electronico</Text>
                 </TouchableOpacity>
               </LinearGradient>
             </View>
             <View style={{ width: '100%', marginBottom: 5 }}>
               <LinearGradient style={{ borderRadius: 3, marginHorizontal: 15 }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#00c853', '#64dd17', '#aeea00']}>
-                <TouchableOpacity style={{ width: '100%', padding: 10 }} onPress={() => openModalEditPassUser(changeData.user_id)} >
+                <TouchableOpacity style={{ width: '100%', padding: 10 }} onPress={() => openModalEditPassUser(dataUser.user_id)} >
                   <Text style={{ color: 'white', fontFamily: 'Roboto_400Regular_Italic', alignSelf: 'center' }}>Cambiar Contraseña</Text>
                 </TouchableOpacity>
               </LinearGradient>
             </View>
             <View style={{ width: '100%', marginBottom: 5 }}>
-              <TouchableOpacity style={{ backgroundColor: 'red', marginHorizontal: 15, borderRadius: 3, padding: 10 }} onPress={() => openModalDeleteUser(changeData)} >
+              <TouchableOpacity style={{ backgroundColor: 'red', marginHorizontal: 15, borderRadius: 3, padding: 10 }} onPress={() => openModalDeleteUser(dataUser)} >
                 <Text style={{ color: 'white', fontFamily: 'Roboto_400Regular_Italic', alignSelf: 'center' }}>Eliminar Usuario</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-      </Modal>
-      {/* -------------------------------MODAL EDIT DATA--------------------- */}
-      <Modal
-        visible={openModalEditEmail}
-        animationType='fade'
-        transparent
-      >
-        <View style={styles.centeredView}>
-          <View style={{ ...styles.modalView, backgroundColor: '#335469', marginHorizontal: 20 }}>
-            <Text style={{ color: 'white', alignSelf: 'flex-start', marginHorizontal: 15, marginTop: 10, marginBottom: 10, fontFamily: 'Roboto_400Regular' }}>Actual Correo Electronico</Text>
-            <TextInput
-              style={styles.textInput}
-              placeholder='Min 6 Caracteres'
-              value={changeData.user_email}
-            />
-            <Text style={{ color: 'white', alignSelf: 'flex-start', marginHorizontal: 15, marginTop: 10, marginBottom: 10, fontFamily: 'Roboto_400Regular' }}>Nuevo Correo Electronico</Text>
-            <TextInput
-              style={styles.textInput}
-              placeholder='Min 6 Caracteres'
-              onChangeText={text => handleChangeNewEmail('user_email', text)}
-            />
-            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 5 }}>
-              <LinearGradient style={{ borderRadius: 3 }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#00c853', '#64dd17', '#aeea00']}>
-                <TouchableOpacity onPress={postNewEmail} style={{ padding: 5, width: '100%' }}>
-                  <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium' }}>Apceptar</Text>
-                </TouchableOpacity>
-              </LinearGradient>
-              <TouchableOpacity onPress={closeModalEditEmailUser} style={{ backgroundColor: 'red', marginLeft: 20, borderRadius: 3, padding: 5 }}>
-                <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium' }}>Cancelar</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -349,8 +375,7 @@ const ListViewUsers = ({ navigation }) => {
             <Text style={{ color: 'white', alignSelf: 'flex-start', marginHorizontal: 15, marginTop: 10, marginBottom: 10, fontFamily: 'Roboto_400Regular' }}>Actual Correo Electronico</Text>
             <TextInput
               style={styles.textInput}
-              placeholder='Min 6 Caracteres'
-              value={changeData.user_email}
+              value={newEmail.actual_email}
             />
             <Text style={{ color: 'white', alignSelf: 'flex-start', marginHorizontal: 15, marginTop: 10, marginBottom: 10, fontFamily: 'Roboto_400Regular' }}>Nuevo Correo Electronico</Text>
             <TextInput
@@ -371,6 +396,48 @@ const ListViewUsers = ({ navigation }) => {
           </View>
         </View>
       </Modal>
+      {/* -------------------------------MODAL EDIT DATA USER--------------------- */}
+      <Modal
+        visible={openModalEditData}
+        animationType='fade'
+        transparent
+      >
+        <View style={styles.centeredView}>
+          <View style={{ ...styles.modalView, backgroundColor: '#335469', marginHorizontal: 20 }}>
+            <Text style={{ color: 'white', alignSelf: 'flex-start', marginHorizontal: 15, marginTop: 10, marginBottom: 10, fontFamily: 'Roboto_400Regular' }}>Nombre de Usuario</Text>
+            <TextInput
+              style={styles.textInput}
+              placeholder='Min 6 Caracteres'
+              defaultValue={changeData.user_name}
+              onChangeText={text=>handleChange('user_name',text)}
+            />
+            <View style={styles.styleSelect}>
+              <Picker
+                style={{ color: 'black', fontFamily: 'Roboto_400Regular' }}
+                selectedValue={changeData.user_rol}
+                onValueChange={(itemValue, itemIndex) => {
+                  handleChange('user_rol', itemValue)
+                }}>
+                <Picker.Item label="Seleccione ..." style={{ fontSize: 14 }} value="" />
+                <Picker.Item label="ADMINISTRADOR" style={{ fontSize: 14 }} value="ADMINISTRADOR" />
+                <Picker.Item label="SUPERVISOR" style={{ fontSize: 14 }} value="SUPERVISOR" />
+                <Picker.Item label="USUARIO" style={{ fontSize: 14 }} value="USUARIO" />
+              </Picker>
+            </View>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 5 }}>
+              <LinearGradient style={{ borderRadius: 3 }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#00c853', '#64dd17', '#aeea00']}>
+                <TouchableOpacity onPress={editDataUser} style={{ padding: 5, width: '100%' }}>
+                  <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium' }}>Apceptar</Text>
+                </TouchableOpacity>
+              </LinearGradient>
+              <TouchableOpacity onPress={closeModalEditDataUser} style={{ backgroundColor: 'red', marginLeft: 20, borderRadius: 3, padding: 5 }}>
+                <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium' }}>Cancelar</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
+      
       {/* -------------------------------MODAL CHANGE PASSWORD--------------------- */}
       <Modal
         visible={openModalEditPassword}
@@ -446,7 +513,7 @@ const ListViewUsers = ({ navigation }) => {
       >
         <View style={styles.centeredView}>
           <View style={{ ...styles.modalView, backgroundColor: '#335469', marginHorizontal: 20 }}>
-            <Text style={{ alignSelf: 'center', fontFamily: 'Roboto_500Medium', color: 'white', padding: 15 }}>Estas Seguro de Eliminar a {removeUser.user_name}</Text>
+            <Text style={{ alignSelf: 'center', fontFamily: 'Roboto_500Medium', color: 'white', padding: 15 }}>Estas Seguro de Eliminar a {changeData.user_name}</Text>
             <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 5 }}>
               <LinearGradient style={{ borderRadius: 3 }} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} colors={['#00c853', '#64dd17', '#aeea00']}>
                 <TouchableOpacity onPress={deleteUser} style={{ padding: 5, width: '100%' }}>
@@ -475,7 +542,7 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     height: 40,
     padding: 10,
-    fontFamily: 'Roboto_400Regular_Italic'
+    fontFamily: 'Roboto_400Regular'
     // borderColor: '#10ac84'
     // borderColor: '#000'
   },
@@ -509,6 +576,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 22,
   },
+  styleSelect: {
+    borderRadius: 3,
+    borderWidth: 1,
+    borderColor: '#10ac84',
+    height: 40,
+    padding: 4,
+    overflow: 'hidden',
+    justifyContent: 'center',
+    display: 'flex',
+    width: '90%',
+    marginBottom: 20,
+    backgroundColor: 'white',
+  }
 })
 
 export default ListViewUsers
