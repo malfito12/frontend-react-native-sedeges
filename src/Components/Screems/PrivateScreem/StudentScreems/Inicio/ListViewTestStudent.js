@@ -8,6 +8,7 @@ import AsyncStorageLib from '@react-native-async-storage/async-storage'
 import { LinearGradient } from 'expo-linear-gradient'
 import fondoImage from '../../../../../images/ImagesFondo/test-analitico.jpg'
 import * as Progress from 'react-native-progress'
+import * as Animatable from 'react-native-animatable'
 
 const ListViewTestStudent = ({ navigation }) => {
     const [event, setEvent] = useState([])
@@ -59,7 +60,7 @@ const ListViewTestStudent = ({ navigation }) => {
                         refreshing={refresing}
                     />}
                 >
-                    <View style={{ padding: 5 }}>
+                    <Animatable.View animation='fadeInUp' style={{ padding: 5 }}>
                         {event.length > 0 ? (
                             event.map((e, index) => (
                                 <View key={index} style={{ marginBottom: 10 }}>
@@ -85,7 +86,7 @@ const ListViewTestStudent = ({ navigation }) => {
                                 </View>
                             </>
                         )}
-                    </View>
+                    </Animatable.View>
                 </ScrollView>
             </Layaut>
         </>

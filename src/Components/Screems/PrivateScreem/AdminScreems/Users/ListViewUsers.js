@@ -13,6 +13,8 @@ import Layaut from '../../../../Atoms/StyleLayaut/Layaut'
 import { AuthContext } from '../../../../Atoms/Context/AuthContext'
 import { useModalAlert, useModalAlertError } from '../../../../Molecules/Hooks/useModalAlert'
 import { ErrorAlert, SuccesAlert } from '../../../../Molecules/Alertas/Alerts'
+import * as Animatable from 'react-native-animatable'
+
 
 const ListViewUsers = ({ navigation }) => {
   const [openModalError, openModalAlertError, closeModalAlertError] = useModalAlertError(false)

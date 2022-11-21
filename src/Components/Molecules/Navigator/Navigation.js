@@ -47,7 +47,11 @@ const Navigation = () => {
     AsyncStorageLib.getItem('rol').then(resp => setRol(JSON.parse(resp)))
     return (
         <NavigationContainer>
-            <Stack.Navigator>
+            <Stack.Navigator
+            screenOptions={{
+                animation:'fade_from_bottom'
+            }}
+            >
                 {login && rol === 'ADMINISTRADOR' ? (
                     <>
                         <Stack.Screen name='AdminHomeScreem' component={AdminHomeScreem} options={{ headerShown: false }} />

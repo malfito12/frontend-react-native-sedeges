@@ -1,16 +1,17 @@
 import { View, StyleSheet, StatusBar } from 'react-native'
 import React from 'react'
 import { LinearGradient } from 'expo-linear-gradient'
+import * as Animatable from 'react-native-animatable'
 
 const Layaut = ({ children }) => {
   return (
     <LinearGradient style={{height:'100%'}}  start={{ x: 1, y: 1 }} end={{ x: 0, y: 1 }} colors={['#000010', '#010822', '#000010']}>
-      <View style={styles.container}>
+      <Animatable.View animation='fadeInUp' style={styles.container}>
 
         {/* icons de celular arriba */}
         <StatusBar backgroundColor='#000010' />
         {children}
-      </View>
+      </Animatable.View>
     </LinearGradient>
   )
 }
