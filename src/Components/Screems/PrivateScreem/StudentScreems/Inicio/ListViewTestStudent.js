@@ -60,7 +60,7 @@ const ListViewTestStudent = ({ navigation }) => {
                         refreshing={refresing}
                     />}
                 >
-                    <Animatable.View animation='fadeInUp' style={{ padding: 5 }}>
+                    <View style={{ padding: 5 }}>
                         {event.length > 0 ? (
                             event.map((e, index) => (
                                 <View key={index} style={{ marginBottom: 10 }}>
@@ -86,7 +86,7 @@ const ListViewTestStudent = ({ navigation }) => {
                                 </View>
                             </>
                         )}
-                    </Animatable.View>
+                    </View>
                 </ScrollView>
             </Layaut>
         </>

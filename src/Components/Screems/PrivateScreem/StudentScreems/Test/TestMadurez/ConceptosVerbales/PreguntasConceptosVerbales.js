@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Modal } from 'react-native'
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Modal, Image } from 'react-native'
 import React, { useCallback, useState } from 'react'
 import Layaut from '../../../../../../Atoms/StyleLayaut/Layaut'
 import { useFocusEffect } from '@react-navigation/native'
@@ -206,14 +206,21 @@ const PreguntasConceptosVerbales = ({ route, navigation }) => {
                     borderRadius: 50,
                     width: '100%',
                 }}>
-                    <TouchableOpacity onPress={closeModalAlertSuccess} >
+                    <View style={{ flex: 1 }}>
+                        <Image
+                            style={{ width: 300, height: 200 }}
+                            source={{ uri: 'https://www.gifsanimados.org/data/media/492/fuegos-artificiales-imagen-animada-0065.gif' }} />
+                    </View>
+                    <TouchableOpacity style={{ position: 'absolute' }} onPress={closeModalAlertSuccess} >
                         <FontAwesome name="check" size={24} color="white" />
                     </TouchableOpacity>
                 </View>}
                 style={{ backgroundColor: 'white' }}
             >
                 <>
-                    <Text style={{ marginTop: -16, marginBottom: 30, fontFamily: 'Roboto_500Medium' }}>Informacion Registrada</Text>
+                    <Text style={{ marginTop: -16, marginBottom: 15, fontFamily: 'Roboto_900Black', color: 'green', fontSize: 15 }}>Felicidades Terminaste esta Prueba</Text>
+                    <Text style={{ marginTop: -16, marginBottom: 15, fontFamily: 'Roboto_900Black', color: 'green', fontSize: 15 }}>Tu Progreso será Registrado</Text>
+                    <Text style={{ marginTop: -16, marginBottom: 15, fontFamily: 'Roboto_900Black', color: 'green', fontSize: 15 }}>Por Favor, Continue</Text>
                     {/* <TouchableOpacity onPress={closeModalAlertSuccess} style={{ backgroundColor: 'green', padding: 5, margin: 5, borderRadius: 3 }}>
                         <Text style={{ color: 'white', fontFamily: 'Roboto_500Medium', alignSelf: 'center' }}>Aceptar</Text>
                     </TouchableOpacity> */}
