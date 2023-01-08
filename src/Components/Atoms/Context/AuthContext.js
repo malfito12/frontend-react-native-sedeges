@@ -106,9 +106,13 @@ export const AuthProvider = ({ children }) => {
                 console.log(err)
             })
     }
+    const cambioFondo=(num)=>{
+        AsyncStorageLib.setItem('fondo',JSON.stringify(num))
+    }
+    // console.log(fondo)
     return (
         <>
-            <AuthContext.Provider value={{ isLoading, token, user, login, logout, openModal, closeModal, message }}>{children}</AuthContext.Provider>
+            <AuthContext.Provider value={{ cambioFondo, isLoading, token, user, login, logout, openModal, closeModal, message }}>{children}</AuthContext.Provider>
         </>
     )
 }

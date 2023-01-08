@@ -5,9 +5,11 @@ import { AuthProvider } from './src/Components/Atoms/Context/AuthContext'
 
 export default function App() {
   return (
-    <AuthProvider>
-      <Navigation />
-    </AuthProvider>
+    <>
+      <AuthProvider>
+        <Navigation />
+      </AuthProvider>
+    </>
     // <NavigationContainer>
     //   <Stack.Navigator>
     //     <Stack.Screen

@@ -48,9 +48,9 @@ const Navigation = () => {
     return (
         <NavigationContainer>
             <Stack.Navigator
-            screenOptions={{
-                animation:'fade_from_bottom'
-            }}
+                screenOptions={{
+                    animation: 'fade_from_bottom'
+                }}
             >
                 {login && rol === 'ADMINISTRADOR' ? (
                     <>

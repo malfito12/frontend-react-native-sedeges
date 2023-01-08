@@ -669,8 +669,8 @@ export const razonamientoLogico = [
                         pre_id: 1,
                         preguntas: {
                             a: 'TRES MUCHACHOS ESTAN ESCALANDO UN CERRO, LUIS SE ENCUENTRA MAS ARRIBA QUE ENRIQUE, FRANCISCO SE ENCUENTRA MAS ARRIBA QUE LUIS.',
-                            b: null,
-                            c: '¿Cual de los muchados se encuentra en el segundo lugar?',
+                            b: '¿Cual de los muchados se encuentra en el segundo lugar?',
+                            c: null,
                         },
                         resp: [
                             { respuesta: 'Luis', puntaje: 5 },
@@ -781,8 +781,8 @@ export const razonamientoLogico = [
                         pre_id: 8,
                         preguntas: {
                             a: 'EDUARDO ES MEJOR JUGADOR DE FUTBOL QUE JAIME, JAIME ES TAN JUGADOR COMO GUILLERMO',
-                            b: null,
-                            c: '¿Quien es el mejor jugador de futbol?',
+                            b: '¿Quien es el mejor jugador de futbol?',
+                            c: null,
                         },
                         resp: [
                             { respuesta: 'Eduardo', puntaje: 5 },
